@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.*?>
+
+<AnchorPane maxHeight="900.0" maxWidth="676.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="475.0" prefWidth="676.0" style="-fx-min-width: 676px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Setup4Controller">
+    <stylesheets>
+        <URL value="@myFonts.css" />
+    </stylesheets>
+    <children>
+      <BorderPane layoutY="-0.0" prefHeight="841.0" prefWidth="676.0" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-0.0">
+         <center>
+            <ScrollPane prefHeight="765.0" prefWidth="676.0" style="-fx-fit-to-height: true; -fx-fit-to-width: true;" BorderPane.alignment="CENTER">
+               <content>
+                  <VBox alignment="CENTER" prefHeight="450.0" prefWidth="674.0">
+                     <children>
+                        <VBox prefHeight="278.0" prefWidth="674.0">
+                           <children>
+                              <Label alignment="TOP_LEFT" prefHeight="100.0" prefWidth="594.0" text="Χρησιμοποιήστε έναν κωδικο πρόσβασης για την εξασφάλιση του απορρήτου των προσωπικών δεδομένων που εμφανίζονται στην εφαρμογή." textOverrun="CLIP" wrapText="true">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" left="40.0" right="40.0" top="20.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="password" alignment="CENTER" maxHeight="40.0" maxWidth="300.0" minHeight="40.0" minWidth="300.0" prefHeight="40.0" prefWidth="300.0" promptText="Κωδικός πρόσβασης">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="180.0" top="10.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextField fx:id="password2" alignment="CENTER" maxHeight="40.0" maxWidth="300.0" minHeight="40.0" minWidth="300.0" prefHeight="40.0" prefWidth="300.0" promptText="Επιβεβαίωση κωδικού πρόσβασης">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="180.0" top="10.0" />
+                                 </VBox.margin>
+                              </TextField>
+                           </children>
+                        </VBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button minWidth="200.0" mnemonicParsing="false" onAction="#PreviousButton" prefHeight="63.0" prefWidth="200.0" styleClass="mainAppButtons" text="Προηγούμενο" textFill="WHITE">
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button minWidth="200.0" mnemonicParsing="false" onAction="#NextButton" prefHeight="63.0" prefWidth="200.0" styleClass="mainAppButtons" text="Επόμενο" textFill="WHITE">
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
+         </center>
+         <top>
+            <StackPane fx:id="movePane" maxHeight="70.0" minHeight="70.0" prefHeight="70.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
+               <children>
+                  <Label styleClass="title" text="Ορισμός Κωδικού Πρόσβασης" textAlignment="CENTER" textFill="WHITE">
+                  </Label>
+                  <Button fx:id="closeButton" mnemonicParsing="false" onAction="#QuitApp" prefHeight="62.0" prefWidth="4.0" styleClass="windowControls" text="x" textFill="WHITE" StackPane.alignment="CENTER_RIGHT">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                     </padding>
+                     <StackPane.margin>
+                        <Insets bottom="30.0" right="20.0" top="24.0" />
+                     </StackPane.margin>
+                  </Button>
+               </children>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </StackPane>
+         </top>
+      </BorderPane>
+   </children>
+</AnchorPane>

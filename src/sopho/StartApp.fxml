@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="612.0" maxWidth="772.0" minHeight="400.0" minWidth="569.0" prefHeight="531.0" prefWidth="772.0" style="-fx-background-color: #bc2d44;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.StartAppController">
+   <stylesheets>
+        <URL value="@myFonts.css" />
+    </stylesheets>
+    <children>
+      <ImageView fx:id="logo" fitHeight="256.0" fitWidth="256.0" layoutX="259.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Icons/Sopho-icon.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="title" alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="49.0" layoutY="317.0" prefHeight="40.0" prefWidth="677.0" text="Σύστημα Οργάνωσης Φιλανθρωπικών Οργανώσεων" textFill="WHITE">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+      <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="197.0" layoutY="475.0" prefHeight="23.0" prefWidth="381.0" text="Design - Development: Agapios Panos 2015" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <VBox layoutX="192.0" layoutY="22.0" />
+      <Button fx:id="login" layoutX="496.0" layoutY="395.0" mnemonicParsing="false" onAction="#Login" prefHeight="40.0" prefWidth="38.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <SVGPath content="M585,269.8 587.6,267.2 599.9,279.6 587.6,291.9 585,289.3 594.7,279.5" fill="WHITE" />
+         </graphic>
+      </Button>
+      <PasswordField fx:id="pass" layoutX="274.0" layoutY="395.0" prefHeight="40.0" prefWidth="224.0" promptText="Password">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </PasswordField>
+      <Button fx:id="closeButton" layoutX="734.0" mnemonicParsing="false" onAction="#QuitApp" style="-fx-background-color: transparent;" styleClass="windowControls" text="X" textFill="WHITE" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="3.0">
+         <padding>
+            <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+         </padding></Button>
+   </children>
+</AnchorPane>
