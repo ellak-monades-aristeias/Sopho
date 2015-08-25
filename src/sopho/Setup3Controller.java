@@ -13,8 +13,6 @@ import javafx.stage.Stage;
 public class Setup3Controller implements Initializable {
 
     @FXML
-    public Button closeButton;
-    @FXML
     public Label checkResult;
     @FXML
     public Button checkButton;
@@ -24,12 +22,6 @@ public class Setup3Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //TODO
-    }
-        
-    @FXML
-    private void QuitApp(ActionEvent event) {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        stage.close();
     }
     
     StageLoader sl = new StageLoader();
@@ -49,15 +41,15 @@ public class Setup3Controller implements Initializable {
                 checkButton.setText("Επόμενο");
             }
         }else{//the connectivity with the database is confirmed
-            Stage stage = (Stage) closeButton.getScene().getWindow();
-            sl.StageLoad("Setup4.fxml", stage);
+            Stage stage = (Stage) checkButton.getScene().getWindow();
+            sl.StageLoad("Setup4.fxml", stage, "Setup3.fxml", false, true); //resizable false, utility true
         }
     }
     
     @FXML
     private void PreviousButton(ActionEvent event) throws IOException {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        sl.StageLoad("Setup2.fxml", stage);
+        Stage stage = (Stage) checkButton.getScene().getWindow();
+        sl.StageLoad("Setup2.fxml", stage, "Setup3.fxml", false, true); //resizable false, utility true
     }
     
 }

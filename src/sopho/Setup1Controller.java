@@ -6,13 +6,13 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class Setup1Controller implements Initializable {
     
     @FXML
-    public Button closeButton;
+    public AnchorPane anchorPane;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -23,7 +23,7 @@ public class Setup1Controller implements Initializable {
     
     @FXML
     private void QuitApp(ActionEvent event) {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
+        Stage stage = (Stage) anchorPane.getScene().getWindow();
         stage.close();
     }
     
@@ -33,20 +33,16 @@ public class Setup1Controller implements Initializable {
     private void YesButton(ActionEvent event) throws IOException {
         prefs.setPrefs("dbIP", "localhost");
         
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        sl.StageLoad("Setup2.fxml", stage);
+        Stage stage = (Stage) anchorPane.getScene().getWindow();
+        sl.StageLoad("Setup2.fxml", stage, "Setup1.fxml", false, true); //resizable false, utility true
     }
     
     @FXML
     private void NoButton(ActionEvent event) throws IOException {
         prefs.setPrefs("dbIP", "null");
         
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        sl.StageLoad("Setup2.fxml", stage);
+        Stage stage = (Stage) anchorPane.getScene().getWindow();
+        sl.StageLoad("Setup2.fxml", stage, "Setup1.fxml", false, true); //resizable false, utility true
     }
-    
-   
-    
-}
-    
 
+}

@@ -11,15 +11,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class ChangePasswordController implements Initializable {
 
-    @FXML
-    public Button closeButton;
+    double initialX;
+    double initialY;
+
     @FXML
     public TextField password;
     @FXML
@@ -28,15 +28,7 @@ public class ChangePasswordController implements Initializable {
     public TextField passwordOld;
     
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }
-    
-    @FXML
-    private void QuitApp(ActionEvent event) {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        stage.close();
-    }
+    public void initialize(URL url, ResourceBundle rb) {}
     
     DBClass db = new DBClass();
     StageLoader sl = new StageLoader();
@@ -52,8 +44,8 @@ public class ChangePasswordController implements Initializable {
                     alert.setHeaderText("Ο κωδικός πρόσβασης έχει αλλάξει");
                     alert.setContentText("Στο εξής θα χρησιμοποιείτε τον νέο κωδικό για την πρόσβαση στην εφαρμογή");
                     alert.showAndWait();
-                    Stage stage = (Stage) closeButton.getScene().getWindow();
-                    sl.StageLoad("Settings.fxml", stage);
+                    Stage stage = (Stage) password.getScene().getWindow();
+                    sl.StageLoad("Settings.fxml", stage, "ChangePassword.fxml", false, true);  //resizable false, utility true
                 }
             }else{
                 Alert alert = new Alert(Alert.AlertType.ERROR);

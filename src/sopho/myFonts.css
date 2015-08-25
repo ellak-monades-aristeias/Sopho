@@ -35,10 +35,10 @@
 
 .title {
     -fx-font-family: 'Open Sans Semibold';
-    -fx-font-size: 30px;  
+    -fx-font-size: 24px;  
 }
 
 .titleSmall{
     -fx-font-family: 'Open Sans Semibold';
-    -fx-font-size: 26px;
+    -fx-font-size: 20px;
 }

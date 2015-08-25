@@ -24,12 +24,10 @@ public class StartAppController implements Initializable {
     public Button login;
     @FXML
     public PasswordField pass;
-    @FXML
-    public Button closeButton;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //TODO
+    
     }
     
     public void start(Stage primaryStage) throws Exception {
@@ -42,11 +40,11 @@ public class StartAppController implements Initializable {
     DBClass db = new DBClass();
     
     StageLoader sl = new StageLoader();
-  
+    
     @FXML
-    private void QuitApp(ActionEvent event) {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        stage.close();
+    public void OpenSettings(ActionEvent event) throws IOException{
+        Stage stage = (Stage) login.getScene().getWindow();
+        sl.StageLoad("DBSettings.fxml", stage, "StartApp.fxml", false, true); //resizable false, utility true
     }
     
     @FXML
@@ -75,7 +73,7 @@ public class StartAppController implements Initializable {
             if(rs.getRow()>0){    
                 //login successful. Goto to mainApp
                 Stage stage = (Stage) login.getScene().getWindow();
-                sl.StageLoad("MainApp.fxml", stage);
+                sl.StageLoad("MainApp.fxml", stage, "StartApp.fxml", true, false); //resizable true, utility false
             }else{
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.initStyle(StageStyle.UNDECORATED);

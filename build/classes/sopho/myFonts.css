@@ -1,0 +1,44 @@
+.OpenRegular {
+    -fx-font-family: 'Open Sans';
+}
+
+.OpenBold {
+    -fx-font-family: 'Open Sans';
+    -fx-font-weight: bold;
+}
+
+.OpenSemiBold {
+    -fx-font-family: 'Open Sans Semibold';
+}
+
+// These were some generic css rules to set the fonts
+
+.windowControls {
+    -fx-font-family: 'Open Sans Extrabold';
+    -fx-font-size: 30px;
+    -fx-font-weight: 800;
+    -fx-background-color: transparent;
+}
+
+.mainAppButtons{
+    -fx-font-family: 'Open Sans Semibold';
+    -fx-font-size: 20px;
+    -fx-background-color: #3668af;
+    -fx-font-weight: 600;
+}
+
+.backButton{
+    -fx-font-family: 'Open Sans Semibold';
+    -fx-font-size: 16px;
+    -fx-background-color: #bc2d44;
+}
+
+.title {
+    -fx-font-family: 'Open Sans Semibold';
+    -fx-font-size: 24px;  
+}
+
+.titleSmall{
+    -fx-font-family: 'Open Sans Semibold';
+    -fx-font-size: 20px;
+}

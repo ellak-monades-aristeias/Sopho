@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="Sopho.jnlp">
+  <information>
+    <title>Sopho</title>
+    <vendor>The Developers Company Greece</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  <shortcut><desktop/></shortcut>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="Sopho.jar" size="746416" download="eager" />
+    <jar href="lib/UndecoratorBis.jar" size="215331" download="eager" />
+    <jar href="lib/mysql-connector-java-5.0.8-bin.jar" size="540852" download="eager" />
+    <jar href="lib/webcam-capture-0.3.10.jar" size="409084" download="eager" />
+  </resources>
+  <applet-desc  width="1024" height="768" main-class="com.javafx.main.NoJavaFXFallback"  name="Sopho" >
+    <param name="requiredFXVersion" value="8.0+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="1024" height="768" main-class="sopho.Sopho"  name="Sopho" />
+  <update check="always"/>
+</jnlp>

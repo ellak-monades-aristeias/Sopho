@@ -11,15 +11,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class Setup4Controller implements Initializable {
 
-    @FXML
-    public Button closeButton;
     @FXML
     public TextField password;
     @FXML
@@ -28,12 +25,6 @@ public class Setup4Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
-    @FXML
-    private void QuitApp(ActionEvent event) {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        stage.close();
     }
     
     StageLoader sl = new StageLoader();
@@ -90,8 +81,8 @@ public class Setup4Controller implements Initializable {
                 //we check if everything was fine through the flag integer.
                 
                 if (flag==1){
-                    Stage stage = (Stage) closeButton.getScene().getWindow();
-                    sl.StageLoad("Setup5.fxml", stage);
+                    Stage stage = (Stage) password.getScene().getWindow();
+                    sl.StageLoad("Setup5.fxml", stage, "Setup4.fxml", false, true); //resizable false, utility true
                 }
                 else if(flag==0){
                     Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -111,7 +102,7 @@ public class Setup4Controller implements Initializable {
     
     @FXML
     private void PreviousButton(ActionEvent event) throws IOException {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        sl.StageLoad("Setup3.fxml", stage);
+        Stage stage = (Stage) password.getScene().getWindow();
+        sl.StageLoad("Setup3.fxml", stage, "Setup4.fxml", false, true); //resizable false, utility true
     }
 }

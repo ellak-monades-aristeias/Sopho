@@ -14,9 +14,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class DBSettingsController implements Initializable {
-
-    @FXML
-    public Button closeButton;
+    
     @FXML
     public Label checkResult;
     @FXML
@@ -31,24 +29,17 @@ public class DBSettingsController implements Initializable {
     public boolean allOk = false;
     public boolean connectionOK = false;
     
-    
     PrefsHandler prefs = new PrefsHandler();
     
     StageLoader sl = new StageLoader();
     
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        //showing the values (the old values that we are currently using) in the textfields
         username.setText(prefs.getPrefs("dbUser"));
         password.setText(prefs.getPrefs("dbPass"));
         ipAddress.setText(prefs.getPrefs("dbIP"));
     }   
-    
-    @FXML
-    private void QuitApp(ActionEvent event) {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        stage.close();
-    }
     
     @FXML
     private void CheckConnection(ActionEvent event) throws IOException{
@@ -97,8 +88,8 @@ public class DBSettingsController implements Initializable {
             }
 
         }else{
-            Stage stage = (Stage) closeButton.getScene().getWindow();
-            sl.StageLoad("Settings.fxml", stage);            
+            Stage stage = (Stage) password.getScene().getWindow();
+            sl.StageLoad(Sopho.lastStageName, stage, "DBSettings.fxml", false, true); //resizable false, utility true          
         }
         
     }

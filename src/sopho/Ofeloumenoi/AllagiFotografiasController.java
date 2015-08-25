@@ -1,6 +1,5 @@
 package sopho.Ofeloumenoi;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -12,8 +11,8 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.image.WritableImage;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
@@ -21,7 +20,7 @@ import javax.imageio.ImageIO;
 public class AllagiFotografiasController implements Initializable {
     
     @FXML
-    public Button closeButton;
+    public AnchorPane anchorPane;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -53,8 +52,8 @@ public class AllagiFotografiasController implements Initializable {
     
     @FXML
     public void TakePhoto(ActionEvent event) throws IOException{
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        sl.StageLoad("Ofeloumenoi/TakePhoto.fxml", stage);
+        Stage stage = (Stage) anchorPane.getScene().getWindow();
+        sl.StageLoad("/sopho/Ofeloumenoi/TakePhoto.fxml", stage, "sopho/Ofeloumenoi/AllagiFotografias.fxml", true, false); //resizable true, utility false
     }
     
 }

@@ -16,8 +16,6 @@ import javafx.stage.StageStyle;
 public class Setup2Controller implements Initializable {
 
     @FXML
-    public Button closeButton;
-    @FXML
     public TextField username;
     @FXML
     public TextField password;
@@ -48,12 +46,6 @@ public class Setup2Controller implements Initializable {
     //Otherwise the prompt text does not appear and the user doesn't know what to fill in.
     public void start(Stage primaryStage) throws Exception {
         title.requestFocus();
-    }
-    
-    @FXML
-    private void QuitApp(ActionEvent event) {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        stage.close();
     }
     
     StageLoader sl = new StageLoader();
@@ -106,8 +98,8 @@ public class Setup2Controller implements Initializable {
         }
         
         if(allOk){
-            Stage stage = (Stage) closeButton.getScene().getWindow();
-            sl.StageLoad("Setup3.fxml", stage);
+            Stage stage = (Stage) title.getScene().getWindow();
+            sl.StageLoad("Setup3.fxml", stage, "Setup2.fxml", false, true); //resizable false, utility true
         }else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initStyle(StageStyle.UNDECORATED);
@@ -120,8 +112,8 @@ public class Setup2Controller implements Initializable {
     
     @FXML
     private void PreviousButton(ActionEvent event) throws IOException {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        sl.StageLoad("Setup1.fxml", stage);
+        Stage stage = (Stage) title.getScene().getWindow();
+        sl.StageLoad("Setup1.fxml", stage, "Setup2.fxml", false, true); //resizable false, utility true
     }
     
 }

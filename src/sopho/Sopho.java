@@ -13,6 +13,8 @@ import javafx.stage.StageStyle;
 
 
 public class Sopho extends Application {
+    
+    public static String lastStageName=null;
         
     @Override
     public void start(Stage stage) throws Exception {
@@ -32,12 +34,12 @@ public class Sopho extends Application {
         
         if (dbIP==null||dbUser==null||dbPass==null) {
             // we have NOT made the initial setup so that the app can NOT connect to database. Start the initial setup wizard
-            sl.StageLoadNoClose("Welcome.fxml");
+            sl.StageLoadNoClose("Welcome.fxml", false, true); //resizable false, utility true
         }else if(!UserExists()){
-            sl.StageLoadNoClose("Setup4.fxml");
+            sl.StageLoadNoClose("Setup4.fxml", false, true); //resizable false, utility true
         }else{
             // we have  made the initial setup so that the app can connect to database. Start the login screen
-            sl.StageLoadNoClose("StartApp.fxml");            
+            sl.StageLoadNoClose("StartApp.fxml", false, true); //resizable false, utility true            
         }
         
     }

@@ -6,31 +6,26 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class WelcomeController implements Initializable {
 
     @FXML
-    public Button closeButton;
+    public AnchorPane anchorPane;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }
     
     StageLoader sl = new StageLoader();
     
     @FXML
-    private void QuitApp(ActionEvent event) {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        stage.close();
-    }
-    
-    @FXML
     private void Next(ActionEvent event) throws IOException {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        sl.StageLoad("Setup1.fxml", stage);
+        Stage stage = (Stage) anchorPane.getScene().getWindow();
+        sl.StageLoad("Setup1.fxml", stage, "Welcome.fxml", false, true);  //resizable false, utility true
     }
     
 }

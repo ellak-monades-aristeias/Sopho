@@ -6,30 +6,24 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class Setup5Controller implements Initializable {
     
     @FXML
-    public Button closeButton;
+    public AnchorPane anchorPane;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
     
-    @FXML
-    private void QuitApp(ActionEvent event) {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        stage.close();
-    }
-    
     StageLoader sl = new StageLoader();
     
     @FXML
     private void NextButton(ActionEvent event) throws IOException{
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        sl.StageLoad("StartApp.fxml", stage);
+        Stage stage = (Stage) anchorPane.getScene().getWindow();
+        sl.StageLoad("StartApp.fxml", stage, "Setup5.fxml", false, true); //resizable false, utility true
     }
 }
