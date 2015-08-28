@@ -42,14 +42,14 @@ public class Setup3Controller implements Initializable {
             }
         }else{//the connectivity with the database is confirmed
             Stage stage = (Stage) checkButton.getScene().getWindow();
-            sl.StageLoad("Setup4.fxml", stage, "Setup3.fxml", false, true); //resizable false, utility true
+            sl.StageLoad("Setup4.fxml", stage, false, true); //resizable false, utility true
         }
     }
     
     @FXML
     private void PreviousButton(ActionEvent event) throws IOException {
         Stage stage = (Stage) checkButton.getScene().getWindow();
-        sl.StageLoad("Setup2.fxml", stage, "Setup3.fxml", false, true); //resizable false, utility true
+        sl.StageLoad("Setup2.fxml", stage, false, true); //resizable false, utility true
     }
     
 }

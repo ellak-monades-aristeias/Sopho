@@ -27,6 +27,13 @@
     -fx-font-weight: 600;
 }
 
+.controlButtons{
+    -fx-font-family: 'Open Sans Semibold';
+    -fx-font-size: 20px;
+    -fx-background-color: #3668af;
+    -fx-font-weight: 600;
+}
+
 .backButton{
     -fx-font-family: 'Open Sans Semibold';
     -fx-font-size: 16px;

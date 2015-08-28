@@ -15,11 +15,9 @@ public class StageLoader {
     public static boolean fullscreen=false;
     
     //this method opens new stage and closes the old one
-    public void StageLoad(String fxmlName, Stage oldStage, String currentStageName, boolean resizable, boolean utilityWindow) throws IOException{
+    public void StageLoad(String fxmlName, Stage oldStage, boolean resizable, boolean utilityWindow) throws IOException{
         
         StageLoadNoClose(fxmlName, resizable, utilityWindow);
-        
-        Sopho.lastStageName = currentStageName;
         
         oldStage.close();
     }
@@ -39,7 +37,7 @@ public class StageLoader {
         }
         
         UndecoratorScene scene = new UndecoratorScene(stage, style, root, null);
-        scene.getStylesheets().add( getClass().getResource("myFonts.css").toExternalForm()); //adding the css for the fxml windows styling*/
+        scene.getStylesheets().add( getClass().getResource("Style.css").toExternalForm()); //adding the css for the fxml windows styling*/
         stage.setScene(scene);
 
         // Set sizes based on client area's sizes
@@ -48,7 +46,7 @@ public class StageLoader {
         stage.setMinHeight(undecorator.getMinHeight());
         stage.setWidth(undecorator.getPrefWidth());
         stage.setHeight(undecorator.getPrefHeight());
-        
+        stage.centerOnScreen();
         stage.setResizable(resizable);
         
         if (undecorator.getMaxWidth() > 0) {

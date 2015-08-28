@@ -14,7 +14,7 @@ import javafx.stage.StageStyle;
 
 public class Sopho extends Application {
     
-    public static String lastStageName=null;
+    public static boolean hasSignedIn=false; // static var to know if the user has signed into the mainApp interface.
         
     @Override
     public void start(Stage stage) throws Exception {

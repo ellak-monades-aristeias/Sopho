@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.*?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="900.0" maxWidth="676.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="526.0" prefWidth="676.0" style="-fx-min-width: 676px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Ofeloumenoi.SearchToEditOfeloumenoiController">
+    <stylesheets>
+        <URL value="@../Style.css" />
+    </stylesheets>
+    <children>
+      <BorderPane layoutY="-0.0" prefHeight="841.0" prefWidth="676.0" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-0.0">
+         <center>
+            <ScrollPane prefHeight="765.0" prefWidth="676.0" style="-fx-fit-to-height: true; -fx-fit-to-width: true;" BorderPane.alignment="CENTER">
+               <content>
+                  <VBox alignment="CENTER" prefHeight="743.0" prefWidth="674.0">
+                     <children>
+                        <Label text="Συμπληρώστε όποια απο τα παρακάτω πεδία επιθυμείτε για να αναζητήσετε τον ωφελούμενο που θα επεξεργαστείτε:" wrapText="true">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="20.0" right="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextField id="barcode" fx:id="barcode" maxHeight="40.0" maxWidth="280.0" minHeight="40.0" minWidth="280.0" prefHeight="40.0" prefWidth="280.0" promptText="Barcode">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="eponimo" maxHeight="40.0" maxWidth="280.0" minHeight="40.0" minWidth="280.0" prefHeight="40.0" prefWidth="280.0" promptText="Επώνυμο">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="onoma" maxHeight="40.0" maxWidth="280.0" minHeight="40.0" minWidth="280.0" prefHeight="40.0" prefWidth="280.0" promptText="Όνομα">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="tilefono" maxHeight="40.0" maxWidth="280.0" minHeight="40.0" minWidth="280.0" prefHeight="40.0" prefWidth="280.0" promptText="Τηλέφωνο">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="afm" maxHeight="40.0" maxWidth="280.0" minHeight="40.0" minWidth="280.0" prefHeight="40.0" prefWidth="280.0" promptText="ΑΦΜ">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="tautotita" maxHeight="40.0" maxWidth="280.0" minHeight="40.0" minWidth="280.0" prefHeight="40.0" prefWidth="280.0" promptText="Ταυτότητα - Διαβατήριο">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Button minWidth="200.0" mnemonicParsing="false" onAction="#Search" prefHeight="63.0" prefWidth="200.0" styleClass="mainAppButtons" text="Αναζήτηση" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="20.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
+         </center>
+         <top>
+            <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
+               <children>
+                   <Button fx:id="backButton" mnemonicParsing="false" prefHeight="33.0" prefWidth="81.0" style="-fx-background-color: #bc2d44;" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
+                     <font>
+                        <Font name="Open Sans Semibold" size="16.0" />
+                     </font>
+                     <StackPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </StackPane.margin>
+                  </Button>
+                  <Label styleClass="title" text="Αναζήτηση ωφελούμενου" textAlignment="CENTER" textFill="WHITE">
+                  </Label>
+               </children>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </StackPane>
+         </top>
+      </BorderPane>
+   </children>
+</AnchorPane>

@@ -17,9 +17,6 @@ import javafx.stage.StageStyle;
 
 public class ChangePasswordController implements Initializable {
 
-    double initialX;
-    double initialY;
-
     @FXML
     public TextField password;
     @FXML
@@ -45,7 +42,7 @@ public class ChangePasswordController implements Initializable {
                     alert.setContentText("Στο εξής θα χρησιμοποιείτε τον νέο κωδικό για την πρόσβαση στην εφαρμογή");
                     alert.showAndWait();
                     Stage stage = (Stage) password.getScene().getWindow();
-                    sl.StageLoad("Settings.fxml", stage, "ChangePassword.fxml", false, true);  //resizable false, utility true
+                    sl.StageLoad("Settings.fxml", stage, false, true);  //resizable false, utility true
                 }
             }else{
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -141,5 +138,11 @@ public class ChangePasswordController implements Initializable {
                 
             }  
         return false;
+    }
+    
+    @FXML
+    public void Cancel(ActionEvent event) throws IOException{
+        Stage stage = (Stage) password.getScene().getWindow();
+        sl.StageLoad("Settings.fxml", stage, true, false); //resizable true, utility false
     }
 }

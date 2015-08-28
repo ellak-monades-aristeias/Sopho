@@ -39,7 +39,13 @@ public class DBSettingsController implements Initializable {
         username.setText(prefs.getPrefs("dbUser"));
         password.setText(prefs.getPrefs("dbPass"));
         ipAddress.setText(prefs.getPrefs("dbIP"));
-    }   
+    }
+    
+    @FXML
+    private void GoBack(ActionEvent event) throws IOException{
+        Stage stage = (Stage) password.getScene().getWindow();
+        sl.StageLoad("StartApp.fxml", stage, false, true); //resizable false, utility true
+    }
     
     @FXML
     private void CheckConnection(ActionEvent event) throws IOException{
@@ -89,9 +95,12 @@ public class DBSettingsController implements Initializable {
 
         }else{
             Stage stage = (Stage) password.getScene().getWindow();
-            sl.StageLoad(Sopho.lastStageName, stage, "DBSettings.fxml", false, true); //resizable false, utility true          
+            if(Sopho.hasSignedIn){// the user has signed into the mainApp interface
+                sl.StageLoad("MainApp.fxml", stage, false, true); //resizable false, utility true          
+            }else{// the user hasn't sign into the mainApp yet. We redirect to the sign in scene.
+                sl.StageLoad("StartApp.fxml", stage, false, true); //resizable false, utility true          
+            }
         }
-        
     }
     
 }

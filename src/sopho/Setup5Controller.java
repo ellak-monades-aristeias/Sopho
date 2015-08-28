@@ -24,6 +24,6 @@ public class Setup5Controller implements Initializable {
     @FXML
     private void NextButton(ActionEvent event) throws IOException{
         Stage stage = (Stage) anchorPane.getScene().getWindow();
-        sl.StageLoad("StartApp.fxml", stage, "Setup5.fxml", false, true); //resizable false, utility true
+        sl.StageLoad("StartApp.fxml", stage, false, true); //resizable false, utility true
     }
 }

@@ -1,5 +1,6 @@
 package sopho;
 
+import sopho.Messages.CustomMessageController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,6 +13,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
@@ -44,7 +47,7 @@ public class StartAppController implements Initializable {
     @FXML
     public void OpenSettings(ActionEvent event) throws IOException{
         Stage stage = (Stage) login.getScene().getWindow();
-        sl.StageLoad("DBSettings.fxml", stage, "StartApp.fxml", false, true); //resizable false, utility true
+        sl.StageLoad("DBSettings.fxml", stage, false, true); //resizable false, utility true
     }
     
     @FXML
@@ -73,14 +76,17 @@ public class StartAppController implements Initializable {
             if(rs.getRow()>0){    
                 //login successful. Goto to mainApp
                 Stage stage = (Stage) login.getScene().getWindow();
-                sl.StageLoad("MainApp.fxml", stage, "StartApp.fxml", true, false); //resizable true, utility false
+                Sopho.hasSignedIn = true;
+                sl.StageLoad("MainApp.fxml", stage, true, false); //resizable true, utility false
             }else{
-                Alert alert = new Alert(AlertType.ERROR);
+                /*Alert alert = new Alert(AlertType.ERROR);
                 alert.initStyle(StageStyle.UNDECORATED);
                 alert.setTitle("Προσοχή!");
                 alert.setHeaderText("Λάθος κωδικός πρόσβασης");
                 alert.setContentText("Προσπαθήστε και πάλι...");
-                alert.showAndWait();                
+                alert.showAndWait();*/
+                CustomMessageController cm = new CustomMessageController(null , "Προσοχή!", "Έχετε εισάγει λάθος κωδικό πρόσβασης. Βεβαιωθείτε ότι γράφετε αγγλικούς χαρακτήρες και ότι το caps lock είναι απενεργοποιημένο.", "error");
+                cm.showAndWait();
             }
             
             

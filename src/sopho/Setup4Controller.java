@@ -82,7 +82,7 @@ public class Setup4Controller implements Initializable {
                 
                 if (flag==1){
                     Stage stage = (Stage) password.getScene().getWindow();
-                    sl.StageLoad("Setup5.fxml", stage, "Setup4.fxml", false, true); //resizable false, utility true
+                    sl.StageLoad("Setup5.fxml", stage, false, true); //resizable false, utility true
                 }
                 else if(flag==0){
                     Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -103,6 +103,6 @@ public class Setup4Controller implements Initializable {
     @FXML
     private void PreviousButton(ActionEvent event) throws IOException {
         Stage stage = (Stage) password.getScene().getWindow();
-        sl.StageLoad("Setup3.fxml", stage, "Setup4.fxml", false, true); //resizable false, utility true
+        sl.StageLoad("Setup3.fxml", stage, false, true); //resizable false, utility true
     }
 }

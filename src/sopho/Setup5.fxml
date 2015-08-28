@@ -13,7 +13,7 @@
 
 <AnchorPane fx:id="anchorPane" maxHeight="900.0" maxWidth="676.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="475.0" prefWidth="676.0" style="-fx-min-width: 676px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Setup5Controller">
     <stylesheets>
-        <URL value="@myFonts.css" />
+        <URL value="@Style.css" />
     </stylesheets>
     <children>
       <BorderPane layoutY="-0.0" prefHeight="841.0" prefWidth="676.0" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-0.0">

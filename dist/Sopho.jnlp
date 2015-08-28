@@ -9,9 +9,11 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Sopho.jar" size="746416" download="eager" />
-    <jar href="lib/UndecoratorBis.jar" size="215331" download="eager" />
+    <jar href="Sopho.jar" size="773561" download="eager" />
+    <jar href="lib/UndecoratorBis.jar" size="213767" download="eager" />
+    <jar href="lib/bridj-0.7.0.jar" size="935929" download="eager" />
     <jar href="lib/mysql-connector-java-5.0.8-bin.jar" size="540852" download="eager" />
+    <jar href="lib/slf4j-api-1.7.2.jar" size="26083" download="eager" />
     <jar href="lib/webcam-capture-0.3.10.jar" size="409084" download="eager" />
   </resources>
   <applet-desc  width="1024" height="768" main-class="com.javafx.main.NoJavaFXFallback"  name="Sopho" >

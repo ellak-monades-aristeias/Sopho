@@ -24,19 +24,19 @@ public class SettingsController implements Initializable {
     @FXML
     public void ChangeDBSetting(ActionEvent event) throws IOException{
         Stage stage = (Stage) anchorPane.getScene().getWindow();
-        sl.StageLoad("DBSettings.fxml", stage, "Settings.fxml", true, false); //resizable true, utility false
+        sl.StageLoad("DBSettings.fxml", stage, true, false); //resizable true, utility false
     }
     
     @FXML
     public void ChangePassword(ActionEvent event) throws IOException{
         Stage stage = (Stage) anchorPane.getScene().getWindow();
-        sl.StageLoad("ChangePassword.fxml", stage, "Settings.fxml", false, true); //resizable false, utility true
+        sl.StageLoad("ChangePassword.fxml", stage, false, true); //resizable false, utility true
     }
     
     @FXML
     private void GoBack(ActionEvent event) throws IOException{
         Stage stage = (Stage) anchorPane.getScene().getWindow();
-        sl.StageLoad("MainApp.fxml", stage, "Settings.fxml", true, false); //resizable true, utility false
+        sl.StageLoad("MainApp.fxml", stage, true, false); //resizable true, utility false
     }
         
 }

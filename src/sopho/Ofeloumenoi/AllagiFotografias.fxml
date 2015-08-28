@@ -13,7 +13,7 @@
 
 <AnchorPane fx:id="anchorPane" maxHeight="900.0" maxWidth="676.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="570.0" prefWidth="676.0" style="-fx-min-width: 676px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Ofeloumenoi.AllagiFotografiasController">
     <stylesheets>
-        <URL value="@../myFonts.css" />
+        <URL value="@../Style.css" />
     </stylesheets>
     <children>
       <BorderPane layoutY="-0.0" prefHeight="841.0" prefWidth="676.0" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-0.0">
@@ -22,12 +22,12 @@
                <content>
                   <VBox alignment="CENTER" prefHeight="743.0" prefWidth="674.0">
                      <children>
-                        <Button minWidth="400.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="400.0" styleClass="mainAppButtons" text="Λήψη απο κάμερα" textFill="WHITE">
+                        <Button minWidth="400.0" mnemonicParsing="false" onAction="#TakePhoto" prefHeight="63.0" prefWidth="400.0" styleClass="mainAppButtons" text="Λήψη απο κάμερα" textFill="WHITE">
                            <VBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
                         </Button>
-                        <Button minWidth="400.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="400.0" styleClass="mainAppButtons" text="Επιλογή εικόνας από τον υπολογιστή" textFill="WHITE">
+                        <Button minWidth="400.0" mnemonicParsing="false" onAction="#OpenPhotoFile" prefHeight="63.0" prefWidth="400.0" styleClass="mainAppButtons" text="Επιλογή εικόνας από τον υπολογιστή" textFill="WHITE">
                            <VBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>

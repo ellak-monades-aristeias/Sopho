@@ -13,7 +13,7 @@
 
 <AnchorPane id="AnchorPane" maxHeight="612.0" maxWidth="772.0" minHeight="400.0" minWidth="569.0" prefHeight="531.0" prefWidth="772.0" style="-fx-background-color: #bc2d44;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.StartAppController">
    <stylesheets>
-        <URL value="@myFonts.css" />
+        <URL value="@Style.css" />
     </stylesheets>
     <children>
       <ImageView fx:id="logo" fitHeight="256.0" fitWidth="256.0" layoutX="259.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">

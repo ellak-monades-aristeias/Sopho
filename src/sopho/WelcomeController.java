@@ -25,7 +25,7 @@ public class WelcomeController implements Initializable {
     @FXML
     private void Next(ActionEvent event) throws IOException {
         Stage stage = (Stage) anchorPane.getScene().getWindow();
-        sl.StageLoad("Setup1.fxml", stage, "Welcome.fxml", false, true);  //resizable false, utility true
+        sl.StageLoad("Setup1.fxml", stage, false, true);  //resizable false, utility true
     }
     
 }

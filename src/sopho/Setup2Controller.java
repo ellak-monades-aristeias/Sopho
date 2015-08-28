@@ -99,7 +99,7 @@ public class Setup2Controller implements Initializable {
         
         if(allOk){
             Stage stage = (Stage) title.getScene().getWindow();
-            sl.StageLoad("Setup3.fxml", stage, "Setup2.fxml", false, true); //resizable false, utility true
+            sl.StageLoad("Setup3.fxml", stage, false, true); //resizable false, utility true
         }else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initStyle(StageStyle.UNDECORATED);
@@ -113,7 +113,7 @@ public class Setup2Controller implements Initializable {
     @FXML
     private void PreviousButton(ActionEvent event) throws IOException {
         Stage stage = (Stage) title.getScene().getWindow();
-        sl.StageLoad("Setup1.fxml", stage, "Setup2.fxml", false, true); //resizable false, utility true
+        sl.StageLoad("Setup1.fxml", stage, false, true); //resizable false, utility true
     }
     
 }

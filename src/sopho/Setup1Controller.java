@@ -34,7 +34,7 @@ public class Setup1Controller implements Initializable {
         prefs.setPrefs("dbIP", "localhost");
         
         Stage stage = (Stage) anchorPane.getScene().getWindow();
-        sl.StageLoad("Setup2.fxml", stage, "Setup1.fxml", false, true); //resizable false, utility true
+        sl.StageLoad("Setup2.fxml", stage, false, true); //resizable false, utility true
     }
     
     @FXML
@@ -42,7 +42,7 @@ public class Setup1Controller implements Initializable {
         prefs.setPrefs("dbIP", "null");
         
         Stage stage = (Stage) anchorPane.getScene().getWindow();
-        sl.StageLoad("Setup2.fxml", stage, "Setup1.fxml", false, true); //resizable false, utility true
+        sl.StageLoad("Setup2.fxml", stage, false, true); //resizable false, utility true
     }
 
 }
