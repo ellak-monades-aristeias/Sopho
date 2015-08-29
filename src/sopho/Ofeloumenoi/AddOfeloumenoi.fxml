@@ -21,7 +21,7 @@
          <bottom>
             <HBox alignment="CENTER" maxHeight="92.0" minHeight="60.0" prefHeight="74.0" prefWidth="997.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" minWidth="190.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: #bc2d44;" text="Καταχώρηση" textFill="WHITE">
+                  <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" minWidth="190.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#Save" style="-fx-background-color: #bc2d44;" text="Καταχώρηση" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -100,11 +100,14 @@
                                           <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
                                        </VBox.margin>
                                     </TextField>
-                                    <ComboBox fx:id="dimos" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="292.0" promptText="Δήμος">
+                                    <TextField fx:id="dimos" layoutX="20.0" layoutY="330.0" prefHeight="39.0" prefWidth="221.0" promptText="Δήμος">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
                                        <VBox.margin>
                                           <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
                                        </VBox.margin>
-                                    </ComboBox>
+                                    </TextField>
                                     <TextField fx:id="tilefono" prefHeight="39.0" prefWidth="221.0" promptText="Τηλέφωνο">
                                        <font>
                                           <Font size="16.0" />
@@ -235,21 +238,20 @@
                                           </Label>
                                        </top>
                                        <center>
-                                          <TableView editable="true" prefHeight="110.0" prefWidth="226.0" BorderPane.alignment="CENTER">
+                                          <TableView fx:id="tekna" editable="true" prefHeight="110.0" prefWidth="226.0" BorderPane.alignment="CENTER">
                                              <columnResizePolicy>
                                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                              </columnResizePolicy>
                                              <columns>
-                                                <TableColumn prefWidth="59.0" text="Έτος Γεννησης" />
-                                                <TableColumn prefWidth="165.0" text="Τάξη Φοίτησης" />
+                                                <TableColumn fx:id="etosCol" prefWidth="59.0" text="Έτος Γεννησης" />
                                              </columns>
                                           </TableView>
                                        </center>
                                        <bottom>
                                           <HBox alignment="CENTER" prefHeight="23.0" prefWidth="311.0" BorderPane.alignment="CENTER">
                                              <children>
-                                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="146.0" text="- Γραμμή" />
-                                                <Button alignment="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="146.0" text="+ Γραμμή" />
+                                                <Button mnemonicParsing="false" onAction="#RemoveRow" prefHeight="25.0" prefWidth="146.0" text="- Γραμμή" />
+                                                <Button alignment="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#AddRow" prefHeight="25.0" prefWidth="146.0" text="+ Γραμμή" />
                                              </children>
                                           </HBox>
                                        </bottom>
