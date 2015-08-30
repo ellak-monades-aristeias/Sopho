@@ -1,5 +1,6 @@
 package sopho.Ofeloumenoi;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -7,21 +8,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import javafx.application.Application;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import java.util.ArrayList;
+import java.util.List;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
@@ -29,10 +25,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-
 import javafx.scene.image.Image;
+
 import javafx.scene.image.ImageView;
-import javafx.util.Callback;
 
 public class AddOfeloumenoiController implements Initializable {
     
@@ -49,13 +44,15 @@ public class AddOfeloumenoiController implements Initializable {
     @FXML
     public DatePicker imGennisis;
     @FXML
-    public TableView tekna;
+    private TableView<tableManager> tekna;
     @FXML
     public TableColumn etosCol;
     @FXML
     public ImageView image;
         
     sopho.StageLoader sl = new sopho.StageLoader();
+    
+    private ObservableList<tableManager> data;
     
     @FXML
     private void GoBack(ActionEvent event) throws IOException{
@@ -65,8 +62,7 @@ public class AddOfeloumenoiController implements Initializable {
     
     @FXML
     public void ChangePhoto(ActionEvent event) throws IOException{
-        Stage stage = (Stage) backButton.getScene().getWindow();
-        sl.StageLoad("/sopho/Ofeloumenoi/AllagiFotografias.fxml", stage, true, false); //resizable true, utility false
+        sl.StageLoadNoClose("/sopho/Ofeloumenoi/AllagiFotografias.fxml", false, true); //resizable false, utility true
         /*// get default webcam and open it
 	Webcam webcam = Webcam.getDefault();
 	webcam.open();
@@ -80,151 +76,137 @@ public class AddOfeloumenoiController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        //initialzing tekna table
+        data = getInitialTableData();
+        
+        System.out.println("start called");
+        
+        tekna.setItems(data);
         tekna.setEditable(true);
-        etosCol.setCellValueFactory(new PropertyValueFactory<tableManager, Integer>("etos"));
+        etosCol.setCellValueFactory(new PropertyValueFactory<tableManager, String>("etos"));
+        
+        //lets make the table cells editable
         etosCol.setCellFactory(TextFieldTableCell.forTableColumn());
-        etosCol.setOnEditCommit(new EventHandler<CellEditEvent<tableManager, Integer>>() {
+        etosCol.setOnEditCommit(new EventHandler<CellEditEvent<tableManager, String>>() {
+            
             @Override
-            public void handle(CellEditEvent<tableManager, Integer> t) {
+            public void handle(CellEditEvent<tableManager, String> t){
                 ((tableManager) t.getTableView().getItems().get(
-                    t.getTablePosition().getRow())
-                    ).setEtos(t.getNewValue());
+                    t.getTablePosition().getRow())).setEtos(t.getNewValue());
             }
         });
-    
+        
+        tekna.getColumns().setAll(etosCol);
+        //end of initialization of tekna table
+        
+        //initialize oikKatastasi combobox
+        oikKatastasi.getItems().addAll(
+            "Άγαμος",
+            "Έγγαμος",
+            "Διαζευγμένος",
+            "Χήρος" 
+        );
+        
+        //initialize asfForeas comboBox
+        asfForeas.getItems().addAll(
+            "Ανασφάλιστος",
+            "ΙΚΑ",
+            "ΟΓΑ",
+            "ΟΑΕΕ",
+            "ΕΤΑΑ",
+            "ΕΟΠΥΥ",
+            "ΤΠΔΥ",
+            "ΤΑΠΙΤ",
+            "ΕΤΑΠ – ΜΜΕ",
+            "Άλλο"
+        );
     }
-    
-    
-    
-    /*
-    public void ChangeImage(String filename){
+
+    public void SetImage(String filename){
         File file = new File(filename);
-        Image img = new Image(file.toURI().toString());
-        image.setImage(img);
-    }*/
+        Image myimage = new Image(file.toURI().toString());
+        image.setImage(myimage);
+        //TODO we have to get the photo from the TakePhotoController
+    }
     
     @FXML
     public void Save(ActionEvent event){
         //TODO push data to database
+        String teknaDB = ""; //we create a var to push data to db.
+        for(int i=0; i<tekna.getItems().size(); i++){
+            tableManager tbl = (tableManager) tekna.getItems().get(i);
+            teknaDB += tbl.getEtos() + ","; //we have to call getEtos from the tableManager class to get the actual value. We add the value to teknaDB and seperate with comma.
+        }
+        teknaDB = teknaDB.substring(0, teknaDB.length()-1); // we have to remove the last comma.
     }
     
     @FXML
     private void AddRow(ActionEvent event) {
-      ObservableList<Map> allData = tekna.getItems();
-      int offset = allData.size();
-      Map<String, String> dataRow = new HashMap<>();
-      for (int j = 0; j < tekna.getColumns().size(); j++) {
-        String mapKey = Character.toString((char) ('A' + j));
-        String value1 = mapKey + (offset + 1);
-        dataRow.put(mapKey, value1);
-      }
-      allData.add(dataRow);
+        //create a new row after the last row
+        tableManager tbl = new tableManager("Συμπληρώστε έτος γέννησης");
+        
+        data.add(tbl);
+        int row = data.size()-1; //we compensate with -1 because the rows count from 0
+        
+        //selecting the new row
+        tekna.requestFocus();
+        tekna.getSelectionModel().select(row);
+        tekna.getFocusModel().focus(row);
     }
     
     
     
     @FXML
     private void RemoveRow(ActionEvent event){
-        try {
-            Integer sel = tekna.getSelectionModel().getSelectedIndex();
-            
-            if (sel==-1){
-                sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Πρέπει να επιλέξετε τουλάχιστον μια γραμμή από τον πίνακα για να αφαιρεθεί.", "error");
-                cm.showAndWait();
-            }else{            
-                System.out.println("the selected line is " + sel);
-                
-                ObservableList<Map> allData = tekna.getItems();
-                allData.remove(sel);
-                
-                tekna.setItems(null); // we remove the items to clear the table;
-                tekna.setItems(allData); // and then we set the new data with the selected line removed.
+        //getting the selected row and deleting it
+        int i = tekna.getSelectionModel().getSelectedIndex();
+        tableManager tbl = (tableManager) tekna.getSelectionModel().getSelectedItem();
+        if(i==-1){
+            //the user did not select any line. We display a message
+            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null,"Προσοχή!", "Δεν έχετε επιλέξει κάποια γραμμή από τον πίνακα για να διαγραφεί.", "error");
+            cm.showAndWait();
+        }else{
+            //we focus on the previous line of the line that the user deleted
+            data.remove(i);
+            if(i!=0){//the i is equal to 0 in the case that the first line was selected.
+                i=i--;
             }
-        }catch(Exception e){
-            System.out.println("table selection error " + e);
+            tekna.requestFocus();
+            tekna.getSelectionModel().select(i);
+            tekna.getFocusModel().focus(i);
         }
     }
     
-    public static class tableManager { //this is a helper class to display the data from the resultSet to the table properly.
+    public class tableManager { //this is a helper class to display the data from the resultSet to the table properly.
         
-        private IntegerProperty etos;
-
-        private tableManager(Integer etos){
-            this.etos = new SimpleIntegerProperty(etos);
-        }
+        private SimpleStringProperty etos;
         
-        public void setEtos(Integer myEtos) {
-            etos.set(myEtos);
+        public tableManager(){}
+        
+        public tableManager(String s){
+            etos = new SimpleStringProperty(s);
         }
         
-    }
-    /*
-    //this class is required to be able to edit the cells for the "tekna" tableView
-    class EditingCell extends TableCell<tableManager, String> {
- 
-        private TextField textField;
- 
-        public EditingCell() {
+        public String getEtos(){
+            return etos.get();
         }
- 
-        @Override
-        public void startEdit() {
-            if (!isEmpty()) {
-                super.startEdit();
-                createTextField();
-                setText(null);
-                setGraphic(textField);
-                textField.selectAll();
-            }
-        }
- 
-        @Override
-        public void cancelEdit() {
-            super.cancelEdit();
- 
-            setText((String) getItem());
-            setGraphic(null);
-        }
- 
-        @Override
-        public void updateItem(String item, boolean empty) {
-            super.updateItem(item, empty);
- 
-            if (empty) {
-                setText(null);
-                setGraphic(null);
-            } else {
-                if (isEditing()) {
-                    if (textField != null) {
-                        textField.setText(getString());
-                    }
-                    setText(null);
-                    setGraphic(textField);
-                } else {
-                    setText(getString());
-                    setGraphic(null);
-                }
-            }
-        }
- 
-        private void createTextField() {
-            textField = new TextField(getString());
-            textField.setMinWidth(this.getWidth() - this.getGraphicTextGap()* 2);
-            textField.focusedProperty().addListener(new ChangeListener<Boolean>(){
-                @Override
-                public void changed(ObservableValue<? extends Boolean> arg0, 
-                    Boolean arg1, Boolean arg2) {
-                        if (!arg2) {
-                            commitEdit(textField.getText());
-                        }
-                }
-            });
-        }
- 
-        private String getString() {
-            return getItem() == null ? "" : getItem().toString();
+        
+        public void setEtos(String s){
+            etos.set(s);
         }
     }
-
-    */
+    
+    //this is required to get the initial data from the table and push them to an observableList.
+    private ObservableList<tableManager> getInitialTableData(){
+        
+        List<tableManager> list = new ArrayList<>();
+        
+        // we can add data to the initial table using the following command
+            list.add(new tableManager("Συμπληρώστε έτος γέννησης"));
+        
+        ObservableList<tableManager> mydata = FXCollections.observableList(list);
+        
+        return mydata;
+    }
 }

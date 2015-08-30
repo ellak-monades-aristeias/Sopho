@@ -17,27 +17,25 @@
         <URL value="@../Style.css" />
     </stylesheets>
     <children>
-      <BorderPane layoutX="9.0" layoutY="11.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="650.0" minWidth="997.0" prefHeight="870.0" prefWidth="997.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <bottom>
-            <HBox alignment="CENTER" maxHeight="92.0" minHeight="60.0" prefHeight="74.0" prefWidth="997.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" minWidth="190.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#Save" style="-fx-background-color: #bc2d44;" text="Καταχώρηση" textFill="WHITE">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="8.0" left="25.0" right="25.0" top="8.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets left="10.0" right="10.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-               <BorderPane.margin>
-                  <Insets bottom="-0.0" />
-               </BorderPane.margin>
-            </HBox>
-         </bottom>
+      <BorderPane minHeight="650.0" minWidth="997.0" prefHeight="870.0" prefWidth="997.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+                  <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
+                     <children>
+                        <Label styleClass="titleSmall" text="Καταχώρηση Ωφελούμενου" textAlignment="CENTER" textFill="WHITE">
+                        </Label>
+                        <Button fx:id="backButton" mnemonicParsing="false" onAction="#GoBack" prefHeight="33.0" prefWidth="81.0" styleClass="backButton" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
+                           <StackPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </StackPane.margin>
+                        </Button>
+                        <SVGPath content="M461,244 L371,244 L317.8,185 L461,185" fill="#bc2d44" nodeOrientation="LEFT_TO_RIGHT" scaleX="1.2" scaleY="0.77" stroke="RED" strokeWidth="0.0" translateX="-12.0" StackPane.alignment="CENTER_RIGHT" />
+                     </children>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </StackPane>
+               </top>
+          
          <center>
             <StackPane prefHeight="712.0" prefWidth="1238.0">
                <children>
@@ -385,23 +383,26 @@
                </BorderPane.margin>
             </StackPane>
          </center>
-         <top>
-                  <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
-                     <children>
-                        <Label styleClass="titleSmall" text="Καταχώρηση Ωφελούμενου" textAlignment="CENTER" textFill="WHITE">
-                        </Label>
-                        <Button fx:id="backButton" mnemonicParsing="false" onAction="#GoBack" prefHeight="33.0" prefWidth="81.0" styleClass="backButton" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
-                           <StackPane.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </StackPane.margin>
-                        </Button>
-                        <SVGPath content="M461,244 L371,244 L317.8,185 L461,185" fill="#bc2d44" nodeOrientation="LEFT_TO_RIGHT" scaleX="1.2" scaleY="0.77" stroke="RED" strokeWidth="0.0" translateX="-12.0" StackPane.alignment="CENTER_RIGHT" />
-                     </children>
-                     <effect>
-                        <DropShadow />
-                     </effect>
-                  </StackPane>
-               </top>
+         <bottom>
+            <HBox alignment="CENTER" maxHeight="92.0" minHeight="60.0" prefHeight="74.0" prefWidth="997.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" minWidth="190.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#Save" style="-fx-background-color: #bc2d44;" text="Καταχώρηση" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="8.0" left="25.0" right="25.0" top="8.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="-0.0" />
+               </BorderPane.margin>
+            </HBox>
+         </bottom>
       </BorderPane>
    </children>
 </AnchorPane>

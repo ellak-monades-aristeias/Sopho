@@ -64,7 +64,7 @@ public class AllagiFotografiasController implements Initializable {
     @FXML
     public void TakePhoto(ActionEvent event) throws IOException{
         Stage stage = (Stage) anchorPane.getScene().getWindow();
-        sl.StageLoad("/sopho/Ofeloumenoi/TakePhoto.fxml", stage, true, false); //resizable true, utility false
+        sl.StageLoad("/sopho/Ofeloumenoi/TakePhoto.fxml", stage, false, true); //resizable false, utility true
     }
     
 }
