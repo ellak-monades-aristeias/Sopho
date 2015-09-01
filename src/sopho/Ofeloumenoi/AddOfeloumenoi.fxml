@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.*?>
 
-<AnchorPane minHeight="676.0" minWidth="997.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="997.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Ofeloumenoi.AddOfeloumenoiController">
+<AnchorPane minHeight="676.0" minWidth="997.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="820.0" prefWidth="997.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Ofeloumenoi.AddOfeloumenoiController">
     <stylesheets>
         <URL value="@../Style.css" />
     </stylesheets>
@@ -162,7 +162,7 @@
                                           </Label>
                                        </top>
                                        <center>
-                                          <ImageView fx:id="image" fitHeight="150.0" fitWidth="289.0" BorderPane.alignment="CENTER" />
+                                          <ImageView fx:id="image" fitHeight="217.0" fitWidth="289.0" BorderPane.alignment="CENTER" />
                                        </center>
                                        <bottom>
                                           <Button mnemonicParsing="false" onAction="#ChangePhoto" prefHeight="37.0" prefWidth="292.0" text="Προσθήκη Φωτογραφίας" textFill="#656565" BorderPane.alignment="CENTER">
@@ -224,10 +224,10 @@
                                     </HBox>
                                     <ComboBox fx:id="oikKatastasi" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="292.0" promptText="Οικογενειακή Κατάσταση">
                                        <VBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                          <Insets left="10.0" right="10.0" top="10.0" />
                                        </VBox.margin>
                                     </ComboBox>
-                                    <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                    <BorderPane prefHeight="134.0" prefWidth="311.0">
                                        <top>
                                           <Label text="Τέκνα" BorderPane.alignment="CENTER">
                                              <font>
@@ -236,7 +236,7 @@
                                           </Label>
                                        </top>
                                        <center>
-                                          <TableView fx:id="tekna" editable="true" prefHeight="110.0" prefWidth="226.0" BorderPane.alignment="CENTER">
+                                          <TableView fx:id="tekna" editable="true" prefHeight="126.0" prefWidth="291.0" BorderPane.alignment="CENTER">
                                              <columnResizePolicy>
                                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                              </columnResizePolicy>

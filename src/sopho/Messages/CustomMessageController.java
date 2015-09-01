@@ -67,5 +67,5 @@ public class CustomMessageController extends Stage implements Initializable {
         Stage stage = (Stage) ok.getScene().getWindow();
         stage.close();
     }
-    
+       
 }

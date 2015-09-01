@@ -10,7 +10,6 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -21,7 +20,6 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -29,13 +27,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import javax.imageio.ImageIO;
 
-public class TakePhotoController extends Application implements Initializable {
-    
-    public static String photoTaken; // this string is required to store the image file name of the photo that we took from the webcam
-    
+public class TakePhotoController implements Initializable {
+       
     @FXML
     public Button takePhoto;
     @FXML
@@ -49,8 +44,6 @@ public class TakePhotoController extends Application implements Initializable {
     private Webcam selWebCam = null;
     private boolean stopCamera = false;
     private ObjectProperty<Image> imageProperty = new SimpleObjectProperty<Image>();
-    
-    public boolean tookPhoto=false;
     
     @FXML
     public void TakePicture(ActionEvent event){
@@ -82,7 +75,10 @@ public class TakePhotoController extends Application implements Initializable {
         if(SaveImage(image, filename)){
             sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Τέλεια!", "Η φωτογραφία του ωφελούμενου αποθηκεύτηκε επιτυχώς!", "confirm");
             cm.showAndWait();
+            String PhotoID = myRand + "";//this is a trick to get myRand because this int cannot be dereferenced and so we could not use toString() method.
+            PhotoListener.setStr(PhotoID);
             Stage stage = (Stage) takePhoto.getScene().getWindow();
+            closeCamera();//we have to close the camera before exiting
             stage.close();
         }else{
             sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Πρόβλημα...", "Η φωτογραφία του ωφελούμενου δεν μπόρεσε να αποθηκευτεί. Προσπαθήστε και πάλι...", "error");
@@ -94,8 +90,6 @@ public class TakePhotoController extends Application implements Initializable {
         try {
             // save image to JPG file
             ImageIO.write(image, "JPG", new File(filename));
-            photoTaken = filename;
-            tookPhoto=true;
             return true;
         } catch (IOException ex) {
             Logger.getLogger(TakePhotoController.class.getName()).log(Level.SEVERE, null, ex);
@@ -141,19 +135,6 @@ public class TakePhotoController extends Application implements Initializable {
 
     }
     
-    @Override
-    public void start(Stage stage){
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                if(tookPhoto){
-                    System.out.println("setOnCloseRequest called...");
-                    //TODO pass photo to AddOfeloumenoiController
-                }
-            }
-        });
-    }
-    
     protected void initializeWebCam(final int webCamIndex) {
 
         Task<Void> webCamIntilizer = new Task<Void>() {
@@ -181,6 +162,7 @@ public class TakePhotoController extends Application implements Initializable {
     }
     
     private void closeCamera() {
+        stopCamera=true;
         if (selWebCam != null) {
             selWebCam.close();
         }

@@ -11,10 +11,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -26,8 +30,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
+import javafx.scene.control.ButtonType;
 
 import javafx.scene.image.ImageView;
+import javafx.stage.StageStyle;
 
 public class AddOfeloumenoiController implements Initializable {
     
@@ -54,6 +60,9 @@ public class AddOfeloumenoiController implements Initializable {
     
     private ObservableList<tableManager> data;
     
+    public String PhotoID;
+    
+       
     @FXML
     private void GoBack(ActionEvent event) throws IOException{
         Stage stage = (Stage) backButton.getScene().getWindow();
@@ -63,25 +72,26 @@ public class AddOfeloumenoiController implements Initializable {
     @FXML
     public void ChangePhoto(ActionEvent event) throws IOException{
         sl.StageLoadNoClose("/sopho/Ofeloumenoi/AllagiFotografias.fxml", false, true); //resizable false, utility true
-        /*// get default webcam and open it
-	Webcam webcam = Webcam.getDefault();
-	webcam.open();
-
-	// get image
-	BufferedImage image = webcam.getImage();
-
-	// save image to PNG file
-	ImageIO.write(image, "PNG", new File("test.png"));*/
+        //showImageChangeDialog();
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
+        //we use a listener to know if the user adds a photo using the TakePhoto class
+        PhotoListener.strProperty().addListener(new ChangeListener(){
+            @Override 
+            public void changed(ObservableValue o,Object oldVal,Object newVal){
+                PhotoID=(String) newVal; 
+                File file = new File(System.getProperty("user.home")+"/Documents/Sopho/Images/photo" + newVal + ".jpg");
+                Image img = new Image(file.toURI().toString());
+                image.setImage(img);
+            }
+        });
+        
         //initialzing tekna table
         data = getInitialTableData();
-        
-        System.out.println("start called");
-        
+                
         tekna.setItems(data);
         tekna.setEditable(true);
         etosCol.setCellValueFactory(new PropertyValueFactory<tableManager, String>("etos"));
@@ -122,7 +132,30 @@ public class AddOfeloumenoiController implements Initializable {
             "Άλλο"
         );
     }
-
+    
+    public void showImageChangeDialog(){
+        Alert c = new Alert(Alert.AlertType.NONE);
+        
+        c.setTitle("Αλλαγή φωτογραφίας");
+        c.initStyle(StageStyle.UNDECORATED);
+        c.setHeaderText("Μπορείτε να επιλέξετε ένα αρχείο εικόνας είτε να τραβήξετε μια φωτογραφία από την κάμερα του υπολογιστή σας.");
+        //c.setGraphic(new ImageView(this.getClass().getResource("/sopho/Messages/okIcon.png").toString()));
+        
+        //set the buttons
+        ButtonType bt1 = new ButtonType("Επιλογή από αρχείο");
+        ButtonType bt2 = new ButtonType("Λήψη εικόνας από κάμερα");
+        
+        c.getButtonTypes().setAll(bt1, bt2);
+        
+        Optional<ButtonType> result = c.showAndWait();
+        if(result.get() == bt1){
+            System.out.println("apo arxeio");
+        }else if(result.get() == bt2){
+            System.out.println("apo kamera");
+        }
+        
+    }
+    
     public void SetImage(String filename){
         File file = new File(filename);
         Image myimage = new Image(file.toURI().toString());
@@ -145,6 +178,8 @@ public class AddOfeloumenoiController implements Initializable {
     private void AddRow(ActionEvent event) {
         //create a new row after the last row
         tableManager tbl = new tableManager("Συμπληρώστε έτος γέννησης");
+        
+        PhotoListener.setStr("this new str");
         
         data.add(tbl);
         int row = data.size()-1; //we compensate with -1 because the rows count from 0
@@ -209,4 +244,6 @@ public class AddOfeloumenoiController implements Initializable {
         
         return mydata;
     }
+    
+    
 }

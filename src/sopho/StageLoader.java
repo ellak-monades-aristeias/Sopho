@@ -4,7 +4,9 @@ import insidefx.undecorator.Undecorator;
 import insidefx.undecorator.UndecoratorScene;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.layout.Region;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -46,7 +48,11 @@ public class StageLoader {
         stage.setMinHeight(undecorator.getMinHeight());
         stage.setWidth(undecorator.getPrefWidth());
         stage.setHeight(undecorator.getPrefHeight());
-        stage.centerOnScreen();
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        System.out.println("width" + stage.getWidth());
+        System.out.println("height" + stage.getHeight());
+        stage.setX((primScreenBounds.getWidth() - stage.getWidth() - 44) / 2); //we use -44 to compensate for the UndecoratorBis that adds 22 pixels at every edge around the stage
+        stage.setY((primScreenBounds.getHeight() - stage.getHeight() - 44) / 2);
         stage.setResizable(resizable);
         
         if (undecorator.getMaxWidth() > 0) {
