@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 
 public class SearchToEditOfeloumenoiController implements Initializable {
 
-    public String sql = "SELECT * FROM ofeloumenoi WHERE";
     Connection conn=null;
     PreparedStatement pst = null;
     ResultSet rs = null;
@@ -33,9 +32,9 @@ public class SearchToEditOfeloumenoiController implements Initializable {
     
     @FXML
     public void Search(ActionEvent event){
-        if(!CheckEmpty()){
+        if(CheckEmpty()){
             //we have at least one field filled
-            
+            String sql = "SELECT * FROM ofeloumenoi WHERE ";
             if(!barcode.getText().isEmpty()){
                 sql = sql + "barcode = " + barcode.getText() + " AND";
             }
@@ -59,6 +58,7 @@ public class SearchToEditOfeloumenoiController implements Initializable {
             
             try{
                 System.out.println("Search sql: " + sql);
+                conn = db.ConnectDB();
                 pst = conn.prepareStatement(sql);
                 rs= pst.executeQuery();
 
@@ -72,7 +72,7 @@ public class SearchToEditOfeloumenoiController implements Initializable {
                     if(rs.getRow()==1){
                         // there is only one result
                         sopho.ResultKeeper.selectedIndex=1;
-                                               
+
                         sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Τέλεια!", "Βρέθηκε ο ωφελούμενος: " + rs.getString("eponimo") + " " + rs.getString("onoma") , "confirm");
                         cm.showAndWait();
                         sl.StageLoad("/sopho/Ofeloumenoi/EditOfeloumenoi.fxml", stage, true, false); //resizable true, utility false.

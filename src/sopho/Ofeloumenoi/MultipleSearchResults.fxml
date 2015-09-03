@@ -48,7 +48,7 @@
                               </AnchorPane>
                           </content>
                         </ScrollPane>
-                        <Button minHeight="60.0" minWidth="200.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="200.0" styleClass="mainAppButtons" text="Επιλογή" textFill="WHITE">
+                        <Button minHeight="60.0" minWidth="200.0" mnemonicParsing="false" onAction="#Select" prefHeight="60.0" prefWidth="200.0" styleClass="mainAppButtons" text="Επιλογή" textFill="WHITE">
                            <VBox.margin>
                               <Insets bottom="20.0" left="5.0" right="5.0" top="20.0" />
                            </VBox.margin>

@@ -75,7 +75,7 @@ public class TakePhotoController implements Initializable {
         if(SaveImage(image, filename)){
             sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Τέλεια!", "Η φωτογραφία του ωφελούμενου αποθηκεύτηκε επιτυχώς!", "confirm");
             cm.showAndWait();
-            String PhotoID = myRand + "";//this is a trick to get myRand because this int cannot be dereferenced and so we could not use toString() method.
+            String PhotoID = "photo" + myRand + ".jpg";//this is a trick to get myRand because this int cannot be dereferenced and so we could not use toString() method.
             PhotoListener.setStr(PhotoID);
             Stage stage = (Stage) takePhoto.getScene().getWindow();
             closeCamera();//we have to close the camera before exiting

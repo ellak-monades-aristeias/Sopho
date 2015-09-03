@@ -12,32 +12,30 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.*?>
 
-<AnchorPane minHeight="676.0" minWidth="997.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="997.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Ofeloumenoi.EditOfeloumenoiController">
+<AnchorPane minHeight="676.0" minWidth="997.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="820.0" prefWidth="997.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Ofeloumenoi.EditOfeloumenoiController">
     <stylesheets>
         <URL value="@../Style.css" />
     </stylesheets>
     <children>
-      <BorderPane layoutX="9.0" layoutY="11.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="650.0" minWidth="997.0" prefHeight="870.0" prefWidth="997.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <bottom>
-            <HBox alignment="CENTER" maxHeight="92.0" minHeight="60.0" prefHeight="74.0" prefWidth="997.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" minWidth="190.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#SaveChanges" style="-fx-background-color: #bc2d44;" text="Αποθήκευση αλλαγών" textFill="WHITE">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="8.0" left="25.0" right="25.0" top="8.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets left="10.0" right="10.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-               <BorderPane.margin>
-                  <Insets bottom="-0.0" />
-               </BorderPane.margin>
-            </HBox>
-         </bottom>
+      <BorderPane minHeight="650.0" minWidth="997.0" prefHeight="870.0" prefWidth="997.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+                  <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
+                     <children>
+                        <Label styleClass="titleSmall" text="Επεξεργασία Ωφελούμενου" textAlignment="CENTER" textFill="WHITE">
+                        </Label>
+                        <Button fx:id="backButton" mnemonicParsing="false" onAction="#GoBack" prefHeight="33.0" prefWidth="81.0" styleClass="backButton" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
+                           <StackPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </StackPane.margin>
+                        </Button>
+                        <SVGPath content="M461,244 L371,244 L317.8,185 L461,185" fill="#bc2d44" nodeOrientation="LEFT_TO_RIGHT" scaleX="1.2" scaleY="0.77" stroke="RED" strokeWidth="0.0" translateX="-12.0" StackPane.alignment="CENTER_RIGHT" />
+                     </children>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </StackPane>
+               </top>
+          
          <center>
             <StackPane prefHeight="712.0" prefWidth="1238.0">
                <children>
@@ -100,7 +98,7 @@
                                           <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
                                        </VBox.margin>
                                     </TextField>
-                                    <TextField fx:id="dimos" prefHeight="39.0" prefWidth="221.0" promptText="Δήμος">
+                                    <TextField fx:id="dimos" layoutX="20.0" layoutY="330.0" prefHeight="39.0" prefWidth="221.0" promptText="Δήμος">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
@@ -164,10 +162,10 @@
                                           </Label>
                                        </top>
                                        <center>
-                                          <ImageView fx:id="image" fitHeight="150.0" fitWidth="289.0" BorderPane.alignment="CENTER" />
+                                          <ImageView fx:id="image" fitHeight="217.0" fitWidth="289.0" preserveRatio="true" BorderPane.alignment="CENTER" />
                                        </center>
                                        <bottom>
-                                          <Button mnemonicParsing="false" onAction="#ChangePhoto" prefHeight="37.0" prefWidth="292.0" text="Αλλαγή Φωτογραφίας" textFill="#656565" BorderPane.alignment="CENTER">
+                                          <Button fx:id="changePhotoButton" mnemonicParsing="false" onAction="#ChangePhoto" prefHeight="37.0" prefWidth="292.0" text="Προσθήκη Φωτογραφίας" textFill="#656565" BorderPane.alignment="CENTER">
                                              <font>
                                                 <Font size="16.0" />
                                              </font>
@@ -226,10 +224,10 @@
                                     </HBox>
                                     <ComboBox fx:id="oikKatastasi" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="292.0" promptText="Οικογενειακή Κατάσταση">
                                        <VBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                          <Insets left="10.0" right="10.0" top="10.0" />
                                        </VBox.margin>
                                     </ComboBox>
-                                    <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                    <BorderPane prefHeight="134.0" prefWidth="311.0">
                                        <top>
                                           <Label text="Τέκνα" BorderPane.alignment="CENTER">
                                              <font>
@@ -238,12 +236,12 @@
                                           </Label>
                                        </top>
                                        <center>
-                                          <TableView fx:id="tekna" editable="true" prefHeight="110.0" prefWidth="226.0" BorderPane.alignment="CENTER">
+                                          <TableView fx:id="tekna" editable="true" prefHeight="126.0" prefWidth="291.0" BorderPane.alignment="CENTER">
                                              <columnResizePolicy>
                                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                              </columnResizePolicy>
                                              <columns>
-                                                <TableColumn fx:id="etos" prefWidth="59.0" text="Έτος Γεννησης" />
+                                                <TableColumn fx:id="etosCol" prefWidth="59.0" text="Έτος Γεννησης" />
                                              </columns>
                                           </TableView>
                                        </center>
@@ -385,23 +383,26 @@
                </BorderPane.margin>
             </StackPane>
          </center>
-         <top>
-                  <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
-                     <children>
-                        <Label styleClass="titleSmall" text="Επεξεργασία Στοιχείων Ωφελούμενου" textAlignment="CENTER" textFill="WHITE">
-                        </Label>
-                        <Button fx:id="backButton" mnemonicParsing="false" onAction="#GoBack" prefHeight="33.0" prefWidth="81.0" styleClass="backButton" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
-                           <StackPane.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </StackPane.margin>
-                        </Button>
-                        <SVGPath content="M461,244 L371,244 L317.8,185 L461,185" fill="#bc2d44" nodeOrientation="LEFT_TO_RIGHT" scaleX="1.2" scaleY="0.77" stroke="RED" strokeWidth="0.0" translateX="-12.0" StackPane.alignment="CENTER_RIGHT" />
-                     </children>
-                     <effect>
-                        <DropShadow />
-                     </effect>
-                  </StackPane>
-               </top>
+         <bottom>
+            <HBox alignment="CENTER" maxHeight="92.0" minHeight="60.0" prefHeight="74.0" prefWidth="997.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" minWidth="190.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#SaveChanges" style="-fx-background-color: #bc2d44;" text="Αποθήκευση Αλλαγών" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="8.0" left="25.0" right="25.0" top="8.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="-0.0" />
+               </BorderPane.margin>
+            </HBox>
+         </bottom>
       </BorderPane>
    </children>
 </AnchorPane>

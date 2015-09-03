@@ -162,10 +162,10 @@
                                           </Label>
                                        </top>
                                        <center>
-                                          <ImageView fx:id="image" fitHeight="217.0" fitWidth="289.0" BorderPane.alignment="CENTER" />
+                                          <ImageView fx:id="image" fitHeight="217.0" fitWidth="289.0" preserveRatio="true" BorderPane.alignment="CENTER" />
                                        </center>
                                        <bottom>
-                                          <Button mnemonicParsing="false" onAction="#ChangePhoto" prefHeight="37.0" prefWidth="292.0" text="Προσθήκη Φωτογραφίας" textFill="#656565" BorderPane.alignment="CENTER">
+                                          <Button fx:id="changePhotoButton" mnemonicParsing="false" onAction="#ChangePhoto" prefHeight="37.0" prefWidth="292.0" text="Προσθήκη Φωτογραφίας" textFill="#656565" BorderPane.alignment="CENTER">
                                              <font>
                                                 <Font size="16.0" />
                                              </font>

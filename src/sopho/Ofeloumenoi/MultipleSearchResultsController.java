@@ -3,7 +3,13 @@ package sopho.Ofeloumenoi;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -26,7 +32,7 @@ public class MultipleSearchResultsController implements Initializable {
     @FXML
     private TableView <tableManager> resultTable;
     @FXML
-    private TableColumn <tableManager, Integer> colBarcode;
+    private TableColumn <tableManager, String> colBarcode;
     @FXML
     private TableColumn <tableManager, String> colOnoma;
     @FXML
@@ -40,40 +46,25 @@ public class MultipleSearchResultsController implements Initializable {
     
     private ObservableList <tableManager> data;
     
+    ResultSet rs = sopho.ResultKeeper.rs;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        ResultSet rs = sopho.ResultKeeper.rs;
+        //initialzing result table
+        data = getInitialTableData();
         
+        //filling table with data
+        resultTable.setItems(data);
+        colBarcode.setCellValueFactory(new PropertyValueFactory<tableManager, String>("barcode"));
+        colOnoma.setCellValueFactory(new PropertyValueFactory<tableManager, String>("onoma"));
+        colEponimo.setCellValueFactory(new PropertyValueFactory<tableManager, String>("eponimo"));
+        colTilefono.setCellValueFactory(new PropertyValueFactory<tableManager, String>("tilefono"));
+        colAfm.setCellValueFactory(new PropertyValueFactory<tableManager, String>("afm"));
+        colTautotita.setCellValueFactory(new PropertyValueFactory<tableManager, String>("tautotita"));
         
-        try{
-                    data = FXCollections.observableArrayList();
-
-                    rs.beforeFirst(); // we ensure that the resultSet will start displaying from the first row.
-                    
-                    while (rs.next()){
-                        //here we use the column names as specified at the database table
-                        data.add(new tableManager(rs.getInt("barcode"), rs.getString("onoma"), rs.getString("eponimo"), rs.getString("tilefono"), rs.getString("afm"), rs.getString("tautotita")));
-                    }
-                    
-                    //we can only insert the data to the table by column and not by row.
-                    colBarcode.setCellValueFactory(new PropertyValueFactory<tableManager, Integer>("barcode"));
-                    colOnoma.setCellValueFactory(new PropertyValueFactory<tableManager, String>("onoma"));
-                    colEponimo.setCellValueFactory(new PropertyValueFactory<tableManager, String>("eponimo"));
-                    colTilefono.setCellValueFactory(new PropertyValueFactory<tableManager, String>("tilefono"));
-                    colAfm.setCellValueFactory(new PropertyValueFactory<tableManager, String>("afm"));
-                    colTautotita.setCellValueFactory(new PropertyValueFactory<tableManager, String>("tautotita"));
-   
-                }catch(Exception e){
-                    System.out.println("Πρόβλημα στη δημιουργία πίνακα " + e);
-                }
-                try{
-                    resultTable.setItems(null);
-                    resultTable.setItems(data);
-                }catch(Exception ex){
-                    System.out.println("Δεν μπορεί να εισάγει στον πίνακα " + ex);
-                }
-             
+        //setting the data to the table
+        resultTable.getColumns().setAll(colBarcode, colOnoma, colEponimo, colTilefono, colAfm, colTautotita);
     }   
     
     sopho.StageLoader sl = new sopho.StageLoader();
@@ -96,24 +87,7 @@ public class MultipleSearchResultsController implements Initializable {
                 System.out.println("the selected line is " + sopho.ResultKeeper.selectedIndex);
 
                 //loading selected row data to variables.
-                
-                /*
-
-                tableManager tbl = (tableManager)resultTable.getSelectionModel().getSelectedItem();
-                
-                myCustomerID = tbl.getID();
-                myBarcode = tbl.getBarcode();
-                myName = tbl.getName();
-                mySurname = tbl.getSurname();
-                myPhone = tbl.getPhone();
-                myPoints = tbl.getPoints();
-
-                System.out.println("value sel " + myCustomerID);
-                
-                if(select){             //μόνο αν πατήσει το κουμπί επιλογή!
-                    Notifier.INSTANCE.notifySuccess("OK", "Ο πελάτης "+myName+" "+mySurname+" επιλέχθηκε!");
-                    select=false;
-                }*/
+                sopho.ResultKeeper.selectedIndex = resultTable.getSelectionModel().getSelectedIndex();
                 
                 Stage stage = (Stage) backButton.getScene().getWindow();
                 sl.StageLoad("/sopho/Ofeloumenoi/EditOfeloumenoi.fxml", stage, true, false); //resizable true, utility false
@@ -128,15 +102,17 @@ public class MultipleSearchResultsController implements Initializable {
 
     public static class tableManager { //this is a helper class to display the data from the resultSet to the table properly.
         
-        private IntegerProperty barcode;
+        private StringProperty barcode;
         private StringProperty onoma;
         private StringProperty eponimo;
         private StringProperty tilefono;
         private StringProperty afm;
         private StringProperty tautotita;
+        
+        public tableManager(){}
 
-        private tableManager(Integer barcode, String onoma, String eponimo, String tilefono, String afm, String tautotita ){
-            this.barcode = new SimpleIntegerProperty(barcode);
+        private tableManager(String barcode, String onoma, String eponimo, String tilefono, String afm, String tautotita ){
+            this.barcode = new SimpleStringProperty(barcode);
             this.onoma = new SimpleStringProperty(onoma);
             this.eponimo = new SimpleStringProperty(eponimo);
             this.tilefono = new SimpleStringProperty(tilefono);
@@ -144,25 +120,75 @@ public class MultipleSearchResultsController implements Initializable {
             this.tautotita = new SimpleStringProperty(tautotita);
         }
         
-        /*
-        //the following are required to insert the value in the cell. Otherwise it will display value="theValue"
-        public Integer getBarcode() {
-           return barcode.get();
+        
+        //the following get and set methods are required. Else the table cells will appear blank
+        public String getBarcode(){
+                return barcode.get();
         }
-        public String getOnoma() {
-           return onoma.get();
+        
+        public void setBarcode(String s){
+            barcode.set(s);
         }
-        public String getEponimo() {
-            return eponimo.get();
+        
+        public String getOnoma(){
+                return onoma.get();
         }
-        public String getTilefono() {
-           return tilefono.get();
+        
+        public void setOnoma(String s){
+            onoma.set(s);
         }
-        public String getAfm() {
-           return afm.get();
+        
+        public String getEponimo(){
+                return eponimo.get();
         }
-        public String getTautotita() {
-           return tautotita.get();
-        }*/
+        
+        public void setEponimo(String s){
+            eponimo.set(s);
+        }
+        
+        public String getTilefono(){
+                return tilefono.get();
+        }
+        
+        public void setTilefono(String s){
+            tilefono.set(s);
+        }
+        
+        public String getAfm(){
+                return afm.get();
+        }
+        
+        public void setAfm(String s){
+            afm.set(s);
+        }
+        
+        public String getTautotita(){
+                return tautotita.get();
+        }
+        
+        public void setTautotita(String s){
+            tautotita.set(s);
+        }
+        
+    }
+    
+    //this is required to get the initial data from the table and push them to an observableList.
+    private ObservableList<tableManager> getInitialTableData(){
+        
+        List<tableManager> list = new ArrayList<>();
+        
+        //we have to add the values from database to the table
+        try{
+            rs.beforeFirst();
+            while(rs.next()){
+                list.add(new tableManager(rs.getString("barcode"), rs.getString("onoma"), rs.getString("eponimo"), rs.getString("tilefono"), rs.getString("afm"), rs.getString("tautotita")));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MultipleSearchResultsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        ObservableList<tableManager> mydata = FXCollections.observableList(list);
+        
+        return mydata;
     }
 }

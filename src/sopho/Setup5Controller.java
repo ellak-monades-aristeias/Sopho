@@ -25,5 +25,9 @@ public class Setup5Controller implements Initializable {
     private void NextButton(ActionEvent event) throws IOException{
         Stage stage = (Stage) anchorPane.getScene().getWindow();
         sl.StageLoad("StartApp.fxml", stage, false, true); //resizable false, utility true
+        
+        PrefsHandler prefs = new PrefsHandler();
+    
+        prefs.setPrefs("showAnenergosTip", "true"); //this is required so that a tip dialog will be displayed to user the first time in the AddOfeloumenoi stage.
     }
 }

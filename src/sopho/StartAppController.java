@@ -8,18 +8,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class StartAppController implements Initializable {
     
@@ -79,12 +73,6 @@ public class StartAppController implements Initializable {
                 Sopho.hasSignedIn = true;
                 sl.StageLoad("MainApp.fxml", stage, true, false); //resizable true, utility false
             }else{
-                /*Alert alert = new Alert(AlertType.ERROR);
-                alert.initStyle(StageStyle.UNDECORATED);
-                alert.setTitle("Προσοχή!");
-                alert.setHeaderText("Λάθος κωδικός πρόσβασης");
-                alert.setContentText("Προσπαθήστε και πάλι...");
-                alert.showAndWait();*/
                 CustomMessageController cm = new CustomMessageController(null , "Προσοχή!", "Έχετε εισάγει λάθος κωδικό πρόσβασης. Βεβαιωθείτε ότι γράφετε αγγλικούς χαρακτήρες και ότι το caps lock είναι απενεργοποιημένο.", "error");
                 cm.showAndWait();
             }

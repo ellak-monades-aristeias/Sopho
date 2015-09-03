@@ -36,7 +36,7 @@ public class OfeloumenoiMainController implements Initializable {
     @FXML
     private void EditOfeloumenoi(ActionEvent event) throws IOException{
         Stage stage = (Stage) backButton.getScene().getWindow();
-        sl.StageLoad("/sopho/Ofeloumenoi/EditOfeloumenoi.fxml", stage, true, false); //resizable true, utility false 
+        sl.StageLoad("/sopho/Ofeloumenoi/SearchToEditOfeloumenoi.fxml", stage, true, false); //resizable true, utility false 
     }
     
     @FXML
