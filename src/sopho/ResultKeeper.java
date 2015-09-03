@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 public class ResultKeeper {
     public static ResultSet rs;
     public static Integer selectedIndex;
+    public static boolean multipleResults;
     
     public ResultSet getRes(){
         return rs;

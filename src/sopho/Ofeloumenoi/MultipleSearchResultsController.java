@@ -78,7 +78,7 @@ public class MultipleSearchResultsController implements Initializable {
     @FXML
     public void Select (ActionEvent event) throws IOException{
         try {
-            sopho.ResultKeeper.selectedIndex = resultTable.getSelectionModel().getSelectedIndex();
+            sopho.ResultKeeper.selectedIndex = resultTable.getSelectionModel().getSelectedIndex() + 1; //we have to compensate for the difference in start of counting. The table starts at 0 while the resultSet starts at 1
             
             if (sopho.ResultKeeper.selectedIndex==-1){
                 sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Πρέπει να επιλέξετε τουλάχιστον έναν ωφελούμενο από τη λίστα με τα αποτελέσματα!", "error");
@@ -123,7 +123,7 @@ public class MultipleSearchResultsController implements Initializable {
         
         //the following get and set methods are required. Else the table cells will appear blank
         public String getBarcode(){
-                return barcode.get();
+            return barcode.get();
         }
         
         public void setBarcode(String s){
@@ -131,7 +131,7 @@ public class MultipleSearchResultsController implements Initializable {
         }
         
         public String getOnoma(){
-                return onoma.get();
+            return onoma.get();
         }
         
         public void setOnoma(String s){
@@ -139,7 +139,7 @@ public class MultipleSearchResultsController implements Initializable {
         }
         
         public String getEponimo(){
-                return eponimo.get();
+            return eponimo.get();
         }
         
         public void setEponimo(String s){
@@ -147,7 +147,7 @@ public class MultipleSearchResultsController implements Initializable {
         }
         
         public String getTilefono(){
-                return tilefono.get();
+            return tilefono.get();
         }
         
         public void setTilefono(String s){
@@ -155,7 +155,7 @@ public class MultipleSearchResultsController implements Initializable {
         }
         
         public String getAfm(){
-                return afm.get();
+            return afm.get();
         }
         
         public void setAfm(String s){
@@ -163,7 +163,7 @@ public class MultipleSearchResultsController implements Initializable {
         }
         
         public String getTautotita(){
-                return tautotita.get();
+            return tautotita.get();
         }
         
         public void setTautotita(String s){
