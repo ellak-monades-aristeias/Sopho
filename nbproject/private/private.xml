@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Tunerakos/Documents/NetBeansProjects/Sopho/src/sopho/Ofeloumenoi/SearchToEditOfeloumenoiController.java</file>
-            <file>file:/C:/Users/Tunerakos/Documents/NetBeansProjects/Sopho/src/sopho/Ofeloumenoi/MultipleSearchResultsController.java</file>
-            <file>file:/C:/Users/Tunerakos/Documents/NetBeansProjects/Sopho/src/sopho/Ofeloumenoi/AddOfeloumenoiController.java</file>
-            <file>file:/C:/Users/Tunerakos/Documents/NetBeansProjects/Sopho/src/sopho/Ofeloumenoi/EditOfeloumenoiController.java</file>
+            <file>file:/C:/Users/Tunerakos/Documents/NetBeansProjects/Sopho/src/sopho/Ofeloumenoi/AddOfeloumenoi.fxml</file>
+            <file>file:/C:/Users/Tunerakos/Documents/NetBeansProjects/Sopho/src/sopho/Ofeloumenoi/SearchOfeloumenoiController.java</file>
+            <file>file:/C:/Users/Tunerakos/Documents/NetBeansProjects/Sopho/src/sopho/Ofeloumenoi/OfeloumenoiMainController.java</file>
+            <file>file:/C:/Users/Tunerakos/Documents/NetBeansProjects/Sopho/src/sopho/Ofeloumenoi/SearchOfeloumenoi.fxml</file>
         </group>
     </open-files>
 </project-private>

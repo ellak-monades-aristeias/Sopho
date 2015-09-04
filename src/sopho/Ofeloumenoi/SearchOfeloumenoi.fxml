@@ -237,14 +237,6 @@
                                                 <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                                              </VBox.margin>
                                           </TextField>
-                                          <CheckBox fx:id="anoTon60" mnemonicParsing="false" prefHeight="25.0" prefWidth="170.0" text="Άνω των 60">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                             <VBox.margin>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
-                                             </VBox.margin>
-                                          </CheckBox>
                                           <CheckBox fx:id="monaxiko" mnemonicParsing="false" prefHeight="25.0" prefWidth="170.0" text="Μοναχικό άτομο">
                                              <font>
                                                 <Font size="16.0" />

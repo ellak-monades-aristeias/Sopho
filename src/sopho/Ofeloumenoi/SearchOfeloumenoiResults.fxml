@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.*?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="900.0" maxWidth="900.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="526.0" prefWidth="900.0" style="-fx-min-width: 676px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Ofeloumenoi.SearchOfeloumenoiResultsController">
+    <stylesheets>
+        <URL value="@../Style.css" />
+    </stylesheets>
+    <children>
+      <BorderPane layoutY="-0.0" prefHeight="841.0" prefWidth="676.0" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-0.0">
+         <center>
+            <ScrollPane prefHeight="900.0" prefWidth="676.0" style="-fx-fit-to-height: true; -fx-fit-to-width: true;" BorderPane.alignment="CENTER">
+               <content>
+                  <VBox alignment="CENTER" prefHeight="743.0" prefWidth="674.0">
+                     <children>
+                        <Label minHeight="60.0" text="Βρέθηκαν αποτελέσματα" wrapText="true">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="20.0" right="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <ScrollPane fitToHeight="true" fitToWidth="true" minHeight="300.0" prefHeight="900.0" prefWidth="900.0">
+                          <content>
+                            <AnchorPane minHeight="300.0" minWidth="890.0" prefHeight="307.0" prefWidth="1403.0">
+                                 <children>
+                                    <TableView fx:id="resultTable" prefHeight="300.0" prefWidth="933.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-0.0" AnchorPane.rightAnchor="-0.0" AnchorPane.topAnchor="0.0">
+                                      <columns>
+                                        <TableColumn fx:id="colEponimo" prefWidth="167.0" text="Επώνυμο" />
+                                          <TableColumn fx:id="colOnoma" prefWidth="157.0" text="Όνομα" />
+                                          <TableColumn fx:id="patronimo" prefWidth="157.0" text="Πατρώνυμο" />
+                                          <TableColumn fx:id="ilikia" prefWidth="157.0" text="Ηλικία" />
+                                          <TableColumn fx:id="dimos" prefWidth="157.0" text="Δήμος" />
+                                          <TableColumn fx:id="anergos" prefWidth="157.0" text="Άνεργος" />
+                                          <TableColumn fx:id="epaggelma" prefWidth="157.0" text="Επάγγελμα" />
+                                          <TableColumn fx:id="eisodima" prefWidth="157.0" text="Φορ. Εισόδημα" />
+                                          <TableColumn fx:id="eksartiseis" prefWidth="157.0" text="Εξαρτήσεις" />
+                                          <TableColumn fx:id="ethnikotita" prefWidth="157.0" text="Εθνικότητα" />
+                                          <TableColumn fx:id="metanastis" prefWidth="157.0" text="Μετανάστης" />
+                                          <TableColumn fx:id="roma" prefWidth="157.0" text="Ρομά" />
+                                          <TableColumn fx:id="oikKatastasi" prefWidth="157.0" text="Οικ. Κατάσταση" />
+                                          <TableColumn fx:id="tekna" prefWidth="157.0" text="Τέκνα" />
+                                          <TableColumn fx:id="mellousaMama" prefWidth="157.0" text="Μέλλουσα Μαμά" />
+                                          <TableColumn fx:id="monogoneiki" prefWidth="157.0" text="Μονογονεϊκή" />
+                                          <TableColumn fx:id="politeknos" prefWidth="157.0" text="Πολύτεκνος" />
+                                          <TableColumn fx:id="asfForeas" prefWidth="157.0" text="Ασφ. Φορέας" />
+                                          <TableColumn fx:id="amea" prefWidth="157.0" text="ΑΜΕΑ" />
+                                          <TableColumn prefWidth="157.0" text="Χρονίως Πάσχων" fx:id="xronios" />
+                                          <TableColumn fx:id="pathisi" prefWidth="157.0" text="Πάθηση" />
+                                          <TableColumn fx:id="monaxiko" prefWidth="157.0" text="Μοναχικό Άτομο" />
+                                          <TableColumn fx:id="emfiliVia" prefWidth="157.0" text="Θύμα Εμφ. Βίας" />
+                                          <TableColumn fx:id="spoudastis" prefWidth="157.0" text="Σπουδαστής" />
+                                          <TableColumn fx:id="anenergos" prefWidth="157.0" text="Ανενεργός Ωφελούμενος" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </ScrollPane>
+                        <Button minHeight="60.0" minWidth="200.0" mnemonicParsing="false" onAction="#Select" prefHeight="60.0" prefWidth="200.0" styleClass="mainAppButtons" text="Νέα Αναζήτηση" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets bottom="20.0" left="5.0" right="5.0" top="20.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
+         </center>
+         <top>
+            <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
+               <children>
+                   <Button fx:id="backButton" mnemonicParsing="false" onAction="#GoBack" prefHeight="33.0" prefWidth="81.0" style="-fx-background-color: #bc2d44;" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
+                     <font>
+                        <Font name="Open Sans Semibold" size="16.0" />
+                     </font>
+                     <StackPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </StackPane.margin>
+                  </Button>
+                  <Label styleClass="title" text="Αποτελεσματα Αναζήτησης" textAlignment="CENTER" textFill="WHITE">
+                  </Label>
+               </children>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </StackPane>
+         </top>
+      </BorderPane>
+   </children>
+</AnchorPane>
