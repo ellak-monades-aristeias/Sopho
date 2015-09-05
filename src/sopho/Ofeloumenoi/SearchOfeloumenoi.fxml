@@ -169,7 +169,7 @@
                                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                              </VBox.margin>
                                           </ComboBox>
-                                          <TextField fx:id="ethnikotita1" prefHeight="39.0" prefWidth="221.0" promptText="Αριθμός τέκνων">
+                                          <TextField fx:id="arTeknon" prefHeight="39.0" prefWidth="221.0" promptText="Αριθμός τέκνων">
                                              <font>
                                                 <Font size="16.0" />
                                              </font>

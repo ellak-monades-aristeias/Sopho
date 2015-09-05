@@ -23,7 +23,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class SearchOfeloumenoiController implements Initializable {
-
+    
+    
     @FXML
     public TextField startAge, endAge, dimos, epaggelma, eisodima, eksartiseis, ethnikotita, arTeknon, pathisi;
     @FXML
@@ -39,36 +40,49 @@ public class SearchOfeloumenoiController implements Initializable {
     ResultSet rs = null;
     
     @Override
-    public void initialize(URL url, ResourceBundle rb) {}
+    public void initialize(URL url, ResourceBundle rb) {
+        
+        //initialize oikKatastasi combobox
+        oikKatastasi.getItems().addAll(
+            "Άγαμος",
+            "Έγγαμος",
+            "Διαζευγμένος",
+            "Χήρος" 
+        );
+        
+        //initialize asfForeas comboBox
+        asfForeas.getItems().addAll(
+            "Ανασφάλιστος",
+            "ΙΚΑ",
+            "ΟΓΑ",
+            "ΟΑΕΕ",
+            "ΕΤΑΑ",
+            "ΕΟΠΥΥ",
+            "ΤΠΔΥ",
+            "ΤΑΠΙΤ",
+            "ΕΤΑΠ – ΜΜΕ",
+            "Άλλο"
+        );
     
+    }
+    
+        
     @FXML
     public void Search (ActionEvent event){
-        System.out.println("oikKatastasi sel index =" + oikKatastasi.getSelectionModel().getSelectedIndex());
+        //System.out.println("oikKatastasi sel index =" + oikKatastasi.getSelectionModel().getSelectedIndex());
+        
+        
         //now we must check if we have at least one field filled with data or one checkbox selected
-        if(startAge.getText().isEmpty()&&endAge.getText().isEmpty()&&dimos.getText().isEmpty()&&!anergos.isSelected()&&epaggelma.getText().isEmpty()&&eisodima.getText().isEmpty()&&eksartiseis.getText().isEmpty()&&ethnikotita.getText().isEmpty()&&!metanastis.isSelected()&&!roma.isSelected()&&oikKatastasi.getSelectionModel().getSelectedIndex()==0&&arTeknon.getText().isEmpty()&&!mellousaMama.isSelected()&&!monogoneiki.isSelected()&&!politeknos.isSelected()&&asfForeas.getSelectionModel().getSelectedIndex()==0&&!amea.isSelected()&&!xronios.isSelected()&&pathisi.getText().isEmpty()&&!monaxiko.isSelected()&&!emfiliVia.isSelected()&&!spoudastis.isSelected()&&!anenergos.isSelected()){
+        if(startAge.getText().isEmpty()&&endAge.getText().isEmpty()&&dimos.getText().isEmpty()&&!anergos.isSelected()&&epaggelma.getText().isEmpty()&&eisodima.getText().isEmpty()&&eksartiseis.getText().isEmpty()&&ethnikotita.getText().isEmpty()&&!metanastis.isSelected()&&!roma.isSelected()&&oikKatastasi.getSelectionModel().getSelectedIndex()==-1&&arTeknon.getText().isEmpty()&&!mellousaMama.isSelected()&&!monogoneiki.isSelected()&&!politeknos.isSelected()&&asfForeas.getSelectionModel().getSelectedIndex()==-1&&!amea.isSelected()&&!xronios.isSelected()&&pathisi.getText().isEmpty()&&!monaxiko.isSelected()&&!emfiliVia.isSelected()&&!spoudastis.isSelected()&&!anenergos.isSelected()){
             sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Πρέπει να συμπληρώσετε τουλάχιστον ένα πεδίο ή να τσεκάρετε κάποια από τις επιλογές.", "error");
             cm.showAndWait();
         }else{//the user has filled at least one field or checked a checkbox
-            if(Integer.parseInt(startAge.getText())>Integer.parseInt(endAge.getText())){
+            if((!startAge.getText().isEmpty()&&!endAge.getText().isEmpty())&&(Integer.parseInt(startAge.getText())>Integer.parseInt(endAge.getText()))){
                 sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Ελέγξτε τα πεδία όπου αναγράφονται οι ηλικίες. Το πεδίο 'από' δεν μπορεί να έχει μεγαλύτερη τιμή από το πεδίο 'έως'", "error");
                 cm.showAndWait();
             }else{
                 try {
-                    /*//we have to convert the age to year of birth because the data are stored in birthdate format in the database
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-                    Date today = new Date();//getting current date
-                    System.out.println(sdf.format(today));
-                    Calendar c = Calendar.getInstance();
-                    c.setTime(today);
-                    c.add(Calendar.YEAR, -Integer.parseInt(endAge.getText()));// it is kind of weird that we use the endAge for the startDate, but if we name them otherwise the startDate will be earlier in calendar than the endDate
-                    Date startDate = c.getTime();
-                    System.out.println("StartDate " + startDate);
-                    c.setTime(today);
-                    c.add(Calendar.YEAR, -Integer.parseInt(startAge.getText()));
-                    Date endDate = c.getTime();
-                    System.out.println("EndDate " + endDate);
-                    */
-                    String sql = "SELECT * FROM ofeloumenoi WHERE";
+                    String sql = "SELECT * FROM ofeloumenoi WHERE ";
                     if(!startAge.getText().isEmpty()){
                         sql += "FLOOR(TIMESTAMPDIFF(hour,imGennisis,CURRENT_TIMESTAMP())/8766)>="+Integer.parseInt(startAge.getText())+" AND ";
                     }
@@ -142,8 +156,12 @@ public class SearchOfeloumenoiController implements Initializable {
                     }
                     sql = sql.substring(0, sql.length()-4); //we have to remove the AND form the end of the string
                     
+                    System.out.println("bare sql :" + sql);
+                    
                     conn=db.ConnectDB();
                     pst = conn.prepareStatement(sql);
+                    
+                    System.out.println("pst sql :" + pst);
                     
                     rs = pst.executeQuery();
                     
@@ -153,7 +171,13 @@ public class SearchOfeloumenoiController implements Initializable {
                         sopho.ResultKeeper.rs = rs; // we keep the results to a static var to access them later.
                         sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Τέλεια!", "Βρέθηκαν αποτελέσματα...", "confirm");
                         cm.showAndWait();
-                        //TODO stage load to display results.
+                        
+                        Stage stage = (Stage) startAge.getScene().getWindow();
+                        try {
+                            sl.StageLoad("/sopho/Ofeloumenoi/SearchOfeloumenoiResults.fxml", stage, true, false); //resizable true, utility false
+                        } catch (IOException ex) {
+                            Logger.getLogger(SearchOfeloumenoiController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                         
                     }else{//we don't have results
                         
