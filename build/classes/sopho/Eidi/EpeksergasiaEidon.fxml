@@ -9,52 +9,27 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import java.net.*?>
 
-<AnchorPane maxHeight="900.0" maxWidth="676.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="749.0" prefWidth="676.0" style="-fx-min-width: 676px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Eidi.EpeksergasiaEidonController">
-   <children>
+<AnchorPane maxHeight="900.0" maxWidth="676.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="693.0" prefWidth="676.0" style="-fx-min-width: 676px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Eidi.EpeksergasiaEidonController">
+   <stylesheets>
+        <URL value="@../Style.css" />
+    </stylesheets>
+    <children>
       <BorderPane layoutY="-0.0" prefHeight="841.0" prefWidth="676.0" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-0.0">
          <top>
-            <StackPane maxHeight="70.0" minHeight="70.0" prefHeight="70.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
+            <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
                <children>
-                  <Label text="Επεξεργασία Ειδών" textAlignment="CENTER" textFill="WHITE">
-                     <font>
-                        <Font name="Open Sans" size="30.0" />
-                     </font>
-                  </Label>
-                  <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="81.0" style="-fx-background-color: #bc2d44;" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
+                   <Button fx:id="backButton" mnemonicParsing="false" onAction="#GoBack" prefHeight="33.0" prefWidth="81.0" style="-fx-background-color: #bc2d44;" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
                      <font>
                         <Font name="Open Sans Semibold" size="16.0" />
                      </font>
                      <StackPane.margin>
-                        <Insets left="25.0" />
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </StackPane.margin>
                   </Button>
-                  <SVGPath content="M145 100 L145 0 L0 0 " fill="#bc2d44" nodeOrientation="LEFT_TO_RIGHT" stroke="RED" strokeWidth="0.0" translateX="1.0" translateY="15.0" StackPane.alignment="CENTER_RIGHT" />
-                  <Button fx:id="minimize" mnemonicParsing="false" onAction="" prefHeight="34.0" prefWidth="20.0" style="-fx-background-color: transparent;" text="_" textFill="WHITE" StackPane.alignment="CENTER_RIGHT">
-                     <font>
-                        <Font name="Open Sans Extrabold" size="30.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-                     </padding>
-                     <StackPane.margin>
-                        <Insets bottom="42.0" right="45.0" />
-                     </StackPane.margin>
-                  </Button>
-                  <Button fx:id="closeButton" mnemonicParsing="false" onAction="" prefHeight="62.0" prefWidth="4.0" style="-fx-background-color: transparent;" text="x" textFill="WHITE" StackPane.alignment="CENTER_RIGHT">
-                     <font>
-                        <Font name="Open Sans Extrabold" size="30.0" />
-                     </font>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <padding>
-                        <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-                     </padding>
-                     <StackPane.margin>
-                        <Insets bottom="30.0" right="15.0" />
-                     </StackPane.margin>
-                  </Button>
+                  <Label styleClass="title" text="Επεξεργασία Ειδών" textAlignment="CENTER" textFill="WHITE">
+                  </Label>
                </children>
                <effect>
                   <DropShadow />
@@ -62,11 +37,13 @@
             </StackPane>
          </top>
          <center>
-            <VBox alignment="TOP_CENTER" BorderPane.alignment="TOP_CENTER">
+            <VBox alignment="TOP_CENTER" prefHeight="723.0" prefWidth="676.0" BorderPane.alignment="TOP_CENTER">
                <children>
-                  <TableView prefHeight="496.0" prefWidth="636.0" BorderPane.alignment="CENTER">
+                  <TableView fx:id="eidiTable" prefHeight="496.0" prefWidth="636.0" BorderPane.alignment="CENTER">
                     <columns>
-                      <TableColumn prefWidth="635.0" text="Όνομα Είδους" />
+                        <TableColumn fx:id="colID" editable="false" prefWidth="65.0" text="id" visible="false" />
+                      <TableColumn fx:id="colEidi" prefWidth="411.0" text="Όνομα Είδους" />
+                        <TableColumn fx:id="colActive" editable="false" prefWidth="224.0" text="Ενεργό/Ανενεργό" />
                     </columns>
                      <BorderPane.margin>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -75,16 +52,28 @@
                         <Insets left="20.0" right="20.0" top="20.0" />
                      </VBox.margin>
                   </TableView>
-                  <HBox maxHeight="25.0" minHeight="25.0" prefHeight="25.0" prefWidth="636.0">
+                  <HBox alignment="CENTER" maxHeight="53.0" minHeight="25.0" prefHeight="37.0" prefWidth="636.0">
                      <children>
-                        <Button alignment="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="146.0" text="Προσθήκη Γραμμής" />
-                        <Button alignment="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="146.0" text="Αφαίρεση Γραμμής" />
+                        <Button alignment="CENTER" contentDisplay="CENTER" minHeight="35.0" minWidth="200.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#AddRow" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: #3668af;" text="Προσθήκη είδους" textFill="WHITE">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin></Button>
+                        <Button alignment="CENTER" contentDisplay="CENTER" minHeight="35.0" minWidth="200.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#ActivateDeactivate" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: #3668af;" text="Ενεργοποίηση/Απενεργοποίηση" textFill="WHITE">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin></Button>
                      </children>
                      <VBox.margin>
                         <Insets bottom="20.0" left="20.0" right="20.0" />
                      </VBox.margin>
                   </HBox>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" minWidth="190.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: #bc2d44;" text="Αποθήκευση" textFill="WHITE">
+                  <Button fx:id="saveButton" alignment="BOTTOM_CENTER" contentDisplay="CENTER" minWidth="190.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#Save" style="-fx-background-color: #bc2d44;" text="Αποθήκευση" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>

@@ -10,7 +10,6 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-
 //this is a helper class to load the new scene and close the old one
 public class StageLoader {
     

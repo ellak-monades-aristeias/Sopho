@@ -301,7 +301,6 @@ public class AddOfeloumenoiController implements Initializable {
     private void RemoveRow(ActionEvent event){
         //getting the selected row and deleting it
         int i = tekna.getSelectionModel().getSelectedIndex();
-        tableManager tbl = (tableManager) tekna.getSelectionModel().getSelectedItem();
         if(i==-1){
             //the user did not select any line. We display a message
             sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null,"Προσοχή!", "Δεν έχετε επιλέξει κάποια γραμμή από τον πίνακα για να διαγραφεί.", "error");
