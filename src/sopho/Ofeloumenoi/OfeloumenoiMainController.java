@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import sopho.StageLoader;
 
 public class OfeloumenoiMainController implements Initializable {
 
@@ -41,6 +42,7 @@ public class OfeloumenoiMainController implements Initializable {
     
     @FXML
     private void SearchOfeloumenoi(ActionEvent event) throws IOException{
+        StageLoader.lastStage="/sopho/Ofeloumenoi/OfeloumenoiMain.fxml";
         Stage stage = (Stage) backButton.getScene().getWindow();
         sl.StageLoad("/sopho/Ofeloumenoi/SearchOfeloumenoi.fxml", stage, true, false); //resizable true, utility false 
     }

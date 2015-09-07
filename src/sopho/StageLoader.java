@@ -14,6 +14,7 @@ import javafx.stage.StageStyle;
 public class StageLoader {
     
     public static boolean fullscreen=false;
+    public static String lastStage;
     
     //this method opens new stage and closes the old one
     public void StageLoad(String fxmlName, Stage oldStage, boolean resizable, boolean utilityWindow) throws IOException{

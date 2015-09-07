@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import sopho.StageLoader;
 
 public class EidiMainController implements Initializable {
 
@@ -27,8 +28,10 @@ public class EidiMainController implements Initializable {
     
     @FXML
     private void OpenEidiDothikan(ActionEvent event) throws IOException{
+        StageLoader.lastStage="/sopho/Eidi/EidiMain.fxml";
         Stage stage = (Stage) backButton.getScene().getWindow();
-        sl.StageLoad("/sopho/Eidi/EidiDothikan.fxml", stage, true, false); //resizable true, utility false
+        //we load SearchToEditOfeloumenoi because we want to search ofeloumenoi and the process is the same. We avoid creating a new identical scene
+        sl.StageLoad("/sopho/Ofeloumenoi/SearchToEditOfeloumenoi.fxml", stage, true, false); //resizable true, utility false
     }
     
     @FXML

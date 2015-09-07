@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import sopho.StageLoader;
 
 public class SearchToEditOfeloumenoiController implements Initializable {
 
@@ -31,7 +32,7 @@ public class SearchToEditOfeloumenoiController implements Initializable {
     }
     
     @FXML
-    public void Search(ActionEvent event){
+    public void Search(ActionEvent event) throws IOException{
         if(CheckEmpty()){
             //we have at least one field filled
             String sql = "SELECT * FROM ofeloumenoi WHERE ";
@@ -76,7 +77,11 @@ public class SearchToEditOfeloumenoiController implements Initializable {
 
                         sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Τέλεια!", "Βρέθηκε ο ωφελούμενος: " + rs.getString("eponimo") + " " + rs.getString("onoma") , "confirm");
                         cm.showAndWait();
-                        sl.StageLoad("/sopho/Ofeloumenoi/EditOfeloumenoi.fxml", stage, true, false); //resizable true, utility false.
+                        if(StageLoader.lastStage.equals("/sopho/Ofeloumenoi/OfeloumenoiMain.fxml")){
+                            sl.StageLoad("/sopho/Ofeloumenoi/EditOfeloumenoi.fxml", stage, true, false); //resizable true, utility false.
+                        }else if (StageLoader.lastStage.equals("/sopho/Eidi/EidiMain.fxml")){
+                            sl.StageLoad("/sopho/Eidi/EidiDothikan.fxml", stage, true, false); //resizable true, utility false.
+                        }
                     }else{
                         //there are more than one results. We need to choose from them
                         sopho.ResultKeeper.multipleResults=true; //we have to know if there are multiple results to set properly the backButton at EditOfeloumenoiController
@@ -88,9 +93,9 @@ public class SearchToEditOfeloumenoiController implements Initializable {
                     cm.showAndWait();
                 }
 
-            }catch (SQLException | IOException e){
+            }catch (SQLException e){
                 System.out.println("Σφάλμα Βάσης Δεδομένων!");
-                sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Πρόβλημα...", "Υπήρξε κάποιο πρόβλημα με την αναζήτηση στη βάση δεδομένων. Δοκιμάστε και πάλι και αν δεν διορθωθεί επικοινωνήστε με τον Developer." , "error");
+                sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Πρόβλημα...", "Υπήρξε κάποιο πρόβλημα με την αναζήτηση στη βάση δεδομένων. Δοκιμάστε και πάλι και αν δεν διορθωθεί επικοινωνήστε με τον Developer. ERROR:"+e , "error");
                 cm.showAndWait();
             }    
         }
@@ -108,7 +113,7 @@ public class SearchToEditOfeloumenoiController implements Initializable {
     @FXML
     public void GoBack(ActionEvent event) throws IOException{
         Stage stage = (Stage) onoma.getScene().getWindow();
-        sl.StageLoad("/sopho/Ofeloumenoi/OfeloumenoiMain.fxml", stage, true, false); // resizable true, utility false
+        sl.StageLoad(StageLoader.lastStage, stage, true, false); // resizable true, utility false
     }
     
 }

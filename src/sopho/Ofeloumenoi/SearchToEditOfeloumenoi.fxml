@@ -22,7 +22,7 @@
                <content>
                   <VBox alignment="CENTER" prefHeight="743.0" prefWidth="674.0">
                      <children>
-                        <Label text="Συμπληρώστε όποια απο τα παρακάτω πεδία επιθυμείτε για να αναζητήσετε τον ωφελούμενο που θα επεξεργαστείτε:" wrapText="true">
+                        <Label text="Συμπληρώστε όποια απο τα παρακάτω πεδία επιθυμείτε για να αναζητήσετε τον ωφελούμενο που επιθυμείτε:" wrapText="true">
                            <font>
                               <Font size="18.0" />
                            </font>
