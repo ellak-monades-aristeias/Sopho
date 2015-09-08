@@ -156,7 +156,7 @@
                                        <children>
                                           <VBox fx:id="choiceVbox" alignment="TOP_CENTER" prefHeight="591.0" prefWidth="411.0">
                                              <children>
-                                                <DatePicker fx:id="date" prefHeight="40.0" prefWidth="211.0" promptText="Επιλογή ημερομηνίας" />
+                                                <DatePicker fx:id="date" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="211.0" promptText="Επιλογή ημερομηνίας" />
                                                 <HBox alignment="TOP_CENTER" prefHeight="51.0" prefWidth="431.0">
                                                    <children>
                                                       <Label text="Ώρα">
@@ -167,7 +167,7 @@
                                                             <Insets top="5.0" />
                                                          </HBox.margin>
                                                       </Label>
-                                                      <TextField fx:id="hours" prefHeight="40.0" prefWidth="40.0">
+                                                      <TextField fx:id="hours" alignment="CENTER" prefHeight="40.0" prefWidth="40.0">
                                                          <HBox.margin>
                                                             <Insets left="5.0" right="5.0" />
                                                          </HBox.margin>
@@ -180,7 +180,7 @@
                                                             <Insets top="5.0" />
                                                          </HBox.margin>
                                                       </Label>
-                                                      <TextField fx:id="minutes" prefHeight="40.0" prefWidth="40.0">
+                                                      <TextField fx:id="minutes" alignment="CENTER" prefHeight="40.0" prefWidth="40.0">
                                                          <HBox.margin>
                                                             <Insets left="5.0" right="5.0" />
                                                          </HBox.margin>
@@ -195,11 +195,25 @@
                                                       <Font size="17.0" />
                                                    </font>
                                                 </Label>
+                                                <ListView fx:id="listView" maxHeight="1.7976931348623157E308" maxWidth="254.0" minHeight="250.0" minWidth="250.0" prefHeight="414.0" prefWidth="254.0" />
                                              </children>
                                           </VBox>
-                                          <VBox prefHeight="591.0" prefWidth="580.0">
+                                          <VBox prefHeight="564.0" prefWidth="3.0" style="-fx-background-color: #cacaca; -fx-border-radius: 100px;">
+                                             <HBox.margin>
+                                                <Insets bottom="10.0" top="20.0" />
+                                             </HBox.margin>
+                                          </VBox>
+                                          <VBox alignment="TOP_CENTER" prefHeight="591.0" prefWidth="580.0">
                                              <children>
-                                                <TableView fx:id="history" prefHeight="593.0" prefWidth="580.0">
+                                                <Label alignment="CENTER" text="Ιστορικό ειδών που παρέλαβε ο ωφελούμενος:">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="20.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <TableView fx:id="history" prefHeight="497.0" prefWidth="549.0">
                                                   <columns>
                                                     <TableColumn fx:id="historyDate" prefWidth="171.0" text="Ημερομηνία" />
                                                     <TableColumn fx:id="historyEidi" prefWidth="408.0" text="Είδη" />

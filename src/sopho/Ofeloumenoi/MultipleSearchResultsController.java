@@ -90,16 +90,11 @@ public class MultipleSearchResultsController implements Initializable {
                 sopho.ResultKeeper.selectedIndex = resultTable.getSelectionModel().getSelectedIndex();
                 
                 Stage stage = (Stage) backButton.getScene().getWindow();
-                switch (sopho.StageLoader.lastStage) {
-                    case "/sopho/Ofeloumenoi/OfeloumenoiMain.fxml":
-                        sl.StageLoad("/sopho/Ofeloumenoi/EditOfeloumenoi.fxml", stage, true, false); //resizable true, utility false.
-                        break;
-                    case "/sopho/Eidi/EidiMain.fxml":
-                        sl.StageLoad("/sopho/Eidi/EidiDothikan.fxml", stage, true, false); //resizable true, utility false.
-                        break;
-                }
-                sl.StageLoad("/sopho/Ofeloumenoi/EditOfeloumenoi.fxml", stage, true, false); //resizable true, utility false
-                
+                if (sopho.StageLoader.lastStage.equals("/sopho/Ofeloumenoi/OfeloumenoiMain.fxml")) {
+                    sl.StageLoad("/sopho/Ofeloumenoi/EditOfeloumenoi.fxml", stage, true, false); //resizable true, utility false.
+                }else if(sopho.StageLoader.lastStage.equals("/sopho/Eidi/EidiMain.fxml")){
+                    sl.StageLoad("/sopho/Eidi/EidiDothikan.fxml", stage, true, false); //resizable true, utility false.
+                }                
             }
         }catch(Exception e){
             System.out.println("table selection error " + e);
