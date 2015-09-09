@@ -97,7 +97,7 @@ public class EditOfeloumenoiController implements Initializable {
         try {
             
             rs.first();//move the cursor to the first row
-            if(selectedIndex>1){//only if we need to move from the first line
+            if(selectedIndex>0){//only if we need to move from the first line
                 rs.relative(selectedIndex);//move to the row that we selected at the previous scene
             }
         

@@ -36,13 +36,13 @@ public class OfeloumenoiMainController implements Initializable {
     
     @FXML
     private void EditOfeloumenoi(ActionEvent event) throws IOException{
+        StageLoader.lastStage="/sopho/Ofeloumenoi/OfeloumenoiMain.fxml";
         Stage stage = (Stage) backButton.getScene().getWindow();
         sl.StageLoad("/sopho/Ofeloumenoi/SearchToEditOfeloumenoi.fxml", stage, true, false); //resizable true, utility false 
     }
     
     @FXML
     private void SearchOfeloumenoi(ActionEvent event) throws IOException{
-        StageLoader.lastStage="/sopho/Ofeloumenoi/OfeloumenoiMain.fxml";
         Stage stage = (Stage) backButton.getScene().getWindow();
         sl.StageLoad("/sopho/Ofeloumenoi/SearchOfeloumenoi.fxml", stage, true, false); //resizable true, utility false 
     }

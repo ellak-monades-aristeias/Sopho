@@ -72,7 +72,7 @@ public class MultipleSearchResultsController implements Initializable {
     @FXML
     public void GoBack (ActionEvent event) throws IOException{
         Stage stage = (Stage) backButton.getScene().getWindow();
-        sl.StageLoad("/sopho/Ofeloumenoi/SearchOfeloumenoi.fxml", stage, true, false); //resizable true, utility false
+        sl.StageLoad(sopho.StageLoader.lastStage, stage, true, false); //resizable true, utility false
     }
     
     @FXML

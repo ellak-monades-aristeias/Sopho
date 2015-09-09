@@ -164,7 +164,7 @@
                                                 <Insets top="15.0" />
                                              </VBox.margin>
                                           </HBox>
-                                          <ComboBox fx:id="oikKatastasi" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="292.0" promptText="Οικογενειακή Κατάσταση">
+                                          <ComboBox fx:id="oikKatastasi" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="292.0" promptText="Οικογενειακή Κατάσταση" style="-fx-font: 16px System;">
                                              <VBox.margin>
                                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                              </VBox.margin>
@@ -201,7 +201,7 @@
                                                 <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                                              </VBox.margin>
                                           </CheckBox>
-                                          <ComboBox fx:id="asfForeas" minHeight="40.0" prefHeight="40.0" prefWidth="292.0" promptText="Ασφαλιστικός Φορέας">
+                                          <ComboBox fx:id="asfForeas" minHeight="40.0" prefHeight="40.0" prefWidth="292.0" promptText="Ασφαλιστικός Φορέας" style="-fx-font: 16px System;">
                                              <VBox.margin>
                                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                              </VBox.margin>

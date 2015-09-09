@@ -84,7 +84,7 @@ public class EidiDothikanController extends Application implements Initializable
         
         try {
             oldrs.first();//move the cursor to the first row
-            if(selectedIndex>1){//only if we need to move from the first line
+            if(selectedIndex>0){//only if we need to move from the first line
                 oldrs.relative(selectedIndex);//move to the row that we selected at the previous scene
             }
         } catch (SQLException ex) {
@@ -229,7 +229,7 @@ public class EidiDothikanController extends Application implements Initializable
             ResultSetMetaData rsmd = rs.getMetaData();
             int columnsNumber = rsmd.getColumnCount();
             //we keep the eidiNumber because we will need it at the Save function
-            eidiNumber=columnsNumber-3;            
+            eidiNumber=columnsNumber-6;//we subtract 6 beacause the first 6 columns are not for eidi
             
             rs.last();
             if(rs.getRow()>0){
@@ -255,9 +255,6 @@ public class EidiDothikanController extends Application implements Initializable
         
         ObservableList<tableManager> mydata = FXCollections.observableList(list);
         
-        
-        
-            
         return mydata;
     }
     
@@ -293,7 +290,7 @@ public class EidiDothikanController extends Application implements Initializable
             }
             sqlEidi=sqlEidi.substring(0, sqlEidi.length()-2);//to remove the space and the comma
 
-            String sql = "INSERT INTO eidiofeloumenoi (barcode, date, "+sqlEidi+") VALUES (?,?,";
+            String sql = "INSERT INTO eidiofeloumenoi (barcode, date, eponimo, onoma, patronimo, "+sqlEidi+") VALUES (?,?,?,?,?,";
 
             for (int i=1; i<=eidiNumber; i++){
                 sql+="?,";
@@ -340,10 +337,13 @@ public class EidiDothikanController extends Application implements Initializable
                 pst=conn.prepareStatement(sql);
                 pst.setString(1, selectedBarcode);
                 pst.setTimestamp(2, timestamp);
+                pst.setString(3, eponimo.getText());
+                pst.setString(4, onoma.getText());
+                pst.setString(5, patronimo.getText());
                 
                 for(int i=0; i<eidosIsActive.size();i++){
-                    System.out.println("eidos"+i+1+" is "+eidosIsActive.get(i));
-                    pst.setInt(i+3, Integer.parseInt((String) eidosIsActive.get(i)));
+                    System.out.println("eidos"+(i+1)+" is "+eidosIsActive.get(i));
+                    pst.setInt(i+6, Integer.parseInt((String) eidosIsActive.get(i)));//we use i+6 to start from index 6
                 }
                 
                 System.out.println("the final sql is: "+pst.toString());

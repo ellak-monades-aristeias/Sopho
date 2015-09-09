@@ -18,7 +18,7 @@ public class StageLoader {
     
     //this method opens new stage and closes the old one
     public void StageLoad(String fxmlName, Stage oldStage, boolean resizable, boolean utilityWindow) throws IOException{
-        
+                
         StageLoadNoClose(fxmlName, resizable, utilityWindow);
         
         oldStage.close();

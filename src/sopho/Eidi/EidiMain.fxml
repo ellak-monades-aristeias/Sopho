@@ -27,7 +27,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
                         </Button>
-                        <Button minWidth="440.0" mnemonicParsing="false" onAction="#OpenIstorikoEidonOfeloumenou" prefHeight="63.0" prefWidth="440.0" styleClass="mainAppButtons" text="Προβολή ιστορικού ειδών ωφελούμενου" textFill="WHITE">
+                        <Button minWidth="440.0" mnemonicParsing="false" onAction="#OpenIstorikoEidonOfeloumenou" prefHeight="63.0" prefWidth="440.0" styleClass="mainAppButtons" text="Προβολή ιστορικού ειδών ωφελούμενων" textFill="WHITE">
                            <VBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>

@@ -156,7 +156,7 @@
                                        <children>
                                           <VBox fx:id="choiceVbox" alignment="TOP_CENTER" prefHeight="591.0" prefWidth="411.0">
                                              <children>
-                                                <DatePicker fx:id="date" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="211.0" promptText="Επιλογή ημερομηνίας" />
+                                                <DatePicker fx:id="date" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="211.0" promptText="Επιλογή ημερομηνίας" style="-fx-font: 16px System;" />
                                                 <HBox alignment="TOP_CENTER" prefHeight="51.0" prefWidth="431.0">
                                                    <children>
                                                       <Label text="Ώρα">

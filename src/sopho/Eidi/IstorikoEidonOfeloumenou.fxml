@@ -9,171 +9,50 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import java.net.*?>
 
 <AnchorPane maxHeight="900.0" maxWidth="1298.0" minHeight="676.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="749.0" prefWidth="985.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Eidi.IstorikoEidonOfeloumenouController">
-   <children>
+    <stylesheets>
+        <URL value="@../Style.css" />
+    </stylesheets>
+    <children>
       <BorderPane layoutY="-0.0" prefHeight="841.0" prefWidth="676.0" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-0.0">
          <center>
-            <StackPane>
-               <children>
-                  <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="765.0" prefWidth="676.0" BorderPane.alignment="CENTER">
-                     <content>
-                        <HBox prefHeight="677.0" prefWidth="935.0">
-                           <children>
-                              <VBox alignment="TOP_CENTER" prefHeight="677.0" prefWidth="456.0">
-                                 <children>
-                                    <Label text="Αναζήτηση Ωφελούμενου">
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </VBox.margin>
-                                       <font>
-                                          <Font size="23.0" />
-                                       </font>
-                                    </Label>
-                                    <TextField id="barcode" fx:id="barcode" alignment="BOTTOM_LEFT" maxWidth="300.0" prefHeight="39.0" prefWidth="300.0" promptText="Barcode">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </VBox.margin>
-                                    </TextField>
-                                    <TextField alignment="BOTTOM_LEFT" maxWidth="300.0" prefHeight="39.0" prefWidth="300.0" promptText="Επώνυμο">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </VBox.margin>
-                                    </TextField>
-                                    <TextField alignment="BOTTOM_LEFT" maxWidth="300.0" prefHeight="39.0" prefWidth="300.0" promptText="Όνομα">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </VBox.margin>
-                                    </TextField>
-                                    <TextField alignment="BOTTOM_LEFT" maxWidth="300.0" prefHeight="39.0" prefWidth="300.0" promptText="Τηλέφωνο">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </VBox.margin>
-                                    </TextField>
-                                    <TextField alignment="BOTTOM_LEFT" maxWidth="300.0" prefHeight="39.0" prefWidth="300.0" promptText="ΑΦΜ">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </VBox.margin>
-                                    </TextField>
-                                    <TextField alignment="BOTTOM_LEFT" maxWidth="300.0" prefHeight="39.0" prefWidth="300.0" promptText="Ταυτότητα - Διαβατήριο">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </VBox.margin>
-                                    </TextField>
-                                    <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" minWidth="190.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: #bc2d44;" text="Αναζήτηση" textFill="WHITE">
-                                       <font>
-                                          <Font size="24.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets bottom="8.0" left="25.0" right="25.0" top="8.0" />
-                                       </padding>
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
-                                       </VBox.margin>
-                                    </Button>
-                                    <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="143.0" layoutY="428.0" minWidth="190.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: #bc2d44;" text="Καθαρισμός" textFill="WHITE">
-                                       <font>
-                                          <Font size="24.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets bottom="8.0" left="25.0" right="25.0" top="8.0" />
-                                       </padding>
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </VBox.margin>
-                                    </Button>
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </HBox.margin>
-                              </VBox>
-                              <VBox alignment="TOP_CENTER" prefHeight="687.0" prefWidth="457.0">
-                                 <children>
-                                    <Label text="Ιστορικό Ειδών">
-                                       <font>
-                                          <Font size="23.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <TableView prefHeight="507.0" prefWidth="437.0">
-                                      <columns>
-                                        <TableColumn prefWidth="150.0" text="Ημερομηνία" />
-                                        <TableColumn minWidth="0.0" prefWidth="286.0" text="Είδη" />
-                                      </columns>
-                                    </TableView>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </padding></VBox>
-                           </children>
-                        </HBox>
-                     </content>
-                  </ScrollPane>
-               </children>
-            </StackPane>
+            <ScrollPane fitToHeight="true" fitToWidth="true" prefViewportHeight="664.0" prefViewportWidth="945.0" StackPane.alignment="CENTER">
+               <content>
+                  <AnchorPane prefHeight="663.0" prefWidth="942.0" StackPane.alignment="CENTER">
+                     <children>
+                        <TableView fx:id="results" prefHeight="663.0" prefWidth="943.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-0.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                            <TableColumn fx:id="date" prefWidth="144.0" text="Ημερομηνία" />
+                            <TableColumn fx:id="eponimo" prefWidth="142.0" text="Επώνυμο" />
+                              <TableColumn fx:id="onoma" prefWidth="142.0" text="Όνομα" />
+                              <TableColumn fx:id="patronimo" prefWidth="142.0" text="Πατρώνυμο" />
+                              <TableColumn fx:id="eidi" prefWidth="374.0" sortType="DESCENDING" text="Είδη" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+               <BorderPane.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </BorderPane.margin>
+            </ScrollPane>
          </center>
          <top>
-            <StackPane maxHeight="60.0" minHeight="60.0" prefHeight="60.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
+            <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
                <children>
-                  <Label text="Ιστορικό Ειδών Ωφελούμενου" textAlignment="CENTER" textFill="WHITE">
-                     <font>
-                        <Font name="Open Sans" size="27.0" />
-                     </font>
+                  <Label styleClass="titleSmall" text="Καταχώρηση ειδών που δόθηκαν" textAlignment="CENTER" textFill="WHITE">
                   </Label>
-                  <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="81.0" style="-fx-background-color: #bc2d44;" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
-                     <font>
-                        <Font name="Open Sans Semibold" size="16.0" />
-                     </font>
+                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#GoBack" prefHeight="33.0" prefWidth="81.0" styleClass="backButton" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
                      <StackPane.margin>
-                        <Insets left="25.0" />
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </StackPane.margin>
                   </Button>
-                  <SVGPath content="M145 100 L145 0 L0 0 " fill="#bc2d44" nodeOrientation="LEFT_TO_RIGHT" stroke="RED" strokeWidth="0.0" translateX="1.0" translateY="20.0" StackPane.alignment="CENTER_RIGHT" />
-                  <Button fx:id="minimize" mnemonicParsing="false" onAction="#Minimize" prefHeight="34.0" prefWidth="20.0" style="-fx-background-color: transparent;" text="_" textFill="WHITE" StackPane.alignment="CENTER_RIGHT">
-                     <font>
-                        <Font name="Open Sans Extrabold" size="30.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-                     </padding>
-                     <StackPane.margin>
-                        <Insets bottom="42.0" right="45.0" top="15.0" />
-                     </StackPane.margin>
-                  </Button>
-                  <Button fx:id="closeButton" mnemonicParsing="false" onAction="#QuitApp" prefHeight="62.0" prefWidth="4.0" style="-fx-background-color: transparent;" text="x" textFill="WHITE" StackPane.alignment="CENTER_RIGHT">
-                     <font>
-                        <Font name="Open Sans Extrabold" size="30.0" />
-                     </font>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <padding>
-                        <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-                     </padding>
-                     <StackPane.margin>
-                        <Insets bottom="30.0" right="15.0" top="15.0" />
-                     </StackPane.margin>
-                  </Button>
+                  <SVGPath content="M461,244 L371,244 L317.8,185 L461,185" fill="#bc2d44" nodeOrientation="LEFT_TO_RIGHT" scaleX="1.2" scaleY="0.77" stroke="RED" strokeWidth="0.0" translateX="-12.0" StackPane.alignment="CENTER_RIGHT" />
                </children>
                <effect>
                   <DropShadow />
