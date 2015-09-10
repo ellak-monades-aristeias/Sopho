@@ -23,7 +23,7 @@ public class CustomMessageController extends Stage implements Initializable {
     @FXML
     public Label message;
     @FXML
-    public Button ok;
+    public Button ok, yes, no;
     @FXML
     public ImageView icon;
     
@@ -31,6 +31,7 @@ public class CustomMessageController extends Stage implements Initializable {
     private String myMessage;
     private String myType;
     public Image image;
+    public boolean saidYes=false;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -38,8 +39,16 @@ public class CustomMessageController extends Stage implements Initializable {
         title.setText(myTitle);
         if(myType.equals("error")){
             image = new Image(CustomMessageController.class.getResourceAsStream("errorIcon.png"));
+            yes.setVisible(false);
+            no.setVisible(false);
         }else if(myType.equals("confirm")){
             image = new Image(CustomMessageController.class.getResourceAsStream("okIcon.png"));
+            yes.setVisible(false);
+            no.setVisible(false);
+        }else if(myType.equals("question")){
+            image = new Image(CustomMessageController.class.getResourceAsStream("questionIcon.png"));
+            ok.setVisible(false);
+            
         }
         icon.setImage(image);
     }    
@@ -64,6 +73,19 @@ public class CustomMessageController extends Stage implements Initializable {
     
     @FXML
     public void OK(ActionEvent event){
+        Stage stage = (Stage) ok.getScene().getWindow();
+        stage.close();
+    }
+    
+    @FXML
+    public void Yes(ActionEvent event){
+        saidYes=true;
+        Stage stage = (Stage) ok.getScene().getWindow();
+        stage.close();
+    }
+    
+    @FXML
+    public void No(ActionEvent event){
         Stage stage = (Stage) ok.getScene().getWindow();
         stage.close();
     }

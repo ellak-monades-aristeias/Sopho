@@ -8,6 +8,9 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -84,7 +87,7 @@ public class EidiDothikanController extends Application implements Initializable
         
         try {
             oldrs.first();//move the cursor to the first row
-            if(selectedIndex>0){//only if we need to move from the first line
+            if(sopho.ResultKeeper.multipleResults){//only if we need to move from the first line
                 oldrs.relative(selectedIndex);//move to the row that we selected at the previous scene
             }
         } catch (SQLException ex) {
@@ -242,9 +245,11 @@ public class EidiDothikanController extends Application implements Initializable
                             eidiTaken+=eidinames.get(i)+", ";
                         }
                     }
-                    eidiTaken=eidiTaken.substring(0, eidiTaken.length()-2);//to remove the last comma and space
+                    eidiTaken=eidiTaken.substring(0, eidiTaken.length()-2);//to remove the last comma and space                    
                     String t = rs.getTimestamp("date").toString();
-                    t=t.substring(0,t.length()-5);//to display one hours and mins.
+
+                    t= t.substring(0, t.length()-5);//to display only hours and mins
+
                     list.add(new tableManager(t, eidiTaken));
                 }
             }

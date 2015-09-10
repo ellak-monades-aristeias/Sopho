@@ -34,12 +34,6 @@ public class ApothikiMainController implements Initializable {
     }
     
     @FXML
-    public void OpenParalavi(ActionEvent e) throws IOException{
-        Stage stage = (Stage) backButton.getScene().getWindow();
-        sl.StageLoad("/sopho/ApothikiAntikeimenon/ParalaviAntikeimenou.fxml", stage, true, false); //resizable true, utility false
-    }
-    
-    @FXML
     public void OpenDiathesima(ActionEvent e) throws IOException{
         Stage stage = (Stage) backButton.getScene().getWindow();
         sl.StageLoad("/sopho/ApothikiAntikeimenon/DiathesimaAntikeimena.fxml", stage, true, false); //resizable true, utility false

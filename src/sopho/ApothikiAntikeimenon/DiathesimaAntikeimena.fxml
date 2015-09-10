@@ -37,12 +37,62 @@
                </top>
           
          <center>
-            <StackPane prefHeight="712.0" prefWidth="1238.0">
+            <ScrollPane fitToHeight="true" fitToWidth="true" prefViewportHeight="712.0" prefViewportWidth="1238.0" BorderPane.alignment="TOP_CENTER">
+               <content>
+                  <AnchorPane>
+                     <children>
+                        <TableView fx:id="diathesima" prefHeight="625.0" prefWidth="997.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                              <TableColumn fx:id="id" prefWidth="240.0" text="id" visible="false" />
+                            <TableColumn fx:id="antikeimeno" prefWidth="240.0" text="Αντικείμενο" />
+                              <TableColumn fx:id="date" prefWidth="147.0" text="Ημερομηνία παράδοσης" />
+                            <TableColumn prefWidth="609.0" text="Στοιχεία παραδότη">
+                                 <columns>
+                                    <TableColumn fx:id="eponimo" prefWidth="191.0" text="Επώνυμο" />
+                                    <TableColumn fx:id="onoma" prefWidth="146.0" text="Όνομα" />
+                                    <TableColumn fx:id="patronimo" prefWidth="135.0" text="Πατρώνυμο" />
+                                    <TableColumn fx:id="tilefono" prefWidth="115.0" text="Τηλέφωνο" />
+                                    <TableColumn fx:id="dieuthinsi" prefWidth="121.0" text="Διεύθυνση" />
+                                 </columns>
+                              </TableColumn>
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
                <BorderPane.margin>
-                  <Insets />
+                  <Insets left="10.0" right="10.0" top="10.0" />
                </BorderPane.margin>
-            </StackPane>
+            </ScrollPane>
          </center>
+         <bottom>
+            <HBox alignment="CENTER" prefHeight="70.0" prefWidth="997.0" BorderPane.alignment="TOP_CENTER">
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" minWidth="190.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#Select" style="-fx-background-color: #bc2d44;" text="Παραλαβή αντικειμένου" textFill="WHITE">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="8.0" left="25.0" right="25.0" top="8.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" minWidth="190.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#Delete" style="-fx-background-color: #bc2d44;" text="Διαγραφή αντικειμένου" textFill="WHITE">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="8.0" left="25.0" right="25.0" top="8.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </bottom>
       </BorderPane>
    </children>
 </AnchorPane>
