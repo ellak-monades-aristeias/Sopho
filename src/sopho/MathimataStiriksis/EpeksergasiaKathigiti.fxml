@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.*?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="630.0" maxWidth="1298.0" minHeight="593.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="593.0" prefWidth="868.0" style="-fx-min-width: 676px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.MathimataStiriksis.KataxorisiMathitiController">
+<AnchorPane fx:id="anchorPane" maxHeight="630.0" maxWidth="1298.0" minHeight="593.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="593.0" prefWidth="868.0" style="-fx-min-width: 676px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.MathimataStiriksis.EpeksergasiaKathigitiController">
    <stylesheets>
         <URL value="@../Style.css" />
     </stylesheets>
@@ -66,6 +66,14 @@
                                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                        </VBox.margin>
                                     </TextField>
+                                    <TextField fx:id="tilefono2" alignment="BOTTOM_LEFT" maxWidth="300.0" prefHeight="39.0" prefWidth="300.0" promptText="Τηλέφωνο 2">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </VBox.margin>
+                                    </TextField>
                                     <TextField fx:id="dieuthinsi" alignment="BOTTOM_LEFT" maxWidth="300.0" prefHeight="39.0" prefWidth="300.0" promptText="Διεύθυνση">
                                        <font>
                                           <Font size="16.0" />
@@ -74,11 +82,6 @@
                                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                        </VBox.margin>
                                     </TextField>
-                                    <DatePicker fx:id="date" prefHeight="40.0" prefWidth="300.0" promptText="Ημερομηνία Γέννησης" style="-fx-font: 16px System;">
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </VBox.margin>
-                                    </DatePicker>
                                  </children>
                                  <HBox.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -88,7 +91,7 @@
                                  <children>
                                     <VBox alignment="TOP_CENTER" maxHeight="500.0" minHeight="500.0" prefHeight="500.0" prefWidth="392.0">
                                        <children>
-                                          <Label alignment="TOP_CENTER" text="Μαθήματα που παρακολουθεί">
+                                          <Label alignment="TOP_CENTER" text="Μαθήματα που παραδίδει">
                                              <font>
                                                 <Font size="23.0" />
                                              </font>
@@ -96,12 +99,12 @@
                                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                              </VBox.margin>
                                           </Label>
-                                          <VBox prefHeight="314.0" prefWidth="395.0">
+                                          <VBox prefHeight="308.0" prefWidth="395.0">
                                              <VBox.margin>
                                                 <Insets />
                                              </VBox.margin>
                                              <children>
-                                                <TableView fx:id="table" prefHeight="299.0" prefWidth="375.0">
+                                                <TableView fx:id="table" prefHeight="363.0" prefWidth="372.0">
                                                   <columns>
                                                     <TableColumn fx:id="mathimata" prefWidth="371.0" text="Τίτλος μαθήματος" />
                                                   </columns>
@@ -160,7 +163,7 @@
          <top>
                   <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
                      <children>
-                        <Label styleClass="titleSmall" text="Καταχώρηση μαθητή" textAlignment="CENTER" textFill="WHITE">
+                        <Label styleClass="titleSmall" text="Επεξεργασία καθηγητή" textAlignment="CENTER" textFill="WHITE">
                         </Label>
                         <Button fx:id="backButton" mnemonicParsing="false" onAction="#GoBack" prefHeight="33.0" prefWidth="81.0" styleClass="backButton" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
                            <StackPane.margin>

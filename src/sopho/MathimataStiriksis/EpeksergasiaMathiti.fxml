@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.*?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="630.0" maxWidth="1298.0" minHeight="593.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="593.0" prefWidth="868.0" style="-fx-min-width: 676px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.MathimataStiriksis.KataxorisiMathitiController">
+<AnchorPane fx:id="anchorPane" maxHeight="630.0" maxWidth="1298.0" minHeight="593.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="593.0" prefWidth="868.0" style="-fx-min-width: 676px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.MathimataStiriksis.EpeksergasiaMathitiController">
    <stylesheets>
         <URL value="@../Style.css" />
     </stylesheets>
@@ -160,7 +160,7 @@
          <top>
                   <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
                      <children>
-                        <Label styleClass="titleSmall" text="Καταχώρηση μαθητή" textAlignment="CENTER" textFill="WHITE">
+                        <Label styleClass="titleSmall" text="Επεξεργασία μαθητή" textAlignment="CENTER" textFill="WHITE">
                         </Label>
                         <Button fx:id="backButton" mnemonicParsing="false" onAction="#GoBack" prefHeight="33.0" prefWidth="81.0" styleClass="backButton" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
                            <StackPane.margin>

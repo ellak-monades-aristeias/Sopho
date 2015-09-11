@@ -8,9 +8,6 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,7 +27,6 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -40,7 +36,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -119,7 +114,7 @@ public class EidiDothikanController extends Application implements Initializable
         data = getInitialTableData();
                 
         history.setItems(data);
-        history.setEditable(true);
+        
         historyDate.setSortType(TableColumn.SortType.DESCENDING);
         historyDate.setCellValueFactory(new PropertyValueFactory<tableManager, String>("date"));
         historyEidi.setCellValueFactory(new PropertyValueFactory<tableManager, String>("eidi"));

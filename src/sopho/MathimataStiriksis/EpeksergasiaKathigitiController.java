@@ -6,9 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -20,7 +19,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -30,14 +28,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 
-public class KataxorisiMathitiController implements Initializable {
+public class EpeksergasiaKathigitiController implements Initializable {
 
     @FXML
     public Label label;    
     @FXML
-    public TextField eponimo, onoma, dieuthinsi, tilefono, patronimo;
-    @FXML
-    public DatePicker date;
+    public TextField eponimo, onoma, dieuthinsi, tilefono, tilefono2, patronimo;
     @FXML
     public TableView<tableManager> table;
     @FXML
@@ -47,6 +43,11 @@ public class KataxorisiMathitiController implements Initializable {
     
     sopho.StageLoader sl = new sopho.StageLoader();
     
+    int sel = sopho.ResultKeeper.selectedIndex;
+    ResultSet oldrs = sopho.ResultKeeper.rs;
+    
+    int selectedID;
+    
     Connection conn=null;
     PreparedStatement pst = null;
     ResultSet rs = null;
@@ -54,6 +55,24 @@ public class KataxorisiMathitiController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+         
+        try {
+            oldrs.first();
+            
+            //get selected id
+            selectedID = oldrs.getInt("id");
+            
+            //filling the fields with data from db
+            eponimo.setText(oldrs.getString("eponimo"));
+            onoma.setText(oldrs.getString("onoma"));
+            patronimo.setText(oldrs.getString("patronimo"));
+            dieuthinsi.setText(oldrs.getString("patronimo"));
+            tilefono.setText(oldrs.getString("tilefono"));
+            tilefono2.setText(oldrs.getString("tilefono2"));
+        } catch (SQLException ex) {
+            Logger.getLogger(EpeksergasiaKathigitiController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         //initialzing table
         data = getInitialTableData();
                 
@@ -98,8 +117,6 @@ public class KataxorisiMathitiController implements Initializable {
         table.getSelectionModel().select(row);
         table.getFocusModel().focus(row);
     }
-    
-    
     
     @FXML
     private void RemoveRow(ActionEvent event){
@@ -148,7 +165,7 @@ public class KataxorisiMathitiController implements Initializable {
                 totalMathimata = totalMathimata.substring(0, totalMathimata.length()-1); // we have to remove the last comma.
             }
             
-                String sql = "INSERT INTO mathites (eponimo, onoma, patronimo, dieuthinsi, tilefono, date, mathimata) VALUES (?,?,?,?,?,?,?)";
+                String sql = "UPDATE kathigites SET eponimo=?, onoma=?, patronimo=?, dieuthinsi=?, tilefono=?, tilefono2=?, mathimata=? WHERE id=?";
 
                 conn=db.ConnectDB();
                 
@@ -159,20 +176,14 @@ public class KataxorisiMathitiController implements Initializable {
                 pst.setString(3, patronimo.getText());
                 pst.setString(4, dieuthinsi.getText());
                 pst.setString(5, tilefono.getText());
-                if(date.getValue()!=null){
-                    Date mydate = Date.from(date.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-                    java.sql.Date sqlDate = new java.sql.Date(mydate.getTime());
-                    pst.setDate(6,sqlDate);
-                }else{
-                    pst.setDate(6, null);
-                }
+                pst.setString(6, tilefono2.getText());
                 pst.setString(7, totalMathimata);
-                
+                pst.setInt(8, selectedID);
                 
                 int flag = pst.executeUpdate();
                 
                 if(flag>0){
-                    sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Τέλεια!", "Τα στοιχεία του μαθητή έχουν ενημερωθεί με επιτυχία.", "confirm");
+                    sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Τέλεια!", "Τα στοιχεία του καθηγητή έχουν ενημερωθεί με επιτυχία.", "confirm");
                     cm.showAndWait();
                     Stage stage = (Stage) onoma.getScene().getWindow();
                     sl.StageLoad("/sopho/MathimataStiriksis/MathimataMain.fxml", stage, false, true); //resizable false, utility true
@@ -181,7 +192,7 @@ public class KataxorisiMathitiController implements Initializable {
                     cm.showAndWait();
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(KataxorisiKathigitiController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(EpeksergasiaKathigitiController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -212,11 +223,28 @@ public class KataxorisiMathitiController implements Initializable {
               
         List<tableManager> list = new ArrayList<>();
         
-        list.add(new tableManager("Συμπληρώστε το όνομα του μαθήματος"));
+        //we have to add the values from database to the table
+        try {
+            oldrs.first();//move the cursor to the first row
+            if(sel>1){//only if we need to move from the first line
+                oldrs.relative(sel);//move to the row that we selected at the previous scene
+            }
+            
+            String m = oldrs.getString("mathimata");
+            if(!m.isEmpty()){
+                List<String> mList = Arrays.asList(m.split(",")); //we convert the single record we got from db to a list so that we can set the data to the table
+                for (int i = 0; i < mList.size(); i++) {
+                    list.add(new tableManager(mList.get(i)));
+		}
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(EpeksergasiaKathigitiController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         ObservableList<tableManager> mydata = FXCollections.observableList(list);
         
         return mydata;
-    }
+    }  
     
 }

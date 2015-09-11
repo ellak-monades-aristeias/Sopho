@@ -34,6 +34,11 @@
     -fx-font-weight: 600;
 }
 
+.blueButtons{
+    -fx-background-color: #3668af;
+    -fx-text-fill: white;
+}
+
 .backButton{
     -fx-font-family: 'Open Sans Semibold';
     -fx-font-size: 16px;
