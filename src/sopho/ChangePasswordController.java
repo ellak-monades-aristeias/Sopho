@@ -10,13 +10,11 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class ChangePasswordController implements Initializable {
-
+    
     @FXML
     public TextField password;
     @FXML
@@ -25,8 +23,7 @@ public class ChangePasswordController implements Initializable {
     public TextField passwordOld;
     
     @Override
-    public void initialize(URL url, ResourceBundle rb) {}
-    
+    public void initialize(URL url, ResourceBundle rb) {}  
     DBClass db = new DBClass();
     StageLoader sl = new StageLoader();
     
@@ -35,30 +32,18 @@ public class ChangePasswordController implements Initializable {
         if(CheckOldPass(passwordOld.getText())){
             if(password.getText().equals(password2.getText())){
                 if(ChangePass(password.getText())){
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.initStyle(StageStyle.UNDECORATED);
-                    alert.setTitle("Επιτυχία!");
-                    alert.setHeaderText("Ο κωδικός πρόσβασης έχει αλλάξει");
-                    alert.setContentText("Στο εξής θα χρησιμοποιείτε τον νέο κωδικό για την πρόσβαση στην εφαρμογή");
-                    alert.showAndWait();
+                    sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Τέλεια!", "Ο κωδικός έχει αλλάξει. Στο εξής θα χρησιμοποιείτε το νέο κωδικό που ορίσατε για την πρόσβαση στην εφαρμογή!", "confirm");
+                    cm.showAndWait();
                     Stage stage = (Stage) password.getScene().getWindow();
                     sl.StageLoad("Settings.fxml", stage, false, true);  //resizable false, utility true
                 }
             }else{
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.initStyle(StageStyle.UNDECORATED);
-                alert.setTitle("Προσοχή!");
-                alert.setHeaderText("Ασυμφωνία κωδικών");
-                alert.setContentText("Ο νέος κωδικός πρόσβασης δεν ταιριάζει με τον κωδικό πρόσβασης που εισάγατε στο πεδίο της επιβεβαίωσης!");
-                alert.showAndWait();
+                sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Ο κωδικός που έχετε εισάγει στο πεδίο της επιβεβαίωσης κωδικού δεν συμφωνεί με τον κωδικό που εισάγατε στο πεδίο του νέου κωδικού. Οι δύο αυτοί κωδικοί θα πρέπει να είναι ίδιοι.", "error");
+                cm.showAndWait();
             }
         }else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initStyle(StageStyle.UNDECORATED);
-            alert.setTitle("Προσοχή!");
-            alert.setHeaderText("Λάθος κωδικός");
-            alert.setContentText("Ο παλιός κωδικός πρόσβασης που έχετε εισάγει δεν είναι σωστός");
-            alert.showAndWait();
+            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Ο παλιός κωδικός πρόσβασης που έχετε εισάγει δεν είναι σωστός!", "error");
+            cm.showAndWait();
         }
     }
     
@@ -122,12 +107,8 @@ public class ChangePasswordController implements Initializable {
                     return true;
                 }
                 else if(flag==0){
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.initStyle(StageStyle.UNDECORATED);
-                    alert.setTitle("Σφάλμα!");
-                    alert.setHeaderText("Ο κωδικός δεν μπόρεσε να εισαχθεί στη βάση");
-                    alert.setContentText("Προσπαθήστε και πάλι να εισάγετε τον κωδικό ή επικοινωνήστε με την τεχνική υποστήριξη.");
-                    alert.showAndWait();
+                    sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Ο κωδικός δεν μπόρεσε να εισαχθεί στη βάση. Προσπαθήστε και πάλι!", "error");
+                    cm.showAndWait();
                     return false;
                 }
 

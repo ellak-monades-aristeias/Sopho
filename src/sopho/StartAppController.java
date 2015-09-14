@@ -23,13 +23,7 @@ public class StartAppController implements Initializable {
     public PasswordField pass;
     
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-    
-    }
-    
-    public void start(Stage primaryStage) throws Exception {
-        login.requestFocus();
-    }
+    public void initialize(URL url, ResourceBundle rb) {}
     
     Connection conn=null;
     PreparedStatement pst = null;
