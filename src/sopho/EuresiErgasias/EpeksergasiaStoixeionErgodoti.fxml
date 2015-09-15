@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.*?>
 
-<AnchorPane maxHeight="630.0" maxWidth="1298.0" minHeight="499.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="525.0" prefWidth="842.0" style="-fx-min-width: 676px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.EuresiErgasias.KataxorisiThesisErgasiasController">
+<AnchorPane maxHeight="630.0" maxWidth="1298.0" minHeight="499.0" minWidth="581.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="529.0" prefWidth="676.0" style="-fx-min-width: 676px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.EuresiErgasias.EpeksergasiaStoixeionErgodotiController">
    <stylesheets>
         <URL value="@../Style.css" />
     </stylesheets>
@@ -22,18 +22,10 @@
                <children>
                   <ScrollPane style="-fx-fit-to-height: true; -fx-fit-to-width: true;" BorderPane.alignment="CENTER" StackPane.alignment="CENTER">
                      <content>
-                        <HBox maxHeight="376.0" minHeight="350.0" prefHeight="376.0" prefWidth="983.0">
+                        <HBox alignment="CENTER" maxHeight="451.0" minHeight="350.0" prefHeight="451.0" prefWidth="433.0">
                            <children>
-                              <VBox alignment="TOP_CENTER" focusTraversable="true" maxHeight="500.0" minHeight="368.0" prefHeight="368.0" prefWidth="384.0">
+                              <VBox alignment="CENTER" focusTraversable="true" maxHeight="500.0" minHeight="368.0" prefHeight="464.0" prefWidth="384.0">
                                  <children>
-                                    <Label text="Στοιχεία εργοδότη">
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </VBox.margin>
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </Label>
                                     <TextField fx:id="eponimia" alignment="BOTTOM_LEFT" maxWidth="300.0" prefHeight="39.0" prefWidth="300.0" promptText="Επωνυμία επιχείρησης">
                                        <font>
                                           <Font size="16.0" />
@@ -87,53 +79,6 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </HBox.margin>
                               </VBox>
-                              <VBox alignment="TOP_CENTER" maxHeight="500.0" minHeight="362.0" prefHeight="362.0" prefWidth="392.0">
-                                 <children>
-                                    <Label alignment="TOP_CENTER" text="Θέσεις που προσφέρει">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <VBox prefHeight="285.0" prefWidth="392.0">
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
-                                       <children>
-                                          <TableView fx:id="table" prefHeight="238.0" prefWidth="372.0">
-                                            <columns>
-                                              <TableColumn fx:id="tableCol" prefWidth="371.0" text="Περιγραφή θέσης" />
-                                            </columns>
-                                             <VBox.margin>
-                                                <Insets left="10.0" right="10.0" top="10.0" />
-                                             </VBox.margin>
-                                          </TableView>
-                                          <HBox prefHeight="34.0" prefWidth="392.0">
-                                             <VBox.margin>
-                                                <Insets left="11.0" right="10.0" />
-                                             </VBox.margin>
-                                             <children>
-                                                <Button alignment="CENTER" maxHeight="33.0" maxWidth="185.0" minHeight="33.0" minWidth="185.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#AddRow" prefHeight="33.0" prefWidth="185.0" styleClass="blueButtons" text="Προσθήκη γραμμής">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Button>
-                                                <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="33.0" maxWidth="185.0" minHeight="33.0" minWidth="185.0" mnemonicParsing="false" onAction="#RemoveRow" prefHeight="33.0" prefWidth="185.0" styleClass="blueButtons" text="Αφαίρεση γραμμής">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Button>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </HBox.margin>
-                              </VBox>
                            </children>
                         </HBox>
                      </content>
@@ -144,7 +89,7 @@
          <top>
                   <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
                      <children>
-                        <Label styleClass="titleSmall" text="Καταχώρηση θέσης εργασίας" textAlignment="CENTER" textFill="WHITE">
+                        <Label styleClass="titleSmall" text="Επεξεργασία θέσης εργασίας" textAlignment="CENTER" textFill="WHITE">
                         </Label>
                         <Button fx:id="backButton" mnemonicParsing="false" onAction="#GoBack" prefHeight="33.0" prefWidth="81.0" styleClass="backButton" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
                            <StackPane.margin>
@@ -159,7 +104,7 @@
                   </StackPane>
                </top>
          <bottom>
-            <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" minWidth="190.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#Save" style="-fx-background-color: #bc2d44;" text="Αποθήκευση" textFill="WHITE" BorderPane.alignment="CENTER">
+            <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" minWidth="190.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: #bc2d44;" text="Αποθήκευση" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font>

@@ -25,7 +25,7 @@
                      <content>
                         <HBox alignment="CENTER" maxHeight="500.0" minHeight="500.0" prefHeight="500.0" prefWidth="983.0">
                            <children>
-                              <VBox alignment="TOP_CENTER" maxHeight="500.0" minHeight="500.0" prefHeight="500.0" prefWidth="456.0">
+                              <VBox alignment="TOP_CENTER" focusTraversable="true" maxHeight="500.0" minHeight="500.0" prefHeight="500.0" prefWidth="456.0">
                                  <children>
                                     <TextField fx:id="eponimo" alignment="BOTTOM_LEFT" maxWidth="300.0" prefHeight="39.0" prefWidth="300.0" promptText="Επώνυμο">
                                        <font>
@@ -89,7 +89,7 @@
                                  <children>
                                     <BorderPane prefHeight="200.0" prefWidth="200.0">
                                        <bottom>
-                                          <Button fx:id="changePhotoButton" mnemonicParsing="false" onAction="#ChangePhoto" prefHeight="37.0" prefWidth="292.0" text="Προσθήκη Φωτογραφίας" textFill="#656565" BorderPane.alignment="CENTER">
+                                          <Button fx:id="changePhotoButton" mnemonicParsing="false" onAction="#ChangePhoto" prefHeight="37.0" prefWidth="292.0" styleClass="blueButtons" text="Προσθήκη Φωτογραφίας" textFill="#656565" BorderPane.alignment="CENTER">
                                              <font>
                                                 <Font size="16.0" />
                                              </font>
@@ -186,8 +186,8 @@
                                        <bottom>
                                           <HBox alignment="CENTER" prefHeight="23.0" prefWidth="311.0" BorderPane.alignment="CENTER">
                                              <children>
-                                                <Button alignment="CENTER" mnemonicParsing="false" onAction="#AddRow" prefHeight="25.0" prefWidth="146.0" text="Προσθήκη γραμμής" />
-                                                <Button alignment="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#RemoveRow" prefHeight="25.0" prefWidth="146.0" text="Αφαίρεση γραμμής" />
+                                                <Button alignment="CENTER" mnemonicParsing="false" onAction="#AddRow" prefHeight="25.0" prefWidth="146.0" styleClass="blueButtons" text="Προσθήκη γραμμής" />
+                                                <Button alignment="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#RemoveRow" prefHeight="25.0" prefWidth="146.0" styleClass="blueButtons" text="Αφαίρεση γραμμής" />
                                              </children>
                                           </HBox>
                                        </bottom>

@@ -20,27 +20,23 @@
          <center>
             <StackPane>
                <children>
-                  <ScrollPane maxHeight="950.0" minHeight="578.0" prefHeight="950.0" prefViewportHeight="649.0" prefViewportWidth="945.0">
-                     <content>
-                        <TableView fx:id="table" maxHeight="800.0" minHeight="563.0" prefHeight="800.0" prefWidth="1880.0">
-                          <columns>
-                              <TableColumn fx:id="id" prefWidth="217.0" text="id" visible="false" />
-                              <TableColumn fx:id="eponimo" prefWidth="217.0" text="Επώνυμο" />
-                              <TableColumn fx:id="onoma" prefWidth="161.0" text="Όνομα" />
-                            <TableColumn fx:id="patronimo" prefWidth="130.0" text="Πατρώνυμο" />
-                              <TableColumn fx:id="imGennisis" prefWidth="130.0" text="Ημ. Γέννησης" />
-                              <TableColumn fx:id="eidikotita" prefWidth="177.0" text="Ειδικότητα" />
-                            <TableColumn fx:id="tilefono" prefWidth="176.0" text="Τηλέφωνο" />
-                              <TableColumn fx:id="dieuthinsi" prefWidth="250.0" text="Διεύθυνση" />
-                              <TableColumn fx:id="dimos" prefWidth="122.0" text="Δήμος" />
-                              <TableColumn fx:id="ekpaideusi" prefWidth="217.0" text="Εκπαιδευτικό επίπεδο" />
-                              <TableColumn fx:id="oikKatastasi" prefWidth="217.0" text="Οικογενειακή κατάσταση" />
-                              <TableColumn fx:id="diploma" prefWidth="217.0" text="Δίπλωμα" />
-                              <TableColumn fx:id="empeiria" prefWidth="217.0" text="Εμπειρία" />
-                          </columns>
-                        </TableView>
-                     </content>
-                  </ScrollPane>
+                  <TableView fx:id="table" maxHeight="800.0" minHeight="563.0" prefHeight="800.0" prefWidth="1880.0">
+                    <columns>
+                        <TableColumn fx:id="id" prefWidth="217.0" text="id" visible="false" />
+                        <TableColumn fx:id="eponimo" prefWidth="217.0" text="Επώνυμο" />
+                        <TableColumn fx:id="onoma" prefWidth="161.0" text="Όνομα" />
+                      <TableColumn fx:id="patronimo" prefWidth="130.0" text="Πατρώνυμο" />
+                        <TableColumn fx:id="imGennisis" prefWidth="130.0" text="Ημ. Γέννησης" />
+                        <TableColumn fx:id="eidikotita" prefWidth="177.0" text="Ειδικότητα" />
+                      <TableColumn fx:id="tilefono" prefWidth="176.0" text="Τηλέφωνο" />
+                        <TableColumn fx:id="dieuthinsi" prefWidth="250.0" text="Διεύθυνση" />
+                        <TableColumn fx:id="dimos" prefWidth="122.0" text="Δήμος" />
+                        <TableColumn fx:id="ekpaideusi" prefWidth="217.0" text="Εκπαιδευτικό επίπεδο" />
+                        <TableColumn fx:id="oikKatastasi" prefWidth="217.0" text="Οικογενειακή κατάσταση" />
+                        <TableColumn fx:id="diploma" prefWidth="217.0" text="Δίπλωμα" />
+                        <TableColumn fx:id="empeiria" prefWidth="217.0" text="Εμπειρία" />
+                    </columns>
+                  </TableView>
                </children>
                <BorderPane.margin>
                   <Insets left="15.0" right="15.0" top="15.0" />

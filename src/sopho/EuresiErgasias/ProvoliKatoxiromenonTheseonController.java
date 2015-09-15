@@ -1,4 +1,4 @@
-package sopho.ApothikiAntikeimenon;
+package sopho.EuresiErgasias;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,14 +24,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-public class IstorikoAntikeimenaController implements Initializable {
-
+public class ProvoliKatoxiromenonTheseonController implements Initializable {
+    
     @FXML
     public Button backButton;
     @FXML
-    public TableView<tableManager> antikeimena;
+    public TableView<tableManager> table;
     @FXML
-    public TableColumn<tableManager, String> antikeimeno, date, eponimo, onoma, patronimo, tilefono, dieuthinsi;
+    public TableColumn<tableManager, String> date, thesi, eponimia, eponimo, onoma, patronimo, tilefono, dieuthinsi, ergEponimo, ergOnoma, ergPatronimo, ergDieuthinsi, ergTilefono;
     @FXML
     public TableColumn<tableManager, Integer> id;
     
@@ -44,63 +44,84 @@ public class IstorikoAntikeimenaController implements Initializable {
         //initialzing table
         data = getInitialTableData();
         
-        antikeimena.setItems(data);
+        table.setItems(data);
+        
         id.setCellValueFactory(new PropertyValueFactory<tableManager, Integer>("id"));
-        antikeimeno.setCellValueFactory(new PropertyValueFactory<tableManager, String>("antikeimeno"));
         date.setCellValueFactory(new PropertyValueFactory<tableManager, String>("date"));
         date.setSortType(TableColumn.SortType.DESCENDING);
+        thesi.setCellValueFactory(new PropertyValueFactory<tableManager, String>("thesi"));
+        eponimia.setCellValueFactory(new PropertyValueFactory<tableManager, String>("eponimia"));
         eponimo.setCellValueFactory(new PropertyValueFactory<tableManager, String>("eponimo"));
         onoma.setCellValueFactory(new PropertyValueFactory<tableManager, String>("onoma"));
         patronimo.setCellValueFactory(new PropertyValueFactory<tableManager, String>("patronimo"));
         tilefono.setCellValueFactory(new PropertyValueFactory<tableManager, String>("tilefono"));
         dieuthinsi.setCellValueFactory(new PropertyValueFactory<tableManager, String>("dieuthinsi"));
+        ergEponimo.setCellValueFactory(new PropertyValueFactory<tableManager, String>("ergEponimo"));
+        ergOnoma.setCellValueFactory(new PropertyValueFactory<tableManager, String>("ergOnoma"));
+        ergPatronimo.setCellValueFactory(new PropertyValueFactory<tableManager, String>("ergPatronimo"));
+        ergDieuthinsi.setCellValueFactory(new PropertyValueFactory<tableManager, String>("ergDieuthinsi"));
+        ergTilefono.setCellValueFactory(new PropertyValueFactory<tableManager, String>("ergTilefono"));
         
-        antikeimena.getColumns().setAll(id, antikeimeno, date, eponimo, onoma, patronimo, tilefono, dieuthinsi);
-        antikeimena.getSortOrder().add(date);
+        table.getColumns().setAll(id, date, thesi, eponimia, eponimo, onoma, patronimo, tilefono, dieuthinsi, ergEponimo, ergOnoma, ergPatronimo, ergDieuthinsi, ergTilefono);
+        table.getSortOrder().add(date);
+
         //end of initialization of table 
     }   
     
     @FXML
     public void GoBack(ActionEvent e) throws IOException{
         Stage stage = (Stage) backButton.getScene().getWindow();
-        sl.StageLoad("/sopho/ApothikiAntikeimenon/ApothikiMain.fxml", stage, false, true); //resizable false, utility true
+        sl.StageLoad("/sopho/EuresiErgasias/EuresiErgasiasMain.fxml", stage, false, true); //resizable false, utility true
     }  
-    
+     
     
     public class tableManager {
         
         private SimpleIntegerProperty id;
-        private SimpleStringProperty antikeimeno;
         private SimpleStringProperty date;
+        private SimpleStringProperty eponimia;
         private SimpleStringProperty eponimo;
         private SimpleStringProperty onoma;
         private SimpleStringProperty patronimo;
         private SimpleStringProperty dieuthinsi;
         private SimpleStringProperty tilefono;
+        private SimpleStringProperty thesi;
+        private SimpleStringProperty ergEponimo;
+        private SimpleStringProperty ergOnoma;
+        private SimpleStringProperty ergPatronimo;
+        private SimpleStringProperty ergDieuthinsi;
+        private SimpleStringProperty ergTilefono;
         
         public tableManager(){}
         
-        public tableManager(Integer id, String antikeimeno, String date, String eponimo, String onoma, String patronimo, String dieuthinsi, String tilefono){
+        public tableManager(Integer id, String date, String eponimia, String eponimo, String onoma, String patronimo, String dieuthinsi, String tilefono, String thesi, String ergEponimo, String ergOnoma, String ergPatronimo, String ergDieuthinsi, String ergTilefono){
             this.id = new SimpleIntegerProperty(id);
-            this.antikeimeno = new SimpleStringProperty(antikeimeno);
             this.date = new SimpleStringProperty(date);
+            this.eponimia = new SimpleStringProperty(eponimia);
             this.eponimo = new SimpleStringProperty(eponimo);
             this.onoma = new SimpleStringProperty(onoma);
             this.patronimo = new SimpleStringProperty(patronimo);
             this.dieuthinsi = new SimpleStringProperty(dieuthinsi);
             this.tilefono = new SimpleStringProperty(tilefono);
+            this.thesi = new SimpleStringProperty(thesi);
+            this.ergEponimo = new SimpleStringProperty(ergEponimo);
+            this.ergOnoma = new SimpleStringProperty(ergOnoma);
+            this.ergPatronimo = new SimpleStringProperty(ergPatronimo);
+            this.ergDieuthinsi = new SimpleStringProperty(ergDieuthinsi);
+            this.ergTilefono = new SimpleStringProperty(ergTilefono);
+
         }
         
         public Integer getId(){
             return id.get();
         }
         
-        public String getAntikeimeno(){
-            return antikeimeno.get();
-        }
-        
         public String getDate(){
             return date.get();
+        }
+        
+        public String getEponimia(){
+            return eponimia.get();
         }
         
         public String getEponimo(){
@@ -122,13 +143,37 @@ public class IstorikoAntikeimenaController implements Initializable {
         public String getTilefono(){
             return tilefono.get();
         }
+        
+        public String getThesi(){
+            return thesi.get();
+        }
+        
+        public String getErgEponimo(){
+            return ergEponimo.get();
+        }
+        
+        public String getErgOnoma(){
+            return ergOnoma.get();
+        }
+        
+        public String getErgPatronimo(){
+            return ergPatronimo.get();
+        }
+        
+        public String getErgDieuthinsi(){
+            return ergDieuthinsi.get();
+        }
+        
+        public String getErgTilefono(){
+            return ergTilefono.get();
+        }
     }
     
     //this is required to get the initial data from the table and push them to an observableList.
     private ObservableList<tableManager> getInitialTableData(){
         List<tableManager> list = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM apothikiparalavi";
+            String sql = "SELECT * FROM katoxiromenestheseis";
             
             sopho.DBClass db = new sopho.DBClass();
             Connection conn=null;
@@ -147,12 +192,12 @@ public class IstorikoAntikeimenaController implements Initializable {
                 rs.beforeFirst();
                 while(rs.next()){
                     // we can add data to the initial table using the following command
-                    list.add(new tableManager(rs.getInt("id"), rs.getString("antikeimeno"), rs.getDate("date").toString(), rs.getString("eponimo"), rs.getString("onoma"), rs.getString("patronimo"), rs.getString("dieuthinsi"), rs.getString("tilefono")));
+                    list.add(new tableManager(rs.getInt("id"), rs.getDate("date").toString(), rs.getString("ergodotisEponimia"), rs.getString("ergodotisEponimo"), rs.getString("ergodotisOnoma"), rs.getString("ergodotisPatronimo"), rs.getString("ergodotisDieuthinsi"), rs.getString("ergodotisTilefono"), rs.getString("thesi"), rs.getString("eponimo"), rs.getString("onoma"), rs.getString("patronimo"), rs.getString("dieuthinsi"), rs.getString("tilefono")));
                 }
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(DiathesimaAntikeimenaController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProvoliDiathesimonTheseonController.class.getName()).log(Level.SEVERE, null, ex);
         }
         ObservableList<tableManager> mydata = FXCollections.observableList(list);
         return mydata;

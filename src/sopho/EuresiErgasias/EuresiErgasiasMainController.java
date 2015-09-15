@@ -32,6 +32,12 @@ public class EuresiErgasiasMainController implements Initializable {
     }
     
     @FXML
+    public void OpenKatoxiromenesTheseis(ActionEvent e) throws IOException{
+        Stage stage = (Stage) backButton.getScene().getWindow();
+        sl.StageLoad("/sopho/EuresiErgasias/ProvoliKatoxiromenonTheseon.fxml", stage, true, false); //resizable true, utility false
+    }
+    
+    @FXML
     public void OpenKataxorisiAtomou(ActionEvent e) throws IOException{
         Stage stage = (Stage) backButton.getScene().getWindow();
         sl.StageLoad("/sopho/EuresiErgasias/KataxorisiAtomouPouZita.fxml", stage, true, false); //resizable true, utility false
