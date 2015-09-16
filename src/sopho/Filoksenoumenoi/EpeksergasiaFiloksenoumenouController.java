@@ -6,10 +6,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,7 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.stage.Stage;
 
-public class KataxorisiFiloksenoumenouController implements Initializable {
+public class EpeksergasiaFiloksenoumenouController implements Initializable {
 
     @FXML
     public TextField eponimo, onoma, patronimo, dieuthinsi, tilefono, tautotita, aitia;
@@ -30,6 +31,14 @@ public class KataxorisiFiloksenoumenouController implements Initializable {
     
     sopho.StageLoader sl = new sopho.StageLoader();
     
+    sopho.DBClass db = new sopho.DBClass();
+    Connection conn=null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    
+    ResultSet oldrs = sopho.ResultKeeper.rs;
+    int sel = sopho.ResultKeeper.selectedIndex;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //setting a tooltip for the date because it will be filled and the prompt text will not appear
@@ -37,19 +46,34 @@ public class KataxorisiFiloksenoumenouController implements Initializable {
         t.setText("Ημερομηνία άφιξης");
         date.setTooltip(t);
         
-        date.setValue(LocalDate.now()); //setting the datePicker to current date.
+        try {
+            oldrs.first();
+            if(sel>0){
+                oldrs.relative(sel);
+            }
+            
+            eponimo.setText(oldrs.getString("eponimo"));
+            onoma.setText(oldrs.getString("onoma"));
+            patronimo.setText(oldrs.getString("patronimo"));
+            dieuthinsi.setText(oldrs.getString("dieuthinsi"));
+            tilefono.setText(oldrs.getString("tilefono"));
+            tautotita.setText(oldrs.getString("tautotita"));
+            if(oldrs.getDate("date")!=null){
+                date.setValue(oldrs.getDate("date").toLocalDate());
+            }
+            aitia.setText(oldrs.getString("aitia"));
+            loipa.setText(oldrs.getString("loipa"));
+        } catch (SQLException ex) {
+            Logger.getLogger(EpeksergasiaFiloksenoumenouController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     
     @FXML
     public void Save(ActionEvent e) throws IOException, SQLException{
         if(!eponimo.getText().isEmpty()&&!onoma.getText().isEmpty()&&!patronimo.getText().isEmpty()&&!aitia.getText().isEmpty()){
             
-            sopho.DBClass db = new sopho.DBClass();
-            Connection conn=null;
-            PreparedStatement pst = null;
-            ResultSet rs = null;
-            
-            String sql = "INSERT INTO filoksenoumenoi (eponimo, onoma, patronimo, dieuthinsi, tilefono, tautotita, aitia, date, loipa, apoxorisi) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            String sql = "UPDATE filoksenoumenoi SET eponimo=?, onoma=?, patronimo=?, dieuthinsi=?, tilefono=?, tautotita=?, aitia=?, date=?, loipa=?, apoxorisi=? WHERE id=?";
 
             conn=db.ConnectDB();
             pst = conn.prepareStatement(sql);
@@ -70,6 +94,8 @@ public class KataxorisiFiloksenoumenouController implements Initializable {
             }
             pst.setString(9, loipa.getText());
             pst.setInt(10, 0);
+            pst.setInt(11, oldrs.getInt("id"));
+            
             
             int flag = pst.executeUpdate();
             
@@ -92,7 +118,7 @@ public class KataxorisiFiloksenoumenouController implements Initializable {
     @FXML
     public void GoBack(ActionEvent e) throws IOException{
         Stage stage = (Stage) onoma.getScene().getWindow();
-        sl.StageLoad("/sopho/Filoksenoumenoi/FiloksenoumenoiMain.fxml", stage, false, true); //resizable false, utility true
-    }
+        sl.StageLoad("/sopho/Filoksenoumenoi/ProvoliTrexontonFiloksenoumenon.fxml", stage, true, false); //resizable true, utility false
+    }   
     
 }

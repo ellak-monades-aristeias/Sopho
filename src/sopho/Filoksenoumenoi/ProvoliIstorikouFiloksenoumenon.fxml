@@ -1,11 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import java.net.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Filoksenoumenoi.ProvoliIstorikouFiloksenoumenonController">
-    
+<AnchorPane maxHeight="900.0" maxWidth="1298.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="657.0" prefWidth="985.0" style="-fx-min-width: 676px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Filoksenoumenoi.ProvoliIstorikouFiloksenoumenonController">
+   <stylesheets>
+        <URL value="@../Style.css" />
+    </stylesheets>
+    <children>
+      <BorderPane layoutY="-0.0" prefHeight="841.0" prefWidth="676.0" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-0.0">
+         <center>
+            <StackPane>
+               <children>
+                  <TableView fx:id="table" maxHeight="800.0" minHeight="563.0" prefHeight="800.0" prefWidth="1880.0">
+                    <columns>
+                        <TableColumn fx:id="id" prefWidth="217.0" text="id" visible="false" />
+                        <TableColumn fx:id="eponimo" prefWidth="217.0" text="Επώνυμο" />
+                        <TableColumn fx:id="onoma" prefWidth="161.0" text="Όνομα" />
+                      <TableColumn fx:id="patronimo" prefWidth="130.0" text="Πατρώνυμο" />
+                        <TableColumn fx:id="date" prefWidth="130.0" text="Ημ. άφιξης" />
+                        <TableColumn fx:id="dateApoxorisis" prefWidth="130.0" text="Ημ. αποχώρησης" />
+                        <TableColumn fx:id="aitia" prefWidth="177.0" text="Αιτία φιλοξενίας" />
+                      <TableColumn fx:id="loipa" prefWidth="176.0" text="Λοιπές παρατηρήσεις" />
+                        <TableColumn fx:id="dieuthinsi" prefWidth="176.0" text="Διεύθυνση" />
+                        <TableColumn fx:id="tilefono" prefWidth="176.0" text="Τηλέφωνο" />
+                        <TableColumn fx:id="tautotita" prefWidth="176.0" text="Ταυτότητα" />
+                    </columns>
+                  </TableView>
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </BorderPane.margin>
+            </StackPane>
+         </center>
+         <top>
+            <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
+               <children>
+                   <Button fx:id="backButton" mnemonicParsing="false" onAction="#GoBack" prefHeight="33.0" prefWidth="81.0" style="-fx-background-color: #bc2d44;" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
+                     <font>
+                        <Font name="Open Sans Semibold" size="16.0" />
+                     </font>
+                     <StackPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </StackPane.margin>
+                  </Button>
+                  <Label styleClass="title" text="Ιστορικό φιλοξενούμενων" textAlignment="CENTER" textFill="WHITE">
+                  </Label>
+               </children>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </StackPane>
+         </top>
+      </BorderPane>
+   </children>
 </AnchorPane>

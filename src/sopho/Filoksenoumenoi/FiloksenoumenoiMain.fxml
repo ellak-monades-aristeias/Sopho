@@ -9,16 +9,20 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import java.net.*?>
 
-<AnchorPane maxHeight="900.0" maxWidth="676.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="749.0" prefWidth="676.0" style="-fx-min-width: 676px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Filoksenoumenoi.FiloksenoumenoiMainController">
-   <children>
+<AnchorPane maxHeight="900.0" maxWidth="676.0" minWidth="633.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="595.0" prefWidth="633.0" style="-fx-min-width: 676px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Filoksenoumenoi.FiloksenoumenoiMainController">
+    <stylesheets>
+        <URL value="@../Style.css" />
+    </stylesheets>
+    <children>
       <BorderPane layoutY="-0.0" prefHeight="841.0" prefWidth="676.0" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-0.0">
          <center>
             <ScrollPane prefHeight="765.0" prefWidth="676.0" style="-fx-fit-to-height: true; -fx-fit-to-width: true;" BorderPane.alignment="CENTER">
                <content>
                   <VBox alignment="CENTER">
                      <children>
-                        <Button minWidth="450.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="450.0" style="-fx-background-color: #3668af; -fx-background-radius: 0;" text="Καταχώρηση φιλοξενούμενου" textFill="WHITE">
+                        <Button minWidth="450.0" mnemonicParsing="false" onAction="#OpenKataxorisi" prefHeight="63.0" prefWidth="450.0" style="-fx-background-color: #3668af; -fx-background-radius: 0;" text="Καταχώρηση φιλοξενούμενου" textFill="WHITE">
                            <font>
                               <Font name="Open Sans Semibold" size="20.0" />
                            </font>
@@ -26,7 +30,15 @@
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Button minWidth="450.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="450.0" style="-fx-background-color: #3668af; -fx-background-radius: 0;" text="Προβολή ιστορικού φιλοξενούμενων" textFill="WHITE">
+                        <Button minWidth="450.0" mnemonicParsing="false" onAction="#OpenTrexontes" prefHeight="63.0" prefWidth="450.0" style="-fx-background-color: #3668af; -fx-background-radius: 0;" text="Προβολή τρέχοντων φιλοξενούμενων" textFill="WHITE">
+                           <font>
+                              <Font name="Open Sans Semibold" size="20.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button minWidth="450.0" mnemonicParsing="false" onAction="#OpenIstoriko" prefHeight="63.0" prefWidth="450.0" style="-fx-background-color: #3668af; -fx-background-radius: 0;" text="Προβολή ιστορικού φιλοξενούμενων" textFill="WHITE">
                            <font>
                               <Font name="Open Sans Semibold" size="20.0" />
                            </font>
@@ -40,52 +52,18 @@
             </ScrollPane>
          </center>
          <top>
-            <StackPane maxHeight="70.0" minHeight="70.0" prefHeight="70.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
+            <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
                <children>
-                  <Label text="Φιλοξενούμενοι" textAlignment="CENTER" textFill="WHITE">
-                     <font>
-                        <Font name="Open Sans" size="30.0" />
-                     </font>
-                  </Label>
-                  <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="81.0" style="-fx-background-color: #bc2d44;" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
+                   <Button fx:id="backButton" mnemonicParsing="false" onAction="#GoBack" prefHeight="33.0" prefWidth="81.0" style="-fx-background-color: #bc2d44;" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
                      <font>
                         <Font name="Open Sans Semibold" size="16.0" />
                      </font>
                      <StackPane.margin>
-                        <Insets left="25.0" />
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </StackPane.margin>
                   </Button>
-                  <SVGPath content="M461,244 L371,244 L317.8,185 L461,185" fill="#bc2d44" nodeOrientation="LEFT_TO_RIGHT" stroke="RED" strokeWidth="0.0" StackPane.alignment="CENTER_RIGHT" />
-                  <Button fx:id="minimize" mnemonicParsing="false" onAction="" prefHeight="34.0" prefWidth="20.0" style="-fx-background-color: transparent;" text="_" textFill="WHITE" StackPane.alignment="CENTER_RIGHT">
-                     <font>
-                        <Font name="Open Sans Extrabold" size="30.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-                     </padding>
-                     <StackPane.margin>
-                        <Insets bottom="42.0" right="70.0" top="21.0" />
-                     </StackPane.margin>
-                  </Button>
-                  <SVGPath content="M394,403v16.6h16.6v-16.6H394z M407.3,416.3h-10.3v-10.3h10.3V416.3z" fill="WHITE" StackPane.alignment="TOP_RIGHT">
-                     <StackPane.margin>
-                        <Insets right="44.0" top="21.0" />
-                     </StackPane.margin>
-                  </SVGPath>
-                  <Button fx:id="closeButton" mnemonicParsing="false" onAction="" prefHeight="62.0" prefWidth="4.0" style="-fx-background-color: transparent;" text="x" textFill="WHITE" StackPane.alignment="CENTER_RIGHT">
-                     <font>
-                        <Font name="Open Sans Extrabold" size="30.0" />
-                     </font>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <padding>
-                        <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
-                     </padding>
-                     <StackPane.margin>
-                        <Insets bottom="30.0" right="15.0" top="24.0" />
-                     </StackPane.margin>
-                  </Button>
+                  <Label styleClass="title" text="Φιλοξενούμενοι" textAlignment="CENTER" textFill="WHITE">
+                  </Label>
                </children>
                <effect>
                   <DropShadow />
