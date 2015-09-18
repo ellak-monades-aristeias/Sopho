@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.*?>
+
+<AnchorPane minHeight="676.0" minWidth="997.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="677.0" prefWidth="997.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Vivliothiki.ListaDaneismenonController">
+    <stylesheets>
+        <URL value="@../Style.css" />
+    </stylesheets>
+    <children>
+      <BorderPane minHeight="650.0" minWidth="997.0" prefHeight="870.0" prefWidth="997.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+                  <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
+                     <children>
+                        <Label styleClass="titleSmall" text="Δανεισμένα βιβλία" textAlignment="CENTER" textFill="WHITE">
+                        </Label>
+                        <Button fx:id="backButton" mnemonicParsing="false" onAction="#GoBack" prefHeight="33.0" prefWidth="81.0" styleClass="backButton" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
+                           <StackPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </StackPane.margin>
+                        </Button>
+                        <SVGPath content="M461,244 L371,244 L317.8,185 L461,185" fill="#bc2d44" nodeOrientation="LEFT_TO_RIGHT" scaleX="1.2" scaleY="0.77" stroke="RED" strokeWidth="0.0" translateX="-12.0" StackPane.alignment="CENTER_RIGHT" />
+                     </children>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </StackPane>
+               </top>
+          
+         <center>
+            <ScrollPane fitToHeight="true" prefViewportHeight="712.0" prefViewportWidth="1238.0" BorderPane.alignment="TOP_CENTER">
+               <content>
+                  <AnchorPane>
+                     <children>
+                        <TableView fx:id="table" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                              <TableColumn fx:id="id" prefWidth="240.0" text="id" visible="false" />
+                            <TableColumn fx:id="titlos" prefWidth="240.0" text="Τίτλος" />
+                              <TableColumn fx:id="siggrafeas" prefWidth="157.0" text="Συγγραφέας" />
+                              <TableColumn fx:id="katigoria" prefWidth="194.0" text="Κατηγορία" />
+                              <TableColumn fx:id="ekdotikos" prefWidth="191.0" text="Εκδοτικός οίκος" />
+                              <TableColumn fx:id="selides" prefWidth="250.0" text="Αριθμός σελίδων" />
+                              <TableColumn fx:id="isbn" prefWidth="240.0" text="ISBN" />
+                              <TableColumn fx:id="date" prefWidth="147.0" text="Ημερομηνία δανεισμού" />
+                              <TableColumn fx:id="eponimo" prefWidth="191.0" text="Επώνυμο" />
+                              <TableColumn fx:id="onoma" prefWidth="190.0" text="Όνομα" />
+                              <TableColumn fx:id="patronimo" prefWidth="190.0" text="Πατρώνυμο" />
+                              <TableColumn fx:id="tilefono" prefWidth="190.0" text="Τηλέφωνο" />
+                              <TableColumn fx:id="dieuthinsi" prefWidth="190.0" text="Διεύθυνση" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+               <BorderPane.margin>
+                  <Insets left="10.0" right="10.0" top="10.0" />
+               </BorderPane.margin>
+            </ScrollPane>
+         </center>
+         <bottom>
+            <HBox alignment="CENTER" prefHeight="70.0" prefWidth="997.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" minWidth="190.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#Epistrofi" style="-fx-background-color: #bc2d44;" text="Επιστροφή βιβλίου" textFill="WHITE">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="8.0" left="25.0" right="25.0" top="8.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="CENTER" minWidth="190.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#Delete" style="-fx-background-color: #bc2d44;" text="Διαγραφή δανεισμού" textFill="WHITE">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="8.0" left="25.0" right="25.0" top="8.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>

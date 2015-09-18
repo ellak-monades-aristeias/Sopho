@@ -46,12 +46,12 @@
                         </VBox>
                         <HBox alignment="CENTER" prefHeight="89.0" prefWidth="674.0">
                            <children>
-                              <Button fx:id="ok" minWidth="200.0" mnemonicParsing="false" onAction="#OK" prefHeight="63.0" prefWidth="200.0" styleClass="mainAppButtons" text="OK" textFill="WHITE">
+                              <Button fx:id="yes" minWidth="200.0" mnemonicParsing="false" onAction="#Yes" prefHeight="63.0" prefWidth="200.0" styleClass="mainAppButtons" text="Ναί" textFill="WHITE">
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button fx:id="yes" minWidth="200.0" mnemonicParsing="false" onAction="#Yes" prefHeight="63.0" prefWidth="200.0" styleClass="mainAppButtons" text="Ναί" textFill="WHITE">
+                              <Button fx:id="ok" minWidth="200.0" mnemonicParsing="false" onAction="#OK" prefHeight="63.0" prefWidth="200.0" styleClass="mainAppButtons" text="OK" textFill="WHITE">
                                  <HBox.margin>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>

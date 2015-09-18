@@ -34,13 +34,19 @@ public class VivliothikiMainController implements Initializable {
     @FXML
     public void OpenDiathesima(ActionEvent e) throws IOException{
         Stage stage = (Stage) backButton.getScene().getWindow();
-        sl.StageLoad("/sopho/Vivliothiki/DiathesimaVivlia.fxml", stage, true, false); //resizable true, utility false
+        sl.StageLoad("/sopho/Vivliothiki/ListaDiathesimon.fxml", stage, true, false); //resizable true, utility false
     }
     
     @FXML
     public void OpenDaneismena(ActionEvent e) throws IOException{
         Stage stage = (Stage) backButton.getScene().getWindow();
-        sl.StageLoad("/sopho/Vivliothiki/DaneismenaVivlia.fxml", stage, true, false); //resizable true, utility false
+        sl.StageLoad("/sopho/Vivliothiki/ListaDaneismenon.fxml", stage, true, false); //resizable true, utility false
     }    
+    
+    @FXML
+    public void OpenIstoriko(ActionEvent e) throws IOException{
+        Stage stage = (Stage) backButton.getScene().getWindow();
+        sl.StageLoad("/sopho/Vivliothiki/IstorikoDaneismou.fxml", stage, true, false); //resizable true, utility false
+    }
     
 }

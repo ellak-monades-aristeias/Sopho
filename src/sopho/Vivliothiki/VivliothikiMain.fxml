@@ -27,12 +27,17 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
                         </Button>
-                        <Button minWidth="440.0" mnemonicParsing="false" onAction="#OpenDiathesima" prefHeight="63.0" prefWidth="440.0" styleClass="mainAppButtons" text="Προβολή διαθέσιμων βιβλίων" textFill="WHITE">
+                        <Button minWidth="440.0" mnemonicParsing="false" onAction="#OpenDiathesima" prefHeight="63.0" prefWidth="440.0" styleClass="mainAppButtons" text="Διαθέσιμα βιβλία" textFill="WHITE">
                            <VBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
                         </Button>
-                        <Button minWidth="440.0" mnemonicParsing="false" onAction="#OpenDaneismena" prefHeight="63.0" prefWidth="440.0" styleClass="mainAppButtons" text="Προβολή δανεισμένων βιβλίων" textFill="WHITE">
+                        <Button minWidth="440.0" mnemonicParsing="false" onAction="#OpenDaneismena" prefHeight="63.0" prefWidth="440.0" styleClass="mainAppButtons" text="Δανεισμένα βιβλία" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button minWidth="440.0" mnemonicParsing="false" onAction="#OpenIstoriko" prefHeight="63.0" prefWidth="440.0" styleClass="mainAppButtons" text="Ιστορικό δανεισμού βιβλίων" textFill="WHITE">
                            <VBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
