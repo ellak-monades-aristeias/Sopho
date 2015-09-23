@@ -1,5 +1,6 @@
 package sopho.Ofeloumenoi;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -9,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,6 +27,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -127,9 +130,12 @@ public class EditOfeloumenoiController implements Initializable {
             PhotoID = rs.getString("PhotoID");
             if(PhotoID != null){
                 //we have a picture stored at the database.
-                File file = new File(System.getProperty("user.home")+"/Documents/Sopho/Images/"+PhotoID);
-                Image img = new Image(file.toURI().toString());
-                image.setImage(img);
+                BufferedImage bf = bfImage(PhotoID);
+                
+                if(bf!=null){
+                    Image im = SwingFXUtils.toFXImage(bf, null);
+                    image.setImage(im);
+                }
             
                 //and we set the button bellow image to "Αλλαγή Φωτογραφίας"
                 changePhotoButton.setText("Αλλαγή Φωτογραφίας");
@@ -194,9 +200,12 @@ public class EditOfeloumenoiController implements Initializable {
             @Override 
             public void changed(ObservableValue o,Object oldVal,Object newVal){
                 PhotoID=(String) newVal; 
-                File file = new File(System.getProperty("user.home")+"/Documents/Sopho/Images/"+newVal);
-                Image img = new Image(file.toURI().toString());
-                image.setImage(img);
+                BufferedImage bf = bfImage(PhotoID);
+                
+                if(bf!=null){
+                    Image im = SwingFXUtils.toFXImage(bf, null);
+                    image.setImage(im);
+                }
             }
         });
         
@@ -242,6 +251,37 @@ public class EditOfeloumenoiController implements Initializable {
             "ΕΤΑΠ – ΜΜΕ",
             "Άλλο"
         );
+    }
+    
+    public BufferedImage bfImage(String rand){
+        BufferedImage img = null;  //Buffered image coming from database
+        InputStream fis = null;
+
+        try{
+            ResultSet myrs;
+            
+            sopho.DBClass db = new sopho.DBClass();
+            
+            Connection conn = db.ConnectDB();
+            
+            String sql = "SELECT * FROM images WHERE photoID =?";
+            
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, rand);
+
+            myrs= pst.executeQuery();
+            
+            myrs.first();
+
+            fis = myrs.getBinaryStream("image");
+
+            img = javax.imageio.ImageIO.read(fis);  //create the BufferedImaged
+
+        } catch (SQLException | IOException e){
+            System.err.println("error " +e);
+        }
+
+       return img; //function returns a BufferedImage object
     }
     
     @FXML

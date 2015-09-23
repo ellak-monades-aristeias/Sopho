@@ -1,7 +1,9 @@
 package sopho.EuresiErgasias;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,6 +21,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -68,7 +71,7 @@ public class KataxorisiAtomouPouZitaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        PhotoListener.setStr(null);//we set the var to null to know if the user has selected a photo to be shown
+        //PhotoListener.setStr(null);//we set the var to null to know if the user has selected a photo to be shown
         
         //we use a listener to know if the user adds a photo using the TakePhoto class
         PhotoListener.strProperty().addListener(new ChangeListener(){
@@ -78,9 +81,12 @@ public class KataxorisiAtomouPouZitaController implements Initializable {
                     changePhotoButton.setText("Αλλαγή Φωτογραφίας");
                 }
                 PhotoID=(String) newVal; 
-                File file = new File(System.getProperty("user.home")+"/Documents/Sopho/Images/"+newVal);
-                Image img = new Image(file.toURI().toString());
-                image.setImage(img);
+                BufferedImage bf = bfImage(PhotoID);
+                
+                if(bf!=null){
+                    Image im = SwingFXUtils.toFXImage(bf, null);
+                    image.setImage(im);
+                }
             }
         });
         
@@ -114,7 +120,38 @@ public class KataxorisiAtomouPouZitaController implements Initializable {
             "Χήρος" 
         );
         
-    }    
+    }   
+    
+    public BufferedImage bfImage(String rand){
+        BufferedImage img = null;  //Buffered image coming from database
+        InputStream fis = null;
+
+        try{
+            ResultSet rs;
+            
+            sopho.DBClass db = new sopho.DBClass();
+            
+            Connection conn = db.ConnectDB();
+            
+            String sql = "SELECT * FROM images WHERE photoID =?";
+            
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, rand);
+
+            rs= pst.executeQuery();
+            
+            rs.first();
+
+            fis = rs.getBinaryStream("image");
+
+            img = javax.imageio.ImageIO.read(fis);  //create the BufferedImaged
+
+        } catch (SQLException | IOException e){
+            System.err.println("error " +e);
+        }
+
+       return img; //function returns a BufferedImage object
+    }
     
     @FXML
     private void GoBack(ActionEvent event) throws IOException{
@@ -164,9 +201,9 @@ public class KataxorisiAtomouPouZitaController implements Initializable {
     @FXML
     public void Save(ActionEvent event) throws IOException{
         
-        if(onoma.getText().isEmpty()||eponimo.getText().isEmpty()||patronimo.getText().isEmpty()||tilefono.getText().isEmpty()){ //checking if the user has filled the required fields
+        if(onoma.getText().isEmpty()||eponimo.getText().isEmpty()||patronimo.getText().isEmpty()||tilefono.getText().isEmpty()||date.getValue()==null){ //checking if the user has filled the required fields
             
-            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Δεν έχετε συμπληρώσει όλα τα απαιτούμενα πεδία. Θα πρέπει να συμπληρώσετε τα πεδία Επώνυμο, Όνομα, Πατρώνυμο και Τηλέφωνο προκειμένου να συνεχίσετε!", "error" );
+            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Δεν έχετε συμπληρώσει όλα τα απαιτούμενα πεδία. Θα πρέπει να συμπληρώσετε τα πεδία Επώνυμο, Όνομα, Πατρώνυμο, Ημερομηνία Γέννησης και Τηλέφωνο προκειμένου να συνεχίσετε!", "error" );
             cm.showAndWait();
         
         }else{//the user has filled the required fields. We can proceed.

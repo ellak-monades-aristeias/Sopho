@@ -72,7 +72,7 @@ public class SearchToEditOfeloumenoiController implements Initializable {
                     Stage stage = (Stage) onoma.getScene().getWindow();
                     if(rs.getRow()==1){
                         // there is only one result
-                        sopho.ResultKeeper.selectedIndex=1;
+                        sopho.ResultKeeper.selectedIndex=0;
                         sopho.ResultKeeper.multipleResults=false; //we have to know if there are multiple results to set properly the backButton at EditOfeloumenoiController
 
                         sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Τέλεια!", "Βρέθηκε ο ωφελούμενος: " + rs.getString("eponimo") + " " + rs.getString("onoma") , "confirm");

@@ -3,6 +3,7 @@ package sopho;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,41 +30,29 @@ public class Setup4Controller implements Initializable {
     
     StageLoader sl = new StageLoader();
     DBClass db = new DBClass();
-    
-    Connection conn=null;
+
+    Connection conn = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
     
     @FXML
-    private void NextButton(ActionEvent event) throws IOException {
+    private void NextButton(ActionEvent event) throws IOException, SQLException {
         if(password.getText().isEmpty()){
             //error the password field must not be empty
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.initStyle(StageStyle.UNDECORATED);
-                alert.setTitle("Προσοχή!");
-                alert.setHeaderText("Δεν συμπληρώσατε κωδικό!");
-                alert.setContentText("Συμπληρώστε έναν κωδικό στο πεδίο για να διασφαλίσετε το απόρρητο των προσωπικών δεδομένων που περιλαμβάνονται στην εφαρμογή");
-                alert.showAndWait();
+            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Δεν συμπληρώσατε κωδικό! Συμπληρώστε έναν κωδικό στο πεδίο για να διασφαλίσετε το απόρρητο των προσωπικών δεδομένων που περιλαμβάνονται στην εφαρμογή", "error");
+            cm.showAndWait();
         }else if(password2.getText().isEmpty()){
             //error the password confirm field must not be empty
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.initStyle(StageStyle.UNDECORATED);
-                alert.setTitle("Προσοχή!");
-                alert.setHeaderText("Δεν επιβεβαιώσατε τον κωδικό!");
-                alert.setContentText("Συμπληρώστε ίδιο κωδικό για δεύτερη φορά για να επιβεβαιώσετε τον κωδικό που επιλέξατε.");
-                alert.showAndWait();
+            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Δεν επιβεβαιώσατε τον κωδικό! Συμπληρώστε ίδιο κωδικό για δεύτερη φορά για να επιβεβαιώσετε τον κωδικό που επιλέξατε.", "error");
+            cm.showAndWait();
         }else if(!password.getText().equals(password2.getText())){
             //if the passwords does not match
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.initStyle(StageStyle.UNDECORATED);
-                alert.setTitle("Προσοχή!");
-                alert.setHeaderText("Οι κωδικοί δεν ταιριάζουν!");
-                alert.setContentText("Θα πρέπει να συμπληρώσετε τον ίδιο κωδικό και στα δύο πεδία.");
-                alert.showAndWait();
+            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Οι κωδικοί δεν ταιριάζουν! Θα πρέπει να συμπληρώσετε τον ίδιο κωδικό και στα δύο πεδία.", "error");
+            cm.showAndWait();
         }else{
             //we can go to the next step
             conn=db.ConnectDB();
-        
+                   
             System.out.println("the pass is: "+password.getText());
 
             MD5 md5 = new MD5();
@@ -85,12 +74,8 @@ public class Setup4Controller implements Initializable {
                     sl.StageLoad("Setup5.fxml", stage, false, true); //resizable false, utility true
                 }
                 else if(flag==0){
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.initStyle(StageStyle.UNDECORATED);
-                    alert.setTitle("Σφάλμα!");
-                    alert.setHeaderText("Ο κωδικός δεν μπόρεσε να εισαχθεί στη βάση");
-                    alert.setContentText("Προσπαθήστε και πάλι να εισάγετε τον κωδικό ή επικοινωνήστε με την τεχνική υποστήριξη.");
-                    alert.showAndWait();
+                    sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Σφάλμα!", "Ο κωδικός δεν μπόρεσε να εισαχθεί στη βάση. Προσπαθήστε και πάλι να εισάγετε τον κωδικό ή επικοινωνήστε με την τεχνική υποστήριξη.", "error");
+                    cm.showAndWait();
                 }
 
 

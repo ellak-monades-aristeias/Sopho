@@ -58,20 +58,12 @@ public class Setup2Controller implements Initializable {
         String pass = password.getText();
         
         if(user.isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initStyle(StageStyle.UNDECORATED);
-            alert.setTitle("Προσοχή!");
-            alert.setHeaderText("Δεν συμπληρώσατε username!");
-            alert.setContentText("Συμπληρώστε το username για τη πρόσβαση στη βάση δεδομένων");
-            alert.showAndWait();
+            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή", "Δεν συμπληρώσατε username! Συμπληρώστε το username για τη πρόσβαση στη βάση δεδομένων", "error");
+            cm.showAndWait();
             allOk=false;
         }else if(pass.isEmpty()){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initStyle(StageStyle.UNDECORATED);
-            alert.setTitle("Προσοχή!");
-            alert.setHeaderText("Δεν συμπληρώσατε password!");
-            alert.setContentText("Συμπληρώστε το password για τη πρόσβαση στη βάση δεδομένων");
-            alert.showAndWait();
+            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή", "Δεν συμπληρώσατε password! Συμπληρώστε το password για τη πρόσβαση στη βάση δεδομένων", "error");
+            cm.showAndWait();
             allOk=false;
 
         }else{
@@ -83,12 +75,8 @@ public class Setup2Controller implements Initializable {
             if(!ipIsset){// we do not set the ip if it is already set to localhost by the previous step
                 String ip = ipAddress.getText();
                 if(ip.isEmpty()){
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.initStyle(StageStyle.UNDECORATED);
-                    alert.setTitle("Προσοχή!");
-                    alert.setHeaderText("Δεν συμπληρώσατε τη διεύθυνση IP!");
-                    alert.setContentText("Συμπληρώστε τη διεύθυνση IP του υπολογιστή που φιλοξενεί τη βάση");
-                    alert.showAndWait();
+                    sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή", "Δεν συμπληρώσατε τη διεύθυνση IP! Συμπληρώστε τη διεύθυνση IP του υπολογιστή που φιλοξενεί τη βάση", "error");
+                    cm.showAndWait();
                     allOk=false;
                 }else{
                     prefs.setPrefs("dbIP", ip);
@@ -101,12 +89,8 @@ public class Setup2Controller implements Initializable {
             Stage stage = (Stage) title.getScene().getWindow();
             sl.StageLoad("Setup3.fxml", stage, false, true); //resizable false, utility true
         }else{
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.initStyle(StageStyle.UNDECORATED);
-            alert.setTitle("Σφάλμα!");
-            alert.setHeaderText("Ελέγξτε όλα τα πεδία!");
-            alert.setContentText("Ενδεχομένως δεν έχετε συμπληρώσει κάποιο πεδίο...");
-            alert.showAndWait();
+            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Σφάλμα", "Ελέγξτε όλα τα πεδία! Ενδεχομένως δεν έχετε συμπληρώσει κάποιο πεδίο...", "error");
+            cm.showAndWait();
         }
     }
     

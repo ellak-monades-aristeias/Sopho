@@ -1,0 +1,51 @@
+package sopho;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import org.apache.ibatis.jdbc.ScriptRunner;
+
+public class CreateDatabase {
+    
+    public void CreateDB() throws ClassNotFoundException, SQLException {
+		                		                
+                PrefsHandler prefs = new PrefsHandler();
+                
+                //getting the credentials from the preferencies
+                String user = prefs.getPrefs("dbUser");
+                String pass = prefs.getPrefs("dbPass");
+                String dbIP = prefs.getPrefs("dbIP");
+
+                Class.forName("com.mysql.jdbc.Driver");
+                
+                Connection conn = DriverManager.getConnection("jdbc:mysql://"+dbIP+":3306", user, pass);
+                
+                //we are using the myBatis library to create the initial database using an sql file as a template.
+                
+                InputStream in = CreateDatabase.class.getResourceAsStream("dbCreate.sql");
+		try {
+			// Initialize object for ScriptRunner
+			ScriptRunner sr = new ScriptRunner(conn);
+
+                        URL url = getClass().getResource("/sopho/dbCreate.sql");
+                        File file = new File(url.getPath());
+                        
+                        // Give the input file to Reader
+			Reader reader = new BufferedReader(
+                               new InputStreamReader(in));
+
+			// Exctute script
+			sr.runScript(reader);
+
+		} catch (Exception e) {
+			System.err.println("Failed to Execute"+" The error is " + e.getMessage());
+		}
+	}
+}

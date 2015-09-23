@@ -3,13 +3,15 @@ package sopho.Ofeloumenoi;
 import com.github.sarxos.webcam.Webcam;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
-import java.io.File;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Random;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -24,6 +26,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -37,6 +40,8 @@ public class TakePhotoController implements Initializable {
     public ComboBox<WebCamInfo> selCamera;
     @FXML
     public ImageView picture;
+    @FXML
+    public Label loading;
     
     sopho.StageLoader sl = new sopho.StageLoader();
     
@@ -45,56 +50,47 @@ public class TakePhotoController implements Initializable {
     private boolean stopCamera = false;
     private ObjectProperty<Image> imageProperty = new SimpleObjectProperty<Image>();
     
+    sopho.PrefsHandler prefs = new sopho.PrefsHandler();
+    
     @FXML
-    public void TakePicture(ActionEvent event){
+    public void TakePicture(ActionEvent event) throws SQLException, IOException{
         BufferedImage image = selWebCam.getImage();
-        
         
         //produce random filename
         int myRand = randInt(100000000, 999999999);//we use great numbers to reduce the posibility to have 2 identical filenames
+                
+        String sql = "INSERT INTO images (photoID, image) VALUES (?,?)";
+        
+        sopho.DBClass db = new sopho.DBClass();
+        
+        Connection conn = db.ConnectDB();
+        PreparedStatement pst = conn.prepareStatement(sql);
 
-        String filename = System.getProperty("user.home")+"/Documents/Sopho/Images/photo" + myRand + ".jpg";
+        
+        //converting the image to bytearray
+        ByteArrayOutputStream ou = new ByteArrayOutputStream();
+        ImageIO.write(image,"jpeg",ou);
+        byte[] buf = ou.toByteArray();
+        // setup stream for blob
+        ByteArrayInputStream inStream = new ByteArrayInputStream(buf);       
+        
+        pst.setString(1, myRand+""); //trick because myRand int cannot be dereferenced
+        pst.setBinaryStream(2, inStream,inStream.available());
 
-        File theDir = new File(System.getProperty("user.home")+"/Documents/Sopho/Images");
-        System.out.println(theDir.toString());
-        if (!theDir.exists()) {
-            System.out.println("creating directory");
-            boolean result = false;
-
-            try{
-                theDir.mkdirs();
-                result = true;
-            } 
-            catch(SecurityException se){
-                System.out.println(se);
-            }        
-            if(result) {    
-                System.out.println("DIR created");
-            }
-        }
-        if(SaveImage(image, filename)){
-            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Τέλεια!", "Η φωτογραφία του ωφελούμενου αποθηκεύτηκε επιτυχώς!", "confirm");
+        int flag = pst.executeUpdate();
+        if(flag>0) {
+            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Τέλεια!", "Η φωτογραφία αποθηκεύτηκε επιτυχώς!", "confirm");
             cm.showAndWait();
-            String PhotoID = "photo" + myRand + ".jpg";//this is a trick to get myRand because this int cannot be dereferenced and so we could not use toString() method.
+            String PhotoID = "" + myRand; //this is a trick to get myRand because this int cannot be dereferenced and so we could not use toString() method.
             PhotoListener.setStr(PhotoID);
             Stage stage = (Stage) takePhoto.getScene().getWindow();
             closeCamera();//we have to close the camera before exiting
             stage.close();
         }else{
-            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Πρόβλημα...", "Η φωτογραφία του ωφελούμενου δεν μπόρεσε να αποθηκευτεί. Προσπαθήστε και πάλι...", "error");
+            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Πρόβλημα...", "Η φωτογραφία δεν μπόρεσε να αποθηκευτεί. Προσπαθήστε και πάλι...", "error");
             cm.showAndWait();
         }
-    }
-    
-    public boolean SaveImage(BufferedImage image, String filename){
-        try {
-            // save image to JPG file
-            ImageIO.write(image, "JPG", new File(filename));
-            return true;
-        } catch (IOException ex) {
-            Logger.getLogger(TakePhotoController.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
+        
     }
     
     //this is a method to produce random numbers for the photo filename
@@ -127,8 +123,9 @@ public class TakePhotoController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends WebCamInfo> arg0, WebCamInfo arg1, WebCamInfo arg2) {
                     if (arg2 != null) {
-                            System.out.println("WebCam Index: " + arg2.getWebCamIndex() + ": WebCam Name:" + arg2.getWebCamName());
-                            initializeWebCam(arg2.getWebCamIndex());
+                        loading.setText("Φορτώνει...");
+                        System.out.println("WebCam Index: " + arg2.getWebCamIndex() + ": WebCam Name:" + arg2.getWebCamName());
+                        initializeWebCam(arg2.getWebCamIndex());
                     }
             }
         });
@@ -235,7 +232,7 @@ public class TakePhotoController implements Initializable {
 	private boolean stopCamera = false;
 	private ObjectProperty<Image> imageProperty = new SimpleObjectProperty<Image>();
 
-	private String cameraListPromptText = "Choose Camera";
+	private String cameraListPromptText = "Επιλέξτε κάμερα...";
 
         @Override
         public String toString() {

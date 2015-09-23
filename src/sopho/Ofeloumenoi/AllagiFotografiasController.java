@@ -1,23 +1,26 @@
 package sopho.Ofeloumenoi;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.CopyOption;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javax.imageio.ImageIO;
 
 public class AllagiFotografiasController implements Initializable {
     
@@ -30,7 +33,7 @@ public class AllagiFotografiasController implements Initializable {
     }
     
     @FXML
-    public void OpenPhotoFile(ActionEvent event){
+    public void OpenPhotoFile(ActionEvent event) throws FileNotFoundException, SQLException{
         FileChooser fileChooser = new FileChooser();
              
             //Set extension filter
@@ -39,61 +42,78 @@ public class AllagiFotografiasController implements Initializable {
               
             //Show open file dialog
             File file = fileChooser.showOpenDialog(null);
-            
-            if(file!=null){
-                try {
-                    String path = file.getAbsolutePath();
-                    
-                    String photoName = file.getName();
-                    
-                    Path FROM = Paths.get(path);
-                    
-                    System.out.println("FROM path is:"+FROM.toString());
-                    
-                    //we need to create the destination directory if it doesn't exist
-                    File theDir = new File(System.getProperty("user.home")+"/Documents/Sopho/Images");
-                    if (!theDir.exists()) {
-                        System.out.println("creating directory");
-                        boolean result = false;
 
-                        try{
-                            theDir.mkdirs();
-                            result = true;
-                        } 
-                        catch(SecurityException se){
-                            System.out.println(se);
-                        }        
-                        if(result) {    
-                            System.out.println("DIR created");
+            if(file!=null){
+                
+                double size = file.length();
+                
+                if(size>3145728){
+                    sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Μεγάλο αρχείο...", "Το αρχείο που επιλέξατε είναι μεγαλύτερο από 3 MB. Επιλέξτε μικρότερο αρχείο", "error");
+                    cm.showAndWait();
+                }else{
+                
+                    try {
+
+                        //converting the image to bufferedimage 
+                        BufferedImage image = ImageIO.read(file);
+
+                        //converting the image to bytearray
+                        ByteArrayOutputStream ou = new ByteArrayOutputStream();
+                        ImageIO.write(image,"jpeg",ou);
+                        byte[] buf = ou.toByteArray();
+                        // setup stream for blob
+                        ByteArrayInputStream inStream = new ByteArrayInputStream(buf);       
+
+                        String sql = "INSERT INTO images (photoID, image) VALUES (?,?)";
+
+                        sopho.DBClass db = new sopho.DBClass();
+
+                        Connection conn=db.ConnectDB();
+
+                        PreparedStatement pst = conn.prepareStatement(sql);
+
+                        //produce random filename
+                        int myRand = randInt(100000000, 999999999);//we use great numbers to reduce the posibility to have 2 identical filenames
+
+                        pst.setString(1, myRand+""); //trick because myRand int cannot be dereferenced
+                        pst.setBinaryStream(2, inStream,inStream.available());
+
+                        int flag = pst.executeUpdate();
+
+                        if(flag>0){
+                            //finally we call the photoListener class to change the photo at the AddOfeloumenoi Stage.
+                            PhotoListener.setStr(myRand+"");
+                            Stage stage = (Stage) anchorPane.getScene().getWindow();
+                            stage.close();
+                        }else{
+                            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Πρόβλημα!", "Αδυναμία αποθήκευσης της φωτογραφίας στη βάση δεδομένων", "error");
+                            cm.showAndWait();
                         }
+
+
+                    } catch (IOException ex) {
+                        Logger.getLogger(AllagiFotografiasController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    String destPath = System.getProperty("user.home")+"/Documents/Sopho/Images/"+photoName;
-                    System.out.println("Destination path:"+destPath);
-                    Path TO = Paths.get(destPath);
-                    CopyOption[] options = new CopyOption[]{
-                      StandardCopyOption.REPLACE_EXISTING,
-                      StandardCopyOption.COPY_ATTRIBUTES
-                    }; 
-                    java.nio.file.Files.copy(FROM, TO, options);
-                    
-                    //finally we call the photoListener class to change the photo at the AddOfeloumenoi Stage.
-                    PhotoListener.setStr(photoName);
-                    Stage stage = (Stage) anchorPane.getScene().getWindow();
-                    stage.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(AllagiFotografiasController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }else{//the user didn't choose any file
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.initStyle(StageStyle.UNDECORATED);
-                alert.setTitle("Προσοχή!");
-                alert.setHeaderText("Δεν επιλέξατε κάποιο αρχείο εικόνας");
-                alert.setContentText("Επιλέξτε κάποιο αρχείο εικόνας ή τραβήξτε μια φωτογραφία από την κάμερα.");
-                alert.showAndWait();
+                sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Δεν επιλέξατε αρχείο εικόνας. Επιλέξτε κάποιο αρχείο εικόνας ή τραβήξτε μια φωτογραφία από την κάμερα.", "error");
+                cm.showAndWait();    
             }
     }
     
     sopho.StageLoader sl = new sopho.StageLoader();
+    
+    //this is a method to produce random numbers for the photo filename
+    public int randInt(int min, int max) {
+        Random rand = new Random();
+
+        // nextInt is normally exclusive of the top value,
+        // so add 1 to make it inclusive
+        int randomNum = rand.nextInt((max - min) + 1) + min;
+
+        return randomNum;
+    }
+    
     
     @FXML
     public void TakePhoto(ActionEvent event) throws IOException{
