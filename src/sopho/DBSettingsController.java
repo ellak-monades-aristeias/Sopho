@@ -44,7 +44,13 @@ public class DBSettingsController implements Initializable {
     @FXML
     private void GoBack(ActionEvent event) throws IOException{
         Stage stage = (Stage) password.getScene().getWindow();
-        sl.StageLoad("StartApp.fxml", stage, false, true); //resizable false, utility true
+        //we have to direct to different stages if the user has not signed in
+        if(Sopho.hasSignedIn = true){
+            sl.StageLoad("MainApp.fxml", stage, false, true); //resizable false, utility true
+        }else{
+            sl.StageLoad("StartApp.fxml", stage, false, true); //resizable false, utility true
+        }
+        
     }
     
     @FXML

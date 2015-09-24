@@ -22,6 +22,8 @@ public class ChangePasswordController implements Initializable {
     @FXML
     public TextField passwordOld;
     
+    int selID;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {}  
     DBClass db = new DBClass();
@@ -57,7 +59,7 @@ public class ChangePasswordController implements Initializable {
         MD5 md5 = new MD5();
         String encryptedPass = md5.getMD5(pass);
         
-        String sql = "SELECT pass FROM users WHERE pass=?";
+        String sql = "SELECT * FROM users WHERE pass=?";
         
         try {
             
@@ -70,7 +72,12 @@ public class ChangePasswordController implements Initializable {
             
             rs.last(); //i go to the last line of the result to find out the number of the line
             
-            return rs.getRow()>0;
+            if( rs.getRow()>0){
+                selID=rs.getInt("id");
+                return true;
+            }else{
+                return false;
+            }
             
         }catch (SQLException e){
             System.out.println("Πρόβλημα κατά την εγγραφή!" + e);
@@ -88,15 +95,15 @@ public class ChangePasswordController implements Initializable {
             System.out.println("the pass is: "+password.getText());
 
             MD5 md5 = new MD5();
-            String encryptedPassOld = md5.getMD5(passwordOld.getText());
             String encryptedPass = md5.getMD5(password.getText());
             
-            String sql = "UPDATE users SET pass=? WHERE pass='"+encryptedPassOld+"'";
+            String sql = "UPDATE users SET pass=? WHERE id=?";
 
             try {
 
                 pst = conn.prepareStatement(sql);
                 pst.setString(1, encryptedPass);
+                pst.setInt(2, selID);
                 System.out.println("the query is:" + pst.toString());
                 int flag = pst.executeUpdate(); //the flag is the number of affected rows
                 
