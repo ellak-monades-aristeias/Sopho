@@ -78,7 +78,32 @@ public class SearchToEditOfeloumenoiController implements Initializable {
                         sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Τέλεια!", "Βρέθηκε ο ωφελούμενος: " + rs.getString("eponimo") + " " + rs.getString("onoma") , "confirm");
                         cm.showAndWait();
                         if(StageLoader.lastStage.equals("/sopho/Ofeloumenoi/OfeloumenoiMain.fxml")){
-                            sl.StageLoad("/sopho/Ofeloumenoi/EditOfeloumenoi.fxml", stage, true, false); //resizable true, utility false.
+                            if(rs.getInt("editing")==1){
+                                //another user is currently editing the record.
+                                sopho.Messages.CustomMessageController cmNew = new sopho.Messages.CustomMessageController(null, "Oops!", "Δυστυχώς κάποιος άλλος χρήστης επεξεργάζεται αυτή τη στιγμή τα στοιχεία του ωφελούμενου. Προσπαθήστε και πάλι αργότερα και βεβαιωθείτε ότι η καρτέλα αυτού του ωφελούμενου δεν είναι ανοιχτή σε κάποιον άλλον υπολογιστή." , "error");
+                                cmNew.showAndWait();
+                            }else{
+                                int id = rs.getInt("id");
+                                
+                                //we jave to set editing to 1 to lock out other users trying to edit the same record
+                                
+                                sql = "UPDATE ofeloumenoi SET editing=1 WHERE id = ?";
+                                
+                                pst = conn.prepareStatement(sql);
+                                pst.setInt(1, id);
+                                
+                                int flag = pst.executeUpdate();
+                                
+                                if(flag>0){
+                                    // editing successfully set to 1.
+                                    sl.StageLoad("/sopho/Ofeloumenoi/EditOfeloumenoi.fxml", stage, true, false); //resizable true, utility false.
+                                }else{
+                                    sopho.Messages.CustomMessageController cmNew = new sopho.Messages.CustomMessageController(null, "Πρόβλημα!", "Η καρτέλα του ωφελούμενο δεν κλειδώθηκε. Τα στοιχεία του ωφελούμενου μπορούν να επεξεργάζονται και από άλλον υπολογιστή αυτή τη στιγμή. Μπορεί να υπάρξει πρόβλημα κατά την αποθήκευση των αλλαγών. Προσπαθήστε και πάλι.","error");
+                                    cmNew.showAndWait();
+                                }
+                                
+                                
+                            }
                         }else if (StageLoader.lastStage.equals("/sopho/Eidi/EidiMain.fxml")){
                             sl.StageLoad("/sopho/Eidi/EidiDothikan.fxml", stage, true, false); //resizable true, utility false.
                         }

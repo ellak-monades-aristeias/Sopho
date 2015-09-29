@@ -1,7 +1,6 @@
 package sopho.Ofeloumenoi;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -71,6 +70,9 @@ public class EditOfeloumenoiController implements Initializable {
     ResultSet rs = sopho.ResultKeeper.rs;
     int selectedIndex = sopho.ResultKeeper.selectedIndex;
     
+    //we make it static to access it from the stageLoader class
+    public static int selID=-1;
+    
     public String PhotoID;
     public int arithmosTeknon=0;
     
@@ -81,12 +83,14 @@ public class EditOfeloumenoiController implements Initializable {
     public String showAnenergosTip = prefs.getPrefs("showAnenergosTip"); //this var is required to show the tip about the anenergos checkbox. When that checkbox is checked the username field is marked red and we need to inform the user why this happens.   
        
     @FXML
-    private void GoBack(ActionEvent event) throws IOException{
-        Stage stage = (Stage) backButton.getScene().getWindow();
-        if(sopho.ResultKeeper.multipleResults){
-            sl.StageLoad("/sopho/Ofeloumenoi/MultipleSearchResults.fxml", stage, true, false); //resizable true, utility false
-        }else{
-            sl.StageLoad("/sopho/Ofeloumenoi/OfeloumenoiMain.fxml", stage, true, false); //resizable true, utility false
+    private void GoBack(ActionEvent event) throws IOException, SQLException{
+        if(EditingFalse()){
+            Stage stage = (Stage) backButton.getScene().getWindow();
+            if(sopho.ResultKeeper.multipleResults){
+                sl.StageLoad("/sopho/Ofeloumenoi/MultipleSearchResults.fxml", stage, true, false); //resizable true, utility false
+            }else{
+                sl.StageLoad("/sopho/Ofeloumenoi/OfeloumenoiMain.fxml", stage, true, false); //resizable true, utility false
+            }
         }
     }
     
@@ -97,12 +101,17 @@ public class EditOfeloumenoiController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        
         try {
             
             rs.first();//move the cursor to the first row
             if(selectedIndex>0){//only if we need to move from the first line
                 rs.relative(selectedIndex);//move to the row that we selected at the previous scene
             }
+            
+            //keep the selected ofeloumenos id
+            selID = rs.getInt("id");
         
             System.out.println("The selected rs row is " + rs.getRow());
             
@@ -418,6 +427,20 @@ public class EditOfeloumenoiController implements Initializable {
             tekna.getSelectionModel().select(i);
             tekna.getFocusModel().focus(i);
         }
+    }
+    
+    //this method re-sets the editing to 0 to be able to proccess the record from other computers. Else the are locked out.
+    public boolean EditingFalse() throws SQLException{
+        String sql = "UPDATE ofeloumenoi SET editing = 0 WHERE id=?";
+        
+        sopho.DBClass db = new sopho.DBClass();
+        Connection conn = db.ConnectDB();
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setInt(1, selID);
+        
+        int flag = pst.executeUpdate();
+        
+        return flag>0;
     }
     
     public class tableManager { //this is a helper class to display the data from the resultSet to the table properly.

@@ -3,12 +3,20 @@ package sopho;
 import insidefx.undecorator.Undecorator;
 import insidefx.undecorator.UndecoratorScene;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.layout.Region;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 
 //this is a helper class to load the new scene and close the old one
 public class StageLoader {
@@ -64,6 +72,36 @@ public class StageLoader {
         stage.sizeToScene();
         stage.show();
         
+        Platform.setImplicitExit(false);
+
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                if(fxmlName.equals("/sopho/Ofeloumenoi/EditOfeloumenoi.fxml")){
+                    //we have to set editing back to 0 else the editing will remain 1 and the next time someone tries to access the record it will be locked.
+                    try {
+                        setEditingFalse("ofeloumenoi", sopho.Ofeloumenoi.EditOfeloumenoiController.selID);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(StageLoader.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    
+                }
+            }
+        });
+        
+    }
+    
+    //this is a helper class to set editing back to 0 when the user closes the window.
+    public void setEditingFalse(String tableName, Integer id) throws SQLException{
+        String sql = "UPDATE "+tableName+" SET editing =0 WHERE id=?";
+        
+        DBClass db = new DBClass();
+        Connection conn = db.ConnectDB();
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setInt(1, id);
+        
+        pst.executeUpdate();
     }
     
 }
