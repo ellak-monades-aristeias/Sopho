@@ -1,3 +1,17 @@
+/*
+ * /* ---------------------------------------------LICENSE-----------------------------------------------------
+ * *
+ * *YOU ARE NOT ALLOWED TO MODIFY THE LICENSE OR DELETE THE LICENSE FROM THE FILES
+ * *
+ * *This is an open source project hosted at github: https://github.com/ellak-monades-aristeias/Sopho
+ * *
+ * *This application is distributed with the following license:
+ * *code with license EUPL v1.1 and content with license CC-BY-SA 4.0.
+ * *
+ * *The development of the application is funded by EL/LAK (http://www.ellak.gr)
+ * *
+ * *
+ */
 package sopho.MathimataStiriksis;
 
 import java.io.IOException;
@@ -89,15 +103,6 @@ public class ListaMathitonController implements Initializable {
             sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Είστε σίγουροι;", "Θέλετε σίγουρα να διαγράψετε το μαθητή: "+tbl.getEponimo()+" "+tbl.getOnoma()+" από τη λίστα των μαθητών; Δεν θα μπορείτε να ανακτήσετε τα στοιχεία του μαθητή αυτού στη συνέχεια...", "question");
             cm.showAndWait();
             if(cm.saidYes){
-                System.out.println("deleting the item...");
-                //we focus on the previous line of the line that the user deleted
-                data.remove(sel);
-                if(sel!=0){//the i is equal to 0 in the case that the first line was selected.
-                    sel--;
-                }
-                table.requestFocus();
-                table.getSelectionModel().select(sel);
-                table.getFocusModel().focus(sel);
                 
                 int idNumber = tbl.getId();
                 
@@ -118,6 +123,12 @@ public class ListaMathitonController implements Initializable {
                     if(flag<=0){
                         sopho.Messages.CustomMessageController cm2 = new sopho.Messages.CustomMessageController(null, "Πρόβλημα!", "Δεν μπόρεσε να διαγραφεί ο μαθητής από τη βάση δεδομένων", "error");
                         cm2.showAndWait();
+                    }else{
+                        //get the new rs and set the table again
+                        //this prevents the bug of deleting a line from the table and passing the oldrs to the ResultKeeper. If the oldrs was passed and the new selectedIndex was passed to ResultKeeper the selected row of rs would not correspond to the table row because the rs would have also the deleted row of the table.
+                        data = getInitialTableData();
+                
+                        table.setItems(data);
                     }
                     
                 } catch (SQLException ex) {

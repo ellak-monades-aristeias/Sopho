@@ -1,7 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * /* ---------------------------------------------LICENSE-----------------------------------------------------
+ * *
+ * *YOU ARE NOT ALLOWED TO MODIFY THE LICENSE OR DELETE THE LICENSE FROM THE FILES
+ * *
+ * *This is an open source project hosted at github: https://github.com/ellak-monades-aristeias/Sopho
+ * *
+ * *This application is distributed with the following license:
+ * *code with license EUPL v1.1 and content with license CC-BY-SA 4.0.
+ * *
+ * *The development of the application is funded by EL/LAK (http://www.ellak.gr)
+ * *
+ * *
  */
 package sopho.Statistika;
 

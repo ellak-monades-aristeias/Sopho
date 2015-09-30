@@ -1,3 +1,17 @@
+/*
+ * /* ---------------------------------------------LICENSE-----------------------------------------------------
+ * *
+ * *YOU ARE NOT ALLOWED TO MODIFY THE LICENSE OR DELETE THE LICENSE FROM THE FILES
+ * *
+ * *This is an open source project hosted at github: https://github.com/ellak-monades-aristeias/Sopho
+ * *
+ * *This application is distributed with the following license:
+ * *code with license EUPL v1.1 and content with license CC-BY-SA 4.0.
+ * *
+ * *The development of the application is funded by EL/LAK (http://www.ellak.gr)
+ * *
+ * *
+ */
 package sopho.Filoksenoumenoi;
 
 import java.io.IOException;
@@ -122,16 +136,6 @@ public class ProvoliTrexontonFiloksenoumenonController implements Initializable 
             cm.showAndWait();
             if(cm.saidYes){
                 
-                /*
-                //we focus on the previous line of the line that the user deleted
-                data.remove(sel);
-                if(sel!=0){//the i is equal to 0 in the case that the first line was selected.
-                    sel--;
-                }
-                table.requestFocus();
-                table.getSelectionModel().select(sel);
-                table.getFocusModel().focus(sel);
-                */
                 int idNumber = tbl.getId();
                 
                 String sql="DELETE FROM filoksenoumenoi WHERE id = ?";

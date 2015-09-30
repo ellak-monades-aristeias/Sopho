@@ -1,3 +1,17 @@
+/*
+ * /* ---------------------------------------------LICENSE-----------------------------------------------------
+ * *
+ * *YOU ARE NOT ALLOWED TO MODIFY THE LICENSE OR DELETE THE LICENSE FROM THE FILES
+ * *
+ * *This is an open source project hosted at github: https://github.com/ellak-monades-aristeias/Sopho
+ * *
+ * *This application is distributed with the following license:
+ * *code with license EUPL v1.1 and content with license CC-BY-SA 4.0.
+ * *
+ * *The development of the application is funded by EL/LAK (http://www.ellak.gr)
+ * *
+ * *
+ */
 package sopho;
 
 import insidefx.undecorator.Undecorator;
@@ -84,9 +98,9 @@ public class StageLoader {
                     } catch (SQLException ex) {
                         Logger.getLogger(StageLoader.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
-                    
                 }
+                //we have to invoke platform exit; else the app will continue running in the background because we invoked platform.setImplicitExit(false) above.
+                Platform.exit();
             }
         });
         
