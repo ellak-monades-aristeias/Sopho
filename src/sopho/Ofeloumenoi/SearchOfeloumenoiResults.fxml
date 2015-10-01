@@ -38,6 +38,7 @@
                                        <children>
                                           <TableView fx:id="resultTable" prefWidth="3950.0">
                                             <columns>
+                                                <TableColumn fx:id="colId" editable="false" prefWidth="167.0" text="id" visible="false" />
                                               <TableColumn fx:id="colEponimo" prefWidth="167.0" text="Επώνυμο" />
                                                 <TableColumn fx:id="colOnoma" prefWidth="157.0" text="Όνομα" />
                                                 <TableColumn fx:id="colPatronimo" prefWidth="157.0" text="Πατρώνυμο" />
@@ -68,10 +69,13 @@
                                        </children>
                                     </StackPane>
                                  </content>
+                                 <VBox.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </VBox.margin>
                               </ScrollPane>
                               <HBox alignment="CENTER" prefHeight="87.0" prefWidth="898.0">
                                  <children>
-                                    <Button minHeight="45.0" minWidth="280.0" mnemonicParsing="false" onAction="#Select" prefHeight="45.0" prefWidth="200.0" style="-fx-font-size: 18px;" styleClass="mainAppButtons" text="Επεξεργασία επιλεγμένου" textFill="WHITE">
+                                    <Button minHeight="45.0" minWidth="280.0" mnemonicParsing="false" onAction="#Select" prefHeight="45.0" prefWidth="200.0" style="-fx-font-size: 20px;" styleClass="backButton" text="Επεξεργασία επιλεγμένου" textFill="WHITE">
                                        <VBox.margin>
                                           <Insets bottom="20.0" left="5.0" right="5.0" top="20.0" />
                                        </VBox.margin>
@@ -79,7 +83,7 @@
                                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button minHeight="45.0" minWidth="280.0" mnemonicParsing="false" onAction="#NewSearch" prefHeight="45.0" prefWidth="200.0" style="-fx-font-size: 18px;" styleClass="mainAppButtons" text="Νέα Αναζήτηση" textFill="WHITE">
+                                    <Button minHeight="45.0" minWidth="280.0" mnemonicParsing="false" onAction="#NewSearch" prefHeight="45.0" prefWidth="200.0" style="-fx-font-size: 20px;" styleClass="backButton" text="Νέα Αναζήτηση" textFill="WHITE">
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                        </HBox.margin>

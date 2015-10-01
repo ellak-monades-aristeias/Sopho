@@ -16,7 +16,9 @@ package sopho.Ofeloumenoi;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -27,6 +29,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -46,6 +50,8 @@ public class SearchOfeloumenoiResultsController implements Initializable {
     public Label info;
     @FXML
     private TableView <tableManager> resultTable;
+    @FXML
+    private TableColumn <tableManager, Integer> colId;
     @FXML
     private TableColumn <tableManager, String> colEponimo;
     @FXML
@@ -123,6 +129,8 @@ public class SearchOfeloumenoiResultsController implements Initializable {
         
         //filling table with data
         resultTable.setItems(data);
+        
+        colId.setCellValueFactory(new PropertyValueFactory<tableManager, Integer>("id"));
         colEponimo.setCellValueFactory(new PropertyValueFactory<tableManager, String>("eponimo"));
         colOnoma.setCellValueFactory(new PropertyValueFactory<tableManager, String>("onoma"));
         colPatronimo.setCellValueFactory(new PropertyValueFactory<tableManager, String>("patronimo"));
@@ -150,7 +158,7 @@ public class SearchOfeloumenoiResultsController implements Initializable {
         colAnenergos.setCellValueFactory(new PropertyValueFactory<tableManager, String>("anenergos"));
         
         //setting the data to the table
-        resultTable.getColumns().setAll(colEponimo, colOnoma, colPatronimo, colIlikia, colDimos, colAnergos, colEpaggelma, colEisodima, colEksartiseis, colEthnikotita, colMetanastis, colRoma, colOikKatastasi, colTekna, colMellousaMama, colMonogoneiki, colPoliteknos, colAsfForeas, colAmea, colXronios, colPathisi, colMonaxiko, colEmfiliVia, colSpoudastis, colAnenergos);
+        resultTable.getColumns().setAll(colId, colEponimo, colOnoma, colPatronimo, colIlikia, colDimos, colAnergos, colEpaggelma, colEisodima, colEksartiseis, colEthnikotita, colMetanastis, colRoma, colOikKatastasi, colTekna, colMellousaMama, colMonogoneiki, colPoliteknos, colAsfForeas, colAmea, colXronios, colPathisi, colMonaxiko, colEmfiliVia, colSpoudastis, colAnenergos);
     }
     
     @FXML
@@ -166,20 +174,41 @@ public class SearchOfeloumenoiResultsController implements Initializable {
     }
     
     @FXML
-    public void Select(ActionEvent event) throws IOException{
+    public void Select(ActionEvent event) throws IOException, SQLException{
         int index = resultTable.getSelectionModel().getSelectedIndex();
         if(index==-1){
             sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Θα πρέπει να επιλέξετε έναν ωφελούμενο από τον πίνακα προκειμένου να επεξεργαστείτε τα στοιχεία του", "error");
             cm.showAndWait();
         }else{
-            sopho.ResultKeeper.selectedIndex = index + 1; //we add 1 because of the different starting number between ResultSet and TableView
-            Stage stage = (Stage) info.getScene().getWindow();
-            sl.StageLoad("/sopho/Ofeloumenoi/EditOfeloumenoi.fxml", stage, true, false); //resizable true, utility false
+            tableManager tbl = resultTable.getSelectionModel().getSelectedItem();
+            int id = tbl.getId();
+
+            //we have to set editing to 1 to lock out other users trying to edit the same record
+
+            String sql = "UPDATE ofeloumenoi SET editing=1 WHERE id = ?";
+            
+            sopho.DBClass db = new sopho.DBClass();
+            Connection conn = db.ConnectDB();
+            
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1, id);
+
+            int flag = pst.executeUpdate();
+
+            if(flag>0){
+                // editing successfully set to 1.
+                Stage stage = (Stage) info.getScene().getWindow();
+                sl.StageLoad("/sopho/Ofeloumenoi/EditOfeloumenoi.fxml", stage, true, false); //resizable true, utility false.
+            }else{
+                sopho.Messages.CustomMessageController cmNew = new sopho.Messages.CustomMessageController(null, "Πρόβλημα!", "Η καρτέλα του ωφελούμενο δεν κλειδώθηκε. Τα στοιχεία του ωφελούμενου μπορούν να επεξεργάζονται και από άλλον υπολογιστή αυτή τη στιγμή. Μπορεί να υπάρξει πρόβλημα κατά την αποθήκευση των αλλαγών. Προσπαθήστε και πάλι.","error");
+                cmNew.showAndWait();
+            }
         }
     }
     
     public static class tableManager { //this is a helper class to display the data from the resultSet to the table properly.
         
+        private IntegerProperty id;
         private StringProperty eponimo;
         private StringProperty onoma;
         private StringProperty patronimo;
@@ -209,7 +238,8 @@ public class SearchOfeloumenoiResultsController implements Initializable {
         
         public tableManager(){}
 
-        private tableManager(String eponimo, String onoma, String patronimo, String ilikia, String dimos, String anergos, String epaggelma, String eisodima, String eksartiseis, String ethnikotita, String metanastis, String roma, String oikKatastasi, String tekna, String mellousaMama, String monogoneiki, String politeknos, String asfForeas, String amea, String xronios, String pathisi, String monaxiko, String emfiliVia, String spoudastis, String anenergos){
+        private tableManager( Integer id, String eponimo, String onoma, String patronimo, String ilikia, String dimos, String anergos, String epaggelma, String eisodima, String eksartiseis, String ethnikotita, String metanastis, String roma, String oikKatastasi, String tekna, String mellousaMama, String monogoneiki, String politeknos, String asfForeas, String amea, String xronios, String pathisi, String monaxiko, String emfiliVia, String spoudastis, String anenergos){
+            this.id = new SimpleIntegerProperty(id);
             this.eponimo = new SimpleStringProperty(eponimo);
             this.onoma = new SimpleStringProperty(onoma);
             this.patronimo = new SimpleStringProperty(patronimo);
@@ -237,30 +267,21 @@ public class SearchOfeloumenoiResultsController implements Initializable {
             this.anenergos = new SimpleStringProperty(anenergos);
         }
         
-        
         //the following get and set methods are required. Else the table cells will appear blank
-        public String getEponimo(){
-            return eponimo.get();
+        public Integer getId(){
+            return id.get();
         }
         
-        public void setEponimo(String s){
-            eponimo.set(s);
+        public String getEponimo(){
+            return eponimo.get();
         }
         
         public String getOnoma(){
             return onoma.get();
         }
         
-        public void setOnoma(String s){
-            onoma.set(s);
-        }
-        
         public String getPatronimo(){
             return patronimo.get();
-        }
-        
-        public void setPatronimo(String s){
-            patronimo.set(s);
         }
         
         public String getIlikia(){
@@ -419,7 +440,7 @@ public class SearchOfeloumenoiResultsController implements Initializable {
                 }
         
                 
-                list.add(new tableManager(rs.getString("eponimo"), rs.getString("onoma"), rs.getString("patronimo"), age, rs.getString("dimos"), ConvertToYesNo(rs.getInt("anergos")), rs.getString("epaggelma"), rs.getString("eisodima"), rs.getString("eksartiseis"), rs.getString("ethnikotita"), ConvertToYesNo(rs.getInt("metanastis")), ConvertToYesNo(rs.getInt("roma")), oikKatastasi, rs.getInt("arithmosTeknon")+"", ConvertToYesNo(rs.getInt("mellousaMama")), ConvertToYesNo(rs.getInt("monogoneiki")), ConvertToYesNo(rs.getInt("politeknos")), asfForeas, ConvertToYesNo(rs.getInt("amea")), ConvertToYesNo(rs.getInt("xronios")), rs.getString("pathisi"), ConvertToYesNo(rs.getInt("monaxikos")), ConvertToYesNo(rs.getInt("emfiliVia")), ConvertToYesNo(rs.getInt("spoudastis")), ConvertToYesNo(rs.getInt("anenergos"))));
+                list.add(new tableManager(rs.getInt("id"), rs.getString("eponimo"), rs.getString("onoma"), rs.getString("patronimo"), age, rs.getString("dimos"), ConvertToYesNo(rs.getInt("anergos")), rs.getString("epaggelma"), rs.getString("eisodima"), rs.getString("eksartiseis"), rs.getString("ethnikotita"), ConvertToYesNo(rs.getInt("metanastis")), ConvertToYesNo(rs.getInt("roma")), oikKatastasi, rs.getInt("arithmosTeknon")+"", ConvertToYesNo(rs.getInt("mellousaMama")), ConvertToYesNo(rs.getInt("monogoneiki")), ConvertToYesNo(rs.getInt("politeknos")), asfForeas, ConvertToYesNo(rs.getInt("amea")), ConvertToYesNo(rs.getInt("xronios")), rs.getString("pathisi"), ConvertToYesNo(rs.getInt("monaxikos")), ConvertToYesNo(rs.getInt("emfiliVia")), ConvertToYesNo(rs.getInt("spoudastis")), ConvertToYesNo(rs.getInt("anenergos"))));
             }
         } catch (SQLException ex) {
             Logger.getLogger(MultipleSearchResultsController.class.getName()).log(Level.SEVERE, null, ex);

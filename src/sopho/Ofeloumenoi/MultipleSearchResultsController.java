@@ -16,10 +16,11 @@ package sopho.Ofeloumenoi;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -46,6 +47,8 @@ public class MultipleSearchResultsController implements Initializable {
     @FXML
     private TableView <tableManager> resultTable;
     @FXML
+    private TableColumn <tableManager, Integer> colId;
+    @FXML
     private TableColumn <tableManager, String> colBarcode;
     @FXML
     private TableColumn <tableManager, String> colOnoma;
@@ -70,6 +73,8 @@ public class MultipleSearchResultsController implements Initializable {
         
         //filling table with data
         resultTable.setItems(data);
+        
+        colId.setCellValueFactory(new PropertyValueFactory<tableManager, Integer>("id"));
         colBarcode.setCellValueFactory(new PropertyValueFactory<tableManager, String>("barcode"));
         colOnoma.setCellValueFactory(new PropertyValueFactory<tableManager, String>("onoma"));
         colEponimo.setCellValueFactory(new PropertyValueFactory<tableManager, String>("eponimo"));
@@ -78,7 +83,7 @@ public class MultipleSearchResultsController implements Initializable {
         colTautotita.setCellValueFactory(new PropertyValueFactory<tableManager, String>("tautotita"));
         
         //setting the data to the table
-        resultTable.getColumns().setAll(colBarcode, colOnoma, colEponimo, colTilefono, colAfm, colTautotita);
+        resultTable.getColumns().setAll(colId, colBarcode, colOnoma, colEponimo, colTilefono, colAfm, colTautotita);
     }   
     
     sopho.StageLoader sl = new sopho.StageLoader();
@@ -104,10 +109,39 @@ public class MultipleSearchResultsController implements Initializable {
                 sopho.ResultKeeper.selectedIndex = resultTable.getSelectionModel().getSelectedIndex();
                 
                 Stage stage = (Stage) backButton.getScene().getWindow();
+                
+                //now we have to make some distinctions because we use the same stage for two different purposes.
                 if (sopho.StageLoader.lastStage.equals("/sopho/Ofeloumenoi/OfeloumenoiMain.fxml")) {
+                    
+                    tableManager tbl = resultTable.getSelectionModel().getSelectedItem();
+                    int id = tbl.getId();
+
+                    //we have to set editing to 1 to lock out other users trying to edit the same record
+
+                    String sql = "UPDATE ofeloumenoi SET editing=1 WHERE id = ?";
+
+                    sopho.DBClass db = new sopho.DBClass();
+                    Connection conn = db.ConnectDB();
+
+                    PreparedStatement pst = conn.prepareStatement(sql);
+                    pst.setInt(1, id);
+
+                    int flag = pst.executeUpdate();
+
+                    if(flag>0){
+                        // editing successfully set to 1.
+                        sl.StageLoad("/sopho/Ofeloumenoi/EditOfeloumenoi.fxml", stage, true, false); //resizable true, utility false.
+                    }else{
+                        sopho.Messages.CustomMessageController cmNew = new sopho.Messages.CustomMessageController(null, "Πρόβλημα!", "Η καρτέλα του ωφελούμενου δεν κλειδώθηκε. Τα στοιχεία του ωφελούμενου μπορούν να επεξεργάζονται και από άλλον υπολογιστή αυτή τη στιγμή. Μπορεί να υπάρξει πρόβλημα κατά την αποθήκευση των αλλαγών. Προσπαθήστε και πάλι.","error");
+                        cmNew.showAndWait();
+                    }
+                    
                     sl.StageLoad("/sopho/Ofeloumenoi/EditOfeloumenoi.fxml", stage, true, false); //resizable true, utility false.
+                    
                 }else if(sopho.StageLoader.lastStage.equals("/sopho/Eidi/EidiMain.fxml")){
+                    
                     sl.StageLoad("/sopho/Eidi/EidiDothikan.fxml", stage, true, false); //resizable true, utility false.
+                    
                 }                
             }
         }catch(Exception e){
@@ -116,9 +150,9 @@ public class MultipleSearchResultsController implements Initializable {
                 
     }
 
-
     public static class tableManager { //this is a helper class to display the data from the resultSet to the table properly.
         
+        private IntegerProperty id;
         private StringProperty barcode;
         private StringProperty onoma;
         private StringProperty eponimo;
@@ -128,7 +162,9 @@ public class MultipleSearchResultsController implements Initializable {
         
         public tableManager(){}
 
-        private tableManager(String barcode, String onoma, String eponimo, String tilefono, String afm, String tautotita ){
+        private tableManager(Integer id, String barcode, String onoma, String eponimo, String tilefono, String afm, String tautotita ){
+            
+            this.id = new SimpleIntegerProperty(id);
             this.barcode = new SimpleStringProperty(barcode);
             this.onoma = new SimpleStringProperty(onoma);
             this.eponimo = new SimpleStringProperty(eponimo);
@@ -136,55 +172,34 @@ public class MultipleSearchResultsController implements Initializable {
             this.afm = new SimpleStringProperty(afm);
             this.tautotita = new SimpleStringProperty(tautotita);
         }
-        
-        
+                
         //the following get and set methods are required. Else the table cells will appear blank
-        public String getBarcode(){
-            return barcode.get();
+        public Integer getId(){
+            return id.get();
         }
         
-        public void setBarcode(String s){
-            barcode.set(s);
+        public String getBarcode(){
+            return barcode.get();
         }
         
         public String getOnoma(){
             return onoma.get();
         }
         
-        public void setOnoma(String s){
-            onoma.set(s);
-        }
-        
         public String getEponimo(){
             return eponimo.get();
-        }
-        
-        public void setEponimo(String s){
-            eponimo.set(s);
         }
         
         public String getTilefono(){
             return tilefono.get();
         }
         
-        public void setTilefono(String s){
-            tilefono.set(s);
-        }
-        
         public String getAfm(){
             return afm.get();
         }
         
-        public void setAfm(String s){
-            afm.set(s);
-        }
-        
         public String getTautotita(){
             return tautotita.get();
-        }
-        
-        public void setTautotita(String s){
-            tautotita.set(s);
         }
         
     }
@@ -198,7 +213,7 @@ public class MultipleSearchResultsController implements Initializable {
         try{
             rs.beforeFirst();
             while(rs.next()){
-                list.add(new tableManager(rs.getString("barcode"), rs.getString("onoma"), rs.getString("eponimo"), rs.getString("tilefono"), rs.getString("afm"), rs.getString("tautotita")));
+                list.add(new tableManager( rs.getInt("id"), rs.getString("barcode"), rs.getString("onoma"), rs.getString("eponimo"), rs.getString("tilefono"), rs.getString("afm"), rs.getString("tautotita")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(MultipleSearchResultsController.class.getName()).log(Level.SEVERE, null, ex);

@@ -156,6 +156,8 @@ CREATE TABLE IF NOT EXISTS `ofeloumenoi`(
   `spoudastis` int(11) DEFAULT NULL,
   `anenergos` int(11) DEFAULT NULL,
   `loipa` longtext,
+  `editing` int(11) DEFAULT 0,
+  `registerDate` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `barcode_UNIQUE` (`barcode`)

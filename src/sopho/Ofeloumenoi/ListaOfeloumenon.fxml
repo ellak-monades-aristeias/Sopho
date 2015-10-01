@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.*?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="900.0" maxWidth="900.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="500.0" prefWidth="900.0" style="-fx-min-width: 676px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Ofeloumenoi.ListaOfeloumenonController">
+    <stylesheets>
+        <URL value="@../Style.css" />
+    </stylesheets>
+    <children>
+      <BorderPane prefHeight="1000.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <ScrollPane fitToHeight="true" prefHeight="1000.0" BorderPane.alignment="CENTER">
+               <content>
+                  <AnchorPane prefHeight="1000.0">
+                     <children>
+                        <TableView fx:id="resultTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                              <TableColumn fx:id="colID" editable="false" prefWidth="167.0" text="id" visible="false" />
+                              <TableColumn fx:id="colRegisterDate" editable="false" prefWidth="167.0" text="Ημ/νία Εγγραφής" />
+                            <TableColumn fx:id="colEponimo" prefWidth="167.0" text="Επώνυμο" />
+                              <TableColumn fx:id="colOnoma" prefWidth="157.0" text="Όνομα" />
+                              <TableColumn fx:id="colPatronimo" prefWidth="157.0" text="Πατρώνυμο" />
+                              <TableColumn fx:id="colIlikia" prefWidth="157.0" text="Ηλικία" />
+                              <TableColumn fx:id="colDimos" prefWidth="157.0" text="Δήμος" />
+                              <TableColumn fx:id="colAnergos" prefWidth="157.0" text="Άνεργος" />
+                              <TableColumn fx:id="colEpaggelma" prefWidth="157.0" text="Επάγγελμα" />
+                              <TableColumn fx:id="colEisodima" prefWidth="157.0" text="Φορ. Εισόδημα" />
+                              <TableColumn fx:id="colEksartiseis" prefWidth="157.0" text="Εξαρτήσεις" />
+                              <TableColumn fx:id="colEthnikotita" prefWidth="157.0" text="Εθνικότητα" />
+                              <TableColumn fx:id="colMetanastis" prefWidth="157.0" text="Μετανάστης" />
+                              <TableColumn fx:id="colRoma" prefWidth="157.0" text="Ρομά" />
+                              <TableColumn fx:id="colOikKatastasi" prefWidth="157.0" text="Οικ. Κατάσταση" />
+                              <TableColumn fx:id="colTekna" prefWidth="157.0" text="Τέκνα" />
+                              <TableColumn fx:id="colMellousaMama" prefWidth="157.0" text="Μέλλουσα Μαμά" />
+                              <TableColumn fx:id="colMonogoneiki" prefWidth="157.0" text="Μονογονεϊκή" />
+                              <TableColumn fx:id="colPoliteknos" prefWidth="157.0" text="Πολύτεκνος" />
+                              <TableColumn fx:id="colAsfForeas" prefWidth="157.0" text="Ασφ. Φορέας" />
+                              <TableColumn fx:id="colAmea" prefWidth="157.0" text="ΑΜΕΑ" />
+                              <TableColumn fx:id="colXronios" prefWidth="157.0" text="Χρονίως Πάσχων" />
+                              <TableColumn fx:id="colPathisi" prefWidth="157.0" text="Πάθηση" />
+                              <TableColumn fx:id="colMonaxiko" prefWidth="157.0" text="Μοναχικό Άτομο" />
+                              <TableColumn fx:id="colEmfiliVia" prefWidth="157.0" text="Θύμα Εμφ. Βίας" />
+                              <TableColumn fx:id="colSpoudastis" prefWidth="157.0" text="Σπουδαστής" />
+                              <TableColumn fx:id="colAnenergos" prefWidth="157.0" text="Ανενεργός Ωφελούμενος" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+               <BorderPane.margin>
+                  <Insets left="10.0" right="10.0" top="10.0" />
+               </BorderPane.margin>
+            </ScrollPane>
+         </center>
+         <top>
+            <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
+               <children>
+                   <Button fx:id="backButton" mnemonicParsing="false" onAction="#GoBack" prefHeight="33.0" prefWidth="81.0" style="-fx-background-color: #bc2d44;" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
+                     <font>
+                        <Font name="Open Sans Semibold" size="16.0" />
+                     </font>
+                     <StackPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </StackPane.margin>
+                  </Button>
+                  <Label styleClass="title" text="Λίστα ωφελούμενων" textAlignment="CENTER" textFill="WHITE">
+                  </Label>
+               </children>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </StackPane>
+         </top>
+         <bottom>
+            <HBox alignment="CENTER" prefHeight="53.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button minHeight="45.0" minWidth="180.0" mnemonicParsing="false" onAction="#Edit" prefHeight="45.0" prefWidth="180.0" style="-fx-font-size: 20px;" styleClass="backButton" text="Επεξεργασία" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="5.0" right="5.0" top="20.0" />
+                     </VBox.margin>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button minHeight="45.0" minWidth="180.0" mnemonicParsing="false" onAction="#Delete" prefHeight="45.0" prefWidth="180.0" style="-fx-font-size: 20px;" styleClass="backButton" text="Διαγραφή" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>

@@ -29,6 +29,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
@@ -261,7 +262,7 @@ public class AddOfeloumenoiController implements Initializable {
                     sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Υπάρχει ήδη ωφελούμενος με αυτό το barcode. Τα στοιχεία του καταχωρημένου ωφελούμενου είναι τα εξής. Barcode:" + rs.getString("barcode") + " Επώνυμο: " + rs.getString("eponimo") + " Όνομα: " + rs.getString("onoma") + " Πατρώνυμο: " + rs.getString("patronimo"), "error" );
                     cm.showAndWait();
                 }else{ // we can push the data to database...
-                    sql = "INSERT INTO ofeloumenoi (barcode, eponimo, onoma, patronimo, mitronimo, imGennisis, dieuthinsi, dimos, tilefono, anergos, epaggelma, eisodima, eksartiseis, photoID, afm, tautotita, ethnikotita, metanastis, roma, oikKatastasi, hasTekna, arithmosTeknon, ilikiesTeknon, politeknos, monogoneiki, mellousaMama, amea, asfForeas, xronios, pathisi, anoTon60, monaxikos, emfiliVia, spoudastis, anenergos, loipa) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    sql = "INSERT INTO ofeloumenoi (barcode, eponimo, onoma, patronimo, mitronimo, imGennisis, dieuthinsi, dimos, tilefono, anergos, epaggelma, eisodima, eksartiseis, photoID, afm, tautotita, ethnikotita, metanastis, roma, oikKatastasi, hasTekna, arithmosTeknon, ilikiesTeknon, politeknos, monogoneiki, mellousaMama, amea, asfForeas, xronios, pathisi, anoTon60, monaxikos, emfiliVia, spoudastis, anenergos, loipa, dateRegister) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                     pst = conn.prepareStatement(sql);
                     //now we will set the values to the sql statement
                     pst.setString(1, barcode.getText());
@@ -307,6 +308,10 @@ public class AddOfeloumenoiController implements Initializable {
                     pst.setInt(34, spoudastis.isSelected() ? 1 : 0);
                     pst.setInt(35, anenergos.isSelected() ? 1 : 0);
                     pst.setString(36, loipa.getText());
+                    //insert today's date as registerDate
+                    LocalDate now = LocalDate.now();
+                    java.sql.Date sqlToday = java.sql.Date.valueOf(now);
+                    pst.setDate(37, sqlToday);
                     
                     System.out.println("the query is:" + pst.toString());
                     int linesAffected = pst.executeUpdate();
@@ -330,7 +335,6 @@ public class AddOfeloumenoiController implements Initializable {
             }
         
         }
-        
         
     }
     
