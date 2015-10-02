@@ -65,7 +65,9 @@ public class EpeksergasiaMathitiController implements Initializable {
     int sel = sopho.ResultKeeper.selectedIndex;
     ResultSet oldrs = sopho.ResultKeeper.rs;
     
-    int selectedID;
+    public static int selectedID;
+    
+    sopho.LockEdit le = new sopho.LockEdit();
     
     Connection conn=null;
     PreparedStatement pst = null;
@@ -77,6 +79,10 @@ public class EpeksergasiaMathitiController implements Initializable {
          
         try {
             oldrs.first();
+            
+            if(sel>0){
+                rs.relative(sel);
+            }
             
             //get selected id
             selectedID = oldrs.getInt("id");
@@ -162,9 +168,14 @@ public class EpeksergasiaMathitiController implements Initializable {
     }
     
     @FXML
-    public void GoBack(ActionEvent e) throws IOException{
-        Stage stage = (Stage) onoma.getScene().getWindow();
-        sl.StageLoad("/sopho/MathimataStiriksis/MathimataMain.fxml", stage, false, true); //resizable false, utility true
+    public void GoBack(ActionEvent e) throws IOException, SQLException{
+        if(le.LockEditing(false, selectedID, "mathites")){
+            Stage stage = (Stage) onoma.getScene().getWindow();
+            sl.StageLoad("/sopho/MathimataStiriksis/MathimataMain.fxml", stage, false, true); //resizable false, utility true                       
+        }else{
+            sopho.Messages.CustomMessageController cm2 = new sopho.Messages.CustomMessageController(null, "Πρόβλημα", "Τα στοιχεία του μαθητή δεν μπόρεσαν να ξεκλειδωθούν. Αυτό σημαίνει ότι δεν θα μπορείτε να τα επεξεργαστείτε ξανά. Για να διορθώσετε το πρόβλημα προσπαθήστε να κλείσετε το παράθυρο.", "error");
+            cm2.showAndWait();
+        }
     }
     
     @FXML
@@ -215,8 +226,14 @@ public class EpeksergasiaMathitiController implements Initializable {
                 if(flag>0){
                     sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Τέλεια!", "Τα στοιχεία του καθηγητή έχουν καταχωρηθεί με επιτυχία.", "confirm");
                     cm.showAndWait();
-                    Stage stage = (Stage) onoma.getScene().getWindow();
-                    sl.StageLoad("/sopho/MathimataStiriksis/MathimataMain.fxml", stage, false, true); //resizable false, utility true
+                    
+                    if(le.LockEditing(false, selectedID, "mathites")){
+                        Stage stage = (Stage) onoma.getScene().getWindow();
+                        sl.StageLoad("/sopho/MathimataStiriksis/MathimataMain.fxml", stage, false, true); //resizable false, utility true                       
+                    }else{
+                        sopho.Messages.CustomMessageController cm2 = new sopho.Messages.CustomMessageController(null, "Πρόβλημα", "Τα στοιχεία του μαθητή δεν μπόρεσαν να ξεκλειδωθούν. Αυτό σημαίνει ότι δεν θα μπορείτε να τα επεξεργαστείτε ξανά. Για να διορθώσετε το πρόβλημα προσπαθήστε να κλείσετε το παράθυρο.", "error");
+                        cm2.showAndWait();
+                    }
                 }else{
                     sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Πρόβλημα!", "Υπήρξε πρόβλημα κατά τη καταχώρηση των στοιχείων στη βάση δεδομένων. Προσπαθήστε και πάλι.", "error");
                     cm.showAndWait();

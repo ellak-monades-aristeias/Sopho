@@ -39,7 +39,9 @@ public class EpeksergasiaThesisErgasiasController implements Initializable {
     public ResultSet oldrs = sopho.ResultKeeper.rs;
     public int sel = sopho.ResultKeeper.selectedIndex;
     
-    public int selID = -1;
+    public static int selID = -1;
+    
+    sopho.LockEdit le = new sopho.LockEdit();
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -92,10 +94,21 @@ public class EpeksergasiaThesisErgasiasController implements Initializable {
             int flag = pst.executeUpdate();
             
             if(flag>0){
+                
+                Stage stage = (Stage) onoma.getScene().getWindow();
+
+                
                 sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Τέλεια!", "Τα στοιχεία για την επιλεγμένη θέση έχουν ενημερωθεί με επιτυχία!", "confirm");
                 cm.showAndWait();
-                Stage stage = (Stage) onoma.getScene().getWindow();
-                sl.StageLoad("/sopho/EuresiErgasias/ProvoliDiathesimonTheseon.fxml", stage, true, false); //resizable true, utility false
+                
+                if(le.LockEditing(false, selID, "theseisergasias")){//unlocking the record because we finished editing
+                    sl.StageLoad("/sopho/EuresiErgasias/ProvoliDiathesimonTheseon.fxml", stage, true, false); //resizable true, utility false
+                }else{
+                    sopho.Messages.CustomMessageController cm2 = new sopho.Messages.CustomMessageController(null, "Πρόβλημα", "Τα στοιχεία της θέσης εργασίας που επεξεργαστήκατε δεν μπόρεσαν να ξεκλειδωθούν. Αυτό σημαίνει ότι δεν θα μπορείτε να τα επεξεργαστείτε ξανά. Για να διορθώσετε το πρόβλημα κάντε και πάλι αποθήκευση ή κλείστε το παράθυρο.", "error");
+                    cm2.showAndWait();
+                }
+                
+                
             }else{
                 sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Πρόβλημα!", "Τα στοιχεία για την επιλεγμένη θέση δεν μπόρεσαν να ενημερωθούν! Προσπαθήστε και πάλι.", "error");
                 cm.showAndWait();
@@ -109,9 +122,13 @@ public class EpeksergasiaThesisErgasiasController implements Initializable {
     }
     
     @FXML
-    public void GoBack (ActionEvent e) throws IOException{
-        Stage stage = (Stage) onoma.getScene().getWindow();
-        sl.StageLoad("/sopho/EuresiErgasias/EuresiErgasiasMain.fxml", stage, false, true); //resizable false, utility true
-    }
-    
+    public void GoBack (ActionEvent e) throws IOException, SQLException{
+        if (le.LockEditing(false, selID, "theseisergasias")){//unlock editing and check if unlock was successful
+            Stage stage = (Stage) eponimo.getScene().getWindow();
+            sl.StageLoad("/sopho/EuresiErgasias/EuresiErgasiasMain.fxml", stage, true, false); //resizable true, utility false
+        }else{
+            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Πρόβλημα", "Τα στοιχεία της θέσης εργασίας που επεξεργάζεστε δεν μπόρεσαν να ξεκλειδωθούν για να είναι διαθέσιμα για επεξεργασία από άλλους χρήστες. Δοκιμάστε και πάλι.", "error");
+            cm.showAndWait();
+        }
+    }    
 }

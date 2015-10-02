@@ -58,7 +58,7 @@ public class IstorikoEidonOfeloumenouController implements Initializable {
     int eidiNumber = 0;
     
     private ObservableList<tableManager> data;
-        
+            
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -173,12 +173,6 @@ public class IstorikoEidonOfeloumenouController implements Initializable {
             }else{
                 sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Δεν έχετε εισάγει είδη στο μενού επεξεργασία ειδών, είτε όλα τα είδη είναι ανενεργά... Προσθέστε είδη ή ενεργοποιήστε τα υπάρχοντα και έπειτα καταχωρήστε είδη που παρέλαβαν οι ωφελούμενοι.", "error");
                 cm.showAndWait();
-                Stage stage = (Stage) results.getScene().getWindow();
-                try {
-                    sl.StageLoad("/sopho/Eidi/EpeksergasiaEidon.fxml", stage, true, false); //resizable true, utility false
-                } catch (IOException ex) {
-                    Logger.getLogger(EidiDothikanController.class.getName()).log(Level.SEVERE, null, ex);
-                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(EidiDothikanController.class.getName()).log(Level.SEVERE, null, ex);

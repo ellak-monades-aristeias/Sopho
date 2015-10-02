@@ -37,7 +37,11 @@ public class EditVivlioController implements Initializable {
     ResultSet oldrs=sopho.ResultKeeper.rs;
     int sel=sopho.ResultKeeper.selectedIndex;
     
+    sopho.LockEdit le = new sopho.LockEdit();
+    
     sopho.StageLoader sl = new sopho.StageLoader();
+    
+    public static int selID=-1;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -47,6 +51,8 @@ public class EditVivlioController implements Initializable {
             if(sel>0){
                 oldrs.relative(sel);
             }
+            
+            selID=oldrs.getInt("id");
             
             siggrafeas.setText(oldrs.getString("siggrafeas"));
             titlos.setText(oldrs.getString("titlos"));
@@ -62,9 +68,14 @@ public class EditVivlioController implements Initializable {
     }
     
     @FXML
-    private void GoBack(ActionEvent event) throws IOException{
-        Stage stage = (Stage) titlos.getScene().getWindow();
-        sl.StageLoad("/sopho/Vivliothiki/VivliothikiMain.fxml", stage, true, false); //resizable true, utility false 
+    private void GoBack(ActionEvent event) throws IOException, SQLException{
+        if(le.LockEditing(false, selID, "vivliothiki")){
+            Stage stage = (Stage) titlos.getScene().getWindow();
+            sl.StageLoad("/sopho/Vivliothiki/VivliothikiMain.fxml", stage, true, false); //resizable true, utility false 
+        }else{
+            sopho.Messages.CustomMessageController cm2 = new sopho.Messages.CustomMessageController(null, "Πρόβλημα", "Τα στοιχεία του βιβλίου δεν μπόρεσαν να ξεκλειδωθούν. Αυτό σημαίνει ότι δεν θα μπορείτε να τα επεξεργαστείτε ξανά. Για να διορθώσετε το πρόβλημα προσπαθήστε να κλείσετε το παράθυρο.", "error");
+            cm2.showAndWait();
+        }
     }
     
     @FXML
@@ -92,8 +103,15 @@ public class EditVivlioController implements Initializable {
             if(flag>0){
                 sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Τέλεια!", "Το στοιχεία του βιβλίου ενημερώθηκαν με επιτυχία.", "confirm");
                 cm.showAndWait();
-                Stage stage = (Stage) titlos.getScene().getWindow();
-                sl.StageLoad("/sopho/Vivliothiki/ListaDiathesimon.fxml", stage, true, false); //resizable true, utility false 
+                
+                if(le.LockEditing(false, selID, "vivliothiki")){
+                    Stage stage = (Stage) titlos.getScene().getWindow();
+                    sl.StageLoad("/sopho/Vivliothiki/ListaDiathesimon.fxml", stage, true, false); //resizable true, utility false 
+                }else{
+                    sopho.Messages.CustomMessageController cm2 = new sopho.Messages.CustomMessageController(null, "Πρόβλημα", "Τα στοιχεία του βιβλιου δεν μπόρεσαν να ξεκλειδωθούν. Αυτό σημαίνει ότι δεν θα μπορείτε να τα επεξεργαστείτε ξανά. Για να διορθώσετε το πρόβλημα προσπαθήστε να κλείσετε το παράθυρο.", "error");
+                    cm2.showAndWait();
+                }
+                
             }else{
                 sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Πρόβλημα!", "Τα στοιχεία του βιβλίου δεν μπόρεσαν να ενημερωθούν. Προσπαθήστε πάλι.", "error");
                 cm.showAndWait();

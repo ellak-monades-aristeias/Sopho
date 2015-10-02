@@ -43,10 +43,6 @@ CREATE TABLE IF NOT EXISTS `eidiofeloumenoi`(
   `eponimo` varchar(45) DEFAULT NULL,
   `onoma` varchar(45) DEFAULT NULL,
   `patronimo` varchar(45) DEFAULT NULL,
-  `eidos1` int(11) DEFAULT NULL,
-  `eidos2` int(11) DEFAULT NULL,
-  `eidos3` int(11) DEFAULT NULL,
-  `eidos4` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
@@ -63,6 +59,7 @@ CREATE TABLE IF NOT EXISTS `filoksenoumenoi`(
   `loipa` longtext,
   `dateApoxorisis` date DEFAULT NULL,
   `apoxorisi` int(11) DEFAULT NULL,
+  `editing` int(11) DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
@@ -84,6 +81,7 @@ CREATE TABLE IF NOT EXISTS `kathigites`(
   `tilefono` varchar(45) DEFAULT NULL,
   `tilefono2` varchar(45) DEFAULT NULL,
   `mathimata` longtext,
+  `editing` int(11) DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
@@ -115,6 +113,7 @@ CREATE TABLE IF NOT EXISTS `mathites`(
   `tilefono` varchar(45) DEFAULT NULL,
   `date` date DEFAULT NULL,
   `mathimata` longtext,
+  `editing` int(11) DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -172,6 +171,7 @@ CREATE TABLE IF NOT EXISTS `theseisergasias`(
   `dieuthinsi` varchar(245) DEFAULT NULL,
   `tilefono` varchar(45) DEFAULT NULL,
   `thesi` longtext,
+  `editing` int(11) DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -197,6 +197,7 @@ CREATE TABLE IF NOT EXISTS`vivliothiki`(
   `dieuthinsi` varchar(245) DEFAULT NULL,
   `tilefono` varchar(45) DEFAULT NULL,
   `date` date DEFAULT NULL,
+  `editing` int(11) DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
@@ -238,6 +239,7 @@ CREATE TABLE IF NOT EXISTS `zitounergasia` (
   `empeiria` longtext,
   `oikKatastasi` int(11) DEFAULT NULL,
   `loipa` longtext,
+  `editing` int(11) DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

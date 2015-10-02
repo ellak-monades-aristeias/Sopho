@@ -53,6 +53,8 @@ public class ListaDiathesimonController implements Initializable {
     
     sopho.StageLoader sl = new sopho.StageLoader();
     
+    sopho.LockEdit le = new sopho.LockEdit();
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //initialzing table
@@ -78,17 +80,29 @@ public class ListaDiathesimonController implements Initializable {
     }
     
     @FXML
-    public void Edit(ActionEvent e) throws IOException{
+    public void Edit(ActionEvent e) throws IOException, SQLException{
         int sel = table.getSelectionModel().getSelectedIndex();
         if(sel==-1){
             //the user did not select a line
             sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Θα πρέπει να επιλέξετε ένα βιβλίο από τον πίνακα για να επεξεργαστείτε τα στοιχεία του!", "error");
             cm.showAndWait();
         }else{
-            sopho.ResultKeeper.selectedIndex=sel;//we keep the selected line of the table
-
-            Stage stage = (Stage) backButton.getScene().getWindow();
+            
+            tableManager tbl = table.getSelectionModel().getSelectedItem();
+            int id = tbl.getId();
+            
+            if(!le.CheckLock(id, "vivliothiki")){//check if editing is locked because another user is currently editing the data.
+                if (!le.LockEditing(true, id, "vivliothiki")){//check if lock editing is successful else display message about it
+                    sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Πρόβλημα", "Τα στοιχεία του βιβλίου που επιλέξατε δεν μπόρεσαν να κλειδωθούν για επεξεργασία. Αυτό σημαίνει ότι μπορεί να επεξεργαστεί και άλλος χρήστης παράλληλα τα ίδια στοιχεία και να διατηρηθούν οι αλλαγές που θα αποθηκεύσει ο άλλος χρήστης. Μπορείτε να επεξεργαστείτε τα στοιχεία ή να βγείτε και να μπείτε και πάλι στα στοιχεία για να κλειδώσουν.", "error");
+                    cm.showAndWait();
+                }
+                sopho.ResultKeeper.selectedIndex=sel;
+                Stage stage = (Stage) backButton.getScene().getWindow();
             sl.StageLoad("/sopho/Vivliothiki/EditVivlio.fxml", stage, false, true); //resizable false, utility true
+            }else{
+                sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Κάποιος άλλος χρήστης επεξεργάζεται αυτή τη στιγμή το επιλεγμένο βιβλίο. Βεβαιωθείτε ότι η καρτέλα του βιβλίου δεν είναι ανοιχτή σε κάποιον άλλον υπολογιστή και προσπαθήστε και πάλι.", "error");
+                cm.showAndWait();
+            }
     
         } 
     }

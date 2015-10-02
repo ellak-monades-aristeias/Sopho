@@ -91,7 +91,9 @@ public class EpeksergasiaAtomouPouZitaController implements Initializable {
     ResultSet oldrs = sopho.ResultKeeper.rs;
     int selIndex = sopho.ResultKeeper.selectedIndex;
     
-    int selectedID=-1;
+    sopho.LockEdit le = new sopho.LockEdit();
+    
+    public static int selectedID=-1;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -244,9 +246,15 @@ public class EpeksergasiaAtomouPouZitaController implements Initializable {
     }
     
     @FXML
-    private void GoBack(ActionEvent event) throws IOException{
-        Stage stage = (Stage) eponimo.getScene().getWindow();
-        sl.StageLoad("/sopho/EuresiErgasias/EuresiErgasiasMain.fxml", stage, true, false); //resizable true, utility false 
+    private void GoBack(ActionEvent event) throws IOException, SQLException{
+        if (le.LockEditing(false, selectedID, "zitounergasia")){//unlock editing and check if unlock was successful
+            Stage stage = (Stage) eponimo.getScene().getWindow();
+            sl.StageLoad("/sopho/EuresiErgasias/EuresiErgasiasMain.fxml", stage, true, false); //resizable true, utility false
+        }else{
+            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Πρόβλημα", "Τα στοιχεία του ατόμου που επεξεργάζεστε δεν μπόρεσαν να ξεκλειδωθούν για να είναι διαθέσιμα για επεξεργασία από άλλους χρήστες. Δοκιμάστε και πάλι.", "error");
+            cm.showAndWait();
+        }
+        
     }
     
     @FXML
@@ -312,7 +320,7 @@ public class EpeksergasiaAtomouPouZitaController implements Initializable {
             }
             conn=db.ConnectDB();
            
-            String sql = "UPDATE zitounergasia SET eponimo=?, onoma=?, patronimo=?, imGennisis=?, tilefono=?, dieuthinsi=?, dimos=?, photoID=?, eidikotita=?, ye=?, de=?, te=?, pe=?, diploma=?, empeiria=?, oikKatastasi=?, loipa=? WHERE id=?";
+            String sql = "UPDATE zitounergasia SET eponimo=?, onoma=?, patronimo=?, imGennisis=?, tilefono=?, dieuthinsi=?, dimos=?, photoID=?, eidikotita=?, ye=?, de=?, te=?, pe=?, diploma=?, empeiria=?, oikKatastasi=?, loipa=?, editing=0 WHERE id=?";
             try{
                     pst=conn.prepareStatement(sql);
                     
@@ -352,7 +360,14 @@ public class EpeksergasiaAtomouPouZitaController implements Initializable {
                         Stage stage = (Stage) onoma.getScene().getWindow();
                         sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Τέλεια!", "Τα στοιχεία του ατόμου που ζητά εργασία έχουν ενημερωθεί με επιτυχία!", "confirm");
                         cm.showAndWait();
-                        sl.StageLoad("/sopho/EuresiErgasias/EuresiErgasiasMain.fxml", stage, false, true); //resizable false, utility true
+
+                        if(le.LockEditing(false, selectedID, "zitounergasia")){//unlocking the record because we finished editing
+                            sl.StageLoad("/sopho/EuresiErgasias/EuresiErgasiasMain.fxml", stage, false, true); //resizable false, utility true
+                        }else{
+                            sopho.Messages.CustomMessageController cm2 = new sopho.Messages.CustomMessageController(null, "Πρόβλημα", "Τα στοιχεία του ατόμου που επεξεργαστήκατε δεν μπόρεσαν να ξεκλειδωθούν. Αυτό σημαίνει ότι δεν θα μπορείτε να τα επεξεργαστείτε ξανά. Για να διορθώσετε το πρόβλημα κάντε και πάλι αποθήκευση ή κλείστε το παράθυρο.", "error");
+                            cm2.showAndWait();
+                        }
+                        
                     }else{//problem inserting data...
                         sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Πρόβλημα!", "Τα στοιχεία του ατόμου που ζητά εργασία δεν μπόρεσαν να ενημερωθούν. Προσπαθήστε και πάλι...", "error");
                         cm.showAndWait();
@@ -366,7 +381,7 @@ public class EpeksergasiaAtomouPouZitaController implements Initializable {
         
         
     }
-    
+
     
     public class tableManager { //this is a helper class to display the data from the resultSet to the table properly.
         

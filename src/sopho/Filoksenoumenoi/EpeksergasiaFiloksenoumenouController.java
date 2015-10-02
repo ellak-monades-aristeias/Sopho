@@ -43,6 +43,8 @@ public class EpeksergasiaFiloksenoumenouController implements Initializable {
     @FXML
     public DatePicker date;
     
+    sopho.LockEdit le = new sopho.LockEdit();
+    
     sopho.StageLoader sl = new sopho.StageLoader();
     
     sopho.DBClass db = new sopho.DBClass();
@@ -52,6 +54,8 @@ public class EpeksergasiaFiloksenoumenouController implements Initializable {
     
     ResultSet oldrs = sopho.ResultKeeper.rs;
     int sel = sopho.ResultKeeper.selectedIndex;
+    
+    public static int selID=-1;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -65,6 +69,8 @@ public class EpeksergasiaFiloksenoumenouController implements Initializable {
             if(sel>0){
                 oldrs.relative(sel);
             }
+            
+            selID=oldrs.getInt("id");
             
             eponimo.setText(oldrs.getString("eponimo"));
             onoma.setText(oldrs.getString("onoma"));
@@ -108,7 +114,7 @@ public class EpeksergasiaFiloksenoumenouController implements Initializable {
             }
             pst.setString(9, loipa.getText());
             pst.setInt(10, 0);
-            pst.setInt(11, oldrs.getInt("id"));
+            pst.setInt(11, selID);
             
             
             int flag = pst.executeUpdate();
@@ -116,8 +122,16 @@ public class EpeksergasiaFiloksenoumenouController implements Initializable {
             if(flag>0){
                 sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Τέλεια!", "Τα στοιχεία του φιλοξενούμενου καταχωρήθηκαν με επιτυχία.", "confirm");
                 cm.showAndWait();
-                Stage stage = (Stage) onoma.getScene().getWindow();
-                sl.StageLoad("/sopho/Filoksenoumenoi/FiloksenoumenoiMain.fxml", stage, false, true); //resizable false, utility true
+                
+                if(le.LockEditing(false, selID, "filoksenoumenoi")){//unlocking the record because we finished editing
+                
+                    Stage stage = (Stage) onoma.getScene().getWindow();
+                    sl.StageLoad("/sopho/Filoksenoumenoi/FiloksenoumenoiMain.fxml", stage, false, true); //resizable false, utility true
+                }else{
+                    sopho.Messages.CustomMessageController cm2 = new sopho.Messages.CustomMessageController(null, "Πρόβλημα", "Τα στοιχεία του φιλοξενούμενου δεν μπόρεσαν να ξεκλειδωθούν. Αυτό σημαίνει ότι δεν θα μπορείτε να τα επεξεργαστείτε ξανά. Για να διορθώσετε το πρόβλημα κάντε και πάλι αποθήκευση ή κλείστε το παράθυρο.", "error");
+                    cm2.showAndWait();
+                    
+                }
             }else{
                 sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Τα στοιχεία του φιλοξενούμενου δεν μπόρεσαν να καταχωρηθούν. Προσπαθήστε και πάλι.", "error");
                 cm.showAndWait();
@@ -130,9 +144,15 @@ public class EpeksergasiaFiloksenoumenouController implements Initializable {
     }
     
     @FXML
-    public void GoBack(ActionEvent e) throws IOException{
-        Stage stage = (Stage) onoma.getScene().getWindow();
-        sl.StageLoad("/sopho/Filoksenoumenoi/ProvoliTrexontonFiloksenoumenon.fxml", stage, true, false); //resizable true, utility false
+    public void GoBack(ActionEvent e) throws IOException, SQLException{
+        
+        if(le.LockEditing(true, oldrs.getInt("id"), "filoksenoumenoi")){
+            Stage stage = (Stage) onoma.getScene().getWindow();
+            sl.StageLoad("/sopho/Filoksenoumenoi/ProvoliTrexontonFiloksenoumenon.fxml", stage, true, false); //resizable true, utility false
+        }else{
+            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Πρόβλημα", "Τα στοιχεία του φιλοξενούμενου δεν ξεκλειδώθηκαν. Αυτό σημαίνει ότι δεν θα μπορείτε να τα επεξεργαστείτε ξανα. Δοκιμάστε και πάλι να πατήσετε το κουμπί πίσω ή κλείστε το παράθυρο.", "error");
+            cm.showAndWait();
+        }
     }   
     
 }

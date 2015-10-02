@@ -38,7 +38,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -53,63 +52,13 @@ public class ListaOfeloumenonController implements Initializable {
     @FXML
     private TableColumn <tableManager, Integer> colID;
     @FXML
-    private TableColumn <tableManager, String> colRegisterDate;
-    @FXML
-    private TableColumn <tableManager, String> colEponimo;
-    @FXML
-    private TableColumn <tableManager, String> colOnoma;
-    @FXML
-    private TableColumn <tableManager, String> colPatronimo;
-    @FXML
-    private TableColumn <tableManager, String> colIlikia;
-    @FXML
-    private TableColumn <tableManager, String> colDimos;
-    @FXML
-    private TableColumn <tableManager, String> colAnergos;
-    @FXML
-    private TableColumn <tableManager, String> colEpaggelma;
-    @FXML
-    private TableColumn <tableManager, String> colEisodima;
-    @FXML
-    private TableColumn <tableManager, String> colEksartiseis;
-    @FXML
-    private TableColumn <tableManager, String> colEthnikotita;
-    @FXML
-    private TableColumn <tableManager, String> colMetanastis;
-    @FXML
-    private TableColumn <tableManager, String> colRoma;
-    @FXML
-    private TableColumn <tableManager, String> colOikKatastasi;
-    @FXML
-    private TableColumn <tableManager, String> colTekna;
-    @FXML
-    private TableColumn <tableManager, String> colMellousaMama;
-    @FXML
-    private TableColumn <tableManager, String> colMonogoneiki;
-    @FXML
-    private TableColumn <tableManager, String> colPoliteknos;
-    @FXML
-    private TableColumn <tableManager, String> colAsfForeas;
-    @FXML
-    private TableColumn <tableManager, String> colAmea;
-    @FXML
-    private TableColumn <tableManager, String> colXronios;
-    @FXML
-    private TableColumn <tableManager, String> colPathisi;
-    @FXML
-    private TableColumn <tableManager, String> colMonaxiko;
-    @FXML
-    private TableColumn <tableManager, String> colEmfiliVia;
-    @FXML
-    private TableColumn <tableManager, String> colSpoudastis;
-    @FXML
-    private TableColumn <tableManager, String> colAnenergos;
+    private TableColumn <tableManager, String> colRegisterDate, colEponimo, colPatronimo, colOnoma, colIlikia, colDimos, colAnergos, colEpaggelma, colEisodima, colEksartiseis, colEthnikotita, colMetanastis, colRoma, colOikKatastasi, colTekna, colMellousaMama, colMonogoneiki, colPoliteknos, colAsfForeas, colXronios, colPathisi, colAmea, colMonaxiko, colEmfiliVia, colSpoudastis, colAnenergos;
     
     private ObservableList <tableManager> data;
     
     sopho.StageLoader sl = new sopho.StageLoader();
     
-
+    sopho.LockEdit le = new sopho.LockEdit();
     
     
     @Override
@@ -167,26 +116,18 @@ public class ListaOfeloumenonController implements Initializable {
         }else{
             tableManager tbl = resultTable.getSelectionModel().getSelectedItem();
             int id = tbl.getId();
-
-            //we have to set editing to 1 to lock out other users trying to edit the same record
-
-            String sql = "UPDATE ofeloumenoi SET editing=1 WHERE id = ?";
             
-            sopho.DBClass db = new sopho.DBClass();
-            Connection conn = db.ConnectDB();
-            
-            PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setInt(1, id);
-
-            int flag = pst.executeUpdate();
-
-            if(flag>0){
-                // editing successfully set to 1.
+            if(!le.CheckLock(id, "ofeloumenoi")){//check if editing is locked because another user is currently editing the data.
+                if (!le.LockEditing(true, id, "ofeloumenoi")){//check if lock editing is successful else display message about it
+                    sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Πρόβλημα", "Τα στοιχεία του ωφελούμενου που επιλέξατε δεν μπόρεσαν να κλειδωθούν για επεξεργασία. Αυτό σημαίνει ότι μπορεί να επεξεργαστεί και άλλος χρήστης παράλληλα τα ίδια στοιχεία και να διατηρηθούν οι αλλαγές που θα αποθηκεύσει ο άλλος χρήστης. Μπορείτε να επεξεργαστείτε τα στοιχεία ή να βγείτε και να μπείτε και πάλι στα στοιχεία για να κλειδώσουν.", "error");
+                    cm.showAndWait();
+                }
+                sopho.ResultKeeper.selectedIndex=index;
                 Stage stage = (Stage) backButton.getScene().getWindow();
-                sl.StageLoad("/sopho/Ofeloumenoi/EditOfeloumenoi.fxml", stage, true, false); //resizable true, utility false.
+                sl.StageLoad("/sopho/Ofeloumenoi/EditOfeloumenoi.fxml", stage, true, false); //resizable true, utility false
             }else{
-                sopho.Messages.CustomMessageController cmNew = new sopho.Messages.CustomMessageController(null, "Πρόβλημα!", "Η καρτέλα του ωφελούμενο δεν κλειδώθηκε. Τα στοιχεία του ωφελούμενου μπορούν να επεξεργάζονται και από άλλον υπολογιστή αυτή τη στιγμή. Μπορεί να υπάρξει πρόβλημα κατά την αποθήκευση των αλλαγών. Προσπαθήστε και πάλι.","error");
-                cmNew.showAndWait();
+                sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Κάποιος άλλος χρήστης επεξεργάζεται αυτή τη στιγμή τον επιλεγμένο ωφελούμενο. Βεβαιωθείτε ότι η καρτέλα του ωφελούμενου δεν είναι ανοιχτή σε κάποιον άλλον υπολογιστή και προσπαθήστε και πάλι.", "error");
+                cm.showAndWait();
             }
         }
     }
@@ -495,7 +436,7 @@ public class ListaOfeloumenonController implements Initializable {
                     }
 
 
-                    list.add(new tableManager(rs.getInt("id"), rs.getString("registerDate"), rs.getString("eponimo"), rs.getString("onoma"), rs.getString("patronimo"), age, rs.getString("dimos"), ConvertToYesNo(rs.getInt("anergos")), rs.getString("epaggelma"), rs.getString("eisodima"), rs.getString("eksartiseis"), rs.getString("ethnikotita"), ConvertToYesNo(rs.getInt("metanastis")), ConvertToYesNo(rs.getInt("roma")), oikKatastasi, rs.getInt("arithmosTeknon")+"", ConvertToYesNo(rs.getInt("mellousaMama")), ConvertToYesNo(rs.getInt("monogoneiki")), ConvertToYesNo(rs.getInt("politeknos")), asfForeas, ConvertToYesNo(rs.getInt("amea")), ConvertToYesNo(rs.getInt("xronios")), rs.getString("pathisi"), ConvertToYesNo(rs.getInt("monaxikos")), ConvertToYesNo(rs.getInt("emfiliVia")), ConvertToYesNo(rs.getInt("spoudastis")), ConvertToYesNo(rs.getInt("anenergos"))));
+                    list.add(new tableManager(rs.getInt("id"), rs.getDate("registerDate").toString(), rs.getString("eponimo"), rs.getString("onoma"), rs.getString("patronimo"), age, rs.getString("dimos"), ConvertToYesNo(rs.getInt("anergos")), rs.getString("epaggelma"), rs.getString("eisodima"), rs.getString("eksartiseis"), rs.getString("ethnikotita"), ConvertToYesNo(rs.getInt("metanastis")), ConvertToYesNo(rs.getInt("roma")), oikKatastasi, rs.getInt("arithmosTeknon")+"", ConvertToYesNo(rs.getInt("mellousaMama")), ConvertToYesNo(rs.getInt("monogoneiki")), ConvertToYesNo(rs.getInt("politeknos")), asfForeas, ConvertToYesNo(rs.getInt("amea")), ConvertToYesNo(rs.getInt("xronios")), rs.getString("pathisi"), ConvertToYesNo(rs.getInt("monaxikos")), ConvertToYesNo(rs.getInt("emfiliVia")), ConvertToYesNo(rs.getInt("spoudastis")), ConvertToYesNo(rs.getInt("anenergos"))));
                 }
             
             }else{

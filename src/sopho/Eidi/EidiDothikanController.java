@@ -88,7 +88,7 @@ public class EidiDothikanController extends Application implements Initializable
     PreparedStatement pst = null;
     ResultSet rs = null;
     sopho.DBClass db = new sopho.DBClass();
-    
+        
     String selectedBarcode;
     
     @Override
@@ -97,7 +97,9 @@ public class EidiDothikanController extends Application implements Initializable
         try {
             oldrs.first();//move the cursor to the first row
             if(sopho.ResultKeeper.multipleResults){//only if we need to move from the first line
-                oldrs.relative(selectedIndex);//move to the row that we selected at the previous scene
+                if(selectedIndex>0){
+                    oldrs.relative(selectedIndex);//move to the row that we selected at the previous scene
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(EidiDothikanController.class.getName()).log(Level.SEVERE, null, ex);

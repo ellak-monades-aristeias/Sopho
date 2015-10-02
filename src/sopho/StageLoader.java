@@ -38,6 +38,8 @@ public class StageLoader {
     public static boolean fullscreen=false;
     public static String lastStage;
     
+    LockEdit le = new LockEdit();
+    
     //this method opens new stage and closes the old one
     public void StageLoad(String fxmlName, Stage oldStage, boolean resizable, boolean utilityWindow) throws IOException{
                 
@@ -94,7 +96,49 @@ public class StageLoader {
                 if(fxmlName.equals("/sopho/Ofeloumenoi/EditOfeloumenoi.fxml")){
                     //we have to set editing back to 0 else the editing will remain 1 and the next time someone tries to access the record it will be locked.
                     try {
-                        setEditingFalse("ofeloumenoi", sopho.Ofeloumenoi.EditOfeloumenoiController.selID);
+                        le.LockEditing(false, sopho.Ofeloumenoi.EditOfeloumenoiController.selID, "ofeloumenoi");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(StageLoader.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }else if(fxmlName.equals("/sopho/EuresiErgasias/EpeksergasiaAtomouPouZita.fxml")){
+                    //we have to set editing back to 0 else the editing will remain 1 and the next time someone tries to access the record it will be locked.
+                    try {
+                        le.LockEditing(false, sopho.EuresiErgasias.EpeksergasiaAtomouPouZitaController.selectedID, "zitounergasia");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(StageLoader.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }else if(fxmlName.equals("/sopho/EuresiErgasias/EpeksergasiaThesisErgasias.fxml")){
+                    //we have to set editing back to 0 else the editing will remain 1 and the next time someone tries to access the record it will be locked.
+                    try {
+                        le.LockEditing(false, sopho.EuresiErgasias.EpeksergasiaThesisErgasiasController.selID, "theseisergasias");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(StageLoader.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }else if(fxmlName.equals("/sopho/Filoksenoumenoi/EpeksergasiaFiloksenoumenou.fxml")){
+                    //we have to set editing back to 0 else the editing will remain 1 and the next time someone tries to access the record it will be locked.
+                    try {
+                        le.LockEditing(false, sopho.Filoksenoumenoi.EpeksergasiaFiloksenoumenouController.selID, "filoksenoumenoi");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(StageLoader.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }else if(fxmlName.equals("/sopho/MathimataStiriksis/EpeksergasiaKathigiti.fxml")){
+                    //we have to set editing back to 0 else the editing will remain 1 and the next time someone tries to access the record it will be locked.
+                    try {
+                        le.LockEditing(false, sopho.MathimataStiriksis.EpeksergasiaKathigitiController.selectedID, "kathigites");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(StageLoader.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }else if(fxmlName.equals("/sopho/MathimataStiriksis/EpeksergasiaMathiti.fxml")){
+                    //we have to set editing back to 0 else the editing will remain 1 and the next time someone tries to access the record it will be locked.
+                    try {
+                        le.LockEditing(false, sopho.MathimataStiriksis.EpeksergasiaMathitiController.selectedID, "mathites");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(StageLoader.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }else if(fxmlName.equals("/sopho/Vivliothiki/EditVivlio.fxml")){
+                    //we have to set editing back to 0 else the editing will remain 1 and the next time someone tries to access the record it will be locked.
+                    try {
+                        le.LockEditing(false, sopho.Vivliothiki.EditVivlioController.selID, "vivliothiki");
                     } catch (SQLException ex) {
                         Logger.getLogger(StageLoader.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -104,18 +148,6 @@ public class StageLoader {
             }
         });
         
-    }
-    
-    //this is a helper class to set editing back to 0 when the user closes the window.
-    public void setEditingFalse(String tableName, Integer id) throws SQLException{
-        String sql = "UPDATE "+tableName+" SET editing =0 WHERE id=?";
-        
-        DBClass db = new DBClass();
-        Connection conn = db.ConnectDB();
-        PreparedStatement pst = conn.prepareStatement(sql);
-        pst.setInt(1, id);
-        
-        pst.executeUpdate();
     }
     
 }

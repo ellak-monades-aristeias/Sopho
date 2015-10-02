@@ -65,6 +65,8 @@ public class MultipleSearchResultsController implements Initializable {
     
     ResultSet rs = sopho.ResultKeeper.rs;
     
+    sopho.LockEdit le = new sopho.LockEdit();
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
@@ -96,17 +98,16 @@ public class MultipleSearchResultsController implements Initializable {
     
     @FXML
     public void Select (ActionEvent event) throws IOException{
-        try {
-            sopho.ResultKeeper.selectedIndex = resultTable.getSelectionModel().getSelectedIndex() + 1; //we have to compensate for the difference in start of counting. The table starts at 0 while the resultSet starts at 1
-            
+        try {            
             if (sopho.ResultKeeper.selectedIndex==-1){
                 sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Πρέπει να επιλέξετε τουλάχιστον έναν ωφελούμενο από τη λίστα με τα αποτελέσματα!", "error");
                 cm.showAndWait();
             }else{            
-                System.out.println("the selected line is " + sopho.ResultKeeper.selectedIndex);
-
                 //loading selected row data to variables.
-                sopho.ResultKeeper.selectedIndex = resultTable.getSelectionModel().getSelectedIndex();
+                
+                int sel = resultTable.getSelectionModel().getSelectedIndex();
+                
+                sopho.ResultKeeper.selectedIndex = sel;
                 
                 Stage stage = (Stage) backButton.getScene().getWindow();
                 
@@ -116,32 +117,21 @@ public class MultipleSearchResultsController implements Initializable {
                     tableManager tbl = resultTable.getSelectionModel().getSelectedItem();
                     int id = tbl.getId();
 
-                    //we have to set editing to 1 to lock out other users trying to edit the same record
-
-                    String sql = "UPDATE ofeloumenoi SET editing=1 WHERE id = ?";
-
-                    sopho.DBClass db = new sopho.DBClass();
-                    Connection conn = db.ConnectDB();
-
-                    PreparedStatement pst = conn.prepareStatement(sql);
-                    pst.setInt(1, id);
-
-                    int flag = pst.executeUpdate();
-
-                    if(flag>0){
-                        // editing successfully set to 1.
+                    if(!le.CheckLock(id, "ofeloumenoi")){//check if editing is locked because another user is currently editing the data.
+                        if (!le.LockEditing(true, id, "ofeloumenoi")){//check if lock editing is successful else display message about it
+                            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Πρόβλημα", "Τα στοιχεία του ατόμου που επιλέξατε δεν μπόρεσαν να κλειδωθούν για επεξεργασία. Αυτό σημαίνει ότι μπορεί να επεξεργαστεί και άλλος χρήστης παράλληλα τα ίδια στοιχεία και να διατηρηθούν οι αλλαγές που θα αποθηκεύσει ο άλλος χρήστης. Μπορείτε να επεξεργαστείτε τα στοιχεία ή να βγείτε και να μπείτε και πάλι στα στοιχεία για να κλειδώσουν.", "error");
+                            cm.showAndWait();
+                        }
+                        sopho.ResultKeeper.selectedIndex=sel;
                         sl.StageLoad("/sopho/Ofeloumenoi/EditOfeloumenoi.fxml", stage, true, false); //resizable true, utility false.
                     }else{
-                        sopho.Messages.CustomMessageController cmNew = new sopho.Messages.CustomMessageController(null, "Πρόβλημα!", "Η καρτέλα του ωφελούμενου δεν κλειδώθηκε. Τα στοιχεία του ωφελούμενου μπορούν να επεξεργάζονται και από άλλον υπολογιστή αυτή τη στιγμή. Μπορεί να υπάρξει πρόβλημα κατά την αποθήκευση των αλλαγών. Προσπαθήστε και πάλι.","error");
-                        cmNew.showAndWait();
+                        sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Κάποιος άλλος χρήστης επεξεργάζεται αυτή τη στιγμή τον επιλεγμένο ωφελούμενο. Βεβαιωθείτε ότι η καρτέλα του ωφελούμενου δεν είναι ανοιχτή σε κάποιον άλλον υπολογιστή και προσπαθήστε και πάλι.", "error");
+                        cm.showAndWait();
                     }
                     
-                    sl.StageLoad("/sopho/Ofeloumenoi/EditOfeloumenoi.fxml", stage, true, false); //resizable true, utility false.
-                    
                 }else if(sopho.StageLoader.lastStage.equals("/sopho/Eidi/EidiMain.fxml")){
-                    
-                    sl.StageLoad("/sopho/Eidi/EidiDothikan.fxml", stage, true, false); //resizable true, utility false.
-                    
+                    sopho.ResultKeeper.selectedIndex=sel;
+                    sl.StageLoad("/sopho/Eidi/EidiDothikan.fxml", stage, true, false); //resizable true, utility false. 
                 }                
             }
         }catch(Exception e){

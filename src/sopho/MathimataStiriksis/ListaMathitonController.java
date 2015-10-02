@@ -53,6 +53,8 @@ public class ListaMathitonController implements Initializable {
     
     sopho.StageLoader sl = new sopho.StageLoader();
     
+    sopho.LockEdit le = new sopho.LockEdit();
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //initialzing table
@@ -78,16 +80,28 @@ public class ListaMathitonController implements Initializable {
     }  
         
     @FXML
-    public void Select(ActionEvent e) throws IOException{
+    public void Select(ActionEvent e) throws IOException, SQLException{
         int sel = table.getSelectionModel().getSelectedIndex();
         if(sel==-1){
             //the user did not select a line
             sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Θα πρέπει να επιλέξετε ένα μαθητή από τον πίνακα.", "error");
             cm.showAndWait();
         }else{
-            sopho.ResultKeeper.selectedIndex=sel+1;//we have to compensate because the table rows start to count from 0 while the resultSet starts from 1
-            Stage stage = (Stage) backButton.getScene().getWindow();
-            sl.StageLoad("/sopho/MathimataStiriksis/EpeksergasiaMathiti.fxml", stage, true, false); //resizable true, utility false
+            tableManager tbl = table.getSelectionModel().getSelectedItem();
+            int id = tbl.getId();
+            
+            if(!le.CheckLock(id, "mathites")){//check if editing is locked because another user is currently editing the data.
+                if (!le.LockEditing(true, id, "mathites")){//check if lock editing is successful else display message about it
+                    sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Πρόβλημα", "Τα στοιχεία του ατόμου που επιλέξατε δεν μπόρεσαν να κλειδωθούν για επεξεργασία. Αυτό σημαίνει ότι μπορεί να επεξεργαστεί και άλλος χρήστης παράλληλα τα ίδια στοιχεία και να διατηρηθούν οι αλλαγές που θα αποθηκεύσει ο άλλος χρήστης. Μπορείτε να επεξεργαστείτε τα στοιχεία ή να βγείτε και να μπείτε και πάλι στα στοιχεία για να κλειδώσουν.", "error");
+                    cm.showAndWait();
+                }
+                sopho.ResultKeeper.selectedIndex=sel;
+                Stage stage = (Stage) backButton.getScene().getWindow();
+                sl.StageLoad("/sopho/MathimataStiriksis/EpeksergasiaMathiti.fxml", stage, true, false); //resizable true, utility false
+            }else{
+                sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Κάποιος άλλος χρήστης επεξεργάζεται αυτή τη στιγμή τον επιλεγμένο μαθητή. Βεβαιωθείτε ότι η καρτέλα του μαθητή δεν είναι ανοιχτή σε κάποιον άλλον υπολογιστή και προσπαθήστε και πάλι.", "error");
+                cm.showAndWait();
+            }
         }
     }
     

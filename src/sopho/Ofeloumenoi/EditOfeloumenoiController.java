@@ -79,6 +79,8 @@ public class EditOfeloumenoiController implements Initializable {
         
     sopho.StageLoader sl = new sopho.StageLoader();
     
+    sopho.LockEdit le = new sopho.LockEdit();
+    
     private ObservableList<tableManager> data;
     
     ResultSet rs = sopho.ResultKeeper.rs;
@@ -98,13 +100,16 @@ public class EditOfeloumenoiController implements Initializable {
        
     @FXML
     private void GoBack(ActionEvent event) throws IOException, SQLException{
-        if(EditingFalse()){
+        if(le.LockEditing(false, selID, "ofeloumenoi")){
             Stage stage = (Stage) backButton.getScene().getWindow();
             if(sopho.ResultKeeper.multipleResults){
                 sl.StageLoad("/sopho/Ofeloumenoi/MultipleSearchResults.fxml", stage, true, false); //resizable true, utility false
             }else{
                 sl.StageLoad("/sopho/Ofeloumenoi/OfeloumenoiMain.fxml", stage, true, false); //resizable true, utility false
-            }
+            }           
+        }else{
+            sopho.Messages.CustomMessageController cm2 = new sopho.Messages.CustomMessageController(null, "Πρόβλημα", "Τα στοιχεία του ωφελούμενου δεν μπόρεσαν να ξεκλειδωθούν. Αυτό σημαίνει ότι δεν θα μπορείτε να τα επεξεργαστείτε ξανά. Για να διορθώσετε το πρόβλημα προσπαθήστε να κλείσετε το παράθυρο.", "error");
+            cm2.showAndWait();
         }
     }
     
@@ -308,7 +313,7 @@ public class EditOfeloumenoiController implements Initializable {
     }
     
     @FXML
-    public void SaveChanges(ActionEvent event){
+    public void SaveChanges(ActionEvent event) throws IOException{
         
         if(barcode.getText().isEmpty()||onoma.getText().isEmpty()||eponimo.getText().isEmpty()||patronimo.getText().isEmpty()){ //checking if the user has filled the required fields
         
@@ -392,11 +397,13 @@ public class EditOfeloumenoiController implements Initializable {
                 if(linesAffected > 0){
                     sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Τέλεια!", "Τα στοιχεία του ωφελούμενου έχουν ενημερωθεί με επιτυχία, σύμφωνα με τις αλλαγές που κάνατε.", "confirm");
                     cm.showAndWait();
-                    Stage stage = (Stage) barcode.getScene().getWindow();
-                    try {
+                    
+                    if(le.LockEditing(false, selID, "mathites")){
+                        Stage stage = (Stage) barcode.getScene().getWindow();
                         sl.StageLoad("/sopho/Ofeloumenoi/OfeloumenoiMain.fxml", stage, true, false); //resizable true, utility false
-                    } catch (IOException ex) {
-                        Logger.getLogger(EditOfeloumenoiController.class.getName()).log(Level.SEVERE, null, ex);
+                    }else{
+                        sopho.Messages.CustomMessageController cm2 = new sopho.Messages.CustomMessageController(null, "Πρόβλημα", "Τα στοιχεία του ωφελούμενου δεν μπόρεσαν να ξεκλειδωθούν. Αυτό σημαίνει ότι δεν θα μπορείτε να τα επεξεργαστείτε ξανά. Για να διορθώσετε το πρόβλημα προσπαθήστε να κλείσετε το παράθυρο.", "error");
+                        cm2.showAndWait();
                     }
                 }else{//problem inserting data...
                     sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Πρόβλημα!", "Οι αλλαγές δεν μπόρεσαν να καταχωρηθούν στη βάση δεδομένων. Προσπαθήστε και πάλι...", "error");
@@ -441,20 +448,6 @@ public class EditOfeloumenoiController implements Initializable {
             tekna.getSelectionModel().select(i);
             tekna.getFocusModel().focus(i);
         }
-    }
-    
-    //this method re-sets the editing to 0 to be able to proccess the record from other computers. Else the are locked out.
-    public boolean EditingFalse() throws SQLException{
-        String sql = "UPDATE ofeloumenoi SET editing = 0 WHERE id=?";
-        
-        sopho.DBClass db = new sopho.DBClass();
-        Connection conn = db.ConnectDB();
-        PreparedStatement pst = conn.prepareStatement(sql);
-        pst.setInt(1, selID);
-        
-        int flag = pst.executeUpdate();
-        
-        return flag>0;
     }
     
     public class tableManager { //this is a helper class to display the data from the resultSet to the table properly.
