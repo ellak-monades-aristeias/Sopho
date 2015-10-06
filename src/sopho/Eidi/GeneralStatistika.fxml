@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.*?>
+
+<AnchorPane maxHeight="900.0" maxWidth="1298.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="657.0" prefWidth="985.0" style="-fx-min-width: 676px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Eidi.GeneralStatistikaController">
+   <stylesheets>
+        <URL value="@../Style.css" />
+    </stylesheets>
+    <children>
+      <BorderPane layoutY="-0.0" prefHeight="841.0" prefWidth="676.0" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-0.0">
+         <top>
+            <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
+               <children>
+                   <Button fx:id="backButton" mnemonicParsing="false" onAction="#GoBack" prefHeight="33.0" prefWidth="81.0" style="-fx-background-color: #bc2d44;" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
+                     <font>
+                        <Font name="Open Sans Semibold" size="16.0" />
+                     </font>
+                     <StackPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </StackPane.margin>
+                  </Button>
+                  <Label styleClass="title" text="Γενικά στατιστικά για τα είδη" textAlignment="CENTER" textFill="WHITE">
+                  </Label>
+               </children>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </StackPane>
+         </top>
+         <center>
+            <ScrollPane fitToHeight="true" fitToWidth="true" BorderPane.alignment="CENTER">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0">
+                     <children>
+                        <VBox alignment="TOP_CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label text="Στο διάγραμμα που ακολουθεί μπορείτε να δείτε στατιστικά στοιχεία για τα είδη που έχουν δοθεί εως σήμερα">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <BarChart fx:id="eidiBar" prefHeight="515.0" prefWidth="983.0">
+                                <xAxis>
+                                  <CategoryAxis fx:id="catAxis" style="-fx-font: 15px System;">
+                                       <tickLabelFont>
+                                          <Font size="14.0" />
+                                       </tickLabelFont>
+                                    </CategoryAxis>
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis fx:id="numAxis" minorTickVisible="false" side="LEFT">
+                                       <tickLabelFont>
+                                          <Font size="15.0" />
+                                       </tickLabelFont>
+                                    </NumberAxis>
+                                </yAxis>
+                              </BarChart>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

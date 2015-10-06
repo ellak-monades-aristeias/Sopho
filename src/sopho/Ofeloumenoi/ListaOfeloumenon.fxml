@@ -29,7 +29,7 @@
                             <TableColumn fx:id="colEponimo" prefWidth="167.0" text="Επώνυμο" />
                               <TableColumn fx:id="colOnoma" prefWidth="157.0" text="Όνομα" />
                               <TableColumn fx:id="colPatronimo" prefWidth="157.0" text="Πατρώνυμο" />
-                              <TableColumn fx:id="colIlikia" prefWidth="157.0" text="Ηλικία" />
+                              <TableColumn fx:id="colGennisi" prefWidth="157.0" text="Ημ/νία Γέννησης" />
                               <TableColumn fx:id="colDimos" prefWidth="157.0" text="Δήμος" />
                               <TableColumn fx:id="colAnergos" prefWidth="157.0" text="Άνεργος" />
                               <TableColumn fx:id="colEpaggelma" prefWidth="157.0" text="Επάγγελμα" />

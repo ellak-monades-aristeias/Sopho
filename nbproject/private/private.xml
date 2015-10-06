@@ -3,12 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Tunerakos/Documents/NetBeansProjects/Sopho/src/sopho/StageLoader.java</file>
-            <file>file:/C:/Users/Tunerakos/Documents/NetBeansProjects/Sopho/src/sopho/LockEdit.java</file>
-            <file>file:/C:/Users/Tunerakos/Documents/NetBeansProjects/Sopho/src/sopho/EuresiErgasias/EpeksergasiaThesisErgasiasController.java</file>
-            <file>file:/C:/Users/Tunerakos/Documents/NetBeansProjects/Sopho/src/sopho/EuresiErgasias/ProvoliAtomonPouZitounController.java</file>
-            <file>file:/C:/Users/Tunerakos/Documents/NetBeansProjects/Sopho/src/sopho/EuresiErgasias/EpeksergasiaAtomouPouZitaController.java</file>
-            <file>file:/C:/Users/Tunerakos/Documents/NetBeansProjects/Sopho/src/sopho/EuresiErgasias/ProvoliDiathesimonTheseonController.java</file>
+            <file>file:/C:/Users/Tunerakos/Documents/NetBeansProjects/Sopho/src/sopho/Eidi/IstorikoEidonOfeloumenouController.java</file>
+            <file>file:/C:/Users/Tunerakos/Documents/NetBeansProjects/Sopho/src/sopho/Eidi/GeneralStatistika.fxml</file>
+            <file>file:/C:/Users/Tunerakos/Documents/NetBeansProjects/Sopho/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/Tunerakos/Documents/NetBeansProjects/Sopho/src/sopho/EuresiErgasias/ProvoliAtomonPouZitoun.fxml</file>
+            <file>file:/C:/Users/Tunerakos/Documents/NetBeansProjects/Sopho/src/sopho/Eidi/StatistikaMainController.java</file>
+            <file>file:/C:/Users/Tunerakos/Documents/NetBeansProjects/Sopho/src/sopho/Eidi/EidiMainController.java</file>
+            <file>file:/C:/Users/Tunerakos/Documents/NetBeansProjects/Sopho/src/sopho/Eidi/EpeksergasiaEidonController.java</file>
+            <file>file:/C:/Users/Tunerakos/Documents/NetBeansProjects/Sopho/src/sopho/Eidi/FiltersStatistikaController.java</file>
+            <file>file:/C:/Users/Tunerakos/Documents/NetBeansProjects/Sopho/src/sopho/Eidi/StatistikaMain.fxml</file>
+            <file>file:/C:/Users/Tunerakos/Documents/NetBeansProjects/Sopho/src/sopho/Eidi/GeneralStatistikaController.java</file>
+            <file>file:/C:/Users/Tunerakos/Documents/NetBeansProjects/Sopho/src/sopho/Eidi/FiltersStatistika.fxml</file>
+            <file>file:/C:/Users/Tunerakos/Documents/NetBeansProjects/Sopho/src/sopho/Eidi/EidiMain.fxml</file>
         </group>
     </open-files>
 </project-private>

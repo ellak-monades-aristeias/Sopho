@@ -55,6 +55,12 @@ public class EidiMainController implements Initializable {
     }
     
     @FXML
+    private void OpenStatistika(ActionEvent event) throws IOException{
+        Stage stage = (Stage) backButton.getScene().getWindow();
+        sl.StageLoad("/sopho/Eidi/StatistikaMain.fxml", stage, false, true); //resizable false, utility true
+    }
+    
+    @FXML
     private void GoBack(ActionEvent event) throws IOException{
         Stage stage = (Stage) backButton.getScene().getWindow();
         sl.StageLoad("MainApp.fxml", stage, true, false); //resizable true, utility false

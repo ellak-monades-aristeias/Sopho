@@ -43,7 +43,7 @@ public class LockEdit {
         Connection conn = db.ConnectDB();
         PreparedStatement pst = conn.prepareStatement(sql);
         pst.setInt(1, id);
-        ResultSet rs = pst.executeQuery(sql);
+        ResultSet rs = pst.executeQuery();
         rs.last();
         return rs.getInt("editing")==1; // if editing ==1 return true else return false
     }

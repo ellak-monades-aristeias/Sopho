@@ -48,7 +48,7 @@ public class SearchToEditOfeloumenoiController implements Initializable {
     }
     
     @FXML
-    public void Search(ActionEvent event) throws IOException{
+    public void Search(ActionEvent event) throws IOException, SQLException{
         if(CheckEmpty()){
             //we have at least one field filled
             String sql = "SELECT * FROM ofeloumenoi WHERE ";
@@ -73,7 +73,7 @@ public class SearchToEditOfeloumenoiController implements Initializable {
                 sql = sql.substring(0, sql.length()-3);
             }
             
-            try{
+            
                 System.out.println("Search sql: " + sql);
                 conn = db.ConnectDB();
                 pst = conn.prepareStatement(sql);
@@ -122,11 +122,7 @@ public class SearchToEditOfeloumenoiController implements Initializable {
                     cm.showAndWait();
                 }
 
-            }catch (SQLException e){
-                System.out.println("Σφάλμα Βάσης Δεδομένων!");
-                sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Πρόβλημα...", "Υπήρξε κάποιο πρόβλημα με την αναζήτηση στη βάση δεδομένων. Δοκιμάστε και πάλι και αν δεν διορθωθεί επικοινωνήστε με τον Developer. ERROR:"+e , "error");
-                cm.showAndWait();
-            }    
+               
         }
     }
     

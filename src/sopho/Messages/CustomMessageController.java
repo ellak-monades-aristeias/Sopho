@@ -46,6 +46,7 @@ public class CustomMessageController extends Stage implements Initializable {
     private String myType;
     public Image image;
     public boolean saidYes=false;
+    public boolean showButtons=true;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -62,7 +63,11 @@ public class CustomMessageController extends Stage implements Initializable {
         }else if(myType.equals("question")){
             image = new Image(CustomMessageController.class.getResourceAsStream("questionIcon.png"));
             ok.setVisible(false);
-            
+        }
+        if(!showButtons){
+            yes.setVisible(false);
+            no.setVisible(false);
+            ok.setVisible(false);
         }
         icon.setImage(image);
     }    

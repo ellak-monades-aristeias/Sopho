@@ -52,7 +52,7 @@ public class ListaOfeloumenonController implements Initializable {
     @FXML
     private TableColumn <tableManager, Integer> colID;
     @FXML
-    private TableColumn <tableManager, String> colRegisterDate, colEponimo, colPatronimo, colOnoma, colIlikia, colDimos, colAnergos, colEpaggelma, colEisodima, colEksartiseis, colEthnikotita, colMetanastis, colRoma, colOikKatastasi, colTekna, colMellousaMama, colMonogoneiki, colPoliteknos, colAsfForeas, colXronios, colPathisi, colAmea, colMonaxiko, colEmfiliVia, colSpoudastis, colAnenergos;
+    private TableColumn <tableManager, String> colRegisterDate, colEponimo, colPatronimo, colOnoma, colGennisi, colDimos, colAnergos, colEpaggelma, colEisodima, colEksartiseis, colEthnikotita, colMetanastis, colRoma, colOikKatastasi, colTekna, colMellousaMama, colMonogoneiki, colPoliteknos, colAsfForeas, colXronios, colPathisi, colAmea, colMonaxiko, colEmfiliVia, colSpoudastis, colAnenergos;
     
     private ObservableList <tableManager> data;
     
@@ -74,7 +74,7 @@ public class ListaOfeloumenonController implements Initializable {
         colEponimo.setCellValueFactory(new PropertyValueFactory<tableManager, String>("eponimo"));
         colOnoma.setCellValueFactory(new PropertyValueFactory<tableManager, String>("onoma"));
         colPatronimo.setCellValueFactory(new PropertyValueFactory<tableManager, String>("patronimo"));
-        colIlikia.setCellValueFactory(new PropertyValueFactory<tableManager, String>("ilikia"));
+        colGennisi.setCellValueFactory(new PropertyValueFactory<tableManager, String>("imGennisis"));
         colDimos.setCellValueFactory(new PropertyValueFactory<tableManager, String>("dimos"));
         colAnergos.setCellValueFactory(new PropertyValueFactory<tableManager, String>("anergos"));
         colEpaggelma.setCellValueFactory(new PropertyValueFactory<tableManager, String>("epaggelma"));
@@ -98,7 +98,7 @@ public class ListaOfeloumenonController implements Initializable {
         colAnenergos.setCellValueFactory(new PropertyValueFactory<tableManager, String>("anenergos"));
         
         //setting the data to the table
-        resultTable.getColumns().setAll(colID, colRegisterDate, colEponimo, colOnoma, colPatronimo, colIlikia, colDimos, colAnergos, colEpaggelma, colEisodima, colEksartiseis, colEthnikotita, colMetanastis, colRoma, colOikKatastasi, colTekna, colMellousaMama, colMonogoneiki, colPoliteknos, colAsfForeas, colAmea, colXronios, colPathisi, colMonaxiko, colEmfiliVia, colSpoudastis, colAnenergos);
+        resultTable.getColumns().setAll(colID, colRegisterDate, colEponimo, colOnoma, colPatronimo, colGennisi, colDimos, colAnergos, colEpaggelma, colEisodima, colEksartiseis, colEthnikotita, colMetanastis, colRoma, colOikKatastasi, colTekna, colMellousaMama, colMonogoneiki, colPoliteknos, colAsfForeas, colAmea, colXronios, colPathisi, colMonaxiko, colEmfiliVia, colSpoudastis, colAnenergos);
     }
     
     @FXML
@@ -185,7 +185,7 @@ public class ListaOfeloumenonController implements Initializable {
         private StringProperty eponimo;
         private StringProperty onoma;
         private StringProperty patronimo;
-        private StringProperty ilikia;
+        private StringProperty imGennisis;
         private StringProperty dimos;
         private StringProperty anergos;
         private StringProperty epaggelma;
@@ -211,13 +211,13 @@ public class ListaOfeloumenonController implements Initializable {
         
         public tableManager(){}
 
-        private tableManager(Integer id, String registerDate, String eponimo, String onoma, String patronimo, String ilikia, String dimos, String anergos, String epaggelma, String eisodima, String eksartiseis, String ethnikotita, String metanastis, String roma, String oikKatastasi, String tekna, String mellousaMama, String monogoneiki, String politeknos, String asfForeas, String amea, String xronios, String pathisi, String monaxiko, String emfiliVia, String spoudastis, String anenergos){
+        private tableManager(Integer id, String registerDate, String eponimo, String onoma, String patronimo, String imGennisis, String dimos, String anergos, String epaggelma, String eisodima, String eksartiseis, String ethnikotita, String metanastis, String roma, String oikKatastasi, String tekna, String mellousaMama, String monogoneiki, String politeknos, String asfForeas, String amea, String xronios, String pathisi, String monaxiko, String emfiliVia, String spoudastis, String anenergos){
             this.id = new SimpleIntegerProperty(id);
             this.registerDate = new SimpleStringProperty(registerDate);
             this.eponimo = new SimpleStringProperty(eponimo);
             this.onoma = new SimpleStringProperty(onoma);
             this.patronimo = new SimpleStringProperty(patronimo);
-            this.ilikia = new SimpleStringProperty(ilikia);
+            this.imGennisis = new SimpleStringProperty(imGennisis);
             this.dimos = new SimpleStringProperty(dimos);
             this.anergos = new SimpleStringProperty(anergos);
             this.epaggelma = new SimpleStringProperty(epaggelma);
@@ -263,8 +263,8 @@ public class ListaOfeloumenonController implements Initializable {
             return patronimo.get();
         }
         
-        public String getIlikia(){
-            return ilikia.get();
+        public String getImGennisis(){
+            return imGennisis.get();
         }
         
         public String getDimos(){
@@ -381,15 +381,7 @@ public class ListaOfeloumenonController implements Initializable {
                 rs.beforeFirst();
 
                 while(rs.next()){
-
-                    Date imGennisis = rs.getDate("imGennisis");
-
-                    LocalDate today = LocalDate.now();
-                    LocalDate birthday = imGennisis.toLocalDate();
-
-                    Period p = Period.between(birthday, today);
-
-                    String age = p.getYears() + ""; //this trick is because int cannot be dereferenced.
+                   
 
                     String oikKatastasi = "";
                     int oikKatIndex = rs.getInt("oikKatastasi");
@@ -436,7 +428,7 @@ public class ListaOfeloumenonController implements Initializable {
                     }
 
 
-                    list.add(new tableManager(rs.getInt("id"), rs.getDate("registerDate").toString(), rs.getString("eponimo"), rs.getString("onoma"), rs.getString("patronimo"), age, rs.getString("dimos"), ConvertToYesNo(rs.getInt("anergos")), rs.getString("epaggelma"), rs.getString("eisodima"), rs.getString("eksartiseis"), rs.getString("ethnikotita"), ConvertToYesNo(rs.getInt("metanastis")), ConvertToYesNo(rs.getInt("roma")), oikKatastasi, rs.getInt("arithmosTeknon")+"", ConvertToYesNo(rs.getInt("mellousaMama")), ConvertToYesNo(rs.getInt("monogoneiki")), ConvertToYesNo(rs.getInt("politeknos")), asfForeas, ConvertToYesNo(rs.getInt("amea")), ConvertToYesNo(rs.getInt("xronios")), rs.getString("pathisi"), ConvertToYesNo(rs.getInt("monaxikos")), ConvertToYesNo(rs.getInt("emfiliVia")), ConvertToYesNo(rs.getInt("spoudastis")), ConvertToYesNo(rs.getInt("anenergos"))));
+                    list.add(new tableManager(rs.getInt("id"), rs.getDate("registerDate").toString(), rs.getString("eponimo"), rs.getString("onoma"), rs.getString("patronimo"), rs.getDate("imGennisis").toString(), rs.getString("dimos"), ConvertToYesNo(rs.getInt("anergos")), rs.getString("epaggelma"), rs.getString("eisodima"), rs.getString("eksartiseis"), rs.getString("ethnikotita"), ConvertToYesNo(rs.getInt("metanastis")), ConvertToYesNo(rs.getInt("roma")), oikKatastasi, rs.getInt("arithmosTeknon")+"", ConvertToYesNo(rs.getInt("mellousaMama")), ConvertToYesNo(rs.getInt("monogoneiki")), ConvertToYesNo(rs.getInt("politeknos")), asfForeas, ConvertToYesNo(rs.getInt("amea")), ConvertToYesNo(rs.getInt("xronios")), rs.getString("pathisi"), ConvertToYesNo(rs.getInt("monaxikos")), ConvertToYesNo(rs.getInt("emfiliVia")), ConvertToYesNo(rs.getInt("spoudastis")), ConvertToYesNo(rs.getInt("anenergos"))));
                 }
             
             }else{
