@@ -77,12 +77,6 @@ public class MainAppController implements Initializable {
         Stage oldstage = (Stage) settings.getScene().getWindow();
         sl.StageLoad("/sopho/Vivliothiki/VivliothikiMain.fxml", oldstage, true, false); //resizable true, utility false
     }
-    
-    @FXML
-    private void OpenStatistika(ActionEvent event) throws IOException {
-        Stage oldstage = (Stage) settings.getScene().getWindow();
-        sl.StageLoad("/sopho/Statistika/StatistikaMain.fxml", oldstage, true, false); //resizable true, utility false
-    }
      
     @Override
     public void initialize(URL url, ResourceBundle rb) {}

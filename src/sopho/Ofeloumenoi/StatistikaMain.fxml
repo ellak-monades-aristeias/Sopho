@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.*?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="900.0" maxWidth="676.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="570.0" prefWidth="676.0" style="-fx-min-width: 676px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Ofeloumenoi.OfeloumenoiMainController">
+<AnchorPane fx:id="anchorPane" maxHeight="900.0" maxWidth="676.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="570.0" prefWidth="676.0" style="-fx-min-width: 676px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Ofeloumenoi.StatistikaMainController">
     <stylesheets>
         <URL value="@../Style.css" />
     </stylesheets>
@@ -22,27 +22,12 @@
                <content>
                   <VBox alignment="CENTER" prefHeight="743.0" prefWidth="674.0">
                      <children>
-                        <Button minWidth="400.0" mnemonicParsing="false" onAction="#AddOfeloumenoi" prefHeight="63.0" prefWidth="400.0" styleClass="mainAppButtons" text="Καταχώρηση ωφελούμενου" textFill="WHITE">
+                        <Button minWidth="440.0" mnemonicParsing="false" onAction="#OpenGeneral" prefHeight="63.0" prefWidth="440.0" styleClass="mainAppButtons" text="Προβολή γενικών στατιστικών" textFill="WHITE">
                            <VBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </VBox.margin>
                         </Button>
-                        <Button minWidth="400.0" mnemonicParsing="false" onAction="#ListaOfeloumenon" prefHeight="63.0" prefWidth="400.0" styleClass="mainAppButtons" text="Προβολή λίστας ωφελούμενων" textFill="WHITE">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </VBox.margin>
-                        </Button>
-                        <Button minWidth="400.0" mnemonicParsing="false" onAction="#EditOfeloumenoi" prefHeight="63.0" prefWidth="400.0" styleClass="mainAppButtons" text="Επεξεργασία στοιχείων ωφελούμενου" textFill="WHITE">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </VBox.margin>
-                        </Button>
-                        <Button minWidth="400.0" mnemonicParsing="false" onAction="#SearchOfeloumenoi" prefHeight="63.0" prefWidth="400.0" styleClass="mainAppButtons" text="Αναζήτηση βάσει κριτηρίων" textFill="WHITE">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </VBox.margin>
-                        </Button>
-                        <Button minWidth="400.0" mnemonicParsing="false" onAction="#OpenStatistika" prefHeight="63.0" prefWidth="400.0" styleClass="mainAppButtons" text="Στατιστικά στοιχεία" textFill="WHITE">
+                        <Button minWidth="440.0" mnemonicParsing="false" onAction="#OpenFilters" prefHeight="63.0" prefWidth="440.0" styleClass="mainAppButtons" text="Στατιστικά με φίλτρα" textFill="WHITE">
                            <VBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </VBox.margin>
@@ -63,7 +48,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </StackPane.margin>
                   </Button>
-                  <Label styleClass="title" text="Διαχείριση ωφελούμενων" textAlignment="CENTER" textFill="WHITE">
+                  <Label styleClass="title" text="Στατιστικά στοιχεία ωφελούμενων" textAlignment="CENTER" textFill="WHITE">
                   </Label>
                </children>
                <effect>

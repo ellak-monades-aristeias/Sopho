@@ -67,4 +67,10 @@ public class OfeloumenoiMainController implements Initializable {
         sl.StageLoad("/sopho/Ofeloumenoi/ListaOfeloumenon.fxml", stage, true, false); //resizable true, utility false 
     }
     
+    @FXML
+    private void OpenStatistika(ActionEvent event) throws IOException{
+        Stage stage = (Stage) backButton.getScene().getWindow();
+        sl.StageLoad("/sopho/Ofeloumenoi/StatistikaMain.fxml", stage, true, false); //resizable true, utility false 
+    }
+    
 }

@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.*?>
+
+<AnchorPane maxHeight="900.0" maxWidth="1298.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="657.0" prefWidth="985.0" style="-fx-min-width: 676px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Ofeloumenoi.GeneralStatistikaController">
+   <stylesheets>
+        <URL value="@../Style.css" />
+    </stylesheets>
+    <children>
+      <BorderPane layoutY="-0.0" prefHeight="841.0" prefWidth="676.0" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-0.0">
+         <top>
+            <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
+               <children>
+                   <Button fx:id="backButton" mnemonicParsing="false" onAction="#GoBack" prefHeight="33.0" prefWidth="81.0" style="-fx-background-color: #bc2d44;" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
+                     <font>
+                        <Font name="Open Sans Semibold" size="16.0" />
+                     </font>
+                     <StackPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </StackPane.margin>
+                  </Button>
+                  <Label styleClass="title" text="Γενικά στατιστικά ωφελούμενων" textAlignment="CENTER" textFill="WHITE">
+                  </Label>
+               </children>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </StackPane>
+         </top>
+         <center>
+            <ScrollPane fitToWidth="true" BorderPane.alignment="CENTER">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0">
+                     <children>
+                        <VBox alignment="TOP_CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label text="Στα παρακάτω διαγράμματα εμφανίζονται στατιστικά στοιχεία για τους ωφελούμενους που έχουν καταχωρηθεί.">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label text="Ηλικιακές ομάδες ωφελούμενων">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Label>
+                              <BarChart fx:id="ageBar" maxHeight="450.0" maxWidth="800.0" prefHeight="450.0" prefWidth="800.0">
+                                <xAxis>
+                                  <CategoryAxis fx:id="catAxis" label="Ηλικιακή ομάδα">
+                                       <tickLabelFont>
+                                          <Font size="14.0" />
+                                       </tickLabelFont>
+                                    </CategoryAxis>
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis fx:id="numAxis" label="Αριθμός ωφελούμενων" minorTickVisible="false" side="LEFT" tickLabelsVisible="false">
+                                       <tickLabelFont>
+                                          <Font size="15.0" />
+                                       </tickLabelFont>
+                                    </NumberAxis>
+                                </yAxis>
+                              </BarChart>
+                              <Label text="Άνεργοι και Εργαζόμενοι">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <PieChart fx:id="anergoiPie" maxHeight="450.0" maxWidth="800.0" prefHeight="450.0" prefWidth="800.0" />
+                              <Label text="Εισόδημα">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <BarChart fx:id="eisodimaBar" maxHeight="450.0" maxWidth="800.0" prefHeight="450.0" prefWidth="800.0">
+                                 <xAxis>
+                                    <CategoryAxis fx:id="catAxis1" label="Εισόδημα">
+                                       <tickLabelFont>
+                                          <Font size="14.0" />
+                                       </tickLabelFont>
+                                    </CategoryAxis>
+                                 </xAxis>
+                                 <yAxis>
+                                    <NumberAxis fx:id="numAxis1" label="Αριθμός ωφελούμενων" minorTickVisible="false" side="LEFT" tickLabelsVisible="false">
+                                       <tickLabelFont>
+                                          <Font size="15.0" />
+                                       </tickLabelFont>
+                                    </NumberAxis>
+                                 </yAxis>
+                              </BarChart>
+                              <Label text="Ασφαλιστικός Φορέας">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <BarChart fx:id="asfBar" maxHeight="450.0" maxWidth="800.0" prefHeight="450.0" prefWidth="800.0">
+                                 <xAxis>
+                                    <CategoryAxis fx:id="catAxis3" label="Ασφαλιστικός φορέας">
+                                       <tickLabelFont>
+                                          <Font size="14.0" />
+                                       </tickLabelFont>
+                                    </CategoryAxis>
+                                 </xAxis>
+                                 <yAxis>
+                                    <NumberAxis fx:id="numAxis3" label="Αριθμός ωφελούμενων" minorTickVisible="false" side="LEFT" tickLabelsVisible="false">
+                                       <tickLabelFont>
+                                          <Font size="15.0" />
+                                       </tickLabelFont>
+                                    </NumberAxis>
+                                 </yAxis>
+                              </BarChart>
+                              <Label text="Εξαρτήσεις">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <PieChart fx:id="eksartiseisPie" maxHeight="450.0" maxWidth="800.0" prefHeight="450.0" prefWidth="800.0" />
+                              <Label text="Εθνικότητες">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <PieChart fx:id="ethnikotitaPie" maxHeight="450.0" maxWidth="800.0" prefHeight="450.0" prefWidth="800.0" />
+                              <Label text="Μετανάστες">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <PieChart fx:id="metanastesPie" maxHeight="450.0" maxWidth="800.0" prefHeight="450.0" prefWidth="800.0" />
+                              <Label text="Ρομά">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <PieChart fx:id="romaPie" maxHeight="450.0" maxWidth="800.0" prefHeight="450.0" prefWidth="800.0" />
+                              <Label text="Οικογενειακή Κατάσταση">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <PieChart fx:id="oikKatPie" maxHeight="450.0" maxWidth="800.0" prefHeight="450.0" prefWidth="800.0" />
+                              <Label text="Αριθμός Τέκνων">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <BarChart fx:id="teknaBar" maxHeight="450.0" maxWidth="800.0" prefHeight="450.0" prefWidth="800.0">
+                                 <xAxis>
+                                    <CategoryAxis fx:id="catAxis2" label="Αριθμός τέκνων του ωφελούμενου">
+                                       <tickLabelFont>
+                                          <Font size="14.0" />
+                                       </tickLabelFont>
+                                    </CategoryAxis>
+                                 </xAxis>
+                                 <yAxis>
+                                    <NumberAxis fx:id="numAxis2" label="Αριθμός ωφελούμενων" minorTickVisible="false" side="LEFT" tickLabelsVisible="false">
+                                       <tickLabelFont>
+                                          <Font size="15.0" />
+                                       </tickLabelFont>
+                                    </NumberAxis>
+                                 </yAxis>
+                              </BarChart>
+                              <Label text="Μέλλουσες Μητέρες">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <PieChart fx:id="mellousaMamaPie" maxHeight="450.0" maxWidth="800.0" prefHeight="450.0" prefWidth="800.0" />
+                              <Label text="Μονογονεϊκές οικογένειες">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <PieChart fx:id="monogoneikiPie" maxHeight="450.0" maxWidth="800.0" prefHeight="450.0" prefWidth="800.0" />
+                              <Label text="AMEA">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <PieChart fx:id="ameaPie" maxHeight="450.0" maxWidth="800.0" prefHeight="450.0" prefWidth="800.0" />
+                              <Label text="Άτομα με Χρόνιες Παθήσεις">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <PieChart maxHeight="450.0" maxWidth="800.0" prefHeight="450.0" prefWidth="800.0" fx:id="xroniosPie" />
+                              <Label text="Μοναχικά Άτομα">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <PieChart fx:id="monaxikoPie" maxHeight="450.0" maxWidth="800.0" prefHeight="450.0" prefWidth="800.0" />
+                              <Label text="Θύματα Έμφυλης Βίας">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <PieChart fx:id="thimaPie" maxHeight="450.0" maxWidth="800.0" prefHeight="450.0" prefWidth="800.0" />
+                              <Label text="Σπουδαστές">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <PieChart fx:id="spoudastisPie" maxHeight="450.0" maxWidth="800.0" prefHeight="450.0" prefWidth="800.0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
