@@ -43,7 +43,8 @@ public class StatistikaMainController implements Initializable {
     @FXML
     private void OpenFilters(ActionEvent event) throws IOException{
         Stage stage = (Stage) backButton.getScene().getWindow();
-        sl.StageLoad("/sopho/Ofeloumenoi/FiltersStatistika.fxml", stage, true, false); //resizable true, utility false
+        sl.StageLoad("/sopho/Ofeloumenoi/FiltersSetStatistika.fxml", stage, true, false); //resizable true, utility false
+        sopho.StageLoader.lastStage="/sopho/Ofeloumenoi/StatistikaMain.fxml";
     }
     
     @FXML

@@ -26,6 +26,7 @@ import javafx.stage.Stage;
 public class Sopho extends Application {
     
     public static boolean hasSignedIn=false; // static var to know if the user has signed into the mainApp interface.
+    boolean error=false;
         
     @Override
     public void start(Stage stage) throws Exception {
@@ -46,11 +47,15 @@ public class Sopho extends Application {
         if (dbIP==null||dbUser==null||dbPass==null) {
             // we have NOT made the initial setup so that the app can NOT connect to database. Start the initial setup wizard
             sl.StageLoadNoClose("Welcome.fxml", false, true); //resizable false, utility true
-        }else if(!UserExists()){
+        }else if(!UserExists()&&!error){
             sl.StageLoadNoClose("Setup4.fxml", false, true); //resizable false, utility true
         }else{
-            // we have  made the initial setup so that the app can connect to database. Start the login screen
-            sl.StageLoadNoClose("StartApp.fxml", false, true); //resizable false, utility true
+            if(!error){
+                // we have  made the initial setup so that the app can connect to database. Start the login screen
+                sl.StageLoadNoClose("StartApp.fxml", false, true); //resizable false, utility true
+            }else{
+                sl.StageLoadNoClose("DBSettings.fxml", false, true); //resizable false, utility true
+            }
         }
         
     }
@@ -64,22 +69,28 @@ public class Sopho extends Application {
         
         conn=db.ConnectDB();
         
-        String sql = "SELECT * FROM users";
-        
-        try {
-            
-            pst = conn.prepareStatement(sql);
-            rs = pst.executeQuery();
-            
-            //now we will check if the query returned a result
-            
-            rs.last(); //i go to the last line of the result to find out the number of the line
-            
-            return rs.getRow()>0; //if rs.getRow() is greater than 0 it means that the table users has at least one record (the user has specified a password)
-            
-            
-        }catch (SQLException e){
-            System.out.println("Πρόβλημα κατά την αναζήτηση εγγραφών στον πίνακα users!" + e);
+        if(conn!=null){
+
+            String sql = "SELECT * FROM users";
+
+            try {
+
+                pst = conn.prepareStatement(sql);
+                rs = pst.executeQuery();
+
+                //now we will check if the query returned a result
+
+                rs.last(); //i go to the last line of the result to find out the number of the line
+
+                return rs.getRow()>0; //if rs.getRow() is greater than 0 it means that the table users has at least one record (the user has specified a password)
+
+
+            }catch (SQLException e){
+                System.out.println("Πρόβλημα κατά την αναζήτηση εγγραφών στον πίνακα users!" + e);
+                return false;
+            }
+        }else{
+            error=true;
             return false;
         }
         

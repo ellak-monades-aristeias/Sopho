@@ -49,7 +49,7 @@ import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class GeneralStatistikaController implements Initializable {
+public class FiltersStatistikaController implements Initializable {
     
     @FXML
     public BarChart ageBar; 
@@ -155,9 +155,7 @@ public class GeneralStatistikaController implements Initializable {
     int spoudastis=0;
     
     int totalOfeloumenoi=0;
-    
-    boolean withAnenergoi=false;
-    
+        
     ObservableList<PieChart.Data> anergoiData;
     ObservableList<PieChart.Data> eksartiseisData;
     ObservableList<PieChart.Data> ethnikotitaData;
@@ -172,15 +170,12 @@ public class GeneralStatistikaController implements Initializable {
     ObservableList<PieChart.Data> thimataData;
     ObservableList<PieChart.Data> spoudastesData;
     
+    ResultSet rs = sopho.ResultKeeper.rs;
+    
     boolean hasData=false;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {        
-        sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Ερώτηση", "Θα θέλατε να συμπεριληφθούν στα στατιστικά και οι ωφελούμενοι που έχετε ορίσει ως ανενεργούς;", "question");
-        cm.showAndWait();
-        if(cm.saidYes){
-            withAnenergoi=true;
-        }
         
         try {
             GetData();
@@ -189,7 +184,6 @@ public class GeneralStatistikaController implements Initializable {
         }
         
         if(hasData){
-        
             anergoiData = anergoiPieData();
             anergoiPie.getData().setAll(anergoiData);
             eksartiseisData = eksartiseisPieData();
@@ -235,12 +229,6 @@ public class GeneralStatistikaController implements Initializable {
     } 
     
     public void GetData() throws SQLException{
-        
-        String sql = "SELECT * FROM ofeloumenoi";
-        if(!withAnenergoi) sql+=" WHERE anenergos=0";
-        Connection conn = db.ConnectDB();
-        PreparedStatement pst = conn.prepareStatement(sql);
-        ResultSet rs = pst.executeQuery();
         
         rs.last();
         if(rs.getRow()>0){
@@ -377,8 +365,11 @@ public class GeneralStatistikaController implements Initializable {
                 monaxiko+=rs.getInt("monaxikos");
                 thima+=rs.getInt("emfiliVia");
                 spoudastis+=rs.getInt("spoudastis");
+                
             }
+            
             hasData=true;
+            
         }else{
             sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Ενημέρωση", "Δεν υπάρχουν ωφελούμενοι με τα κριτήρια αυτά για να εξαχθούν στατιστικά. Καταχωρήστε ωφελούμενους προκειμένου να εμφανιστούν τα στατιστικά.", "error");
             cm.showAndWait();

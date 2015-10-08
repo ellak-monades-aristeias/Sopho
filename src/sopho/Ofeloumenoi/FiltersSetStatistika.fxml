@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.*?>
+
+<AnchorPane minHeight="651.0" minWidth="997.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="651.0" prefWidth="997.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Ofeloumenoi.SearchOfeloumenoiController">
+    <stylesheets>
+        <URL value="@../Style.css" />
+    </stylesheets>
+    <children>
+      <BorderPane minHeight="650.0" minWidth="997.0" prefHeight="870.0" prefWidth="997.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+                  <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
+                     <children>
+                        <Label styleClass="titleSmall" text="Εξαγωγή στατιστικών με χρήση φίλτρων" textAlignment="CENTER" textFill="WHITE">
+                        </Label>
+                        <Button fx:id="backButton" mnemonicParsing="false" onAction="#GoBack" prefHeight="33.0" prefWidth="81.0" styleClass="backButton" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
+                           <StackPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </StackPane.margin>
+                        </Button>
+                        <SVGPath content="M461,244 L371,244 L317.8,185 L461,185" fill="#bc2d44" nodeOrientation="LEFT_TO_RIGHT" scaleX="1.2" scaleY="0.77" stroke="RED" strokeWidth="0.0" translateX="-12.0" StackPane.alignment="CENTER_RIGHT" />
+                     </children>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </StackPane>
+               </top>
+          
+         <center>
+            <StackPane prefHeight="512.0" prefWidth="997.0">
+               <children>
+                  <ScrollPane prefHeight="512.0" prefViewportHeight="512.0" prefViewportWidth="997.0" prefWidth="997.0" style="-fx-fit-to-height: true; -fx-fit-to-width: true; -fx-border-width: 0; -fx-border-color: white;" StackPane.alignment="CENTER">
+                     <content>
+                        <VBox alignment="CENTER" prefHeight="512.0" prefWidth="995.0">
+                           <children>
+                              <Label alignment="TOP_CENTER" minHeight="90.0" prefHeight="90.0" prefWidth="955.0" text="Καθορίστε τα κριτήρια που επιθυμείτε παρακάτω για να περιοριστούν τα στατιστικά στοιχεία βάσει αυτών των κριτηρίων. Σε περίπτωση που θέλετε να δείτε στατιστικά για όλους τους ωφελούμενους χρησιμοποιήστε τα γενικά στατιστικά." wrapText="true">
+                                 <VBox.margin>
+                                    <Insets left="20.0" right="20.0" top="20.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <HBox alignment="CENTER" maxHeight="440.0" minHeight="420.0" minWidth="995.0" prefHeight="420.0" prefWidth="995.0" style="-fx-border-width: 0; -fx-border-color: white;" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <VBox prefHeight="450.0" prefWidth="311.0">
+                                       <children>
+                                          <Label alignment="CENTER" text="Ηλικία:">
+                                             <VBox.margin>
+                                                <Insets left="10.0" right="10.0" top="5.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <HBox>
+                                             <children>
+                                                <TextField id="barcode" fx:id="startAge" prefHeight="37.0" prefWidth="146.0" promptText="από">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+                                                   </VBox.margin>
+                                                </TextField>
+                                                <TextField id="barcode" fx:id="endAge" prefHeight="37.0" prefWidth="146.0" promptText="έως">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </TextField>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <TextField fx:id="dimos" layoutX="20.0" layoutY="330.0" prefHeight="39.0" prefWidth="221.0" promptText="Δήμος">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <CheckBox fx:id="anergos" mnemonicParsing="false" text="Άνεργος">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+                                             </VBox.margin>
+                                          </CheckBox>
+                                          <TextField fx:id="epaggelma" prefHeight="39.0" prefWidth="221.0" promptText="Επάγγελμα">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <TextField fx:id="eisodima" prefHeight="39.0" prefWidth="221.0" promptText="Φορολογητέο Εισόδημα">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <TextField fx:id="eksartiseis" prefHeight="39.0" prefWidth="221.0" promptText="Εξαρτήσεις">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <TextField fx:id="ethnikotita" prefHeight="39.0" prefWidth="221.0" promptText="Εθνικότητα">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="10.0" right="10.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="440.0" prefWidth="311.0">
+                                       <children>
+                                          <HBox prefHeight="27.0" prefWidth="311.0">
+                                             <children>
+                                                <CheckBox fx:id="metanastis" mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0" text="Μετανάστης">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" right="10.0" top="-5.0" />
+                                                   </HBox.margin>
+                                                </CheckBox>
+                                                <CheckBox fx:id="roma" mnemonicParsing="false" text="Ρομά">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" right="10.0" top="-5.0" />
+                                                   </HBox.margin>
+                                                </CheckBox>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="5.0" top="10.0" />
+                                             </padding>
+                                             <VBox.margin>
+                                                <Insets top="15.0" />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <ComboBox fx:id="oikKatastasi" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="292.0" promptText="Οικογενειακή Κατάσταση" style="-fx-font: 16px System;">
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </VBox.margin>
+                                          </ComboBox>
+                                          <TextField fx:id="arTeknon" prefHeight="39.0" prefWidth="221.0" promptText="Αριθμός τέκνων">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <CheckBox fx:id="mellousaMama" mnemonicParsing="false" prefHeight="25.0" prefWidth="170.0" text="Μέλλουσα μαμα">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                                             </VBox.margin>
+                                          </CheckBox>
+                                          <CheckBox fx:id="monogoneiki" mnemonicParsing="false" prefHeight="25.0" prefWidth="170.0" text="Μονογονεϊκή">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                                             </VBox.margin>
+                                          </CheckBox>
+                                          <CheckBox fx:id="politeknos" mnemonicParsing="false" prefHeight="25.0" prefWidth="184.0" text="Πολύτεκνος">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                                             </VBox.margin>
+                                          </CheckBox>
+                                          <ComboBox fx:id="asfForeas" minHeight="40.0" prefHeight="40.0" prefWidth="292.0" promptText="Ασφαλιστικός Φορέας" style="-fx-font: 16px System;">
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </VBox.margin>
+                                          </ComboBox>
+                                          <CheckBox fx:id="amea" mnemonicParsing="false" prefHeight="25.0" prefWidth="170.0" text="ΑΜΕΑ">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+                                             </VBox.margin>
+                                          </CheckBox>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="440.0" prefWidth="311.0">
+                                       <children>
+                                          <CheckBox mnemonicParsing="false" prefHeight="25.0" prefWidth="196.0" text="Χρονίως πάσχοντας" fx:id="xronios">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+                                             </VBox.margin>
+                                          </CheckBox>
+                                          <TextField fx:id="pathisi" prefHeight="39.0" prefWidth="288.0" promptText="Πάθηση">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <CheckBox fx:id="monaxiko" mnemonicParsing="false" prefHeight="25.0" prefWidth="170.0" text="Μοναχικό άτομο">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+                                             </VBox.margin>
+                                          </CheckBox>
+                                          <CheckBox fx:id="emfiliVia" mnemonicParsing="false" prefHeight="25.0" prefWidth="183.0" text="Θύμα έμφυλης βίας">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+                                             </VBox.margin>
+                                          </CheckBox>
+                                          <CheckBox fx:id="spoudastis" mnemonicParsing="false" text="Σπουδαστής">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+                                             </VBox.margin>
+                                          </CheckBox>
+                                          <CheckBox fx:id="anenergos" mnemonicParsing="false" text="Ανενεργός ωφελούμενος">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+                                             </VBox.margin>
+                                          </CheckBox>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </content>
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin>
+                  </ScrollPane>
+               </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </StackPane>
+         </center>
+         <bottom>
+            <HBox alignment="CENTER" maxHeight="92.0" minHeight="60.0" prefHeight="74.0" prefWidth="997.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" minWidth="190.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#Search" style="-fx-background-color: #bc2d44;" text="Προβολή Στατιστικών" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="8.0" left="25.0" right="25.0" top="8.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="-0.0" />
+               </BorderPane.margin>
+            </HBox>
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>

@@ -59,6 +59,7 @@ public class OfeloumenoiMainController implements Initializable {
     private void SearchOfeloumenoi(ActionEvent event) throws IOException{
         Stage stage = (Stage) backButton.getScene().getWindow();
         sl.StageLoad("/sopho/Ofeloumenoi/SearchOfeloumenoi.fxml", stage, true, false); //resizable true, utility false 
+        sopho.StageLoader.lastStage = "/sopho/Ofeloumenoi/OfeloumenoiMain.fxml";
     }
     
     @FXML

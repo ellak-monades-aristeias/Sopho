@@ -427,16 +427,23 @@ public class ListaOfeloumenonController implements Initializable {
                         }
                     }
 
-
-                    list.add(new tableManager(rs.getInt("id"), rs.getDate("registerDate").toString(), rs.getString("eponimo"), rs.getString("onoma"), rs.getString("patronimo"), rs.getDate("imGennisis").toString(), rs.getString("dimos"), ConvertToYesNo(rs.getInt("anergos")), rs.getString("epaggelma"), rs.getString("eisodima"), rs.getString("eksartiseis"), rs.getString("ethnikotita"), ConvertToYesNo(rs.getInt("metanastis")), ConvertToYesNo(rs.getInt("roma")), oikKatastasi, rs.getInt("arithmosTeknon")+"", ConvertToYesNo(rs.getInt("mellousaMama")), ConvertToYesNo(rs.getInt("monogoneiki")), ConvertToYesNo(rs.getInt("politeknos")), asfForeas, ConvertToYesNo(rs.getInt("amea")), ConvertToYesNo(rs.getInt("xronios")), rs.getString("pathisi"), ConvertToYesNo(rs.getInt("monaxikos")), ConvertToYesNo(rs.getInt("emfiliVia")), ConvertToYesNo(rs.getInt("spoudastis")), ConvertToYesNo(rs.getInt("anenergos"))));
+                    String birthdate="";
+                    if(rs.getDate("imGennisis")!=null){
+                        birthdate = rs.getDate("imGennisis").toString();
+                    }
+                     
+                    
+                    list.add(new tableManager(rs.getInt("id"), rs.getDate("registerDate").toString(), rs.getString("eponimo"), rs.getString("onoma"), rs.getString("patronimo"), birthdate, rs.getString("dimos"), ConvertToYesNo(rs.getInt("anergos")), rs.getString("epaggelma"), rs.getString("eisodima"), rs.getString("eksartiseis"), rs.getString("ethnikotita"), ConvertToYesNo(rs.getInt("metanastis")), ConvertToYesNo(rs.getInt("roma")), oikKatastasi, rs.getInt("arithmosTeknon")+"", ConvertToYesNo(rs.getInt("mellousaMama")), ConvertToYesNo(rs.getInt("monogoneiki")), ConvertToYesNo(rs.getInt("politeknos")), asfForeas, ConvertToYesNo(rs.getInt("amea")), ConvertToYesNo(rs.getInt("xronios")), rs.getString("pathisi"), ConvertToYesNo(rs.getInt("monaxikos")), ConvertToYesNo(rs.getInt("emfiliVia")), ConvertToYesNo(rs.getInt("spoudastis")), ConvertToYesNo(rs.getInt("anenergos"))));
                 }
             
             }else{
                 sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Ενημέρωση", "Δεν έχετε προσθέσει ωφελούμενους ακόμη. Θέλετε να προσθέσετε έναν ωφελούμενο τώρα;", "question");
                 cm.showAndWait();
+                Stage stage = (Stage) backButton.getScene().getWindow();
                 if(cm.saidYes){
-                    Stage stage = (Stage) backButton.getScene().getWindow();
                     sl.StageLoad("/sopho/Ofeloumenoi/AddOfeloumenoi.fxml", stage, true, false); //stage to open, stage to close, resizable, utility
+                }else{
+                    sl.StageLoad("/sopho/Ofeloumenoi/OfeloumenoiMain.fxml", stage, false, true); //stage to open, stage to close, resizable, utility
                 }
             }
         } catch (SQLException | IOException ex) {

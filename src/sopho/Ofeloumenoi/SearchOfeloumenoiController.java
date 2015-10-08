@@ -20,11 +20,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -183,19 +178,33 @@ public class SearchOfeloumenoiController implements Initializable {
                     
                     if(rs.getRow()>0){//we have results
                         sopho.ResultKeeper.rs = rs; // we keep the results to a static var to access them later.
-                        sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Τέλεια!", "Βρέθηκαν αποτελέσματα...", "confirm");
-                        cm.showAndWait();
+
+                        if(sopho.StageLoader.lastStage.equals("/sopho/Ofeloumenoi/OfeloumenoiMain.fxml")){
                         
-                        Stage stage = (Stage) startAge.getScene().getWindow();
-                        try {
-                            sl.StageLoad("/sopho/Ofeloumenoi/SearchOfeloumenoiResults.fxml", stage, true, false); //resizable true, utility false
-                        } catch (IOException ex) {
-                            Logger.getLogger(SearchOfeloumenoiController.class.getName()).log(Level.SEVERE, null, ex);
+                            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Τέλεια!", "Βρέθηκαν αποτελέσματα...", "confirm");
+                            cm.showAndWait();
+
+                            Stage stage = (Stage) startAge.getScene().getWindow();
+                            try {
+                                sl.StageLoad("/sopho/Ofeloumenoi/SearchOfeloumenoiResults.fxml", stage, true, false); //resizable true, utility false
+                            } catch (IOException ex) {
+                                Logger.getLogger(SearchOfeloumenoiController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            
+                        }else{
+                            
+                            Stage stage = (Stage) startAge.getScene().getWindow();
+                            try {
+                                sl.StageLoad("/sopho/Ofeloumenoi/FiltersStatistika.fxml", stage, true, false); //resizable true, utility false
+                            } catch (IOException ex) {
+                                Logger.getLogger(SearchOfeloumenoiController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            
                         }
                         
                     }else{//we don't have results
                         
-                        sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Κρίμα...", "Δεν βρέθηκαν αποτελέσματα με τα κριτήρια που καθορίσατε. Δοκιμάστε να αλλάξετε τα κριτήρια της αναζήτησης.", "error");
+                        sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Κρίμα...", "Δεν βρέθηκαν αποτελέσματα με τα κριτήρια που καθορίσατε. Δοκιμάστε να αλλάξετε τα κριτήρια.", "error");
                         cm.showAndWait();
                         
                     }
@@ -210,7 +219,7 @@ public class SearchOfeloumenoiController implements Initializable {
     @FXML
     public void GoBack (ActionEvent event) throws IOException{
         Stage stage = (Stage) startAge.getScene().getWindow();
-        sl.StageLoad("/sopho/Ofeloumenoi/OfeloumenoiMain.fxml", stage, false, true); //resizable false, utility true
+        sl.StageLoad(sopho.StageLoader.lastStage, stage, false, true); //resizable false, utility true
     }
     
 }
