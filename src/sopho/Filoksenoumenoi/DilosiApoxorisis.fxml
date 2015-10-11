@@ -98,11 +98,23 @@
                               <Insets left="100.0" right="100.0" top="10.0" />
                            </VBox.margin>
                         </HBox>
-                        <DatePicker fx:id="dateApoxorisis" minHeight="40.0" minWidth="300.0" promptText="Ημερομηνία αποχώρησης" style="-fx-font: 16px System;">
+                        <VBox alignment="TOP_CENTER" prefHeight="29.0" prefWidth="674.0">
                            <VBox.margin>
                               <Insets top="40.0" />
                            </VBox.margin>
-                        </DatePicker>
+                           <children>
+                              <Label text="Ημερομηνία αποχώρησης">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <DatePicker fx:id="dateApoxorisis" minHeight="40.0" minWidth="300.0" promptText="Ημερομηνία αποχώρησης" style="-fx-font: 16px System;">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </DatePicker>
+                           </children>
+                        </VBox>
                      </children>
                   </VBox>
                </content>

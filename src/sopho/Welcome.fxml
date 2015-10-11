@@ -24,7 +24,7 @@
                      <children>
                         <VBox prefHeight="278.0" prefWidth="674.0">
                            <children>
-                              <Label alignment="TOP_LEFT" prefHeight="266.0" prefWidth="634.0" text="Θα χρειστεί να κάνουμε μερικές ρυθμίσεις πριν χρησιμοποιήσετε την εφαρμογή για πρώτη φορά... Κάντε κλικ στο επόμενο και ακολουθήστε τις οδηγίες!" textOverrun="CLIP" wrapText="true">
+                              <Label alignment="TOP_LEFT" prefHeight="266.0" prefWidth="634.0" text="Θα χρειστεί να κάνετε μερικές ρυθμίσεις πριν χρησιμοποιήσετε την εφαρμογή για πρώτη φορά... Κάντε κλικ στο επόμενο και ακολουθήστε τις οδηγίες!" textOverrun="CLIP" wrapText="true">
                                  <VBox.margin>
                                     <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
                                  </VBox.margin>

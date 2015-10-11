@@ -17,12 +17,9 @@ package sopho.Ofeloumenoi;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -52,7 +49,7 @@ public class ListaOfeloumenonController implements Initializable {
     @FXML
     private TableColumn <tableManager, Integer> colID;
     @FXML
-    private TableColumn <tableManager, String> colRegisterDate, colEponimo, colPatronimo, colOnoma, colGennisi, colDimos, colAnergos, colEpaggelma, colEisodima, colEksartiseis, colEthnikotita, colMetanastis, colRoma, colOikKatastasi, colTekna, colMellousaMama, colMonogoneiki, colPoliteknos, colAsfForeas, colXronios, colPathisi, colAmea, colMonaxiko, colEmfiliVia, colSpoudastis, colAnenergos;
+    private TableColumn <tableManager, String> colRegisterDate, colBarcode, colEponimo, colPatronimo, colOnoma, colGennisi, colDimos, colAnergos, colEpaggelma, colEisodima, colEksartiseis, colEthnikotita, colMetanastis, colRoma, colOikKatastasi, colTekna, colMellousaMama, colMonogoneiki, colPoliteknos, colAsfForeas, colXronios, colPathisi, colAmea, colMonaxiko, colEmfiliVia, colSpoudastis, colAnenergos;
     
     private ObservableList <tableManager> data;
     
@@ -70,6 +67,7 @@ public class ListaOfeloumenonController implements Initializable {
         //filling table with data
         resultTable.setItems(data);
         colID.setCellValueFactory(new PropertyValueFactory<tableManager, Integer>("id"));
+        colBarcode.setCellValueFactory(new PropertyValueFactory<tableManager, String>("barcode"));
         colRegisterDate.setCellValueFactory(new PropertyValueFactory<tableManager, String>("registerDate"));
         colEponimo.setCellValueFactory(new PropertyValueFactory<tableManager, String>("eponimo"));
         colOnoma.setCellValueFactory(new PropertyValueFactory<tableManager, String>("onoma"));
@@ -98,13 +96,13 @@ public class ListaOfeloumenonController implements Initializable {
         colAnenergos.setCellValueFactory(new PropertyValueFactory<tableManager, String>("anenergos"));
         
         //setting the data to the table
-        resultTable.getColumns().setAll(colID, colRegisterDate, colEponimo, colOnoma, colPatronimo, colGennisi, colDimos, colAnergos, colEpaggelma, colEisodima, colEksartiseis, colEthnikotita, colMetanastis, colRoma, colOikKatastasi, colTekna, colMellousaMama, colMonogoneiki, colPoliteknos, colAsfForeas, colAmea, colXronios, colPathisi, colMonaxiko, colEmfiliVia, colSpoudastis, colAnenergos);
+        resultTable.getColumns().setAll(colID, colRegisterDate, colBarcode, colEponimo, colOnoma, colPatronimo, colGennisi, colDimos, colAnergos, colEpaggelma, colEisodima, colEksartiseis, colEthnikotita, colMetanastis, colRoma, colOikKatastasi, colTekna, colMellousaMama, colMonogoneiki, colPoliteknos, colAsfForeas, colAmea, colXronios, colPathisi, colMonaxiko, colEmfiliVia, colSpoudastis, colAnenergos);
     }
     
     @FXML
     public void GoBack(ActionEvent event) throws IOException{
         Stage stage = (Stage) backButton.getScene().getWindow();
-        sl.StageLoad("/sopho/Ofeloumenoi/SearchOfeloumenoi.fxml", stage, true, false); //resizable true, utility false
+        sl.StageLoad("/sopho/Ofeloumenoi/OfeloumenoiMain.fxml", stage, true, false); //resizable true, utility false
     }
     
     @FXML
@@ -181,6 +179,7 @@ public class ListaOfeloumenonController implements Initializable {
     public static class tableManager { //this is a helper class to display the data from the resultSet to the table properly.
         
         private IntegerProperty id;
+        private StringProperty barcode;
         private StringProperty registerDate;
         private StringProperty eponimo;
         private StringProperty onoma;
@@ -211,8 +210,9 @@ public class ListaOfeloumenonController implements Initializable {
         
         public tableManager(){}
 
-        private tableManager(Integer id, String registerDate, String eponimo, String onoma, String patronimo, String imGennisis, String dimos, String anergos, String epaggelma, String eisodima, String eksartiseis, String ethnikotita, String metanastis, String roma, String oikKatastasi, String tekna, String mellousaMama, String monogoneiki, String politeknos, String asfForeas, String amea, String xronios, String pathisi, String monaxiko, String emfiliVia, String spoudastis, String anenergos){
+        private tableManager(Integer id, String registerDate, String barcode, String eponimo, String onoma, String patronimo, String imGennisis, String dimos, String anergos, String epaggelma, String eisodima, String eksartiseis, String ethnikotita, String metanastis, String roma, String oikKatastasi, String tekna, String mellousaMama, String monogoneiki, String politeknos, String asfForeas, String amea, String xronios, String pathisi, String monaxiko, String emfiliVia, String spoudastis, String anenergos){
             this.id = new SimpleIntegerProperty(id);
+            this.barcode = new SimpleStringProperty(barcode);
             this.registerDate = new SimpleStringProperty(registerDate);
             this.eponimo = new SimpleStringProperty(eponimo);
             this.onoma = new SimpleStringProperty(onoma);
@@ -245,6 +245,10 @@ public class ListaOfeloumenonController implements Initializable {
         //the following get and set methods are required. Else the table cells will appear blank
         public Integer getId(){
             return id.get();
+        }
+        
+        public String getBarcode(){
+            return barcode.get();
         }
         
         public String getRegisterDate(){
@@ -433,7 +437,7 @@ public class ListaOfeloumenonController implements Initializable {
                     }
                      
                     
-                    list.add(new tableManager(rs.getInt("id"), rs.getDate("registerDate").toString(), rs.getString("eponimo"), rs.getString("onoma"), rs.getString("patronimo"), birthdate, rs.getString("dimos"), ConvertToYesNo(rs.getInt("anergos")), rs.getString("epaggelma"), rs.getString("eisodima"), rs.getString("eksartiseis"), rs.getString("ethnikotita"), ConvertToYesNo(rs.getInt("metanastis")), ConvertToYesNo(rs.getInt("roma")), oikKatastasi, rs.getInt("arithmosTeknon")+"", ConvertToYesNo(rs.getInt("mellousaMama")), ConvertToYesNo(rs.getInt("monogoneiki")), ConvertToYesNo(rs.getInt("politeknos")), asfForeas, ConvertToYesNo(rs.getInt("amea")), ConvertToYesNo(rs.getInt("xronios")), rs.getString("pathisi"), ConvertToYesNo(rs.getInt("monaxikos")), ConvertToYesNo(rs.getInt("emfiliVia")), ConvertToYesNo(rs.getInt("spoudastis")), ConvertToYesNo(rs.getInt("anenergos"))));
+                    list.add(new tableManager(rs.getInt("id"), rs.getDate("registerDate").toString(), rs.getString("barcode"), rs.getString("eponimo"), rs.getString("onoma"), rs.getString("patronimo"), birthdate, rs.getString("dimos"), ConvertToYesNo(rs.getInt("anergos")), rs.getString("epaggelma"), rs.getString("eisodima"), rs.getString("eksartiseis"), rs.getString("ethnikotita"), ConvertToYesNo(rs.getInt("metanastis")), ConvertToYesNo(rs.getInt("roma")), oikKatastasi, rs.getInt("arithmosTeknon")+"", ConvertToYesNo(rs.getInt("mellousaMama")), ConvertToYesNo(rs.getInt("monogoneiki")), ConvertToYesNo(rs.getInt("politeknos")), asfForeas, ConvertToYesNo(rs.getInt("amea")), ConvertToYesNo(rs.getInt("xronios")), rs.getString("pathisi"), ConvertToYesNo(rs.getInt("monaxikos")), ConvertToYesNo(rs.getInt("emfiliVia")), ConvertToYesNo(rs.getInt("spoudastis")), ConvertToYesNo(rs.getInt("anenergos"))));
                 }
             
             }else{

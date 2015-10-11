@@ -42,7 +42,7 @@ public class VivliothikiMainController implements Initializable {
     @FXML
     public void OpenKataxorisi(ActionEvent e) throws IOException{
         Stage stage = (Stage) backButton.getScene().getWindow();
-        sl.StageLoad("/sopho/Vivliothiki/KataxorisiVivliou.fxml", stage, false, true); //resizable false, utility true
+        sl.StageLoad("/sopho/Vivliothiki/KataxorisiVivliou.fxml", stage, true, true); //resizable true, utility true
     }
     
     @FXML

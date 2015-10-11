@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.image.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.effect.*?>
 <?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -12,56 +12,58 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.*?>
 
-<AnchorPane minHeight="651.0" minWidth="997.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="651.0" prefWidth="997.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Ofeloumenoi.SearchOfeloumenoiController">
+<AnchorPane maxHeight="900.0" maxWidth="1025.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="646.0" prefWidth="1000.0" style="-fx-min-width: 676px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Ofeloumenoi.SearchOfeloumenoiController">
     <stylesheets>
         <URL value="@../Style.css" />
     </stylesheets>
     <children>
-      <BorderPane minHeight="650.0" minWidth="997.0" prefHeight="870.0" prefWidth="997.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane layoutY="-0.0" prefHeight="841.0" prefWidth="676.0" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-0.0">
          <top>
-                  <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
-                     <children>
-                        <Label styleClass="titleSmall" text="Εξαγωγή στατιστικών με χρήση φίλτρων" textAlignment="CENTER" textFill="WHITE">
-                        </Label>
-                        <Button fx:id="backButton" mnemonicParsing="false" onAction="#GoBack" prefHeight="33.0" prefWidth="81.0" styleClass="backButton" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
-                           <StackPane.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </StackPane.margin>
-                        </Button>
-                        <SVGPath content="M461,244 L371,244 L317.8,185 L461,185" fill="#bc2d44" nodeOrientation="LEFT_TO_RIGHT" scaleX="1.2" scaleY="0.77" stroke="RED" strokeWidth="0.0" translateX="-12.0" StackPane.alignment="CENTER_RIGHT" />
-                     </children>
-                     <effect>
-                        <DropShadow />
-                     </effect>
-                  </StackPane>
-               </top>
-          
-         <center>
-            <StackPane prefHeight="512.0" prefWidth="997.0">
+            <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
                <children>
-                  <ScrollPane prefHeight="512.0" prefViewportHeight="512.0" prefViewportWidth="997.0" prefWidth="997.0" style="-fx-fit-to-height: true; -fx-fit-to-width: true; -fx-border-width: 0; -fx-border-color: white;" StackPane.alignment="CENTER">
-                     <content>
-                        <VBox alignment="CENTER" prefHeight="512.0" prefWidth="995.0">
+                   <Button fx:id="backButton" mnemonicParsing="false" onAction="#GoBack" prefHeight="33.0" prefWidth="81.0" style="-fx-background-color: #bc2d44;" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
+                     <font>
+                        <Font name="Open Sans Semibold" size="16.0" />
+                     </font>
+                     <StackPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </StackPane.margin>
+                  </Button>
+                  <Label styleClass="title" text="Εξαγωγή στατιστικών με χρήση φίλτρων" textAlignment="CENTER" textFill="WHITE">
+                  </Label>
+                  <SVGPath content="M461,244 L371,244 L317.8,185 L461,185" fill="#bc2d44" nodeOrientation="LEFT_TO_RIGHT" scaleX="1.2" scaleY="0.77" stroke="RED" strokeWidth="0.0" translateX="-12.0" StackPane.alignment="CENTER_RIGHT" />
+               </children>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </StackPane>
+         </top>
+         <center>
+            <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="532.0" prefWidth="998.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="532.0" prefWidth="985.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <Label alignment="TOP_CENTER" minHeight="90.0" prefHeight="90.0" prefWidth="955.0" text="Καθορίστε τα κριτήρια που επιθυμείτε παρακάτω για να περιοριστούν τα στατιστικά στοιχεία βάσει αυτών των κριτηρίων. Σε περίπτωση που θέλετε να δείτε στατιστικά για όλους τους ωφελούμενους χρησιμοποιήστε τα γενικά στατιστικά." wrapText="true">
-                                 <VBox.margin>
-                                    <Insets left="20.0" right="20.0" top="20.0" />
-                                 </VBox.margin>
                                  <font>
                                     <Font size="18.0" />
                                  </font>
+                                 <VBox.margin>
+                                    <Insets left="20.0" right="20.0" top="20.0" />
+                                 </VBox.margin>
                               </Label>
                               <HBox alignment="CENTER" maxHeight="440.0" minHeight="420.0" minWidth="995.0" prefHeight="420.0" prefWidth="995.0" style="-fx-border-width: 0; -fx-border-color: white;" BorderPane.alignment="CENTER">
                                  <children>
                                     <VBox prefHeight="450.0" prefWidth="311.0">
                                        <children>
                                           <Label alignment="CENTER" text="Ηλικία:">
-                                             <VBox.margin>
-                                                <Insets left="10.0" right="10.0" top="5.0" />
-                                             </VBox.margin>
                                              <font>
                                                 <Font size="16.0" />
                                              </font>
+                                             <VBox.margin>
+                                                <Insets left="10.0" right="10.0" top="5.0" />
+                                             </VBox.margin>
                                           </Label>
                                           <HBox>
                                              <children>
@@ -278,19 +280,13 @@
                               </HBox>
                            </children>
                         </VBox>
-                     </content>
-                     <StackPane.margin>
-                        <Insets />
-                     </StackPane.margin>
-                  </ScrollPane>
-               </children>
-               <BorderPane.margin>
-                  <Insets />
-               </BorderPane.margin>
-            </StackPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
          </center>
          <bottom>
-            <HBox alignment="CENTER" maxHeight="92.0" minHeight="60.0" prefHeight="74.0" prefWidth="997.0" BorderPane.alignment="CENTER">
+            <HBox alignment="TOP_CENTER" prefHeight="63.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
                <children>
                   <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" minWidth="190.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#Search" style="-fx-background-color: #bc2d44;" text="Προβολή Στατιστικών" textFill="WHITE">
                      <font>
@@ -300,15 +296,12 @@
                         <Insets bottom="8.0" left="25.0" right="25.0" top="8.0" />
                      </padding>
                      <HBox.margin>
-                        <Insets left="10.0" right="10.0" />
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Button>
                </children>
-               <BorderPane.margin>
-                  <Insets bottom="-0.0" />
-               </BorderPane.margin>
             </HBox>
          </bottom>
       </BorderPane>
-   </children>
+    </children>
 </AnchorPane>

@@ -21,6 +21,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -105,12 +106,9 @@ public class DaneismosVivliouController implements Initializable {
                 pst.setDate(6, null);
             }else{
                 //converting the date to a suitable format for the db.
-                LocalDate ld = date.getValue();
-                Calendar c =  Calendar.getInstance();
-                c.set(ld.getYear(), ld.getMonthValue(), ld.getDayOfMonth());
-                Date mydate = c.getTime();
+                Date mydate = Date.from(date.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
                 java.sql.Date sqlDate = new java.sql.Date(mydate.getTime());
-                pst.setDate(6, sqlDate);
+                pst.setDate(6,sqlDate);
             }
             pst.setInt(7, selID);
             

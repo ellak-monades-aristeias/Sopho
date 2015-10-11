@@ -16,9 +16,7 @@ package sopho.Ofeloumenoi;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.Date;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -232,6 +230,9 @@ public class FiltersStatistikaController implements Initializable {
         
         rs.last();
         if(rs.getRow()>0){
+            
+            boolean firstEth=true;
+            
             rs.beforeFirst();
             while(rs.next()){
                                 
@@ -290,23 +291,38 @@ public class FiltersStatistikaController implements Initializable {
                 
                 if(!rs.getString("eksartiseis").equals("")) eksartiseis++;
                 
-                if(!rs.getString("ethnikotita").equals("")){ //doing the proccess only if the collumn is filled with data
-                    //we have to iterate through ethnikotita hashmap and add new ethnikotita if it doesn't exist. Else add to the current number
-                    Iterator it = ethnikotita.entrySet().iterator();
-                    while (it.hasNext()) {
-                        Map.Entry pair = (Map.Entry)it.next();
-                        if(pair.getKey().equals(rs.getString("ethnikotita"))){
-                            int oldValue = (int) pair.getValue();
-                            pair.setValue(oldValue++);
-                        }else{
-                            ethnikotita.put(rs.getString("ethnikotita"), 1);
+                String ethnik = rs.getString("ethnikotita");
+                if(!ethnik.equals("")){ //doing the proccess only if the collumn is filled with data
+
+                    if(firstEth){
+                        ethnikotita.put(ethnik, 1);
+                        firstEth=false;
+                        System.out.println("once");
+                    }else{
+                    
+                        //we have to iterate through ethnikotita hashmap and add new ethnikotita if it doesn't exist. Else add to the current number
+                        boolean mustadd=true;//we use mustadd to know if the value already exists through searching the map ethnikotita. if exists it is set to false
+                        
+                        for (Map.Entry<String, Integer> entry : ethnikotita.entrySet()){
+                            if(entry.getKey().equalsIgnoreCase(ethnik)){
+                                int val = (int) entry.getValue() + 1;
+                                System.out.println("val is "+val);
+                                entry.setValue(val);
+                                mustadd=false;
+                                System.out.println("found same " + ethnik);
+                                System.out.println("key" + entry.getKey() + " value"+entry.getValue());
+                            }
                         }
-                        it.remove(); // avoids a ConcurrentModificationException
+                        
+                        if(mustadd){
+                            ethnikotita.put(ethnik, 1);
+                            System.out.println("mustadd " + ethnik);
+                        }
                     }
                 }
                 
                 metanastes += rs.getInt("metanastis");
-                metanastes += rs.getInt("roma");
+                roma += rs.getInt("roma");
                 
                 if(rs.getInt("oikKatastasi")>=0){//if the user didn't selected anything the value is -1
                     if(rs.getInt("oikKatastasi")==0) agamos++;
@@ -389,7 +405,7 @@ public class FiltersStatistikaController implements Initializable {
         XYChart.Data<String, Integer> data7 = new XYChart.Data<>("71-80", age7180);
         XYChart.Data<String, Integer> data8 = new XYChart.Data<>("81-90", age8190);
         XYChart.Data<String, Integer> data9 = new XYChart.Data<>("90+", age91plus);
-        XYChart.Data<String, Integer> data10 = new XYChart.Data<>("Δεν καταγράφηκε", totalOfeloumenoi-age020-age3140-age4150-age5160-age6170-age7180-age8190-age91plus);
+        XYChart.Data<String, Integer> data10 = new XYChart.Data<>("Δεν καταγράφηκε", totalOfeloumenoi-age020-age2130-age3140-age4150-age5160-age6170-age7180-age8190-age91plus);
         
         displayLabelForData(data);
         displayLabelForData(data2);
@@ -588,14 +604,14 @@ public class FiltersStatistikaController implements Initializable {
     private ObservableList<PieChart.Data> ethnikotitaPieData(){
               
         List<PieChart.Data> list = new ArrayList<>();
-        
-        Iterator it = ethnikotita.entrySet().iterator();
         int hasFilled=0;//we have to know the number of persons that have the field blank
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry)it.next();
-            list.add(new PieChart.Data(pair.getKey() + "("+(int) pair.getValue()+")", (int) pair.getValue()));
-            it.remove(); // avoids a ConcurrentModificationException
-            hasFilled += (int) pair.getValue();
+
+        for (Map.Entry<String, Integer> entry : ethnikotita.entrySet()){
+            
+            list.add(new PieChart.Data(entry.getKey() + "("+(int) entry.getValue()+")", (int) entry.getValue()));
+
+            hasFilled += (int) entry.getValue();
+
         }
         
         list.add(new PieChart.Data("Δεν καταγράφηκε ("+(totalOfeloumenoi-hasFilled)+")", totalOfeloumenoi-hasFilled));

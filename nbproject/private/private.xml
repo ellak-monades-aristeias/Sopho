@@ -3,18 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Αγάπιος/Documents/NetBeansProjects/Sopho/src/sopho/Ofeloumenoi/GeneralStatistikaController.java</file>
-            <file>file:/C:/Users/Αγάπιος/Documents/NetBeansProjects/Sopho/src/sopho/Ofeloumenoi/SearchOfeloumenoiResultsController.java</file>
-            <file>file:/C:/Users/Αγάπιος/Documents/NetBeansProjects/Sopho/src/sopho/Ofeloumenoi/StatistikaMain.fxml</file>
+            <file>file:/C:/Users/Αγάπιος/Documents/NetBeansProjects/Sopho/src/sopho/Ofeloumenoi/AddOfeloumenoiController.java</file>
+            <file>file:/C:/Users/Αγάπιος/Documents/NetBeansProjects/Sopho/src/sopho/Ofeloumenoi/TakePhotoController.java</file>
             <file>file:/C:/Users/Αγάπιος/Documents/NetBeansProjects/Sopho/src/sopho/Ofeloumenoi/ListaOfeloumenonController.java</file>
-            <file>file:/C:/Users/Αγάπιος/Documents/NetBeansProjects/Sopho/src/sopho/Ofeloumenoi/GeneralStatistika.fxml</file>
-            <file>file:/C:/Users/Αγάπιος/Documents/NetBeansProjects/Sopho/src/sopho/Ofeloumenoi/FiltersStatistika.fxml</file>
+            <file>file:/C:/Users/Αγάπιος/Documents/NetBeansProjects/Sopho/src/sopho/StageLoader.java</file>
             <file>file:/C:/Users/Αγάπιος/Documents/NetBeansProjects/Sopho/src/sopho/Ofeloumenoi/EditOfeloumenoiController.java</file>
-            <file>file:/C:/Users/Αγάπιος/Documents/NetBeansProjects/Sopho/src/sopho/MainAppController.java</file>
-            <file>file:/C:/Users/Αγάπιος/Documents/NetBeansProjects/Sopho/src/sopho/Ofeloumenoi/OfeloumenoiMain.fxml</file>
-            <file>file:/C:/Users/Αγάπιος/Documents/NetBeansProjects/Sopho/src/sopho/Ofeloumenoi/OfeloumenoiMainController.java</file>
-            <file>file:/C:/Users/Αγάπιος/Documents/NetBeansProjects/Sopho/src/sopho/Ofeloumenoi/StatistikaMainController.java</file>
-            <file>file:/C:/Users/Αγάπιος/Documents/NetBeansProjects/Sopho/src/sopho/Ofeloumenoi/FiltersStatistikaController.java</file>
+            <file>file:/C:/Users/Αγάπιος/Documents/NetBeansProjects/Sopho/src/sopho/Ofeloumenoi/SearchToEditOfeloumenoiController.java</file>
+            <file>file:/C:/Users/Αγάπιος/Documents/NetBeansProjects/Sopho/src/sopho/Ofeloumenoi/SearchOfeloumenoiController.java</file>
         </group>
     </open-files>
 </project-private>

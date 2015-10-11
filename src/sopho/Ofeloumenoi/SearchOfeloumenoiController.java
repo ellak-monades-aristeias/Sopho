@@ -30,6 +30,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.apache.commons.lang3.math.NumberUtils;
 
 public class SearchOfeloumenoiController implements Initializable {
     
@@ -85,6 +86,15 @@ public class SearchOfeloumenoiController implements Initializable {
         if(startAge.getText().isEmpty()&&endAge.getText().isEmpty()&&dimos.getText().isEmpty()&&!anergos.isSelected()&&epaggelma.getText().isEmpty()&&eisodima.getText().isEmpty()&&eksartiseis.getText().isEmpty()&&ethnikotita.getText().isEmpty()&&!metanastis.isSelected()&&!roma.isSelected()&&oikKatastasi.getSelectionModel().getSelectedIndex()==-1&&arTeknon.getText().isEmpty()&&!mellousaMama.isSelected()&&!monogoneiki.isSelected()&&!politeknos.isSelected()&&asfForeas.getSelectionModel().getSelectedIndex()==-1&&!amea.isSelected()&&!xronios.isSelected()&&pathisi.getText().isEmpty()&&!monaxiko.isSelected()&&!emfiliVia.isSelected()&&!spoudastis.isSelected()&&!anenergos.isSelected()){
             sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Πρέπει να συμπληρώσετε τουλάχιστον ένα πεδίο ή να τσεκάρετε κάποια από τις επιλογές.", "error");
             cm.showAndWait();
+        }else if((!NumberUtils.isNumber(startAge.getText())&&!startAge.getText().isEmpty())&&(!NumberUtils.isNumber(endAge.getText())&&!endAge.getText().isEmpty())){
+            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Στα πεδία ηλικία από και ηλικία έως μπορείτε να συμπληρώσετε μόνο αριθμούς. Διορθώστε το πεδίο και προσπαθήστε και πάλι.", "error");
+            cm.showAndWait();        
+        }else if(!NumberUtils.isNumber(eisodima.getText())&&!eisodima.getText().isEmpty()){
+            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Στο πεδίο εισόδημα μπορείτε να συμπληρώσετε μόνο αριθμούς. Διορθώστε το πεδίο και προσπαθήστε και πάλι.", "error");
+            cm.showAndWait();        
+        }else if(!NumberUtils.isNumber(arTeknon.getText())&&!arTeknon.getText().isEmpty()){
+            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Στο πεδίο αριθμός τέκνων μπορείτε να συμπληρώσετε μόνο αριθμούς. Διορθώστε το πεδίο και προσπαθήστε και πάλι.", "error");
+            cm.showAndWait();        
         }else{//the user has filled at least one field or checked a checkbox
             if((!startAge.getText().isEmpty()&&!endAge.getText().isEmpty())&&(Integer.parseInt(startAge.getText())>Integer.parseInt(endAge.getText()))){
                 sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Ελέγξτε τα πεδία όπου αναγράφονται οι ηλικίες. Το πεδίο 'από' δεν μπορεί να έχει μεγαλύτερη τιμή από το πεδίο 'έως'", "error");

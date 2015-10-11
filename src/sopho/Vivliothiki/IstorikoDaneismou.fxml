@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.image.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.effect.*?>
 <?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -12,39 +12,41 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.*?>
 
-<AnchorPane minHeight="676.0" minWidth="997.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="677.0" prefWidth="997.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Vivliothiki.IstorikoDaneismouController">
+<AnchorPane maxHeight="900.0" maxWidth="1025.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="720.0" prefWidth="1024.0" style="-fx-min-width: 676px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Vivliothiki.IstorikoDaneismouController">
     <stylesheets>
         <URL value="@../Style.css" />
     </stylesheets>
     <children>
-      <BorderPane minHeight="650.0" minWidth="997.0" prefHeight="870.0" prefWidth="997.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane layoutY="-0.0" prefHeight="841.0" prefWidth="676.0" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-0.0">
          <top>
-                  <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
-                     <children>
-                        <Label styleClass="titleSmall" text="Ιστορικό δανεισμού βιβλίων" textAlignment="CENTER" textFill="WHITE">
-                        </Label>
-                        <Button fx:id="backButton" mnemonicParsing="false" onAction="#GoBack" prefHeight="33.0" prefWidth="81.0" styleClass="backButton" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
-                           <StackPane.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </StackPane.margin>
-                        </Button>
-                        <SVGPath content="M461,244 L371,244 L317.8,185 L461,185" fill="#bc2d44" nodeOrientation="LEFT_TO_RIGHT" scaleX="1.2" scaleY="0.77" stroke="RED" strokeWidth="0.0" translateX="-12.0" StackPane.alignment="CENTER_RIGHT" />
-                     </children>
-                     <effect>
-                        <DropShadow />
-                     </effect>
-                  </StackPane>
-               </top>
-          
+            <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
+               <children>
+                   <Button fx:id="backButton" mnemonicParsing="false" onAction="#GoBack" prefHeight="33.0" prefWidth="81.0" style="-fx-background-color: #bc2d44;" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
+                     <font>
+                        <Font name="Open Sans Semibold" size="16.0" />
+                     </font>
+                     <StackPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </StackPane.margin>
+                  </Button>
+                  <Label styleClass="title" text="Ιστορικό δανεισμού βιβλίων" textAlignment="CENTER" textFill="WHITE">
+                  </Label>
+                  <SVGPath content="M461,244 L371,244 L317.8,185 L461,185" fill="#bc2d44" nodeOrientation="LEFT_TO_RIGHT" scaleX="1.2" scaleY="0.77" stroke="RED" strokeWidth="0.0" translateX="-12.0" StackPane.alignment="CENTER_RIGHT" />
+               </children>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </StackPane>
+         </top>
          <center>
-            <ScrollPane fitToHeight="true" prefViewportHeight="712.0" prefViewportWidth="1238.0" BorderPane.alignment="TOP_CENTER">
-               <content>
-                  <AnchorPane>
+            <ScrollPane fitToHeight="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="768.0">
                      <children>
                         <TableView fx:id="table" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <columns>
+                           <columns>
                               <TableColumn fx:id="id" prefWidth="240.0" text="id" visible="false" />
-                            <TableColumn fx:id="titlos" prefWidth="240.0" text="Τίτλος" />
+                              <TableColumn fx:id="titlos" prefWidth="240.0" text="Τίτλος" />
                               <TableColumn fx:id="siggrafeas" prefWidth="157.0" text="Συγγραφέας" />
                               <TableColumn fx:id="katigoria" prefWidth="194.0" text="Κατηγορία" />
                               <TableColumn fx:id="ekdotikos" prefWidth="191.0" text="Εκδοτικός οίκος" />
@@ -57,16 +59,13 @@
                               <TableColumn fx:id="patronimo" prefWidth="190.0" text="Πατρώνυμο" />
                               <TableColumn fx:id="tilefono" prefWidth="190.0" text="Τηλέφωνο" />
                               <TableColumn fx:id="dieuthinsi" prefWidth="190.0" text="Διεύθυνση" />
-                          </columns>
+                           </columns>
                         </TableView>
                      </children>
                   </AnchorPane>
-               </content>
-               <BorderPane.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </BorderPane.margin>
+              </content>
             </ScrollPane>
          </center>
       </BorderPane>
-   </children>
+    </children>
 </AnchorPane>

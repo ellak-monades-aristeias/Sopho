@@ -38,14 +38,14 @@
                   </AnchorPane>
                </content>
                <BorderPane.margin>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                  <Insets />
                </BorderPane.margin>
             </ScrollPane>
          </center>
          <top>
             <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
                <children>
-                  <Label styleClass="titleSmall" text="Καταχώρηση ειδών που δόθηκαν" textAlignment="CENTER" textFill="WHITE">
+                  <Label styleClass="titleSmall" text="Ιστορικό ειδών που δόθηκαν" textAlignment="CENTER" textFill="WHITE">
                   </Label>
                   <Button fx:id="backButton" mnemonicParsing="false" onAction="#GoBack" prefHeight="33.0" prefWidth="81.0" styleClass="backButton" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
                      <StackPane.margin>

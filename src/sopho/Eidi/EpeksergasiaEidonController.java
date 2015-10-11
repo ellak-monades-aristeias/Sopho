@@ -39,6 +39,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class EpeksergasiaEidonController implements Initializable {
@@ -71,8 +72,17 @@ public class EpeksergasiaEidonController implements Initializable {
     PreparedStatement pst = null;
     ResultSet rs = null;
     
+    sopho.PrefsHandler prefs = new sopho.PrefsHandler();
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        if(prefs.getPrefs("eidiNotification").equals("true")){
+            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Ειδοποίηση!", "Η επιλογή εμφάνιση/απόκρυψη εμφανίζει ή αποκρύπτει τα είδη από το μενού 'Καταχώρηση ειδών που δόθηκαν'. Χρησιμεύει για να περιοριορίζονται τα είδη που εμφανίζονται αλλά να μην διαγράφονται προκειμένου να εμφανίζονται στο ιστορικό των ειδών που δόθηκαν. Πατήστε οκ για να μην εμφανιστεί ξανά το μήνυμα.", "notify" );
+            cm.showAndWait();
+            prefs.setPrefs("eidiNotification", "false");
+        }
+
         //initialzing eidiTable table
         data = getInitialTableData();
                 
@@ -137,7 +147,7 @@ public class EpeksergasiaEidonController implements Initializable {
             tableManager tbl = (tableManager) eidiTable.getItems().get(i);
             
             int activeFlag;
-            if(tbl.getActive().equals("Ενεργό")){
+            if(tbl.getActive().equals("Εμφανίζεται")){
                 activeFlag=1;
             }else{
                 activeFlag=0;
@@ -220,7 +230,7 @@ public class EpeksergasiaEidonController implements Initializable {
     @FXML
     private void AddRow(ActionEvent event) {
         //create a new row after the last row
-        tableManager tbl = new tableManager(-100, "Συμπληρώστε όνομα είδους" , "Ενεργό"); //the -100 doesn't matter because the id is auto increment and we won't push it to the database
+        tableManager tbl = new tableManager(-100, "Συμπληρώστε όνομα είδους" , "Εμφανίζεται"); //the -100 doesn't matter because the id is auto increment and we won't push it to the database
                 
         data.add(tbl);
         int row = data.size()-1; //we compensate with -1 because the rows count from 0
@@ -245,10 +255,10 @@ public class EpeksergasiaEidonController implements Initializable {
         }else{
             tableManager tbl = eidiTable.getSelectionModel().getSelectedItem();
             
-            if(tbl.getActive().equals("Ενεργό")){
-                tbl.setActive("Ανενεργό");
+            if(tbl.getActive().equals("Εμφανίζεται")){
+                tbl.setActive("Δεν εμφανίζεται");
             }else{
-                tbl.setActive("Ενεργό");
+                tbl.setActive("Εμφανίζεται");
             }
         
         }
@@ -325,7 +335,7 @@ public class EpeksergasiaEidonController implements Initializable {
                 }
             }else{
                 // we can add data to the initial table using the following command
-                list.add(new tableManager(-10,"Συμπληρώστε όνομα είδους", "Ενεργό")); //the -10 doesn't matter because the id is auto increment and we won't push it to the database
+                list.add(new tableManager(-10,"Συμπληρώστε όνομα είδους", "Εμφανίζεται")); //the -10 doesn't matter because the id is auto increment and we won't push it to the database
                 noRecords=true;
             }
                     
@@ -353,9 +363,9 @@ public class EpeksergasiaEidonController implements Initializable {
     public String ConvertToYesNo(int flag){
             String s;
             if(flag==1){
-                s="Ενεργό";
+                s="Εμφανίζεται";
             }else{
-                s="Ανενεργό";
+                s="Δεν εμφανίζεται";
             }
             
             return s;

@@ -17,8 +17,6 @@ package sopho;
 import insidefx.undecorator.Undecorator;
 import insidefx.undecorator.UndecoratorScene;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +25,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -37,12 +36,12 @@ public class StageLoader {
     
     public static boolean fullscreen=false;
     public static String lastStage;
-    
+        
     LockEdit le = new LockEdit();
     
     //this method opens new stage and closes the old one
     public void StageLoad(String fxmlName, Stage oldStage, boolean resizable, boolean utilityWindow) throws IOException{
-                
+        
         StageLoadNoClose(fxmlName, resizable, utilityWindow);
         
         oldStage.close();
@@ -51,6 +50,11 @@ public class StageLoader {
     //this method is to show new stage without closing the old one
     public void StageLoadNoClose(String fxmlName, boolean resizable, boolean utilityWindow) throws IOException {
                
+        Font.loadFont(getClass().getResourceAsStream("../Fonts/OpenSans-ExtraBold"), 14);
+        Font.loadFont(getClass().getResourceAsStream("../Fonts/OpenSans-Light.ttf"), 14);
+        Font.loadFont(getClass().getResourceAsStream("../Fonts/OpenSans-Regular.ttf"), 14);
+        Font.loadFont(getClass().getResourceAsStream("../Fonts/OpenSans-Semibold.ttf"), 14);
+        
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlName));
         Region root = (Region) fxmlLoader.load();
         Stage stage = new Stage();
@@ -75,8 +79,6 @@ public class StageLoader {
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         System.out.println("width" + stage.getWidth());
         System.out.println("height" + stage.getHeight());
-        stage.setX((primScreenBounds.getWidth() - stage.getWidth() - 44) / 2); //we use -44 to compensate for the UndecoratorBis that adds 22 pixels at every edge around the stage
-        stage.setY((primScreenBounds.getHeight() - stage.getHeight() - 44) / 2);
         stage.setResizable(resizable);
         
         if (undecorator.getMaxWidth() > 0) {
@@ -93,6 +95,7 @@ public class StageLoader {
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
+                boolean close=true;
                 if(fxmlName.equals("/sopho/Ofeloumenoi/EditOfeloumenoi.fxml")){
                     //we have to set editing back to 0 else the editing will remain 1 and the next time someone tries to access the record it will be locked.
                     try {
@@ -142,9 +145,18 @@ public class StageLoader {
                     } catch (SQLException ex) {
                         Logger.getLogger(StageLoader.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                }else if(fxmlName.equals("Setup3.fxml")){
+                    //we have to remove the prefs because the user didn't go to the next step to verify connection
+                    PrefsHandler prefs = new PrefsHandler();
+                    prefs.removePrefs("dbIP");
+                    prefs.removePrefs("dbUser");
+                    prefs.removePrefs("dbPass");
+                }else if(fxmlName.equals("/sopho/Ofeloumenoi/TakePhoto.fxml")){
+                    event.consume();
+                    close=false;
                 }
                 //we have to invoke platform exit; else the app will continue running in the background because we invoked platform.setImplicitExit(false) above.
-                Platform.exit();
+                if(close) Platform.exit();
             }
         });
         

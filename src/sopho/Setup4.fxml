@@ -22,7 +22,7 @@
                <content>
                   <VBox alignment="CENTER" prefHeight="450.0" prefWidth="674.0">
                      <children>
-                        <VBox prefHeight="278.0" prefWidth="674.0">
+                        <VBox focusTraversable="true" prefHeight="278.0" prefWidth="674.0">
                            <children>
                               <Label alignment="TOP_LEFT" prefHeight="100.0" prefWidth="594.0" text="Χρησιμοποιήστε έναν κωδικο πρόσβασης για την εξασφάλιση του απορρήτου των προσωπικών δεδομένων που εμφανίζονται στην εφαρμογή." textOverrun="CLIP" wrapText="true">
                                  <VBox.margin>

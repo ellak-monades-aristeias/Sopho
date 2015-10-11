@@ -11,100 +11,91 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.*?>
 
-<AnchorPane maxHeight="630.0" maxWidth="1298.0" minHeight="499.0" minWidth="581.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="529.0" prefWidth="676.0" style="-fx-min-width: 676px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.EuresiErgasias.EpeksergasiaStoixeionErgodotiController">
+<AnchorPane maxHeight="900.0" maxWidth="676.0" minWidth="586.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="507.0" prefWidth="586.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.EuresiErgasias.EpeksergasiaStoixeionErgodotiController">
    <stylesheets>
         <URL value="@../Style.css" />
     </stylesheets>
     <children>
-      <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane layoutY="-0.0" prefHeight="841.0" prefWidth="676.0" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-0.0">
          <center>
-            <StackPane prefWidth="985.0" BorderPane.alignment="CENTER">
-               <children>
-                  <ScrollPane style="-fx-fit-to-height: true; -fx-fit-to-width: true;" BorderPane.alignment="CENTER" StackPane.alignment="CENTER">
-                     <content>
-                        <HBox alignment="CENTER" maxHeight="451.0" minHeight="350.0" prefHeight="451.0" prefWidth="433.0">
-                           <children>
-                              <VBox alignment="CENTER" focusTraversable="true" maxHeight="500.0" minHeight="368.0" prefHeight="464.0" prefWidth="384.0">
-                                 <children>
-                                    <TextField fx:id="eponimia" alignment="BOTTOM_LEFT" maxWidth="300.0" prefHeight="39.0" prefWidth="300.0" promptText="Επωνυμία επιχείρησης">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </VBox.margin>
-                                    </TextField>
-                                    <TextField fx:id="eponimo" alignment="BOTTOM_LEFT" maxWidth="300.0" prefHeight="39.0" prefWidth="300.0" promptText="Επώνυμο">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </VBox.margin>
-                                    </TextField>
-                                    <TextField fx:id="onoma" alignment="BOTTOM_LEFT" maxWidth="300.0" prefHeight="39.0" prefWidth="300.0" promptText="Όνομα">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </VBox.margin>
-                                    </TextField>
-                                    <TextField fx:id="patronimo" alignment="BOTTOM_LEFT" maxWidth="300.0" prefHeight="39.0" prefWidth="300.0" promptText="Πατρώνυμο">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </VBox.margin>
-                                    </TextField>
-                                    <TextField fx:id="tilefono" alignment="BOTTOM_LEFT" maxWidth="300.0" prefHeight="39.0" prefWidth="300.0" promptText="Τηλέφωνο">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </VBox.margin>
-                                    </TextField>
-                                    <TextField fx:id="dieuthinsi" alignment="BOTTOM_LEFT" maxWidth="300.0" prefHeight="39.0" prefWidth="300.0" promptText="Διεύθυνση">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </VBox.margin>
-                                    </TextField>
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </HBox.margin>
-                              </VBox>
-                           </children>
-                        </HBox>
-                     </content>
-                  </ScrollPane>
-               </children>
-            </StackPane>
+            <ScrollPane prefHeight="765.0" prefWidth="676.0" style="-fx-fit-to-height: true; -fx-fit-to-width: true;" BorderPane.alignment="CENTER">
+               <content>
+                  <VBox alignment="CENTER">
+                     <children>
+                        <TextField fx:id="eponimia" alignment="BOTTOM_LEFT" maxWidth="300.0" prefHeight="39.0" prefWidth="300.0" promptText="Επωνυμία επιχείρησης">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="eponimo" alignment="BOTTOM_LEFT" maxWidth="300.0" prefHeight="39.0" prefWidth="300.0" promptText="Επώνυμο">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="onoma" alignment="BOTTOM_LEFT" maxWidth="300.0" prefHeight="39.0" prefWidth="300.0" promptText="Όνομα">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="patronimo" alignment="BOTTOM_LEFT" maxWidth="300.0" prefHeight="39.0" prefWidth="300.0" promptText="Πατρώνυμο">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="tilefono" alignment="BOTTOM_LEFT" maxWidth="300.0" prefHeight="39.0" prefWidth="300.0" promptText="Τηλέφωνο">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="dieuthinsi" alignment="BOTTOM_LEFT" maxWidth="300.0" prefHeight="39.0" prefWidth="300.0" promptText="Διεύθυνση">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
          </center>
          <top>
-                  <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
-                     <children>
-                        <Label styleClass="titleSmall" text="Επεξεργασία θέσης εργασίας" textAlignment="CENTER" textFill="WHITE">
-                        </Label>
-                        <Button fx:id="backButton" mnemonicParsing="false" onAction="#GoBack" prefHeight="33.0" prefWidth="81.0" styleClass="backButton" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
-                           <StackPane.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </StackPane.margin>
-                        </Button>
-                        <SVGPath content="M461,244 L371,244 L317.8,185 L461,185" fill="#bc2d44" nodeOrientation="LEFT_TO_RIGHT" scaleX="1.2" scaleY="0.77" stroke="RED" strokeWidth="0.0" translateX="-12.0" StackPane.alignment="CENTER_RIGHT" />
-                     </children>
-                     <effect>
-                        <DropShadow />
-                     </effect>
-                  </StackPane>
-               </top>
+            <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
+               <children>
+                   <Button fx:id="backButton" mnemonicParsing="false" onAction="#GoBack" prefHeight="33.0" prefWidth="81.0" style="-fx-background-color: #bc2d44;" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
+                     <font>
+                        <Font name="Open Sans Semibold" size="16.0" />
+                     </font>
+                     <StackPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </StackPane.margin>
+                  </Button>
+                  <Label styleClass="title" text="Επεξεργασία στοιχείων εργοδότη" textAlignment="CENTER" textFill="WHITE">
+                  </Label>
+               </children>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </StackPane>
+         </top>
          <bottom>
-            <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" minWidth="190.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: #bc2d44;" text="Αποθήκευση" textFill="WHITE" BorderPane.alignment="CENTER">
+            <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" minWidth="190.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#Save" style="-fx-background-color: #bc2d44;" text="Αποθήκευση" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font>

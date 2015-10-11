@@ -15,7 +15,6 @@
 package sopho.Ofeloumenoi;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -55,6 +54,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import org.apache.commons.lang3.math.NumberUtils;
 import sopho.PrefsHandler;
 
 public class AddOfeloumenoiController implements Initializable {
@@ -88,7 +89,7 @@ public class AddOfeloumenoiController implements Initializable {
     public int arithmosTeknon=0;
     
     PrefsHandler prefs = new PrefsHandler();
-    
+        
     public String showAnenergosTip = prefs.getPrefs("showAnenergosTip"); //this var is required to show the tip about the anenergos checkbox. When that checkbox is checked the username field is marked red and we need to inform the user why this happens.
        
     @FXML
@@ -104,7 +105,18 @@ public class AddOfeloumenoiController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //PhotoListener.setStr(null);//we set the var to null to know if the user has selected a photo to be shown
+
+        tekna.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                if(prefs.getPrefs("tableTipOfeloumenoi").equals("true")){
+                    sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Ενημέρωση", "Για να επεξεργαστείτε τα τέκνα κάντε διπλό κλικ στο 'Συμπληρώστε έτος γέννησης' και συμπληρώστε το έτος. Αφού συμπληρώσετε το έτος πατήστε enter για να καταχωρηθεί η τιμή. Πατήστε οκ για μην εμφανιστεί ξανά το μήνυμα αυτό.", "notify");
+                    cm.showAndWait();
+                    prefs.setPrefs("tableTipOfeloumenoi", "false");
+                }
+            }
+        });
         
         anenergos.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
@@ -161,8 +173,15 @@ public class AddOfeloumenoiController implements Initializable {
             
             @Override
             public void handle(CellEditEvent<tableManager, String> t){
-                ((tableManager) t.getTableView().getItems().get(
-                    t.getTablePosition().getRow())).setEtos(t.getNewValue());
+                if(!NumberUtils.isNumber(t.getNewValue())){
+                    sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Στον πίνακα με τα έτη γέννησης μπορείτε να συμπληρώσετε μόνο αριθμούς. Διορθώστε το πεδίο και προσπαθήστε και πάλι.", "error");
+                    cm.showAndWait();
+                    ((tableManager) t.getTableView().getItems().get(
+                        t.getTablePosition().getRow())).setEtos("Συμπληρώστε έτος γέννησης");
+                }else{
+                    ((tableManager) t.getTableView().getItems().get(
+                        t.getTablePosition().getRow())).setEtos(t.getNewValue());
+                }
             }
         });
         
@@ -231,6 +250,12 @@ public class AddOfeloumenoiController implements Initializable {
             sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Δεν έχετε συμπληρώσει όλα τα απαιτούμενα πεδία. Θα πρέπει να συμπληρώσετε τα πεδία Barcode, Επώνυμο, Όνομα και Πατρώνυμο προκειμένου να καταχωρήσετε έναν ωφελούμενο", "error" );
             cm.showAndWait();
         
+        }else if(!NumberUtils.isNumber(barcode.getText())&&!barcode.getText().isEmpty()){
+            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Στο πεδίο barcode μπορείτε να συμπληρώσετε μόνο αριθμούς. Διορθώστε το πεδίο και προσπαθήστε και πάλι.", "error");
+            cm.showAndWait();        
+        }else if(!NumberUtils.isNumber(eisodima.getText())&&!eisodima.getText().isEmpty()){
+            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Στο πεδίο εισόδημα μπορείτε να συμπληρώσετε μόνο αριθμούς. Διορθώστε το πεδίο και προσπαθήστε και πάλι.", "error");
+            cm.showAndWait();        
         }else{//the user has filled the required fields. We can proceed.
             sopho.DBClass db = new sopho.DBClass();
             Connection conn=null;

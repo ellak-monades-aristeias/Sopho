@@ -18,14 +18,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class Setup2Controller implements Initializable {
 
@@ -54,6 +53,16 @@ public class Setup2Controller implements Initializable {
             ipAddress.setStyle("-fx-opacity:1;");
             System.out.println("Showing the ip field");
         }
+        
+        ipAddress.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Ενημέρωση", "Στην περίπτωση που η βάση δεδομένων είναι εγκατεστημένη σε άλλον υπολογιστή θα πρέπει να έχετε επιτρέψει στο firewall και των δύο υπολογιστών τη διακίνηση δεδομένων από τη port 3306 που είναι αυτή της mysql. Διαφορετικά ο υπολογιστής αυτό δεν θα 'βλέπει' τη βάση δεδομένων του server", "notify");
+                cm.showAndWait();
+            }
+        });
+        
     }
     
     //this method is required so that the first textField is not in focus on the scene appereance. 
@@ -113,5 +122,9 @@ public class Setup2Controller implements Initializable {
         Stage stage = (Stage) title.getScene().getWindow();
         sl.StageLoad("Setup1.fxml", stage, false, true); //resizable false, utility true
     }
+    
+    
+        
+    
     
 }

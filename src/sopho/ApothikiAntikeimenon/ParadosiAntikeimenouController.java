@@ -42,6 +42,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class ParadosiAntikeimenouController implements Initializable {
@@ -59,8 +60,22 @@ public class ParadosiAntikeimenouController implements Initializable {
     
     sopho.StageLoader sl = new sopho.StageLoader();
     
+    sopho.PrefsHandler prefs = new sopho.PrefsHandler();
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        table.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                if(prefs.getPrefs("tableTipPerigrafiAntikeimenou").equals("true")){
+                    sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Ενημέρωση", "Για να επεξεργαστείτε την περιγραφή αντικειμένου κάντε διπλό κλικ στο 'Συμπληρώστε περιγραφή αντικειμένου' και συμπληρώστε την περιγραφή. Αφού συμπληρώσετε την περιγραφή πατήστε enter για να καταχωρηθεί. Πατήστε οκ για μην εμφανιστεί ξανά το μήνυμα αυτό.", "notify");
+                    cm.showAndWait();
+                    prefs.setPrefs("tableTipPerigrafiAntikeimenou", "false");
+                }
+            }
+        });
         
         date.setValue(LocalDate.now());
         

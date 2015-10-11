@@ -54,6 +54,7 @@ public class Sopho extends Application {
                 // we have  made the initial setup so that the app can connect to database. Start the login screen
                 sl.StageLoadNoClose("StartApp.fxml", false, true); //resizable false, utility true
             }else{
+                hasSignedIn=false;
                 sl.StageLoadNoClose("DBSettings.fxml", false, true); //resizable false, utility true
             }
         }

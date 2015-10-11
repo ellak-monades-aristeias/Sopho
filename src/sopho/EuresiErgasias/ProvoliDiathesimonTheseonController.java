@@ -81,16 +81,37 @@ public class ProvoliDiathesimonTheseonController implements Initializable {
     }  
         
     @FXML
-    public void Select(ActionEvent e) throws IOException{
+    public void Select(ActionEvent e) throws IOException, SQLException{
         int sel = table.getSelectionModel().getSelectedIndex();
         if(sel==-1){
             //the user did not select a line
             sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Θα πρέπει να επιλέξετε μια θέση από τον πίνακα προκειμένου να την κατοχυρώσετε σε κάποιον", "error");
             cm.showAndWait();
         }else{
-            sopho.ResultKeeper.selectedIndex=sel;
+            sopho.DBClass db = new sopho.DBClass();
+            
+            //we have to check if there are persons that ask for jobs otherwise the available job will have no person to be occupied by.
+            String sql = "SELECT * FROM zitounergasia";
+            Connection conn = db.ConnectDB();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            
+            rs.last();
+            
             Stage stage = (Stage) backButton.getScene().getWindow();
-            sl.StageLoad("/sopho/EuresiErgasias/KatoxirosiThesis.fxml", stage, true, false); //resizable true, utility false
+            
+            if(rs.getRow()>0){
+                //we have results
+                sopho.ResultKeeper.selectedIndex=sel;
+                sl.StageLoad("/sopho/EuresiErgasias/KatoxirosiThesis.fxml", stage, true, false); //resizable true, utility false
+            }else{
+                sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Θα πρέπει να καταχωρήσετε άτομο που ζητά εργασία προτού επιχειρήσετε να κατοχυρώσετε τη θέση εργασίας σε κάποιον. Αυτή τη στιγμή δεν υπάρχουν άτομα στα οποία μπορείτε να κατοχυρώσετε τη θέση εργασίας.", "error");
+                cm.showAndWait();
+                sl.StageLoad("/sopho/EuresiErgasias/KataxorisiAtomouPouZita.fxml", stage, true, false); //resizable true, utility false
+
+            }
+            
+            
         }
     }
     

@@ -63,6 +63,10 @@ public class CustomMessageController extends Stage implements Initializable {
         }else if(myType.equals("question")){
             image = new Image(CustomMessageController.class.getResourceAsStream("questionIcon.png"));
             ok.setVisible(false);
+        }else if(myType.equals("notify")){
+            image = new Image(CustomMessageController.class.getResourceAsStream("notifyIcon.png"));
+            yes.setVisible(false);
+            no.setVisible(false);
         }
         if(!showButtons){
             yes.setVisible(false);

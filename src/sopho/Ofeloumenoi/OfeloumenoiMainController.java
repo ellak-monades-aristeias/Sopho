@@ -16,6 +16,10 @@ package sopho.Ofeloumenoi;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -69,9 +73,21 @@ public class OfeloumenoiMainController implements Initializable {
     }
     
     @FXML
-    private void OpenStatistika(ActionEvent event) throws IOException{
-        Stage stage = (Stage) backButton.getScene().getWindow();
-        sl.StageLoad("/sopho/Ofeloumenoi/StatistikaMain.fxml", stage, true, false); //resizable true, utility false 
+    private void OpenStatistika(ActionEvent event) throws IOException, SQLException{
+        String sql = "SELECT * FROM ofeloumenoi";
+        sopho.DBClass db = new sopho.DBClass();
+        Connection conn = db.ConnectDB();
+        PreparedStatement pst = conn.prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+        
+        rs.last();
+        if(rs.getRow()>0){//you can't have statistics if there are no entries
+            Stage stage = (Stage) backButton.getScene().getWindow();
+            sl.StageLoad("/sopho/Ofeloumenoi/StatistikaMain.fxml", stage, true, false); //resizable true, utility false 
+        }else{
+            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Δεν έχετε καταχωρήσει ωφελούμενους. Θα πρέπει να καταχωρήσετε ωφελούμενους προκειμένου να εξάγετε στατιστικά στοιχεία.", "error");
+            cm.showAndWait();
+        }
     }
     
 }

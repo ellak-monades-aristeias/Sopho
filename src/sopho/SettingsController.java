@@ -42,18 +42,6 @@ public class SettingsController implements Initializable {
     }
     
     @FXML
-    public void Backup(ActionEvent event) throws IOException{
-        Stage stage = (Stage) anchorPane.getScene().getWindow();
-        sl.StageLoad("BackupDB.fxml", stage, true, false); //resizable true, utility false
-    }
-    
-    @FXML
-    public void Restore(ActionEvent event) throws IOException{
-        Stage stage = (Stage) anchorPane.getScene().getWindow();
-        sl.StageLoad("RestoreDB.fxml", stage, true, false); //resizable true, utility false
-    }
-    
-    @FXML
     public void ChangePassword(ActionEvent event) throws IOException{
         Stage stage = (Stage) anchorPane.getScene().getWindow();
         sl.StageLoad("ChangePassword.fxml", stage, false, true); //resizable false, utility true

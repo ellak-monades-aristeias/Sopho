@@ -41,6 +41,8 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -50,10 +52,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class EidiDothikanController extends Application implements Initializable {
+public class EidiDothikanController implements Initializable {
 
     @FXML
     public VBox choiceVbox;
@@ -69,6 +72,8 @@ public class EidiDothikanController extends Application implements Initializable
     public TextField hours, minutes;
     @FXML
     public DatePicker date;
+    @FXML
+    public Button backButton;
     
     Map eidinames = new HashMap();
     Map activeeidinames = new HashMap();
@@ -91,8 +96,22 @@ public class EidiDothikanController extends Application implements Initializable
         
     String selectedBarcode;
     
+    sopho.PrefsHandler prefs = new sopho.PrefsHandler();
+        
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        listView.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                if(prefs.getPrefs("eidiListTip").equals("true")){
+                    sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Ενημέρωση", "Για να επιλέξετε περισσότερα από ένα αντικείμενα κρατήστε πατημένο το ctrl και κάντε κλικ στο όνομα των αντικειμένων. Για να αποεπιλέξετε ένα αντικείμενο κάντε κλικ σε αυτό έχοντας πατημένο το ctrl Πατήστε οκ για μην εμφανιστεί ξανά το μήνυμα αυτό.", "notify");
+                    cm.showAndWait();
+                    prefs.setPrefs("eidiListTip", "false");
+                }
+            }
+        });
         
         try {
             oldrs.first();//move the cursor to the first row
@@ -158,12 +177,8 @@ public class EidiDothikanController extends Application implements Initializable
                 }
             }
         });
+
     }    
-    
-    @Override
-    public void start(Stage stage){
-        
-    }
     
     public class tableManager { //this is a helper class to display the data from the resultSet to the table properly.
         
@@ -220,15 +235,6 @@ public class EidiDothikanController extends Application implements Initializable
                     eidinames.put(i, rs.getString("name"));
                     i++;
                 }
-            }else{
-                sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Δεν έχετε εισάγει είδη στο μενού επεξεργασία ειδών, είτε όλα τα είδη είναι ανενεργά... Προσθέστε είδη ή ενεργοποιήστε τα υπάρχοντα και έπειτα καταχωρήστε είδη που παρέλαβαν οι ωφελούμενοι.", "error");
-                cm.showAndWait();
-                Stage stage = (Stage) barcode.getScene().getWindow();
-                try {
-                    sl.StageLoad("/sopho/Eidi/EpeksergasiaEidon.fxml", stage, true, false); //resizable true, utility false
-                } catch (IOException ex) {
-                    Logger.getLogger(EidiDothikanController.class.getName()).log(Level.SEVERE, null, ex);
-                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(EidiDothikanController.class.getName()).log(Level.SEVERE, null, ex);
@@ -277,7 +283,7 @@ public class EidiDothikanController extends Application implements Initializable
     @FXML
     public void GoBack(ActionEvent e) throws IOException{
         Stage stage = (Stage) history.getScene().getWindow();
-        sl.StageLoad("/sopho/Ofeloumenoi/SearchToEditOfeloumenoi.fxml", stage, false, true); //resizable false, utility true
+        sl.StageLoad("/sopho/Eidi/EidiMain.fxml", stage, false, true); //resizable false, utility true
     }
     
     @FXML

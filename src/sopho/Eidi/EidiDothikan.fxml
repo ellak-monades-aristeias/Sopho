@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.image.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.effect.*?>
 <?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -12,252 +12,240 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.*?>
 
-<AnchorPane minHeight="676.0" minWidth="997.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="820.0" prefWidth="997.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Eidi.EidiDothikanController">
+<AnchorPane maxHeight="900.0" maxWidth="1025.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="720.0" prefWidth="1024.0" style="-fx-min-width: 676px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Eidi.EidiDothikanController">
     <stylesheets>
         <URL value="@../Style.css" />
     </stylesheets>
     <children>
-      <BorderPane minHeight="650.0" minWidth="997.0" prefHeight="870.0" prefWidth="997.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <top>
-                  <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
-                     <children>
-                        <Label styleClass="titleSmall" text="Καταχώρηση ειδών που δόθηκαν" textAlignment="CENTER" textFill="WHITE">
-                        </Label>
-                        <Button fx:id="backButton" mnemonicParsing="false" onAction="#GoBack" prefHeight="33.0" prefWidth="81.0" styleClass="backButton" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
-                           <StackPane.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </StackPane.margin>
+        <BorderPane layoutY="-0.0" prefHeight="841.0" prefWidth="676.0" AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-0.0">
+            <top>
+                <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
+                    <children>
+                        <Button fx:id="backButton" mnemonicParsing="false" onAction="#GoBack" prefHeight="33.0" prefWidth="81.0" style="-fx-background-color: #bc2d44;" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
+                            <font>
+                                <Font name="Open Sans Semibold" size="16.0" />
+                            </font>
+                            <StackPane.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </StackPane.margin>
                         </Button>
+                        <Label styleClass="title" text="Καταχώρηση ειδών που δόθηκαν" textAlignment="CENTER" textFill="WHITE">
+                        </Label>
                         <SVGPath content="M461,244 L371,244 L317.8,185 L461,185" fill="#bc2d44" nodeOrientation="LEFT_TO_RIGHT" scaleX="1.2" scaleY="0.77" stroke="RED" strokeWidth="0.0" translateX="-12.0" StackPane.alignment="CENTER_RIGHT" />
-                     </children>
-                     <effect>
+                    </children>
+                    <effect>
                         <DropShadow />
-                     </effect>
-                  </StackPane>
-               </top>
-          
-         <center>
-            <StackPane prefHeight="712.0" prefWidth="1238.0">
-               <children>
-                  <ScrollPane prefHeight="712.0" prefViewportHeight="747.0" prefViewportWidth="1238.0" prefWidth="997.0" style="-fx-fit-to-height: true; -fx-fit-to-width: true; -fx-border-width: 0; -fx-border-color: white;" StackPane.alignment="CENTER">
-                     <StackPane.margin>
-                        <Insets />
-                     </StackPane.margin>
-                     <content>
-                        <VBox prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <VBox prefHeight="109.0" prefWidth="995.0">
-                                 <children>
-                                    <VBox alignment="CENTER">
-                                       <children>
-                                          <Label text="Στοιχεία Ωφελούμενου">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                    </VBox>
-                                    <VBox prefHeight="49.0" prefWidth="955.0">
-                                       <VBox.margin>
-                                          <Insets bottom="20.0" left="20.0" right="20.0" top="5.0" />
-                                       </VBox.margin>
-                                       <children>
-                                          <HBox alignment="TOP_CENTER" prefHeight="59.0" prefWidth="955.0">
-                                             <children>
-                                                <VBox>
-                                                   <children>
-                                                      <Label alignment="CENTER" text="Barcode:">
-                                                         <HBox.margin>
-                                                            <Insets left="20.0" right="20.0" />
-                                                         </HBox.margin>
-                                                         <font>
-                                                            <Font size="15.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label fx:id="barcode" alignment="CENTER">
-                                                         <font>
-                                                            <Font size="15.0" />
-                                                         </font>
-                                                      </Label>
-                                                   </children>
-                                                   <HBox.margin>
-                                                      <Insets left="20.0" right="20.0" />
-                                                   </HBox.margin>
+                    </effect>
+                </StackPane>
+            </top>
+            <center>
+                <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="603.0" prefWidth="1022.0">
+                            <children>
+                                <VBox prefHeight="606.0" prefWidth="999.0">
+                                    <children>
+                                        <VBox prefHeight="92.0" prefWidth="999.0">
+                                            <children>
+                                                <VBox alignment="CENTER">
+                                                    <children>
+                                                        <Label text="Στοιχεία Ωφελούμενου">
+                                                            <font>
+                                                                <Font size="18.0" />
+                                                            </font>
+                                                        </Label>
+                                                    </children>
                                                 </VBox>
-                                                <VBox>
-                                                   <children>
-                                                      <Label alignment="CENTER" text="Επώνυμο:">
-                                                         <HBox.margin>
-                                                            <Insets left="20.0" right="20.0" />
-                                                         </HBox.margin>
-                                                         <font>
-                                                            <Font size="15.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label fx:id="eponimo" alignment="CENTER">
-                                                         <font>
-                                                            <Font size="15.0" />
-                                                         </font>
-                                                      </Label>
-                                                   </children>
-                                                   <HBox.margin>
-                                                      <Insets left="20.0" right="20.0" />
-                                                   </HBox.margin>
+                                                <VBox prefHeight="49.0" prefWidth="955.0">
+                                                    <children>
+                                                        <HBox alignment="TOP_CENTER" prefHeight="59.0" prefWidth="955.0">
+                                                            <children>
+                                                                <VBox>
+                                                                    <children>
+                                                                        <Label alignment="CENTER" text="Barcode:">
+                                                                            <font>
+                                                                                <Font size="15.0" />
+                                                                            </font>
+                                                                            <HBox.margin>
+                                                                                <Insets left="20.0" right="20.0" />
+                                                                            </HBox.margin>
+                                                                        </Label>
+                                                                        <Label fx:id="barcode" alignment="CENTER">
+                                                                            <font>
+                                                                                <Font size="15.0" />
+                                                                            </font>
+                                                                        </Label>
+                                                                    </children>
+                                                                    <HBox.margin>
+                                                                        <Insets left="20.0" right="20.0" />
+                                                                    </HBox.margin>
+                                                                </VBox>
+                                                                <VBox>
+                                                                    <children>
+                                                                        <Label alignment="CENTER" text="Επώνυμο:">
+                                                                            <font>
+                                                                                <Font size="15.0" />
+                                                                            </font>
+                                                                            <HBox.margin>
+                                                                                <Insets left="20.0" right="20.0" />
+                                                                            </HBox.margin>
+                                                                        </Label>
+                                                                        <Label fx:id="eponimo" alignment="CENTER">
+                                                                            <font>
+                                                                                <Font size="15.0" />
+                                                                            </font>
+                                                                        </Label>
+                                                                    </children>
+                                                                    <HBox.margin>
+                                                                        <Insets left="20.0" right="20.0" />
+                                                                    </HBox.margin>
+                                                                </VBox>
+                                                                <VBox>
+                                                                    <children>
+                                                                        <Label alignment="CENTER" text="Όνομα:">
+                                                                            <font>
+                                                                                <Font size="15.0" />
+                                                                            </font>
+                                                                        </Label>
+                                                                        <Label fx:id="onoma" alignment="CENTER">
+                                                                            <font>
+                                                                                <Font size="15.0" />
+                                                                            </font>
+                                                                            <HBox.margin>
+                                                                                <Insets left="20.0" right="20.0" />
+                                                                            </HBox.margin>
+                                                                        </Label>
+                                                                    </children>
+                                                                    <HBox.margin>
+                                                                        <Insets left="20.0" right="20.0" />
+                                                                    </HBox.margin>
+                                                                </VBox>
+                                                                <VBox>
+                                                                    <children>
+                                                                        <Label alignment="CENTER" text="Πατρώνυμο:">
+                                                                            <font>
+                                                                                <Font size="15.0" />
+                                                                            </font>
+                                                                            <HBox.margin>
+                                                                                <Insets left="20.0" right="20.0" />
+                                                                            </HBox.margin>
+                                                                        </Label>
+                                                                        <Label fx:id="patronimo" alignment="CENTER">
+                                                                            <font>
+                                                                                <Font size="15.0" />
+                                                                            </font>
+                                                                        </Label>
+                                                                    </children>
+                                                                    <HBox.margin>
+                                                                        <Insets left="20.0" right="20.0" />
+                                                                    </HBox.margin>
+                                                                </VBox>
+                                                            </children>
+                                                        </HBox>
+                                                    </children>
+                                                    <VBox.margin>
+                                                        <Insets bottom="20.0" left="20.0" right="20.0" top="5.0" />
+                                                    </VBox.margin>
                                                 </VBox>
-                                                <VBox>
-                                                   <children>
-                                                      <Label alignment="CENTER" text="Όνομα:">
-                                                         <font>
-                                                            <Font size="15.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label fx:id="onoma" alignment="CENTER">
-                                                         <HBox.margin>
-                                                            <Insets left="20.0" right="20.0" />
-                                                         </HBox.margin>
-                                                         <font>
-                                                            <Font size="15.0" />
-                                                         </font>
-                                                      </Label>
-                                                   </children>
-                                                   <HBox.margin>
-                                                      <Insets left="20.0" right="20.0" />
-                                                   </HBox.margin>
-                                                </VBox>
-                                                <VBox>
-                                                   <children>
-                                                      <Label alignment="CENTER" text="Πατρώνυμο:">
-                                                         <HBox.margin>
-                                                            <Insets left="20.0" right="20.0" />
-                                                         </HBox.margin>
-                                                         <font>
-                                                            <Font size="15.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label fx:id="patronimo" alignment="CENTER">
-                                                         <font>
-                                                            <Font size="15.0" />
-                                                         </font>
-                                                      </Label>
-                                                   </children>
-                                                   <HBox.margin>
-                                                      <Insets left="20.0" right="20.0" />
-                                                   </HBox.margin>
-                                                </VBox>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </VBox>
-                              <VBox alignment="TOP_CENTER" prefHeight="591.0" prefWidth="995.0">
-                                 <children>
-                                    <HBox alignment="TOP_CENTER" prefHeight="591.0" prefWidth="995.0">
-                                       <children>
-                                          <VBox fx:id="choiceVbox" alignment="TOP_CENTER" prefHeight="591.0" prefWidth="411.0">
-                                             <children>
-                                                <DatePicker fx:id="date" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="211.0" promptText="Επιλογή ημερομηνίας" style="-fx-font: 16px System;" />
-                                                <HBox alignment="TOP_CENTER" prefHeight="51.0" prefWidth="431.0">
-                                                   <children>
-                                                      <Label text="Ώρα">
-                                                         <font>
-                                                            <Font size="17.0" />
-                                                         </font>
-                                                         <HBox.margin>
-                                                            <Insets top="5.0" />
-                                                         </HBox.margin>
-                                                      </Label>
-                                                      <TextField fx:id="hours" alignment="CENTER" prefHeight="40.0" prefWidth="40.0">
-                                                         <HBox.margin>
-                                                            <Insets left="5.0" right="5.0" />
-                                                         </HBox.margin>
-                                                      </TextField>
-                                                      <Label text=":">
-                                                         <font>
-                                                            <Font size="17.0" />
-                                                         </font>
-                                                         <HBox.margin>
-                                                            <Insets top="5.0" />
-                                                         </HBox.margin>
-                                                      </Label>
-                                                      <TextField fx:id="minutes" alignment="CENTER" prefHeight="40.0" prefWidth="40.0">
-                                                         <HBox.margin>
-                                                            <Insets left="5.0" right="5.0" />
-                                                         </HBox.margin>
-                                                      </TextField>
-                                                   </children>
-                                                   <VBox.margin>
-                                                      <Insets left="-20.0" top="10.0" />
-                                                   </VBox.margin>
+                                            </children>
+                                        </VBox>
+                                        <VBox alignment="TOP_CENTER" prefHeight="499.0" prefWidth="999.0">
+                                            <children>
+                                                <HBox alignment="TOP_CENTER" prefHeight="494.0" prefWidth="999.0">
+                                                    <children>
+                                                        <VBox fx:id="choiceVbox" alignment="TOP_CENTER" prefHeight="495.0" prefWidth="411.0">
+                                                            <children>
+                                                                <DatePicker fx:id="date" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="261.0" promptText="Επιλογή ημερομηνίας" style="-fx-font: 16px System;" />
+                                                                <HBox alignment="TOP_CENTER" prefHeight="51.0" prefWidth="431.0">
+                                                                    <children>
+                                                                        <Label text="Ώρα">
+                                                                            <font>
+                                                                                <Font size="17.0" />
+                                                                            </font>
+                                                                            <HBox.margin>
+                                                                                <Insets top="5.0" />
+                                                                            </HBox.margin>
+                                                                        </Label>
+                                                                        <TextField fx:id="hours" alignment="CENTER" prefHeight="40.0" prefWidth="45.0">
+                                                                            <HBox.margin>
+                                                                                <Insets left="5.0" right="5.0" />
+                                                                            </HBox.margin>
+                                                                        </TextField>
+                                                                        <Label text=":">
+                                                                            <font>
+                                                                                <Font size="17.0" />
+                                                                            </font>
+                                                                            <HBox.margin>
+                                                                                <Insets top="5.0" />
+                                                                            </HBox.margin>
+                                                                        </Label>
+                                                                        <TextField fx:id="minutes" alignment="CENTER" prefHeight="40.0" prefWidth="45.0">
+                                                                            <HBox.margin>
+                                                                                <Insets left="5.0" right="5.0" />
+                                                                            </HBox.margin>
+                                                                        </TextField>
+                                                                    </children>
+                                                                    <VBox.margin>
+                                                                        <Insets left="-20.0" top="10.0" />
+                                                                    </VBox.margin>
+                                                                </HBox>
+                                                                <Label text="Επιλέξτε είδη:">
+                                                                    <font>
+                                                                        <Font size="17.0" />
+                                                                    </font>
+                                                                </Label>
+                                                                <ListView fx:id="listView" maxHeight="1.7976931348623157E308" maxWidth="254.0" minHeight="250.0" minWidth="250.0" prefHeight="356.0" prefWidth="254.0" />
+                                                            </children>
+                                                        </VBox>
+                                                        <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="580.0">
+                                                            <children>
+                                                                <Label alignment="CENTER" text="Ιστορικό ειδών που παρέλαβε ο ωφελούμενος:">
+                                                                    <font>
+                                                                        <Font size="16.0" />
+                                                                    </font>
+                                                                    <VBox.margin>
+                                                                        <Insets bottom="20.0" />
+                                                                    </VBox.margin>
+                                                                </Label>
+                                                                <TableView fx:id="history" prefHeight="436.0" prefWidth="560.0">
+                                                                    <columns>
+                                                                        <TableColumn fx:id="historyDate" prefWidth="171.0" text="Ημερομηνία" />
+                                                                        <TableColumn fx:id="historyEidi" prefWidth="408.0" text="Είδη" />
+                                                                    </columns>
+                                                                    <VBox.margin>
+                                                                        <Insets bottom="10.0" left="10.0" right="10.0" />
+                                                                    </VBox.margin>
+                                                                </TableView>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
                                                 </HBox>
-                                                <Label text="Επιλέξτε είδη:">
-                                                   <font>
-                                                      <Font size="17.0" />
-                                                   </font>
-                                                </Label>
-                                                <ListView fx:id="listView" maxHeight="1.7976931348623157E308" maxWidth="254.0" minHeight="250.0" minWidth="250.0" prefHeight="414.0" prefWidth="254.0" />
-                                             </children>
-                                          </VBox>
-                                          <VBox prefHeight="564.0" prefWidth="3.0" style="-fx-background-color: #cacaca; -fx-border-radius: 100px;">
-                                             <HBox.margin>
-                                                <Insets bottom="10.0" top="20.0" />
-                                             </HBox.margin>
-                                          </VBox>
-                                          <VBox alignment="TOP_CENTER" prefHeight="591.0" prefWidth="580.0">
-                                             <children>
-                                                <Label alignment="CENTER" text="Ιστορικό ειδών που παρέλαβε ο ωφελούμενος:">
-                                                   <font>
-                                                      <Font size="16.0" />
-                                                   </font>
-                                                   <VBox.margin>
-                                                      <Insets bottom="20.0" />
-                                                   </VBox.margin>
-                                                </Label>
-                                                <TableView fx:id="history" prefHeight="497.0" prefWidth="549.0">
-                                                  <columns>
-                                                    <TableColumn fx:id="historyDate" prefWidth="171.0" text="Ημερομηνία" />
-                                                    <TableColumn fx:id="historyEidi" prefWidth="408.0" text="Είδη" />
-                                                  </columns>
-                                                   <VBox.margin>
-                                                      <Insets bottom="10.0" left="10.0" right="10.0" />
-                                                   </VBox.margin>
-                                                </TableView>
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </VBox>
-                     </content>
-                  </ScrollPane>
-               </children>
-               <BorderPane.margin>
-                  <Insets />
-               </BorderPane.margin>
-            </StackPane>
-         </center>
-         <bottom>
-            <HBox alignment="CENTER" maxHeight="92.0" minHeight="60.0" prefHeight="74.0" prefWidth="997.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" minWidth="190.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#Save" style="-fx-background-color: #bc2d44;" text="Καταχώρηση" textFill="WHITE">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="8.0" left="25.0" right="25.0" top="8.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets left="10.0" right="10.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-               <BorderPane.margin>
-                  <Insets bottom="-0.0" />
-               </BorderPane.margin>
-            </HBox>
-         </bottom>
-      </BorderPane>
-   </children>
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </ScrollPane>
+            </center>
+            <bottom>
+                <HBox alignment="TOP_CENTER" prefHeight="65.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" minWidth="190.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#Save" style="-fx-background-color: #bc2d44;" text="Καταχώρηση" textFill="WHITE">
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                            <padding>
+                                <Insets bottom="8.0" left="25.0" right="25.0" top="8.0" />
+                            </padding>
+                            <HBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </HBox.margin>
+                        </Button>
+                    </children>
+                </HBox>
+            </bottom>
+        </BorderPane>
+    </children>
 </AnchorPane>

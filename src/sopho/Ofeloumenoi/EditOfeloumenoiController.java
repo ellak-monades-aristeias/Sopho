@@ -54,6 +54,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import org.apache.commons.lang3.math.NumberUtils;
 import sopho.PrefsHandler;
 
 public class EditOfeloumenoiController implements Initializable {
@@ -120,6 +122,40 @@ public class EditOfeloumenoiController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        tekna.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                if(prefs.getPrefs("tableTipOfeloumenoi").equals("true")){
+                    sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Ενημέρωση", "Για να επεξεργαστείτε τα τέκνα κάντε διπλό κλικ στο 'Συμπληρώστε έτος γέννησης' και συμπληρώστε το έτος. Αφού συμπληρώσετε το έτος πατήστε enter για να καταχωρηθεί η τιμή. Πατήστε οκ για μην εμφανιστεί ξανά το μήνυμα αυτό.", "notify");
+                    cm.showAndWait();
+                    prefs.setPrefs("tableTipOfeloumenoi", "false");
+                }
+            }
+        });
+        
+        //initialize oikKatastasi combobox
+        oikKatastasi.getItems().addAll(
+            "Άγαμος",
+            "Έγγαμος",
+            "Διαζευγμένος",
+            "Χήρος" 
+        );
+        
+        //initialize asfForeas comboBox
+        asfForeas.getItems().addAll(
+            "Ανασφάλιστος",
+            "ΙΚΑ",
+            "ΟΓΑ",
+            "ΟΑΕΕ",
+            "ΕΤΑΑ",
+            "ΕΟΠΥΥ",
+            "ΤΠΔΥ",
+            "ΤΑΠΙΤ",
+            "ΕΤΑΠ – ΜΜΕ",
+            "Άλλο"
+        );
         
         
         try {
@@ -250,35 +286,22 @@ public class EditOfeloumenoiController implements Initializable {
             
             @Override
             public void handle(CellEditEvent<tableManager, String> t){
-                ((tableManager) t.getTableView().getItems().get(
-                    t.getTablePosition().getRow())).setEtos(t.getNewValue());
+                if(!NumberUtils.isNumber(t.getNewValue())){
+                    sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Στον πίνακα με τα έτη γέννησης μπορείτε να συμπληρώσετε μόνο αριθμούς. Διορθώστε το πεδίο και προσπαθήστε και πάλι.", "error");
+                    cm.showAndWait();       
+                    ((tableManager) t.getTableView().getItems().get(
+                        t.getTablePosition().getRow())).setEtos("Συμπληρώστε έτος γέννησης");
+                }else{
+                    ((tableManager) t.getTableView().getItems().get(
+                        t.getTablePosition().getRow())).setEtos(t.getNewValue());
+                }
             }
         });
         
         tekna.getColumns().setAll(etosCol);
         //end of initialization of tekna table
         
-        //initialize oikKatastasi combobox
-        oikKatastasi.getItems().addAll(
-            "Άγαμος",
-            "Έγγαμος",
-            "Διαζευγμένος",
-            "Χήρος" 
-        );
         
-        //initialize asfForeas comboBox
-        asfForeas.getItems().addAll(
-            "Ανασφάλιστος",
-            "ΙΚΑ",
-            "ΟΓΑ",
-            "ΟΑΕΕ",
-            "ΕΤΑΑ",
-            "ΕΟΠΥΥ",
-            "ΤΠΔΥ",
-            "ΤΑΠΙΤ",
-            "ΕΤΑΠ – ΜΜΕ",
-            "Άλλο"
-        );
     }
     
     public BufferedImage bfImage(String rand){
@@ -313,13 +336,19 @@ public class EditOfeloumenoiController implements Initializable {
     }
     
     @FXML
-    public void SaveChanges(ActionEvent event) throws IOException{
+    public void Save(ActionEvent event) throws IOException{
         
         if(barcode.getText().isEmpty()||onoma.getText().isEmpty()||eponimo.getText().isEmpty()||patronimo.getText().isEmpty()){ //checking if the user has filled the required fields
         
             sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Δεν έχετε συμπληρώσει όλα τα απαιτούμενα πεδία. Θα πρέπει να συμπληρώσετε τα πεδία Barcode, Επώνυμο, Όνομα και Πατρώνυμο προκειμένου να καταχωρήσετε έναν ωφελούμενο", "error" );
             cm.showAndWait();
         
+        }else if(!NumberUtils.isNumber(barcode.getText())&&!barcode.getText().isEmpty()){
+            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Στο πεδίο barcode μπορείτε να συμπληρώσετε μόνο αριθμούς. Διορθώστε το πεδίο και προσπαθήστε και πάλι.", "error");
+            cm.showAndWait();        
+        }else if(!NumberUtils.isNumber(eisodima.getText())&&!eisodima.getText().isEmpty()){
+            sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Στο πεδίο εισόδημα μπορείτε να συμπληρώσετε μόνο αριθμούς. Διορθώστε το πεδίο και προσπαθήστε και πάλι.", "error");
+            cm.showAndWait();        
         }else{//the user has filled the required fields. We can proceed.
             sopho.DBClass db = new sopho.DBClass();
             Connection conn=null;
@@ -398,7 +427,7 @@ public class EditOfeloumenoiController implements Initializable {
                     sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Τέλεια!", "Τα στοιχεία του ωφελούμενου έχουν ενημερωθεί με επιτυχία, σύμφωνα με τις αλλαγές που κάνατε.", "confirm");
                     cm.showAndWait();
                     
-                    if(le.LockEditing(false, selID, "mathites")){
+                    if(le.LockEditing(false, selID, "ofeloumenoi")){
                         Stage stage = (Stage) barcode.getScene().getWindow();
                         sl.StageLoad("/sopho/Ofeloumenoi/OfeloumenoiMain.fxml", stage, true, false); //resizable true, utility false
                     }else{
@@ -476,10 +505,6 @@ public class EditOfeloumenoiController implements Initializable {
         
         //we have to add the values from database to the table
         try {
-            rs.first();//move the cursor to the first row
-            if(selectedIndex>1){//only if we need to move from the first line
-                rs.relative(selectedIndex);//move to the row that we selected at the previous scene
-            }
             
             String teknaDatabase = rs.getString("ilikiesTeknon");
             if(!teknaDatabase.isEmpty()){

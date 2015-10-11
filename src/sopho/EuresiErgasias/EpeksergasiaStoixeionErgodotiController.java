@@ -84,7 +84,7 @@ public class EpeksergasiaStoixeionErgodotiController implements Initializable {
         PreparedStatement pst = null;
         ResultSet rs = null;
         if((!eponimia.getText().isEmpty()||(!eponimo.getText().isEmpty()&&!onoma.getText().isEmpty()&&!patronimo.getText().isEmpty()))&&!tilefono.getText().isEmpty()){
-            String sql = "UPDATE theseisergasias SET eponimia=?, eponimo=?, onoma=?, patronimo=?, dieuthinsi=?, tilefono=?, WHERE eponimia=?, eponimo=?, onoma=?, patronimo=?, dieuthinsi=?, tilefono=?";
+            String sql = "UPDATE theseisergasias SET eponimia=?, eponimo=?, onoma=?, patronimo=?, dieuthinsi=?, tilefono=? WHERE eponimia=? AND eponimo=? AND onoma=? AND patronimo=? AND dieuthinsi=? AND tilefono=?";
 
             conn=db.ConnectDB();
             

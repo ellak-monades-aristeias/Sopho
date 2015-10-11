@@ -39,7 +39,7 @@
                   </TableView>
                </children>
                <BorderPane.margin>
-                  <Insets left="15.0" right="15.0" top="15.0" />
+                  <Insets />
                </BorderPane.margin>
             </StackPane>
          </center>

@@ -20,7 +20,7 @@
          <center>
             <ScrollPane prefHeight="765.0" prefWidth="676.0" style="-fx-fit-to-height: true; -fx-fit-to-width: true;" BorderPane.alignment="CENTER">
                <content>
-                  <VBox alignment="CENTER" prefHeight="743.0" prefWidth="674.0">
+                  <VBox alignment="CENTER" focusTraversable="true" prefHeight="743.0" prefWidth="674.0">
                      <children>
                         <Label text="Συμπληρώστε όποια απο τα παρακάτω πεδία επιθυμείτε για να αναζητήσετε τον ωφελούμενο που επιθυμείτε:" wrapText="true">
                            <font>

@@ -57,7 +57,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </StackPane.margin>
                   </Button>
-                  <Label styleClass="title" text="Αποθήκη αντικειμένων" textAlignment="CENTER" textFill="WHITE" />
+                  <Label styleClass="title" text="Μαθήματα στήριξης" textAlignment="CENTER" textFill="WHITE" />
                </children>
                <effect>
                   <DropShadow />

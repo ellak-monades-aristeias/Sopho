@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `filoksenoumenoi`(
   UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
-CREATE IF NOT EXISTS TABLE images (
+CREATE TABLE IF NOT EXISTS images (
   id int(11) NOT NULL AUTO_INCREMENT,
   photoID varchar(45) DEFAULT NULL,
   image mediumblob,

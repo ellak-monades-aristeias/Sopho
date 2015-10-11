@@ -42,6 +42,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class KataxorisiMathitiController implements Initializable {
@@ -66,8 +67,23 @@ public class KataxorisiMathitiController implements Initializable {
     ResultSet rs = null;
     sopho.DBClass db = new sopho.DBClass();
     
+    sopho.PrefsHandler prefs = new sopho.PrefsHandler();
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        table.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                if(prefs.getPrefs("tableTipKathigites").equals("true")){
+                    sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Ενημέρωση", "Για να επεξεργαστείτε τον τίτλο μαθήματος κάντε διπλό κλικ στο 'Συμπληρώστε τίτλο μαθήματος' και συμπληρώστε τον τίτλο. Αφού συμπληρώσετε τον τίτλο πατήστε enter για να καταχωρηθεί. Πατήστε οκ για μην εμφανιστεί ξανά το μήνυμα αυτό.", "notify");
+                    cm.showAndWait();
+                    prefs.setPrefs("tableTipKathigites", "false");
+                }
+            }
+        });
+        
         //initialzing table
         data = getInitialTableData();
                 

@@ -20,6 +20,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -51,12 +53,21 @@ public class Setup3Controller implements Initializable {
     StageLoader sl = new StageLoader();
     
     @FXML
-    private void Check(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+    private void Check(ActionEvent event) throws IOException, ClassNotFoundException {
         if(!checkok){//we have not performed the check yet
             
             Class.forName("com.mysql.jdbc.Driver");
             
-            Connection conn=DriverManager.getConnection("jdbc:mysql://"+dbIP+":3306", user, pass);
+            Connection conn=null;
+            try {
+                conn = DriverManager.getConnection("jdbc:mysql://"+dbIP+":3306", user, pass);
+            } catch (SQLException ex) {
+                Logger.getLogger(Setup3Controller.class.getName()).log(Level.SEVERE, null, ex);
+                sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Αδυναμία επικοινωνίας με τη βάση", "Ελέγξτε αν η mysql τρέχει και επιβεβαιώστε ότι χρησιμοποιείτε τα σωστά στοιχεία πρόσβασης. Το username είναι συνήθως root εκτός αν επιλέξατε κάτι άλλο και το password το έχετε ορίσει κατά την εγκατάσταση της mysql.", "error");
+                cm.showAndWait();
+                prefs.removePrefs("dbUser");
+                prefs.removePrefs("dbPass");
+            }
             
             if(conn==null){
                 checkResult.setStyle("-fx-text-fill:red");
@@ -71,7 +82,11 @@ public class Setup3Controller implements Initializable {
                 if(prefs.getPrefs("dbIP").equals("localhost")){
                     //we have to create the database if the user choose to install ta db locally.
                     CreateDatabase cd = new CreateDatabase();
-                    cd.CreateDB();
+                    try {
+                        cd.CreateDB();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Setup3Controller.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         }else{//the connectivity with the database is confirmed            

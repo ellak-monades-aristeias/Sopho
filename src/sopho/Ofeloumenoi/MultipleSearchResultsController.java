@@ -16,8 +16,6 @@ package sopho.Ofeloumenoi;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -98,14 +96,14 @@ public class MultipleSearchResultsController implements Initializable {
     
     @FXML
     public void Select (ActionEvent event) throws IOException{
-        try {            
-            if (sopho.ResultKeeper.selectedIndex==-1){
+        try {        
+            int sel = resultTable.getSelectionModel().getSelectedIndex();
+
+            if (sel==-1){
                 sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Πρέπει να επιλέξετε τουλάχιστον έναν ωφελούμενο από τη λίστα με τα αποτελέσματα!", "error");
                 cm.showAndWait();
             }else{            
                 //loading selected row data to variables.
-                
-                int sel = resultTable.getSelectionModel().getSelectedIndex();
                 
                 sopho.ResultKeeper.selectedIndex = sel;
                 

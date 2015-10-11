@@ -24,7 +24,7 @@
                      <content>
                         <HBox maxHeight="500.0" minHeight="500.0" prefHeight="500.0" prefWidth="983.0">
                            <children>
-                              <VBox alignment="TOP_CENTER" maxHeight="500.0" minHeight="500.0" prefHeight="500.0" prefWidth="409.0">
+                              <VBox alignment="TOP_CENTER" focusTraversable="true" maxHeight="500.0" minHeight="500.0" prefHeight="500.0" prefWidth="409.0">
                                  <children>
                                     <Label fx:id="label" text="Ατομικά Στοιχεία">
                                        <VBox.margin>

@@ -43,7 +43,7 @@
                     <columns>
                         <TableColumn fx:id="colID" editable="false" prefWidth="65.0" text="id" visible="false" />
                       <TableColumn fx:id="colEidi" prefWidth="411.0" text="Όνομα Είδους" />
-                        <TableColumn fx:id="colActive" editable="false" prefWidth="224.0" text="Ενεργό/Ανενεργό" />
+                        <TableColumn fx:id="colActive" editable="false" prefWidth="224.0" text="Εμφάνιση / Αποκρυψη" />
                     </columns>
                      <BorderPane.margin>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -61,7 +61,7 @@
                            <HBox.margin>
                               <Insets right="10.0" />
                            </HBox.margin></Button>
-                        <Button alignment="CENTER" contentDisplay="CENTER" minHeight="35.0" minWidth="200.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#ActivateDeactivate" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: #3668af;" text="Ενεργοποίηση/Απενεργοποίηση" textFill="WHITE">
+                        <Button alignment="CENTER" contentDisplay="CENTER" minHeight="35.0" minWidth="200.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#ActivateDeactivate" prefHeight="35.0" prefWidth="300.0" style="-fx-background-color: #3668af;" text="Εμφάνιση / Απόκρυψη" textFill="WHITE">
                            <font>
                               <Font size="17.0" />
                            </font>

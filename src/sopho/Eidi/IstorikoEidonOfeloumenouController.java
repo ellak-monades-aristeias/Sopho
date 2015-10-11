@@ -171,7 +171,7 @@ public class IstorikoEidonOfeloumenouController implements Initializable {
                     i++;
                 }
             }else{
-                sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Δεν έχετε εισάγει είδη στο μενού επεξεργασία ειδών, είτε όλα τα είδη είναι ανενεργά... Προσθέστε είδη ή ενεργοποιήστε τα υπάρχοντα και έπειτα καταχωρήστε είδη που παρέλαβαν οι ωφελούμενοι.", "error");
+                sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Δεν έχουν καταγραφεί είδη που έχουν δοθεί σε ωφελούμενους. Χρησιμοποιήστε την επιλογή 'Καταχώρηση ειδών που δόθηκαν' από το κύριο μενού των προσφερόμενων ειδών για να καταχωρήσετε ήδη που δόθηκαν σε ωφελούμενους.", "error");
                 cm.showAndWait();
             }
         } catch (SQLException ex) {

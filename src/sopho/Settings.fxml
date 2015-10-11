@@ -30,16 +30,6 @@
                            <VBox.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </VBox.margin></Button>
-                        <Button minWidth="400.0" mnemonicParsing="false" onAction="#Backup" prefHeight="63.0" prefWidth="400.0" styleClass="mainAppButtons" text="Backup βάσης δεδομένων" textAlignment="CENTER" textFill="WHITE">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="60.0" />
-                           </VBox.margin>
-                        </Button>
-                        <Button minWidth="400.0" mnemonicParsing="false" onAction="#Restore" prefHeight="63.0" prefWidth="400.0" styleClass="mainAppButtons" text="Επαναφορα βάσης δεδομένων" textAlignment="CENTER" textFill="WHITE">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </VBox.margin>
-                        </Button>
                      </children>
                   </VBox>
                </content>

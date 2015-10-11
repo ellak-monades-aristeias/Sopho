@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.image.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.effect.*?>
 <?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -12,381 +12,369 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.*?>
 
-<AnchorPane minHeight="450.0" minWidth="750.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="484.0" prefWidth="751.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Vivliothiki.EpistrofiVivliouController">
+<AnchorPane maxHeight="900.0" maxWidth="1025.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="501.0" prefWidth="862.0" style="-fx-min-width: 676px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sopho.Vivliothiki.EpistrofiVivliouController">
     <stylesheets>
         <URL value="@../Style.css" />
     </stylesheets>
     <children>
-      <BorderPane minHeight="450.0" minWidth="750.0" prefHeight="870.0" prefWidth="997.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <top>
-                  <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
-                     <children>
-                        <Label styleClass="titleSmall" text="Επιστροφή βιβλίου" textAlignment="CENTER" textFill="WHITE">
-                        </Label>
-                        <Button fx:id="backButton" mnemonicParsing="false" onAction="#GoBack" prefHeight="33.0" prefWidth="81.0" styleClass="backButton" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
-                           <StackPane.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </StackPane.margin>
+        <BorderPane prefHeight="493.0" prefWidth="862.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+                <StackPane maxHeight="45.0" minHeight="45.0" prefHeight="45.0" prefWidth="676.0" style="-fx-background-color: #cc324c;">
+                    <children>
+                        <Button fx:id="backButton" mnemonicParsing="false" onAction="#GoBack" prefHeight="33.0" prefWidth="81.0" style="-fx-background-color: #bc2d44;" text="Πίσω" textFill="WHITE" StackPane.alignment="CENTER_LEFT">
+                            <font>
+                                <Font name="Open Sans Semibold" size="16.0" />
+                            </font>
+                            <StackPane.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </StackPane.margin>
                         </Button>
+                        <Label styleClass="title" text="Επιστροφή βιβλίου" textAlignment="CENTER" textFill="WHITE">
+                        </Label>
                         <SVGPath content="M461,244 L371,244 L317.8,185 L461,185" fill="#bc2d44" nodeOrientation="LEFT_TO_RIGHT" scaleX="1.2" scaleY="0.77" stroke="RED" strokeWidth="0.0" translateX="-12.0" StackPane.alignment="CENTER_RIGHT" />
-                     </children>
-                     <effect>
+                    </children>
+                    <effect>
                         <DropShadow />
-                     </effect>
-                  </StackPane>
-               </top>
-          
-         <center>
-            <StackPane prefHeight="379.0" prefWidth="894.0">
-               <BorderPane.margin>
-                  <Insets />
-               </BorderPane.margin>
-               <children>
-                  <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
+                    </effect>
+                </StackPane>
+            </top>
+            <center>
+                <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="460.0" prefWidth="1022.0">
+                     <children>
+                        <VBox alignment="TOP_CENTER" prefHeight="431.0" prefWidth="862.0">
                            <children>
-                              <VBox alignment="TOP_CENTER" prefHeight="431.0" prefWidth="894.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <HBox alignment="CENTER" prefHeight="280.0" prefWidth="892.0">
                                  <children>
-                                    <HBox alignment="CENTER" prefHeight="280.0" prefWidth="892.0">
+                                    <VBox prefHeight="280.0" prefWidth="369.0" style="-fx-font: 16px System;">
                                        <children>
-                                          <VBox prefHeight="280.0" prefWidth="369.0" style="-fx-font: 16px System;">
+                                          <VBox alignment="CENTER">
                                              <children>
-                                                <VBox alignment="CENTER">
+                                                <Label text="Στοιχεία ατόμου">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets top="10.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" />
+                                             </VBox.margin>
+                                          </VBox>
+                                          <VBox>
+                                             <children>
+                                                <HBox>
                                                    <children>
-                                                      <Label text="Στοιχεία ατόμου">
+                                                      <Label text="Επώνυμο: ">
                                                          <font>
-                                                            <Font size="20.0" />
+                                                            <Font size="16.0" />
                                                          </font>
                                                          <VBox.margin>
-                                                            <Insets top="10.0" />
+                                                            <Insets bottom="10.0" />
                                                          </VBox.margin>
+                                                      </Label>
+                                                      <Label fx:id="eponimo">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
                                                       </Label>
                                                    </children>
                                                    <VBox.margin>
                                                       <Insets bottom="10.0" />
                                                    </VBox.margin>
-                                                </VBox>
-                                                <VBox>
+                                                </HBox>
+                                                <HBox>
                                                    <children>
-                                                      <HBox>
-                                                         <children>
-                                                            <Label text="Επώνυμο: ">
-                                                               <font>
-                                                                  <Font size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <Label fx:id="eponimo">
-                                                               <font>
-                                                                  <Font size="16.0" />
-                                                               </font>
-                                                            </Label>
-                                                         </children>
-                                                         <VBox.margin>
-                                                            <Insets bottom="10.0" />
-                                                         </VBox.margin>
-                                                      </HBox>
-                                                      <HBox>
-                                                         <children>
-                                                            <Label text="Όνομα: ">
-                                                               <font>
-                                                                  <Font size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <Label fx:id="onoma">
-                                                               <font>
-                                                                  <Font size="16.0" />
-                                                               </font>
-                                                            </Label>
-                                                         </children>
-                                                         <VBox.margin>
-                                                            <Insets bottom="10.0" />
-                                                         </VBox.margin>
-                                                      </HBox>
-                                                      <HBox>
-                                                         <children>
-                                                            <Label text="Πατρώνυμο: ">
-                                                               <font>
-                                                                  <Font size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <Label fx:id="patronimo">
-                                                               <font>
-                                                                  <Font size="16.0" />
-                                                               </font>
-                                                            </Label>
-                                                         </children>
-                                                         <VBox.margin>
-                                                            <Insets bottom="10.0" />
-                                                         </VBox.margin>
-                                                      </HBox>
-                                                      <HBox>
-                                                         <children>
-                                                            <Label text="Διεύθυνση: ">
-                                                               <font>
-                                                                  <Font size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <Label fx:id="dieuthinsi">
-                                                               <font>
-                                                                  <Font size="16.0" />
-                                                               </font>
-                                                            </Label>
-                                                         </children>
-                                                         <VBox.margin>
-                                                            <Insets bottom="10.0" />
-                                                         </VBox.margin>
-                                                      </HBox>
-                                                      <HBox>
-                                                         <children>
-                                                            <Label text="Τηλέφωνο: ">
-                                                               <font>
-                                                                  <Font size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <Label fx:id="tilefono">
-                                                               <font>
-                                                                  <Font size="16.0" />
-                                                               </font>
-                                                            </Label>
-                                                         </children>
-                                                         <VBox.margin>
-                                                            <Insets bottom="10.0" />
-                                                         </VBox.margin>
-                                                      </HBox>
-                                                      <HBox>
-                                                         <children>
-                                                            <Label text="Ημερομηνία δανεισμού: ">
-                                                               <font>
-                                                                  <Font size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <Label fx:id="date">
-                                                               <font>
-                                                                  <Font size="16.0" />
-                                                               </font>
-                                                            </Label>
-                                                         </children>
-                                                         <VBox.margin>
-                                                            <Insets bottom="10.0" />
-                                                         </VBox.margin>
-                                                      </HBox>
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                             <HBox.margin>
-                                                <Insets left="20.0" />
-                                             </HBox.margin>
-                                          </VBox>
-                                          <VBox prefHeight="424.0" prefWidth="379.0">
-                                             <children>
-                                                <VBox>
-                                                   <children>
-                                                      <Label alignment="CENTER" prefHeight="25.0" prefWidth="381.0" text="Στοιχεία βιβλίου">
+                                                      <Label text="Όνομα: ">
                                                          <font>
-                                                            <Font size="20.0" />
+                                                            <Font size="16.0" />
                                                          </font>
                                                          <VBox.margin>
                                                             <Insets bottom="10.0" />
                                                          </VBox.margin>
                                                       </Label>
+                                                      <Label fx:id="onoma">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Label>
                                                    </children>
-                                                </VBox>
-                                                <VBox>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                </HBox>
+                                                <HBox>
                                                    <children>
-                                                      <HBox>
-                                                         <children>
-                                                            <Label text="Συγγραφέας: ">
-                                                               <font>
-                                                                  <Font size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <Label fx:id="siggrafeas">
-                                                               <font>
-                                                                  <Font size="16.0" />
-                                                               </font>
-                                                            </Label>
-                                                         </children>
+                                                      <Label text="Πατρώνυμο: ">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
                                                          <VBox.margin>
                                                             <Insets bottom="10.0" />
                                                          </VBox.margin>
-                                                      </HBox>
-                                                      <HBox>
-                                                         <children>
-                                                            <Label text="Τίτλος: ">
-                                                               <font>
-                                                                  <Font size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <Label fx:id="titlos">
-                                                               <font>
-                                                                  <Font size="16.0" />
-                                                               </font>
-                                                            </Label>
-                                                         </children>
-                                                         <VBox.margin>
-                                                            <Insets bottom="10.0" />
-                                                         </VBox.margin>
-                                                      </HBox>
-                                                      <HBox>
-                                                         <children>
-                                                            <Label text="Εκδοτικός οίκος: ">
-                                                               <font>
-                                                                  <Font size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <Label fx:id="ekdotikos">
-                                                               <font>
-                                                                  <Font size="16.0" />
-                                                               </font>
-                                                            </Label>
-                                                         </children>
-                                                         <VBox.margin>
-                                                            <Insets bottom="10.0" />
-                                                         </VBox.margin>
-                                                      </HBox>
-                                                      <HBox>
-                                                         <children>
-                                                            <Label text="Κατηγορία: ">
-                                                               <font>
-                                                                  <Font size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <Label fx:id="katigoria">
-                                                               <font>
-                                                                  <Font size="16.0" />
-                                                               </font>
-                                                            </Label>
-                                                         </children>
-                                                         <VBox.margin>
-                                                            <Insets bottom="10.0" />
-                                                         </VBox.margin>
-                                                      </HBox>
-                                                      <HBox>
-                                                         <children>
-                                                            <Label text="Αριθμός σελίδων: ">
-                                                               <font>
-                                                                  <Font size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <Label fx:id="selides">
-                                                               <font>
-                                                                  <Font size="16.0" />
-                                                               </font>
-                                                            </Label>
-                                                         </children>
-                                                         <VBox.margin>
-                                                            <Insets bottom="10.0" />
-                                                         </VBox.margin>
-                                                      </HBox>
-                                                      <HBox>
-                                                         <children>
-                                                            <Label text="ISBN: ">
-                                                               <font>
-                                                                  <Font size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <Label fx:id="isbn">
-                                                               <font>
-                                                                  <Font size="16.0" />
-                                                               </font>
-                                                            </Label>
-                                                         </children>
-                                                         <VBox.margin>
-                                                            <Insets bottom="10.0" />
-                                                         </VBox.margin>
-                                                      </HBox>
+                                                      </Label>
+                                                      <Label fx:id="patronimo">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Label>
                                                    </children>
-                                                </VBox>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                </HBox>
+                                                <HBox>
+                                                   <children>
+                                                      <Label text="Διεύθυνση: ">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets bottom="10.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <Label fx:id="dieuthinsi">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                </HBox>
+                                                <HBox>
+                                                   <children>
+                                                      <Label text="Τηλέφωνο: ">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets bottom="10.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <Label fx:id="tilefono">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                </HBox>
+                                                <HBox>
+                                                   <children>
+                                                      <Label text="Ημερομηνία δανεισμού: ">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets bottom="10.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <Label fx:id="date">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                </HBox>
                                              </children>
-                                             <HBox.margin>
-                                                <Insets right="20.0" top="10.0" />
-                                             </HBox.margin>
                                           </VBox>
                                        </children>
-                                    </HBox>
-                                    <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
-                                       <children>
-                                          <Label text="Ημερομηνία επιστροφής">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                             <VBox.margin>
-                                                <Insets left="10.0" right="10.0" top="10.0" />
-                                             </VBox.margin>
-                                          </Label>
-                                          <DatePicker fx:id="dateEpistrofis" minHeight="40.0" minWidth="300.0" promptText="Ημερομηνία επιστροφής" style="-fx-font: 16px System;">
-                                             <VBox.margin>
-                                                <Insets left="10.0" right="10.0" />
-                                             </VBox.margin>
-                                          </DatePicker>
-                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="20.0" />
+                                       </HBox.margin>
                                     </VBox>
+                                    <VBox prefHeight="424.0" prefWidth="379.0">
+                                       <children>
+                                          <VBox>
+                                             <children>
+                                                <Label alignment="CENTER" prefHeight="25.0" prefWidth="381.0" text="Στοιχεία βιβλίου">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <VBox>
+                                             <children>
+                                                <HBox>
+                                                   <children>
+                                                      <Label text="Συγγραφέας: ">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets bottom="10.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <Label fx:id="siggrafeas">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                </HBox>
+                                                <HBox>
+                                                   <children>
+                                                      <Label text="Τίτλος: ">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets bottom="10.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <Label fx:id="titlos">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                </HBox>
+                                                <HBox>
+                                                   <children>
+                                                      <Label text="Εκδοτικός οίκος: ">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets bottom="10.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <Label fx:id="ekdotikos">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                </HBox>
+                                                <HBox>
+                                                   <children>
+                                                      <Label text="Κατηγορία: ">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets bottom="10.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <Label fx:id="katigoria">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                </HBox>
+                                                <HBox>
+                                                   <children>
+                                                      <Label text="Αριθμός σελίδων: ">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets bottom="10.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <Label fx:id="selides">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                </HBox>
+                                                <HBox>
+                                                   <children>
+                                                      <Label text="ISBN: ">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets bottom="10.0" />
+                                                         </VBox.margin>
+                                                      </Label>
+                                                      <Label fx:id="isbn">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets right="20.0" top="10.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label text="Ημερομηνία επιστροφής">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets left="10.0" right="10.0" top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <DatePicker fx:id="dateEpistrofis" minHeight="40.0" minWidth="300.0" promptText="Ημερομηνία επιστροφής" style="-fx-font: 16px System;">
+                                       <VBox.margin>
+                                          <Insets left="10.0" right="10.0" />
+                                       </VBox.margin>
+                                    </DatePicker>
                                  </children>
                               </VBox>
                            </children>
+                        </VBox>
+                     </children>
                         </AnchorPane>
                     </content>
-                  </ScrollPane>
-               </children>
-            </StackPane>
-         </center>
+                </ScrollPane>
+            </center>
          <bottom>
-            <HBox alignment="CENTER" maxHeight="92.0" minHeight="60.0" prefHeight="74.0" prefWidth="997.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" minWidth="190.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#Save" style="-fx-background-color: #bc2d44;" text="Καταχώρηση επιστροφής" textFill="WHITE">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="8.0" left="25.0" right="25.0" top="8.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets left="10.0" right="10.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
+            <Button alignment="BOTTOM_CENTER" contentDisplay="CENTER" minWidth="190.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#Save" prefHeight="44.0" prefWidth="307.0" style="-fx-background-color: #bc2d44;" text="Καταχώρηση επιστροφής" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="23.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" top="5.0" />
+               </padding>
                <BorderPane.margin>
-                  <Insets bottom="-0.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </BorderPane.margin>
-            </HBox>
+            </Button>
          </bottom>
-      </BorderPane>
-   </children>
+        </BorderPane>
+    </children>
 </AnchorPane>

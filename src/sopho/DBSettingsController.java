@@ -71,28 +71,16 @@ public class DBSettingsController implements Initializable {
     private void CheckConnection(ActionEvent event) throws IOException{
         if(!connectionOK){
             if(username.getText().isEmpty()){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.initStyle(StageStyle.UNDECORATED);
-                alert.setTitle("Προσοχή!");
-                alert.setHeaderText("Δεν συμπληρώσατε username!");
-                alert.setContentText("Συμπληρώστε το username για τη πρόσβαση στη βάση δεδομένων");
-                alert.showAndWait();
+                sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Δεν συμπληρώσατε username! Συμπληρώστε το username για τη πρόσβαση στη βάση δεδομένων", "error");
+                cm.showAndWait();
                 allOk=false;
             }else if(password.getText().isEmpty()){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.initStyle(StageStyle.UNDECORATED);
-                alert.setTitle("Προσοχή!");
-                alert.setHeaderText("Δεν συμπληρώσατε password!");
-                alert.setContentText("Συμπληρώστε το password για τη πρόσβαση στη βάση δεδομένων");
-                alert.showAndWait();
+                sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Δεν συμπληρώσατε password! Συμπληρώστε το password για τη πρόσβαση στη βάση δεδομένων", "error");
+                cm.showAndWait();
                 allOk=false;
             }else if(ipAddress.getText().isEmpty()){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.initStyle(StageStyle.UNDECORATED);
-                alert.setTitle("Προσοχή!");
-                alert.setHeaderText("Δεν συμπληρώσατε τη διεύθυνση IP!");
-                alert.setContentText("Σε περίπτωση που χρησιμοποιείτε βάση που είναι εγκατεστημένη σε αυτόν τον υπολογιστή συμπληρώστε τη λέξη localhost");
-                alert.showAndWait();
+                sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Δεν συμπληρώσατε τη διεύθυνση IP! Σε περίπτωση που χρησιμοποιείτε βάση που είναι εγκατεστημένη σε αυτόν τον υπολογιστή συμπληρώστε τη λέξη localhost", "error");
+                cm.showAndWait();
                 allOk=false;
             }else{
                 prefs.setPrefs("dbUser", username.getText());

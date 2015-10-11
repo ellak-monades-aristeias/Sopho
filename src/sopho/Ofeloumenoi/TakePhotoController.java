@@ -254,4 +254,10 @@ public class TakePhotoController implements Initializable {
         }
     }
     
+    @FXML
+    public void GoBack(ActionEvent e){
+        Stage stage = (Stage) takePhoto.getScene().getWindow();
+        stage.close();
+    }
+    
 }

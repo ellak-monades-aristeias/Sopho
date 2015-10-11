@@ -98,7 +98,7 @@ public class ListaDiathesimonController implements Initializable {
                 }
                 sopho.ResultKeeper.selectedIndex=sel;
                 Stage stage = (Stage) backButton.getScene().getWindow();
-            sl.StageLoad("/sopho/Vivliothiki/EditVivlio.fxml", stage, false, true); //resizable false, utility true
+            sl.StageLoad("/sopho/Vivliothiki/EditVivlio.fxml", stage, true, true); //resizable true, utility true
             }else{
                 sopho.Messages.CustomMessageController cm = new sopho.Messages.CustomMessageController(null, "Προσοχή!", "Κάποιος άλλος χρήστης επεξεργάζεται αυτή τη στιγμή το επιλεγμένο βιβλίο. Βεβαιωθείτε ότι η καρτέλα του βιβλίου δεν είναι ανοιχτή σε κάποιον άλλον υπολογιστή και προσπαθήστε και πάλι.", "error");
                 cm.showAndWait();
