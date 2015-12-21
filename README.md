@@ -20,3 +20,18 @@ SOPHO (System Organizing Philanthropic Organizations) - ΣΟΦΟ (Σύστημα
 
 
 Για περισσότερες λεπτομέρειες σχετικά με τη δομή του κώδικα και το τεχνικό υπόβαθρο παρακαλώ ανατρέξτε σε [αυτό το link](https://github.com/ellak-monades-aristeias/Sopho/wiki/%CE%9F%CE%B4%CE%B7%CE%B3%CE%AF%CE%B5%CF%82-%CE%B3%CE%B9%CE%B1-Developers) του wiki.
+
+#English description
+
+#Use of the application
+This application can be used by any philanthropic organization or non profit organization that supports people in need. It offers a complete system to support the needs of organizing and exporting statistical data.
+
+#Information about end users
+This app can be used in the Windows operating system as well as the Linux operating system. There are two modes that the app can support. One option is to use it as an autonomous app in a pc, while the other option offers connectivity via lan and provides the function of accessing the same data over different computers in the same network. 
+At the current stage the UI is only in Greek. Though there is the plan to update the UI offering an English version in the future.
+
+#Information for Developers
+For the better management and the optimization of the app, you are advised to report any malfunctions or bugs in the section issues, providing a description of the problem you experienced. You can also suggest improvements in the same section (issues).
+
+#Target Group – End-Users Communities – Developer Communities
+The use of the final product is aiming a) to provide computerization of the activities of the organization and benefiters’ profiles (use of the final product by the end – users) and b) to provide a template that is suitable and extendable so that the developers can create a final product that can be used by other industries (e.g. a retail store, to store their customers profile) (use of the final product by developers to extend its functionality)
